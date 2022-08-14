@@ -1,0 +1,29 @@
+#login-form{
+    display: grid;
+}
+
+#login-logo {
+    width: 60%;
+    padding-bottom: 20%;
+}
+
+#login-form {
+    width: 80%;
+    display: grid;
+    row-gap: 30%;
+    padding-bottom: 40%;
+}
+
+#login-root {
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+}
+
+.login-spinner {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+}

@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #121b22;
+}
+
+* {
+  font-family: 'Domine', serif;
+  font-size: 3.8vw;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}

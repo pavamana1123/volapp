@@ -1,0 +1,30 @@
+.tab {
+    color: white;
+    width: 100vw;
+    font-size: 3.7vw;
+}
+
+.tabHeaderItems {
+    display: flex;
+    justify-content: space-around;
+    height: 9vw;
+    align-items: center;
+}
+
+.tabHeaderItem {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+.tabUnderline {
+    position: relative;
+    height: .4vw;
+    background: var(--green);
+    transition: left .3s ease-in-out;
+}
+
+.tabHeader {
+    background-color: var(--secondaryBg);
+}
