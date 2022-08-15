@@ -17,7 +17,7 @@ function Serv(props) {
             </div>
             <div className='serviceDetails'>
                 <div className='spocPhoneDet'>
-                    <div style={{marginRight:"3vw"}}>{`🥇 ${service.spoc}`}</div>
+                    <div style={{marginRight:"3vw", color:"#555"}}>{`🥇 ${service.spoc}`}</div>
                     <a href={`tel:+91${service.spocPhone}`}><i className="bi bi-telephone-fill"></i></a> 
                     <a href={`https://wa.me/91${service.spocPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>
                 </div>
