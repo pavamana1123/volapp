@@ -31,7 +31,7 @@ function Spinner(props) {
   return (
     <div
       className={`spinner-bg-circle ${show || !props.ctl ?"spinner-show":"spinner-hide"}`}
-      style={{...{width:`${props.size||20}px`, height:`${props.size||20}px`},...style}}>
+      style={{...{width:`${props.size||2}vw`, height:`${props.size||2}vw`},...style}}>
     </div>
   );
 }

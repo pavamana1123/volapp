@@ -22,14 +22,14 @@ function Serv(props) {
             </div>
             <div className='detailsDiv'>
                 <div className='light'>In-charge</div>
-                <div style={{
+                {<div style={{
                     display: "flex",
                     alignItems: "center"
                 }}>
                     <div className='detailFeild' style={{marginRight: "2vw"}}>{`${details.spoc}`}</div>
                     <a href={`tel:+91${details.volunteerPhone}`}><i className="bi bi-telephone-fill"></i></a> 
                     <a href={`https://wa.me/91${details.volunteerPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>
-                </div>
+                </div>}
             </div>
             <HSep/>
         </div>

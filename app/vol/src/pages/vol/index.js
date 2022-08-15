@@ -9,13 +9,13 @@ import moment from 'moment'
 
 function Vol(props) {
 
-  var [filter, setFilter] = useState('Vignesh  K')
+  var [filter, setFilter] = useState('')
   var { data, dates } = props
   var { volunteers } = data
 
-
   useEffect(()=>{
-
+    const urlParams = new URLSearchParams(window.location.search);
+    setFilter(urlParams.get('name'))
   })
 
   return (
@@ -36,7 +36,7 @@ function Vol(props) {
               }
             })
           }/>
-        }</Paper>:<Spinner style={{marginTop:"2vw"}}/>}
+        }</Paper>:<Spinner style={{marginTop:"2vw"}} size={5}/>}
       </div>
     </div>
   );
