@@ -1,24 +1,13 @@
+var config = require("./config.js")
+var APIHandler = require("./api.js")
+
+var api = new APIHandler(config.scriptId)
+
 const express = require('express')
 const app = express()
-app.use(express.json()) 
-const port = 3005
+app.use(express.json())
+const port = 3001
 
-const API  = require("./api.js")
-var cred = require("./cred.js")
-cred.database = 'iskconmy_folk'
+app.post('/api', api.call.bind(api))
 
-var mysql = require('mysql');
-var con = mysql.createConnection(cred);
-
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected to db!");
-});
-
-const api = new API(con)
-
-app.post('/data', api.call.bind(api))
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+app.listen(port, ()=>console.log("Server running on port :" + port))

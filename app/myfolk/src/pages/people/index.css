@@ -1,9 +1,0 @@
-.attendenceSearchHolder {
-    display: grid;
-    justify-items: center;
-}
-
-.attendenceSearchInput {
-    width: 70%;
-    margin-top: 5vw;
-}
