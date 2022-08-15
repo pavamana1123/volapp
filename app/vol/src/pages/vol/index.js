@@ -18,6 +18,8 @@ function Vol(props) {
     setFilter(urlParams.get('name'))
   })
 
+  const NoServ = <div style={{color:"#333", margin: "5vw", display: "flex", justifyContent: "center"}}>{"No services"}</div>
+
   return (
     <div>
       <Header hideOptions/>
@@ -26,13 +28,16 @@ function Vol(props) {
         {dates.length?<Paper style={{marginTop:"2vw", padding: 0, width: "86vw"}}>{
           <Tab tabs={
               dates.map((d)=>{
+
+              var svs = volunteers.filter(v=>{
+                return v.volunteerName==filter && v.date==d
+              }).map(s=>{
+                return <Serv details={s}/>
+              })
+
               return {
                 title: moment(d,"YYYY-MM-DD").format("Do MMM"),
-                component: volunteers.filter(v=>{
-                  return v.volunteerName==filter && v.date==d
-                }).map(s=>{
-                  return <Serv details={s}/>
-                })
+                component: svs.length?svs:NoServ
               }
             })
           }/>
