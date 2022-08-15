@@ -27,8 +27,8 @@ function Serv(props) {
                     alignItems: "center"
                 }}>
                     <div className='detailFeild' style={{marginRight: "2vw"}}>{`${details.spoc}`}</div>
-                    <a href={`tel:+91${details.volunteerPhone}`}><i className="bi bi-telephone-fill"></i></a> 
-                    <a href={`https://wa.me/91${details.volunteerPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>
+                    <a href={`tel:+91${details.spocPhone}`}><i className="bi bi-telephone-fill"></i></a> 
+                    <a href={`https://wa.me/91${details.spocPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>
                 </div>}
             </div>
             <HSep/>
