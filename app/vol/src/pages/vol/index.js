@@ -27,7 +27,7 @@ function Vol(props) {
           <Tab tabs={
               dates.map((d)=>{
               return {
-                title: moment(d,"YYYY-MM-DD").format("Do MMMM"),
+                title: moment(d,"YYYY-MM-DD").format("Do MMM"),
                 component: volunteers.filter(v=>{
                   return v.volunteerName==filter && v.date==d
                 }).map(s=>{
@@ -38,6 +38,8 @@ function Vol(props) {
           }/>
         }</Paper>:<Spinner style={{marginTop:"2vw"}} size={5}/>}
       </div>
+
+      <div style={{margin:"15vw"}}/>
     </div>
   );
 }

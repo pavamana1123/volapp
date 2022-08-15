@@ -11,7 +11,7 @@
 body {
   background-color: (--bg);  
   color: white;
-  font-size: 3vw;
+  font-size: 4vw;
 }
 
 input {
@@ -44,7 +44,7 @@ input:focus {
 
 i {
   color:#00a356;
-  font-size: 3vw;
+  font-size: 4vw;
   cursor: pointer;
   user-select: none;
   margin: 0 2vw 0 .75vw;

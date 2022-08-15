@@ -5,7 +5,7 @@
 .tabHeaderItems {
     display: flex;
     justify-content: space-around;
-    height: 6vw;
+    height: 8vw;
     align-items: center;
 }
 
