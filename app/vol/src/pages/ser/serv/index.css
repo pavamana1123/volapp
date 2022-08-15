@@ -1,0 +1,14 @@
+.servIndiv {
+    margin: 2vw;
+    width: 100vw;
+}
+
+.serviceDetails {
+    color: #555;
+    font-size: 3.5vw;
+    margin: 1vw;
+}
+
+.spocPhoneDet {
+    display: flex;
+}

@@ -1,6 +1,7 @@
 import './App.css';
 import './strings.js'
 import Vol from './pages/vol';
+import Ser from './pages/ser';
 import API from './api';
 import {Route, BrowserRouter as Router, Routes} from "react-router-dom"
 import { useEffect, useState } from 'react';
@@ -30,6 +31,7 @@ function App() {
     <Router>
         <Routes>
           <Route path="/vol" element={<Vol data={data} dates={dates}/>}></Route>
+          <Route path="/ser" element={<Ser data={data} dates={dates}/>}></Route>
         </Routes>
     </Router>
     </div>

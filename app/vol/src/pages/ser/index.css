@@ -1,0 +1,23 @@
+.ser {
+    display: flex;
+    justify-content: center;
+    margin: 4vw 0 0 0;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
+
+.serServ{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 90vh;
+    overflow: scroll;
+}
+
+.svHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

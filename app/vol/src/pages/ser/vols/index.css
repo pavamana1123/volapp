@@ -1,0 +1,9 @@
+.volsIndiv {
+    width: 100vw;
+}
+
+.eachVolDet {
+    display: flex;
+    justify-content: space-between;
+    margin: 2vw 0 2vw 0vw;
+}
