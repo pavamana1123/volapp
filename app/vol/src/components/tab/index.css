@@ -1,13 +1,11 @@
 .tab {
-    color: white;
-    width: 100vw;
-    font-size: 3.7vw;
+    width: 100%;
 }
 
 .tabHeaderItems {
     display: flex;
     justify-content: space-around;
-    height: 9vw;
+    height: 6vw;
     align-items: center;
 }
 
@@ -20,11 +18,11 @@
 
 .tabUnderline {
     position: relative;
-    height: .4vw;
-    background: var(--green);
-    transition: left .3s ease-in-out;
+    height: 0.5vw;
+    background: var(--bar);
+    transition: left .2s ease-in-out;
 }
 
 .tabHeader {
-    background-color: var(--secondaryBg);
+    background-color: white;
 }

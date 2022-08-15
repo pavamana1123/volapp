@@ -1,0 +1,9 @@
+.vol {
+    display: flex;
+    justify-content: center;
+    margin: 4vw 0 0 0;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}

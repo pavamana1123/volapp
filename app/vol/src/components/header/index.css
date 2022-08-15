@@ -7,9 +7,11 @@
     display: flex;
     height: 10vw;
     width: 100%;
-    background-color: var(--secondaryBg);
+    background-color: var(--bar);
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
+    color: white;
+    font-size: 3.5vw;
 }
 
 #menuButton {

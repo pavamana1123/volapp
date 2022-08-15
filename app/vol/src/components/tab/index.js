@@ -1,26 +1,10 @@
 import './index.css';
 import { useState, useEffect, useRef } from 'react';
 
-
-class TabCtl {
-  constructor(){
-    this.show=()=>{}
-    this.hide=()=>{}
-  }
-  setShowFunc(f){
-    this.show=f
-  }
-  setHideFunc(f){
-    this.hide=f
-  }
-}
-
 function Tab(props) {
   var [activeTab, setActiveTab] = useState(0)
   var self=this
   const {tabs} = props
-  var ActiveTabComponent = tabs[activeTab].component
-
   return (
     <div className='tab'>
       <div className='tabHeader'>
@@ -36,17 +20,17 @@ function Tab(props) {
           }
         </div>
         <div className='tabUnderline' style={{
-          width:`${100/tabs.length}vw`,
+          width:`${100/tabs.length}%`,
           left: `${activeTab*(100/tabs.length)}%`
           }}></div>
       </div>
 
       <div className='tabChildren'>
-        <ActiveTabComponent/>
+        {tabs[activeTab].component}
       </div>
 
     </div>
   )
 }
 
-export {Tab, TabCtl};
+export default Tab;

@@ -1,31 +1,35 @@
-import auth from "../auth"
-
 class API {
     constructor(){
-        this.name = auth.name
-        this.phone = auth.phone
-        this.role = auth.role
     }
-   
-    async call(endpoint, body){
-        const res = await fetch('/data', {
+    setFunc(func){
+        this.func = func
+        return this
+    }
+    setParams(...params){
+        this.params=params
+        return this
+    }
+
+    async call(){
+
+        const res = await fetch('/api', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                name: this.name,
-                phone: this.phone,
-                role: this.role,
-                endpoint
             },
-            body: JSON.stringify(body||{}),
+            body: JSON.stringify({
+                func:this.func,
+                params: this.params,
+            }),
         })
-
-        return res.json().then((r)=>{
-            return {
-                status: res.status,
-                body: r,
-                error: r.error
+        return res.json().then((res)=>{
+            if(res.error){
+                throw new Error(res.msg)
             }
+            if(!res.data){
+                throw new Error(`Unexpected response in data: ${res.data}`)
+            }
+            return res.data
         })
     }
 }
