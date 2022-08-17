@@ -6,6 +6,7 @@ function Vols(props) {
 
   var { volunteers } = props
 
+
   return (
     <div className='volsIndiv'>
       <Paper style={{
@@ -22,6 +23,8 @@ function Vols(props) {
                 <div>
                   <a href={`tel:+91${v.volunteerPhone}`}><i className="bi bi-telephone-fill"></i></a> 
                   <a href={`https://wa.me/91${v.volunteerPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>
+                  <a href={`https://wa.me/91${v.volunteerPhone}?text=${encodeURI(`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.volunteerName)}`)}`} target="_blank"><i className="bi bi-share-fill"></i></a>
+                  <a href={`https://vol.iskconmysore.org/vol?name=${encodeURI(v.volunteerName)}`} target="_blank"><i className="bi bi-box-arrow-up-right"></i></a>
                 </div>
               </div>
               <HSep/>

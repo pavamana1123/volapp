@@ -7,6 +7,7 @@ import {Spinner} from '../../components/spinner';
 import moment from 'moment'
 import Serv from './serv';
 import Vols from './vols';
+import { AutoIn } from '../../components/autoin';
 
 function Ser(props) {
 
@@ -20,6 +21,7 @@ function Ser(props) {
   return (
     <div>
       <Header hideOptions/>
+      {/* <AutoIn/> */}
       <div className='ser'>
       {dates.length?
         <Tab tabs={

@@ -6,6 +6,7 @@ import Tab from '../../components/tab';
 import Serv from './serv';
 import {Spinner} from '../../components/spinner';
 import moment from 'moment'
+import { AutoIn } from '../../components/autoin';
 
 function Vol(props) {
 
