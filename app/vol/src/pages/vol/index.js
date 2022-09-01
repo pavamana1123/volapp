@@ -23,7 +23,7 @@ function Vol(props) {
 
   return (
     <div>
-      <Header hideOptions/>
+      <Header title={data.title} hideOptions/>
       <div className='vol'>
         <Paper>{filter}</Paper>
         {dates.length?<Paper style={{marginTop:"2vw", padding: 0, width: "86vw"}}>{
@@ -37,7 +37,7 @@ function Vol(props) {
               })
 
               return {
-                title: moment(d,"YYYY-MM-DD").format("Do MMM"),
+                title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):moment(d,"YYYY-MM-DD").format("Do MMM"),
                 component: svs.length?svs:NoServ
               }
             })

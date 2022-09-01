@@ -18,8 +18,8 @@ function Serv(props) {
             <div className='serviceDetails'>
                 <div className='spocPhoneDet'>
                     <div style={{marginRight:"3vw", color:"#555"}}>{`🥇 ${service.spoc}`}</div>
-                    <a href={`tel:+91${service.spocPhone}`}><i className="bi bi-telephone-fill"></i></a> 
-                    <a href={`https://wa.me/91${service.spocPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>
+                    {!isNaN(service.spocPhone)?<a href={`tel:+91${service.spocPhone}`}><i className="bi bi-telephone-fill"></i></a> : null}
+                    {!isNaN(service.spocPhone)?<a href={`https://wa.me/91${service.spocPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>:null}
                 </div>
             </div>
         </Paper>

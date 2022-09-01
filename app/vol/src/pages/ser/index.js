@@ -20,14 +20,14 @@ function Ser(props) {
 
   return (
     <div>
-      <Header hideOptions/>
+      <Header title={data.title} hideOptions/>
       {/* <AutoIn/> */}
       <div className='ser'>
       {dates.length?
         <Tab tabs={
             dates.map((d)=>{
             return {
-              title: moment(d,"YYYY-MM-DD").format("Do MMM"),
+              title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):moment(d,"YYYY-MM-DD").format("Do MMM"),
               component: <div className='serServ'>
                 {
                   services.filter(s=>{

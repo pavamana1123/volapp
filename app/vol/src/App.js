@@ -14,7 +14,7 @@ function App() {
 
   useEffect(()=>{
     new API()
-    .setFunc("getData").call()
+    .setFunc("getData").setParams("11NhM8M2XOF9G_MeY21NELkHdYNAkC__-9T90L-fjPfo").call()
     .then((data)=>{
       setData(data)
       var d = {}

@@ -17,18 +17,18 @@ function Vols(props) {
         }}>
         {
           volunteers.length?volunteers.map(v=>{
-            return <div className='eachVol'>
+            return v.volunteerName?<div className='eachVol'>
               <div className='eachVolDet'>
                 <div>{v.volunteerName}</div>
                 <div>
-                  <a href={`tel:+91${v.volunteerPhone}`}><i className="bi bi-telephone-fill"></i></a> 
-                  <a href={`https://wa.me/91${v.volunteerPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>
-                  <a href={`https://wa.me/91${v.volunteerPhone}?text=${encodeURI(`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.volunteerName)}`)}`} target="_blank"><i className="bi bi-share-fill"></i></a>
+                  {!isNaN(v.volunteerPhone)?<a href={`tel:+91${v.volunteerPhone}`}><i className="bi bi-telephone-fill"></i></a>:null }
+                  {!isNaN(v.volunteerPhone)?<a href={`https://wa.me/91${v.volunteerPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>:null}
+                  {!isNaN(v.volunteerPhone)?<a href={`https://wa.me/91${v.volunteerPhone}?text=${encodeURI(`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.volunteerName)}`)}`} target="_blank"><i className="bi bi-share-fill"></i></a>:null}
                   <a href={`https://vol.iskconmysore.org/vol?name=${encodeURI(v.volunteerName)}`} target="_blank"><i className="bi bi-box-arrow-up-right"></i></a>
                 </div>
               </div>
               <HSep/>
-            </div>
+            </div>:null
           }): "No volunteers"
         }
       </Paper>
