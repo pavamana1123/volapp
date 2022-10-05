@@ -12,7 +12,7 @@ function App() {
   var [data, setData] = useState({})
   var [dates, setDates] = useState([])
 
-  useEffect(()=>{
+  var init = ()=>{
     new API()
     .setFunc("getData").setParams("1ZqpOqIO7pLFAtt0mxRkO33qlQFEx9izwHR_K2ki2lzg").call()
     .then((data)=>{
@@ -24,6 +24,11 @@ function App() {
       setDates(Object.keys(d).map(d=>{ return d }).sort())
     })
     .catch(()=>{})
+  }
+
+  useEffect(()=>{
+    init()
+    setInterval(init,60*1000)
   },[])
 
   return (

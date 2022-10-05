@@ -19,9 +19,14 @@ function Vols(props) {
           volunteers.length?volunteers.map(v=>{
             return v.volunteerName?<div className='eachVol'>
               <div className='eachVolDet'>
-                <div>
-                  <div>{v.volunteerName}</div>
-                  <div id="servol_category">{v.category}</div>
+                <div className='nameHolder'>
+                  {v.reported?<div>
+                    <i className="bi bi-check-circle-fill nameCheck"></i>
+                  </div>:null}
+                  <div>
+                    <div>{v.volunteerName}</div>
+                    <div id="servol_category">{v.category}</div>
+                  </div>
                 </div>
                   <div>
                   {!isNaN(v.volunteerPhone)?<a href={`tel:+91${v.volunteerPhone}`}><i className="bi bi-telephone-fill"></i></a>:null }

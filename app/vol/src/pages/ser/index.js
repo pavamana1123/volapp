@@ -34,7 +34,7 @@ function Ser(props) {
                   return s.date==d
                 }).map(s=>{
                   return <div className='svHolder'>
-                    <Serv service={s}/>
+                    <Serv service={s} volunteers={volunteers}/>
                     <Vols volunteers={volunteers.filter(v=>{
                       return v.service==s.serviceName && v.date==d
                     })} />

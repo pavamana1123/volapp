@@ -12,3 +12,12 @@
     font-size: 3.3vw;
     color: #aaa;
 }
+
+.nameHolder {
+    display: flex;
+    align-items: center;
+}
+
+.nameCheck {
+    font-size: 6vw;
+}
