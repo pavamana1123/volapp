@@ -14,7 +14,7 @@ function App() {
 
   var init = ()=>{
     new API()
-    .setFunc("getData").setParams("1ZqpOqIO7pLFAtt0mxRkO33qlQFEx9izwHR_K2ki2lzg").call()
+    .setFunc("getData").setParams("1vHdAmSrtMFOZbJEFdpkFjxGNCL0BUi1AbwxO72Eyxnc").call()
     .then((data)=>{
       setData(data)
       var d = {}
