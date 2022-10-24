@@ -14,10 +14,6 @@ function Ser(props) {
   var { data, dates } = props
   var { services, volunteers } = data
 
-  useEffect(()=>{
-
-  })
-
   return (
     <div>
       <Header title={data.title} hideOptions/>
@@ -30,12 +26,22 @@ function Ser(props) {
               title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):moment(d,"YYYY-MM-DD").format("Do MMM"),
               component: <div className='serServ'>
                 {
-                  services.filter(s=>{
+                  services.sort((s1,s2)=>{
+                    if(s1.serviceName > s2.serviceName){
+                      return 1
+                    }
+                    return -1
+                  }).filter(s=>{
                   return s.date==d
                 }).map(s=>{
                   return <div className='svHolder'>
                     <Serv service={s} volunteers={volunteers}/>
-                    <Vols volunteers={volunteers.filter(v=>{
+                    <Vols volunteers={volunteers.sort((v1,v2)=>{
+                        if(v1.volunteerName > v2.volunteerName){
+                          return 1
+                        }
+                        return -1
+                      }).filter(v=>{
                       return v.service==s.serviceName && v.date==d
                     })} />
                   </div>
