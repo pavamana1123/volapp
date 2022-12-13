@@ -25,9 +25,7 @@ function Vols(props) {
                   </div>:null}
                   <div>
                     <div>{v.volunteerName}</div>
-                    <div className="servol_category">{v.category}
-                    <div className="servol_category redlight">{v.availability=="NOT AVAILABLE"?"⚠️ Not available for service":null}</div>
-                    </div>
+                    <div className="servol_category">{v.category}</div>
                   </div>
                 </div>
                   <div className='volactbuttons'>
@@ -37,6 +35,7 @@ function Vols(props) {
                   <a href={`https://vol.iskconmysore.org/vol?name=${encodeURI(v.volunteerName)}`} target="_blank"><i className="bi bi-box-arrow-up-right"></i></a>
                 </div>
               </div>
+              <div className="servol_category redlight">{v.availability=="NOT AVAILABLE"?"⚠️ Not available or not filled the form":null}</div>
               <HSep/>
             </div>:null
           }): "No volunteers"
