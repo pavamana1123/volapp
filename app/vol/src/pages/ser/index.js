@@ -28,7 +28,7 @@ function Ser(props) {
         <div className='fillabel'>Select Service Coordinator</div>
         <select className='filterSel'
             onChange={onFilterSelect}>
-          {services.map(s=>{
+          {(services||[]).map(s=>{
             return s.coordinator
           }).filter((value, index, self)=>{
             return self.indexOf(value) === index
