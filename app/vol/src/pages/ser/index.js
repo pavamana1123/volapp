@@ -14,10 +14,29 @@ function Ser(props) {
   var { data, dates } = props
   var { services, volunteers } = data
 
+  var [filter, setFilter] = useState(null)
+
+  const onFilterSelect = (e)=>{
+    setFilter(e.target.value)
+  }
+
   return (
     <div>
       <Header title={data.title} hideOptions/>
       {/* <AutoIn/> */}
+      <div className='filterSelect'>
+        <div className='fillabel'>Select Service Coordinator</div>
+        <select className='filterSel'
+            onChange={onFilterSelect}>
+          {services.map(s=>{
+            return s.coordinator
+          }).filter((value, index, self)=>{
+            return self.indexOf(value) === index
+          }).sort().map(c=>{
+            return <option>{c}</option>
+          })}
+        </select>
+      </div>
       <div className='ser'>
       {dates.length?
         <Tab tabs={
@@ -32,9 +51,8 @@ function Ser(props) {
                     }
                     return -1
                   }).filter(s=>{
-                  return s.date==d
+                  return s.date==d && (filter?s.coordinator==filter:true)
                 }).map(s=>{
-
                   return <div className='svHolder'>
                     <Serv service={s} volunteers={volunteers.filter(v=>{return v.date==d && v.volunteerName != ""})}/>
                     <Vols volunteers={volunteers.sort((v1,v2)=>{

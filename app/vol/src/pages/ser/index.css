@@ -21,3 +21,18 @@
     flex-direction: column;
     align-items: center;
 }
+
+.filterSelect {
+    margin-left: 5vw;
+    margin-top: 5vw;
+}
+
+.filterSel {
+    width: 90vw;
+    height: 8vw;
+}
+
+.fillabel {
+    color: #555;
+    margin-bottom: 1vw;
+}
