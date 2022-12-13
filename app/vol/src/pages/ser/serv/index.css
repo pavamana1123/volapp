@@ -13,3 +13,8 @@
     display: flex;
     color: #555;
 }
+
+.serviceTitleStats {
+    display: flex;
+    justify-content: space-between;
+}

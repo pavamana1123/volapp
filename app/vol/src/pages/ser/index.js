@@ -23,7 +23,7 @@ function Ser(props) {
         <Tab tabs={
             dates.map((d)=>{
             return {
-              title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):moment(d,"YYYY-MM-DD").format("Do MMM"),
+              title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):(dates.length <5 ? moment(d,"YYYY-MM-DD").format("Do MMM"): moment(d,"YYYY-MM-DD").format("MMM D")),
               component: <div className='serServ'>
                 {
                   services.sort((s1,s2)=>{
@@ -34,15 +34,16 @@ function Ser(props) {
                   }).filter(s=>{
                   return s.date==d
                 }).map(s=>{
+
                   return <div className='svHolder'>
-                    <Serv service={s} volunteers={volunteers}/>
+                    <Serv service={s} volunteers={volunteers.filter(v=>{return v.date==d && v.volunteerName != ""})}/>
                     <Vols volunteers={volunteers.sort((v1,v2)=>{
                         if(v1.volunteerName > v2.volunteerName){
                           return 1
                         }
                         return -1
                       }).filter(v=>{
-                      return v.service==s.serviceName && v.date==d
+                      return v.service==s.serviceName && v.date==d && v.volunteerName != ""
                     })} />
                   </div>
                 })

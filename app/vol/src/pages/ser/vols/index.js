@@ -25,10 +25,12 @@ function Vols(props) {
                   </div>:null}
                   <div>
                     <div>{v.volunteerName}</div>
-                    <div id="servol_category">{v.category}</div>
+                    <div className="servol_category">{v.category}
+                    <div className="servol_category redlight">{v.availability=="NOT AVAILABLE"?"⚠️ Not available for service":null}</div>
+                    </div>
                   </div>
                 </div>
-                  <div>
+                  <div className='volactbuttons'>
                   {!isNaN(v.volunteerPhone)?<a href={`tel:+91${v.volunteerPhone}`}><i className="bi bi-telephone-fill"></i></a>:null }
                   {!isNaN(v.volunteerPhone)?<a href={`https://wa.me/91${v.volunteerPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>:null}
                   {!isNaN(v.volunteerPhone)?<a href={`https://wa.me/91${v.volunteerPhone}?text=${encodeURI(`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.volunteerName)}`)}`} target="_blank"><i className="bi bi-share-fill"></i></a>:null}
