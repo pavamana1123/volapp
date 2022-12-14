@@ -14,30 +14,89 @@ function Ser(props) {
   var { data, dates } = props
   var { services, volunteers } = data
 
-  var [filter, setFilter] = useState(null)
+  const filters = [
+    "None",
+    "Coordinator",
+    "SPOC",
+    "Service",
+    "Volunteer",
+    "Category"
+  ]
 
-  const onFilterSelect = (e)=>{
+  var [filter, setFilter] = useState(filters[0])
+
+  const onFilterChange = (e)=>{
     setFilter(e.target.value)
   }
+
+  const onFilterValueChange = (e)=>{
+    setFilterValue(e.target.value)
+  }
+  var source = []
+  switch(filter){
+    case "Coordinator":
+    case "SPOC":
+    case "Service":
+      source = services
+      break
+    case "Volunteer":
+    case "Category":
+      source = volunteers
+    default:
+  }
+
+  const filterValues = ["None"].concat(source.map(s=>{
+      switch(filter){
+        case "Coordinator":
+          return s.coordinator
+        case "SPOC":
+          return s.spoc
+        case "Service":
+          return s.serviceName
+        case "Volunteer":
+          return s.volunteerName
+        case "Category":
+          return s.category
+        default:
+          return null
+      }
+    }).filter((value, index, self)=>{
+      return self.indexOf(value) === index
+    }).sort())
+
+  var [filterValue, setFilterValue] = useState(filterValues[0])
 
   return (
     <div>
       <Header title={data.title} hideOptions/>
 
       <div className='pageMainDiv'>
-        {services?<div className='filterSelect'>
-          <div className='fillabel'>Select Service Coordinator</div>
-          <select className='filterSel'
-              onChange={onFilterSelect}>
-            {services.map(s=>{
-              return s.coordinator
-            }).filter((value, index, self)=>{
-              return self.indexOf(value) === index
-            }).sort().map(c=>{
-              return <option>{c}</option>
-            })}
-          </select>
-        </div>:null}
+        {services?
+          <div className='filterBody'>
+              <div className='filterBy'>
+                <div className='fillabel'>Filter By</div>
+                <select className='filselect'
+                  onChange={onFilterChange}>
+                  {
+                    filters.map(f=>{
+                      return <option disabled={f=="Volunteer" || f=="Category"}
+                      value={f} key={f}>{f}</option>
+                    })
+                  }
+                </select>
+              </div>
+
+              <div className='filtervalue'>
+                <div className='fillabel'>{`Select ${filter=="None"?"":filter}`}</div>
+                  <select className='filselect'
+                      onChange={onFilterValueChange}
+                      disabled={filter=="None"}>
+                    {filterValues.map(f=>{
+                      return <option>{f}</option>
+                    })}
+                  </select>
+              </div>
+          </div>:null}
         <div className='ser'>
         {dates.length?
           <Tab 
@@ -53,7 +112,23 @@ function Ser(props) {
                       }
                       return -1
                     }).filter(s=>{
-                    return s.date==d && (filter?s.coordinator==filter:true)
+                      return s.date==d && ((filter=="None"||filterValue=="None")?true:(()=>{
+                        switch(filter){
+                          case "Coordinator":
+                            console.log(s.coordinator, filterValue)
+                            return s.coordinator==filterValue
+                          case "SPOC":
+                            return s.spoc==filterValue
+                          case "Service":
+                            return s.serviceName==filterValue
+                          case "Volunteer":
+                            return s.volunteerName
+                          case "Category":
+                            return s.category
+                          default:
+                            return true
+                        }                      
+                    })())
                   }).map(s=>{
                     return <div className='svHolder'>
                       <Serv service={s} volunteers={volunteers.filter(v=>{return v.date==d && v.volunteerName != ""})}/>

@@ -23,9 +23,11 @@
     align-items: center;
 }
 
-.filterSelect {
-    margin-left: 5vw;
-    margin-top: 5vw;
+.filterBody {
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3vw;
 }
 
 .filterSel {
@@ -35,9 +37,17 @@
 
 .fillabel {
     color: #555;
-    margin-bottom: 1vw;
+    margin-bottom: 0.1vw;
+    font-size: 3.2vw;
 }
 
 .pageMainDiv {
     width: 100vw;
+}
+
+.filselect {
+    width: 40vw;
+    margin-top: .5vw;
+    font-size: 3vw;
+    padding: 1vw;
 }
