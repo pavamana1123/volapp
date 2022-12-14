@@ -23,57 +23,60 @@ function Ser(props) {
   return (
     <div>
       <Header title={data.title} hideOptions/>
-      {/* <AutoIn/> */}
-      <div className='filterSelect'>
-        <div className='fillabel'>Select Service Coordinator</div>
-        <select className='filterSel'
-            onChange={onFilterSelect}>
-          {(services||[]).map(s=>{
-            return s.coordinator
-          }).filter((value, index, self)=>{
-            return self.indexOf(value) === index
-          }).sort().map(c=>{
-            return <option>{c}</option>
-          })}
-        </select>
+
+      <div className='pageMainDiv'>
+        {services?<div className='filterSelect'>
+          <div className='fillabel'>Select Service Coordinator</div>
+          <select className='filterSel'
+              onChange={onFilterSelect}>
+            {services.map(s=>{
+              return s.coordinator
+            }).filter((value, index, self)=>{
+              return self.indexOf(value) === index
+            }).sort().map(c=>{
+              return <option>{c}</option>
+            })}
+          </select>
+        </div>:null}
+        <div className='ser'>
+        {dates.length?
+          <Tab 
+            tabs={
+              dates.map((d)=>{
+              return {
+                title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):(dates.length <5 ? moment(d,"YYYY-MM-DD").format("Do MMM"): moment(d,"YYYY-MM-DD").format("MMM D")),
+                component: <div className='serServ'>
+                  {
+                    services.sort((s1,s2)=>{
+                      if(s1.serviceName > s2.serviceName){
+                        return 1
+                      }
+                      return -1
+                    }).filter(s=>{
+                    return s.date==d && (filter?s.coordinator==filter:true)
+                  }).map(s=>{
+                    return <div className='svHolder'>
+                      <Serv service={s} volunteers={volunteers.filter(v=>{return v.date==d && v.volunteerName != ""})}/>
+                      <Vols volunteers={volunteers.sort((v1,v2)=>{
+                          if(v1.volunteerName > v2.volunteerName){
+                            return 1
+                          }
+                          return -1
+                        }).filter(v=>{
+                        return v.service==s.serviceName && v.date==d && v.volunteerName != ""
+                      })} />
+                    </div>
+                  })
+                }</div>
+              }
+            })
+          }/>:<Spinner size={3}/>
+        }
+
+        </div>  
+
+        <div style={{margin:"15vw"}}/>
       </div>
-      <div className='ser'>
-      {dates.length?
-        <Tab tabs={
-            dates.map((d)=>{
-            return {
-              title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):(dates.length <5 ? moment(d,"YYYY-MM-DD").format("Do MMM"): moment(d,"YYYY-MM-DD").format("MMM D")),
-              component: <div className='serServ'>
-                {
-                  services.sort((s1,s2)=>{
-                    if(s1.serviceName > s2.serviceName){
-                      return 1
-                    }
-                    return -1
-                  }).filter(s=>{
-                  return s.date==d && (filter?s.coordinator==filter:true)
-                }).map(s=>{
-                  return <div className='svHolder'>
-                    <Serv service={s} volunteers={volunteers.filter(v=>{return v.date==d && v.volunteerName != ""})}/>
-                    <Vols volunteers={volunteers.sort((v1,v2)=>{
-                        if(v1.volunteerName > v2.volunteerName){
-                          return 1
-                        }
-                        return -1
-                      }).filter(v=>{
-                      return v.service==s.serviceName && v.date==d && v.volunteerName != ""
-                    })} />
-                  </div>
-                })
-              }</div>
-            }
-          })
-        }/>:<Spinner size={3}/>
-      }
-
-      </div>  
-
-      <div style={{margin:"15vw"}}/>
     </div>
   );
 }

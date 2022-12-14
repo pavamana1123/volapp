@@ -9,12 +9,7 @@ function Vols(props) {
 
   return (
     <div className='volsIndiv'>
-      <Paper style={{
-        margin:'-3vw 2vw 2vw 2vw',
-        width: "85%",
-        borderTopLeftRadius: 0,
-        borderTopRightRadius: 0,
-        }}>
+      <Paper>
         {
           volunteers.length?volunteers.map(v=>{
             return v.volunteerName?<div className='eachVol'>

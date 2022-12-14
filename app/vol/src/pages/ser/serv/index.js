@@ -10,7 +10,7 @@ function Serv(props) {
 
   return (
     <div className='servIndiv'>
-        <Paper style={{margin:'2vw', width: "85%"}}>
+        <Paper>
             <div className='serviceTitleStats'>
                 <div>{service.serviceName}</div>
                 <div>{`${volCount>=service.requirement?"✅ ":"⚠️"} ${volCount}/${service.requirement}`}</div>

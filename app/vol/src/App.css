@@ -104,3 +104,8 @@ span.ripple {
   color: #555;
 }
 
+body {
+  max-height: 100vw;
+  overflow: hidden;
+}
+
