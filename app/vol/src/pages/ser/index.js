@@ -79,8 +79,7 @@ function Ser(props) {
                   onChange={onFilterChange}>
                   {
                     filters.map(f=>{
-                      return <option disabled={f=="Volunteer" || f=="Category"}
-                      value={f} key={f}>{f}</option>
+                      return <option value={f} key={f}>{f}</option>
                     })
                   }
                 </select>
@@ -115,16 +114,19 @@ function Ser(props) {
                       return s.date==d && ((filter=="None"||filterValue=="None")?true:(()=>{
                         switch(filter){
                           case "Coordinator":
-                            console.log(s.coordinator, filterValue)
                             return s.coordinator==filterValue
                           case "SPOC":
                             return s.spoc==filterValue
                           case "Service":
                             return s.serviceName==filterValue
                           case "Volunteer":
-                            return s.volunteerName
+                            return volunteers.filter(v=>{
+                              return v.date==d && v.service==s.serviceName && v.volunteerName==filterValue 
+                            }).length>0
                           case "Category":
-                            return s.category
+                            return volunteers.filter(v=>{
+                              return v.date==d && v.service==s.serviceName && v.category==filterValue 
+                            }).length>0
                           default:
                             return true
                         }                      
@@ -138,7 +140,16 @@ function Ser(props) {
                           }
                           return -1
                         }).filter(v=>{
-                        return v.service==s.serviceName && v.date==d && v.volunteerName != ""
+                        return v.service==s.serviceName && v.date==d && v.volunteerName != "" && (()=>{
+                          switch(filter){
+                            case "Volunteer":
+                              return v.volunteerName==filterValue
+                            case "Category":
+                              return v.category==filterValue
+                            default:
+                              return true
+                          }
+                        })()
                       })} />
                     </div>
                   })
