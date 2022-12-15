@@ -51,3 +51,32 @@
     font-size: 3vw;
     padding: 1vw;
 }
+
+@media only screen and (min-width: 1080px) {
+
+    .fillabel {
+        font-size: 1.2vw;
+    }
+
+    .filselect {
+        font-size: 1.2vw;
+        padding: 0.4vw;
+        margin-top: 0;
+        margin-left: 1.5vw;
+    }
+
+    .filterBy, .filtervalue{
+        display: flex;
+        align-items: center;
+    }
+
+    .filterBody {
+        margin-top: 1vw;
+    }
+
+    .ser {
+        margin-top: 1.2vw;
+    }
+   
+  }
+  
