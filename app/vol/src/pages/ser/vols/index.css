@@ -37,3 +37,26 @@
     font-size: 3vw;
     margin-bottom: 0.5vw;
 }
+
+@media only screen and (min-width: 1080px) {
+    .servol_category {
+        font-size: 1.2vw;
+    }
+    .eachVolDet {
+        margin: .5vw 0 .5vw 0;
+    }
+
+    .redlight {
+        margin-bottom: .5vw;
+    }
+
+    .availRed {
+        color: indianred;
+        font-size: 1.1vw;
+        margin-bottom: 0.2vw;
+    }
+
+    .volsIndiv {
+        margin-bottom: 1vw;
+    }
+}

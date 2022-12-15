@@ -26,3 +26,14 @@
 .tabHeader {
     background-color: white;
 }
+
+@media only screen and (min-width: 1080px) {
+
+    .tabHeaderItems {
+        height: 2.7vw;
+    }
+
+    .tabUnderline{
+        height: 0.2vw;
+    }
+}
