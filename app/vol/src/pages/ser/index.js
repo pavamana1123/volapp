@@ -156,7 +156,7 @@ function Ser(props) {
                 }</div>
               }
             })
-          }/>:<Spinner size={3}/>
+          }/>:<Spinner/>
         }
 
         </div>  
