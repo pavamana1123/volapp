@@ -10,7 +10,8 @@ function Vols(props) {
   return (
     <div className='volsIndiv'>
       <Paper>
-        {
+        
+          <div className='voldetholder'>{
           volunteers.length?volunteers.map(v=>{
             return v.volunteerName?<div className='eachVol'>
               <div className='eachVolDet'>
@@ -76,6 +77,7 @@ function Vols(props) {
             </div>:null
           }): "No volunteers"
         }
+        </div>
       </Paper>
     </div>
 

@@ -18,3 +18,32 @@
     display: flex;
     justify-content: space-between;
 }
+
+.spocPP {
+    margin-right: 3vw;
+    color: #555;
+}
+
+@media only screen and (min-width: 1080px) {
+    .serviceDetails{
+        font-size: 1.3vw;
+        margin: .5vw;
+    }
+
+    .serviceTitleStats {
+        font-size: 1.4vw;
+    }
+
+    i {
+        font-size: 1.2vw;
+        margin: .3vw;
+    }
+
+    .spocPP {
+        margin-right: .7vw;
+    }
+
+    .servIndiv {
+        margin-bottom: .8vw;
+    }
+}
