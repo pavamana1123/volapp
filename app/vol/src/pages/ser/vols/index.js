@@ -31,6 +31,47 @@ function Vols(props) {
                 </div>
               </div>
               <div className="servol_category redlight">{v.availability=="NOT AVAILABLE"?"⚠️ Not available or not filled the form":null}</div>
+              {
+                (()=>{
+                  if(v.availability=="Whole Day" || v.availability=="NOT AVAILABLE"){
+                    return null
+                  }
+                  return (()=>{
+                        const timeregex = /(\d{1,2}|(\d{1,2}\.\d{1,2}))(\s+)(A|P)M(\s+)-(\s+)(\d{1,2}|(\d{1,2}\.\d{1,2}))(\s+)(A|P)M/
+                        var isTimeParseable = !!v.availability.trim().match(timeregex) && !!v.timings.trim().match(timeregex)
+
+                        return <div>
+                          {isTimeParseable?(()=>{
+                            const set = (s)=>{
+                              var ps = s.split("-")
+                              var p1 = ps[0].trim()
+                              var p2 = ps[1].trim()
+
+                              var ts1 = p1.split(" ")
+                              var ts2 = p2.split(" ")
+
+                              var t1 = parseFloat(ts1[0].trim())
+                              var t2 = parseFloat(ts2[0].trim())
+
+                              t1+=ts1[1].trim()=="PM"?12:0
+                              t2+=ts2[1].trim()=="PM"?12:0
+
+                              return [t1,t2]
+                            }
+                            const matchTime = (t,a)=>{
+                                return a[0]<=t[0] && a[1]>=t[1]
+                            }
+                            return matchTime(v.timings,v.availability)?null:<div>
+                              <div className='availRed'><b>{"Avialability "}</b>{`${v.availability} (mismatch)`}</div>
+                          </div>
+                        })():<div className='availRed'><b>{"Avialability "}</b>{`${v.availability} (not verified)`}</div>
+                          }
+                          </div>
+                      })()
+                    
+                  
+                })()
+              }
               <HSep/>
             </div>:null
           }): "No volunteers"

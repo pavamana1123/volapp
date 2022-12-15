@@ -31,3 +31,9 @@
     display: flex;
     align-items: center;
 }
+
+.availRed {
+    color: indianred;
+    font-size: 3vw;
+    margin-bottom: 0.5vw;
+}
