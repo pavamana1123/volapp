@@ -4,7 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3005",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "md5": "^2.3.0",
@@ -14,7 +14,8 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.1",
     "use-long-press": "^2.0.2",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",

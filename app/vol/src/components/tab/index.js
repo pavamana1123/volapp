@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 function Tab(props) {
   var [activeTab, setActiveTab] = useState(0)
   var self=this
-  const {tabs} = props
+  const {tabs, onTabChange} = props
   return (
     <div className='tab'>
       <div className='tabHeader'>
@@ -14,6 +14,7 @@ function Tab(props) {
               return (
                 <div className='tabHeaderItem' key={i} onClick={()=>{
                   setActiveTab.bind(self)(i)
+                  onTabChange(i)
                 }}>{tab.title}</div>
               )
             })
