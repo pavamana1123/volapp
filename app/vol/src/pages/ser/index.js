@@ -182,7 +182,7 @@ function Ser(props) {
                 utils.book_append_sheet(workbook,worksheet,"Service Details")
                 writeFile(workbook, `${filter=="None"||filterValue=="None"?"Service Details":`${filter}-${filterValue}`}-${dates[selDate.current]}.xlsx`);
               }}>
-                <img className="downlaodicon" src="icons/filetype-xls.svg" title="Download XL sheet"/>
+                <img className="downlaodicon" src="filetype-xls.svg" title="Download XL sheet"/>
               </div>
           </div>:null}
         <div className='ser'>
