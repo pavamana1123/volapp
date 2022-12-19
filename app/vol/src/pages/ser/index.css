@@ -97,9 +97,12 @@
     .downlaodicon {
         color: var(--bar);
         font-size: 2.8vw;
+        width: 1.6vw;
+        cursor: pointer;
+        filter: invert(34%) sepia(88%) saturate(1001%) hue-rotate(182deg) brightness(95%) contrast(93%);
     }
     .downlaodicon:hover {
-        color: blue;
+        filter: invert(34%) sepia(88%) saturate(1001%) hue-rotate(182deg) brightness(45%) contrast(93%);
     }
    
   }
