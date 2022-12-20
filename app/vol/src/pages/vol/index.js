@@ -26,7 +26,7 @@ function Vol(props) {
       <Header title={data.title} hideOptions/>
       <div className='vol'>
         <Paper>{filter}</Paper>
-        {dates.length?<Paper style={{marginTop:"2vw", padding: 0, width: "86vw"}}>{
+        {dates.length?<Paper className="serpaper">{
           <Tab tabs={
               dates.map((d)=>{
 
@@ -37,12 +37,12 @@ function Vol(props) {
               })
 
               return {
-                title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):moment(d,"YYYY-MM-DD").format("Do MMM"),
+                title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):(dates.length <5 ? moment(d,"YYYY-MM-DD").format("Do MMM"): moment(d,"YYYY-MM-DD").format("MMM D")),
                 component: svs.length?svs:NoServ
               }
             })
           }/>
-        }</Paper>:<Spinner style={{marginTop:"2vw"}} size={5}/>}
+        }</Paper>:<Spinner style={{marginTop:"2vw"}} size={2}/>}
       </div>
 
       <div style={{margin:"15vw"}}/>

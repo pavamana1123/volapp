@@ -10,3 +10,18 @@
     padding: .5vw 0 0 0;
     font-size: 4vw;
 }
+
+@media only screen and (min-width: 1080px) {
+    .detailFeild{
+        padding: .5vw 0 0 0;
+        font-size: 1.4vw;
+    }
+
+    .detailsDiv {
+        margin-bottom: 1vw;
+    }
+
+    .service {
+        padding: 1vw;
+    }
+}

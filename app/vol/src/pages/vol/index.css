@@ -7,3 +7,19 @@
     align-content: center;
     align-items: center;
 }
+
+.serpaper {
+    margin-top: 1vw;
+    max-height: 75vh;
+    overflow: scroll;
+}
+
+
+@media only screen and (min-width: 1080px) {
+    .serpaper {
+        margin-top: .6vw;
+        max-height: 60vh;
+        overflow: scroll;
+    }
+   
+  }

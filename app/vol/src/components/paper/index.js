@@ -10,10 +10,10 @@ class PaperCtl {
 
 function Paper(props) {
 
-  var {children, style} = props
+  var {children, style, className} = props
 
   return(
-    <div className='paper' style={style}>
+    <div className={`paper ${className}`} style={style}>
       {children}
     </div>
   )
