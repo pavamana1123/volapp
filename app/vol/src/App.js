@@ -5,8 +5,8 @@ import Ser from './pages/ser';
 import API from './api';
 import {Route, BrowserRouter as Router, Routes} from "react-router-dom"
 import { useEffect, useState } from 'react';
-import moment from 'moment'
 import Msg from './pages/msg';
+import Home from './pages/home';
 
 function App() {
 
@@ -39,7 +39,7 @@ function App() {
           <Route path="/vol" element={<Vol data={data} dates={dates}/>}></Route>
           <Route path="/ser" element={<Ser data={data} dates={dates}/>}></Route>
           <Route path="/msg" element={<Msg data={data}/>}></Route>
-          <Route path="/" element={<div>{"Hare Krishna!"}</div>}></Route>
+          <Route path="/" element={<Home/>}></Route>
         </Routes>
     </Router>
     </div>

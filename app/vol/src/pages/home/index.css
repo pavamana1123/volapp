@@ -1,0 +1,26 @@
+.home {
+    display: flex;
+    width: 100vw;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.pin {
+    background-color: white;
+    height: 4vw;
+    border: none;
+    width: 20vw;
+    color: black;
+    padding: 1vw;
+    text-align: center;
+}
+
+.pingo {
+    margin: 2vw;
+    background: var(--bar);
+    height: 7vw;
+    width: 7vw;
+    font-size: 2vw;
+    border-radius: 100%;
+}
