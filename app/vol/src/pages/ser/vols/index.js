@@ -62,7 +62,7 @@ function Vols(props) {
                             const matchTime = (t,a)=>{
                                 return a[0]<=t[0] && a[1]>=t[1]
                             }
-                            return matchTime(v.timings,v.availability)?null:<div>
+                            return matchTime(set(v.timings),set(v.availability))?null:<div>
                               <div className='availRed'><b>{"Avialability "}</b>{`${v.availability} (mismatch)`}</div>
                           </div>
                         })():<div className='availRed'><b>{"Avialability "}</b>{`${v.availability} (not verified)`}</div>
