@@ -39,6 +39,7 @@ function App() {
           <Route path="/vol" element={<Vol data={data} dates={dates}/>}></Route>
           <Route path="/ser" element={<Ser data={data} dates={dates}/>}></Route>
           <Route path="/msg" element={<Msg data={data}/>}></Route>
+          <Route path="/" element={<div>{"Hare Krishna!"}</div>}></Route>
         </Routes>
     </Router>
     </div>

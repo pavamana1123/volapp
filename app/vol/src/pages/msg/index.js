@@ -23,7 +23,7 @@ function Msg(props) {
     })
 
     var volunteers = volunteers.filter(v=>{
-      return dates.indexOf(v.date)!=-1
+      return dates.indexOf(v.date)!=-1 && !v.invMsgSent
     })
   
   
@@ -56,7 +56,7 @@ function Msg(props) {
       return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
 *Sri Vaikunta Ekadashi 2023 - Volunteering*
     
-Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balaram 🙏
+Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balaram 🙏 We thank you for registering for the Sri Vaikunta Ekadashi services.
 
 Please go through the following guidelines and details about your services during Vaikunta Ekadashi festival:
 
@@ -97,6 +97,8 @@ You are the SPOC (Single-Point-of-Contact) for this service. Please meet your se
   
 *YOU CAN ALSO CHECK THESE SERVICE DETAILS USING THE LINK GIVEN BELOW*:
 ${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
+
+Please re-check your service before the festival using the above link. Sometimes your service may change due to unavoidable circumstances. 
 
 Regards,
 Pankajanghri Dasa
