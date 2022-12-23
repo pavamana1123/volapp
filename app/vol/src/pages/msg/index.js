@@ -3,6 +3,7 @@ import './index.css';
 function Msg(props) {
 
   var linkDiv = useRef()
+  var nameDiv = useRef()
 
   var {volunteers, services, master, events} = props.data
 
@@ -48,6 +49,8 @@ function Msg(props) {
         }
       }
     })
+
+    var names = Object.keys(voldet).sort().map(n=>{ return n}).join(`\n`)
 
     var links = Object.keys(voldet).sort().map(n=>{
 
@@ -108,10 +111,14 @@ ISKCON Mysore
 `)
   
     linkDiv.current.textContent = links
+    nameDiv.current.textContent = names
   }
 
   return (
-    <div className='links' ref={linkDiv} contentEditable/>
+    <div className='msgmain'>
+      <div className='links' ref={linkDiv} contentEditable/>
+      <div className='names' ref={nameDiv} contentEditable/>
+    </div>
   );
 }
 

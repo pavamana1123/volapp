@@ -1,12 +1,23 @@
-.links {
+.links, .names {
     margin: 3vw;
     background: white;
     padding: 1vw;
     border: 1px black solid;
-    width: 92vw;
     max-height: 90vh;
     overflow: scroll;
     font-family: monospace;
     font-size: 1vw;
     white-space: pre;
+}
+
+.links {
+    width: 60vw;
+}
+
+.names {
+    width: 20vw;
+}
+
+.msgmain {
+    display: flex;
 }
