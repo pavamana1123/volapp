@@ -195,10 +195,7 @@ function Ser(props) {
                 component: <div className='serServ'>
                   {
                     applyServiceFilters(services.sort((s1,s2)=>{
-                      if(s1.serviceName > s2.serviceName){
-                        return 1
-                      }
-                      return -1
+                      return s1.startTime-s2.startTime
                     }),d).map(s=>{
                     return <div className='svHolder'>
                       <Serv service={s} volunteers={volunteers.filter(v=>{return v.date==d && v.volunteerName != ""})}/>

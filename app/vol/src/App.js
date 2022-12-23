@@ -22,7 +22,7 @@ function App() {
       data.services.forEach(s => {
         d[s.date]=null
       });
-      setDates(Object.keys(d).map(d=>{ return d }).sort())
+      setDates(Object.keys(d).map(d=>{ return d }).filter(d=>{ return d!="" }).sort())
     })
     .catch(()=>{})
   }
@@ -37,6 +37,7 @@ function App() {
     <Router>
         <Routes>
           <Route path="/vol" element={<Vol data={data} dates={dates}/>}></Route>
+          <Route path="/volist" element={<Vol data={data} dates={dates} showList/>}></Route>
           <Route path="/ser" element={<Ser data={data} dates={dates}/>}></Route>
           <Route path="/msg" element={<Msg data={data}/>}></Route>
           <Route path="/" element={<Home/>}></Route>

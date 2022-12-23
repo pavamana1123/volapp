@@ -11,7 +11,7 @@ import { AutoIn } from '../../components/autoin';
 function Vol(props) {
 
   var [filter, setFilter] = useState('')
-  var { data, dates } = props
+  var { data, dates, showList } = props
   var { volunteers } = data
 
   useEffect(()=>{
