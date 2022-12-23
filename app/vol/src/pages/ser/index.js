@@ -34,6 +34,7 @@ function Ser(props) {
   const onFilterValueChange = (e)=>{
     setFilterValue(e.target.value)
   }
+
   var source = []
   switch(filter){
     case "Coordinator": 
@@ -46,6 +47,8 @@ function Ser(props) {
       source = volunteers
     default:
   }
+
+  source = source || []
 
   const filterValues = ["None"].concat(source.map(s=>{
       switch(filter){
@@ -67,6 +70,19 @@ function Ser(props) {
     }).sort())
 
   var [filterValue, setFilterValue] = useState(filterValues[0])
+  var [serviceView, setServiceView] = useState(false)
+
+  useEffect(()=>{
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    if(urlParams.has("SPOC")){
+      var spoc = decodeURIComponent(urlParams.get("SPOC"))
+      setFilter("SPOC")
+      setFilterValue(spoc)
+      setServiceView(true)
+    }
+  })
+
 
   const applyServiceFilters = (s,d)=>{
     return s.filter(s=>{
@@ -102,7 +118,7 @@ function Ser(props) {
       <Header title={data.title} hideOptions/>
 
       <div className='pageMainDiv'>
-        {services?
+        {services && !serviceView?
           <div className='filterBody'>
               <div className='filterBy'>
                 <div className='fillabel'>Filter By</div>

@@ -39,6 +39,7 @@ function App() {
           <Route path="/vol" element={<Vol data={data} dates={dates}/>}></Route>
           <Route path="/volist" element={<Vol data={data} dates={dates} showList/>}></Route>
           <Route path="/ser" element={<Ser data={data} dates={dates}/>}></Route>
+          <Route path="/services" element={<Ser data={data} dates={dates}/>}></Route>
           <Route path="/msg" element={<Msg data={data}/>}></Route>
           <Route path="/" element={<Home/>}></Route>
         </Routes>
