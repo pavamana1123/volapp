@@ -114,6 +114,18 @@ ISKCON Mysore
     nameDiv.current.textContent = names
   }
 
+  // if(!!Object.keys(props.data).length){
+  //   services = services.filter(s=>{
+  //     return dates.indexOf(d.date)!=-1
+  //   })
+
+  //   var spocs = services.map(s=>{
+  //     // return s.
+  //   })
+
+
+  // }
+
   return (
     <div className='msgmain'>
       <div className='links' ref={linkDiv} contentEditable/>

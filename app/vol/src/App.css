@@ -14,14 +14,6 @@ body {
   font-size: 4vw;
 }
 
-input {
-  outline: 0;
-  border-width: 0 0 0.1rem;
-  background-color: rgba(0, 0, 0, 0);
-  color: white;
-  font-size: 4vw;
-}
-
 button {
   background-color: var(--green);
   color: white;

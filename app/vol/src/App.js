@@ -5,8 +5,9 @@ import Ser from './pages/ser';
 import API from './api';
 import {Route, BrowserRouter as Router, Routes} from "react-router-dom"
 import { useEffect, useState } from 'react';
-import Msg from './pages/msg';
+import Msg from './pages/util/msg';
 import Home from './pages/home';
+import SPOCBLD from './pages/util/spoc-bld';
 
 function App() {
 
@@ -40,7 +41,8 @@ function App() {
           <Route path="/volist" element={<Vol data={data} dates={dates} showList/>}></Route>
           <Route path="/ser" element={<Ser data={data} dates={dates}/>}></Route>
           <Route path="/services" element={<Ser data={data} dates={dates}/>}></Route>
-          <Route path="/msg" element={<Msg data={data}/>}></Route>
+          <Route path="/util/msg" element={<Msg data={data}/>}></Route>
+          <Route path="/util/spocbld" element={<SPOCBLD data={data} dates={dates}/>}></Route>
           <Route path="/" element={<Home/>}></Route>
         </Routes>
     </Router>

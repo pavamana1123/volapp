@@ -1,0 +1,49 @@
+.spocbld {
+    max-height: 90vh;
+    overflow-y: scroll;
+    margin: 2vw;
+    background-color: white;
+    width: 90vw;
+}
+
+.countrow {
+    display: flex;
+}
+
+.spocell {
+    background-color: aliceblue;
+    margin: .15vw .2vw .15vw .2vw;
+    padding: 1vw;
+}
+
+.spocname {
+    width: 50%;
+}
+
+.spocb, .spocl, .spocd {
+    width: 15%;
+    text-align: center;
+}
+
+.spochead {
+    background-color:bisque;
+}
+
+.spocdate {
+}
+
+.spocdateip {
+    color: black;
+    width: 10vw;
+    text-align: center;
+    padding: 0.3vw;
+    font-size: 1vw;
+    margin-top: 2vw;
+    margin-left: 1vw;
+}
+
+.bldroot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
