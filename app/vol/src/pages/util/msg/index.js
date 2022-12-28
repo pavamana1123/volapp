@@ -23,15 +23,21 @@ function Msg(props) {
 
   return (
     <div className='msgRoot'>
-      <select className='msgfunc' onChange={(e)=>{
-        setLinks(e.target.value != "None"?templates[e.target.value](props):[])
-      }}>
-        {
-          ["None"].concat(Object.keys(templates).sort()).map((f)=>{
-            return <option value={f}>{f}</option>
-          })
-        }
-      </select>
+      <div className='msgOptions'>
+        <select className='msgfunc' onChange={(e)=>{
+          setSelectedIndex(-1)
+          setSelectedName("")
+          setLinks(e.target.value != "None"?templates[e.target.value](props):[])
+        }}>
+          {
+            ["None"].concat(Object.keys(templates).sort()).map((f)=>{
+              return <option value={f}>{f}</option>
+            })
+          }
+        </select>
+        <div className='msgCount'>`{`(${links?links.length:0})`}</div>
+      </div>
+
       <div className='msgmain'>
         <div className='msgtxt'>
           <div className='links' ref={linkDiv} contentEditable/>
