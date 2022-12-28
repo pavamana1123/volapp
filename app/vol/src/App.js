@@ -13,6 +13,7 @@ function App() {
 
   var [data, setData] = useState({})
   var [dates, setDates] = useState([])
+  var [isLoading, setIsLoading] = useState(true)
 
   var init = ()=>{
     new API()
@@ -24,6 +25,7 @@ function App() {
         d[s.date]=null
       });
       setDates(Object.keys(d).map(d=>{ return d }).filter(d=>{ return d!="" }).sort())
+      setIsLoading(false)
     })
     .catch(()=>{})
   }
@@ -41,7 +43,7 @@ function App() {
           <Route path="/volist" element={<Vol data={data} dates={dates} showList/>}></Route>
           <Route path="/ser" element={<Ser data={data} dates={dates}/>}></Route>
           <Route path="/services" element={<Ser data={data} dates={dates}/>}></Route>
-          <Route path="/util/msg" element={<Msg data={data}/>}></Route>
+          <Route path="/util/msg" element={<Msg data={data} isLoading={isLoading}/>}></Route>
           <Route path="/util/spocbld" element={<SPOCBLD data={data} dates={dates}/>}></Route>
           <Route path="/" element={<Home/>}></Route>
         </Routes>
