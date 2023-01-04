@@ -114,10 +114,10 @@ ISKCON Mysore`.trim())}`})
         var voldet = {}
     
         var volunteers = volunteers.filter(v=>{
-            if(dates.indexOf(v.date)!=-1 && v.volunteerName!="" ){
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
                 umap[v.volunteerName]=v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && v.volunteerName!="" && !v.invMsgSent
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.invMsgSent
         })
         
         Object.keys(umap).map(name=>{
@@ -202,35 +202,37 @@ Regards,
 Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
     },
-    "SPOC Info": (props)=>{
+    "SPOC Info - Ratha Yatra": (props)=>{
 
         var { services } = props.data
         const dates = [
-            "2022-12-31",
-            "2023-01-01",
-            "2023-01-02"
+            "2023-01-06",
+            "2023-01-07",
+            "2023-01-08"
         ]
 
         services = services.filter(s=>{
-        return dates.indexOf(s.date)!=-1
+            return dates.indexOf(s.date)!=-1
         })
 
         var spocMap = {}
 
         services.map(s=>{
-        if(s.coordinator==s.spoc){
-            return
-        }
+            if(s.coordinator==s.spoc || s.spoc=="" || s.spocPhone==""){
+                return
+            }
 
-        spocMap[s.spoc]=spocMap[s.spoc]||{
-            spoc: s.spoc,
-            spocPhone: s.spocPhone,
-            services : []
-        }
-        spocMap[s.spoc].services.indexOf(s.service)==-1 && spocMap[s.spoc].services.push({
-                service: s.serviceName,
-                date: s.date
-            })
+            spocMap[s.spoc]=spocMap[s.spoc]||{
+                spoc: s.spoc,
+                spocPhone: s.spocPhone,
+                coordinator: s.coordinator,
+                coordinatorPhone: s.coordinatorPhone,
+                services : []
+            }
+            spocMap[s.spoc].services.indexOf(s.service)==-1 && spocMap[s.spoc].services.push({
+                    service: s.serviceName,
+                    date: s.date
+                })
         })
 
         var spocs = Object.keys(spocMap).sort()
@@ -239,7 +241,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
       return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Sri Vaikunta Ekadashi 2023 services*
+*SPOC for Ratha Yatra 2023 services*
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?`following *${s.services.length}* services:
 
@@ -249,11 +251,203 @@ ${s.services.map(sv=>{ return ` • ${sv.service} (${sv.date})`}).join(`
 Please use this link to check the details of the service${s.services.length>1?`s`:``}:
 https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}
 
+Your service coordinator is ${s.coordinator} (${s.coordinatorPhone}). Please get in touch with your coordinator and discuss the details of the service.
+
 Regards,
 Pankajanghri Dasa
 ISKCON Mysore
 `.trim())}`})
+    },
+    "Service Reminder - Vaikunta Ekadashi": (props)=>{
+
+        var { volunteers } = props.data
+        
+        const dates = [
+            "2023-01-02"
+        ]
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.serviceReminderSent){
+                umap[v.volunteerName]=v.volunteerPhone
+                return true
+            }
+            return false
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                    date: volunteers[i].date,
+                    service: volunteers[i].service,
+                    timings: volunteers[i].timings,
+                    coordinator: volunteers[i].coordinator,
+                    spoc: volunteers[i].spoc,
+                    spocPhone: volunteers[i].spocPhone,
+                    serviceDuration: volunteers[i].serviceDuration
+                })
+            }
+            }
+        })
+
+        Object.keys(umap).map(name=>{
+            voldet[name].majorService = voldet[name].services.sort((a,b)=>{
+                return b.serviceDuration-a.serviceDuration
+            })[0]
+        })
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+*Gentle Reminder - Sri Vaikunta Ekadashi 2023 Volunteering*
+
+Hare Krishna 🙏
+    
+Hope you have got in touch with your service SPOC and are ready for volunteer services tomorrow.
+
+*Please carefully note the following guidelines*
+
+🆔 Please bring your volunteer ID card without fail
+
+🚗 Vehicle parking is not allowed inside the temple. Arrangement for parking is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into the parking area is allowed only against Volunteer ID Card
+
+🪪 PLEASE RETURN YOUR ID CARD AT THE VOLUNTEER INFO DESK WHEN YOUR SERVICES ARE COMPLETED AND COLLECT TAKE-HOME PRASADAM. You can also collect *Ratha Yatra ID card* after returning this card.
+
+*IMPORTANT:*
+Please collect *Prasadam Coupons* for breakfast, lunch & dinner prasadam from your SPOC *${v.majorService.spoc} (${v.majorService.spocPhone})*. Prasadam will be served only against the prasadam coupon. ${v.services.length>1?`Although you have multiple services (and SPOCs), please collect your prasadam coupons from the above mentioned SPOC only.`:``}
+
+Here is your service details, once again for your reference.
+
+*Service Details:*
+
+Name: ${v.name}
+Phone: ${v.phone}
+
+${v.services.length>1?`You have been assigned the following *${v.services.length}* services:`:`You have been assigned the following service:`}
+
+${v.services.map(s=>{
+    return `
+🗓️ *Date*: ${s.date}
+🛐 *Service*: ${s.service}
+🕗 *Timings*: ${s.timings}
+👑 *Co-ordinator*: ${s.coordinator}
+🥇 *SPOC*: ${s.spoc}
+📞 *SPOC's Phone number*: ${s.spocPhone}`.trim()
+    }).join("\n\n")
     }
+    
+*YOU CAN ALSO CHECK THESE SERVICE DETAILS USING THE LINK GIVEN BELOW*:
+${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore`.trim())}`})
+    },
+    "Service Reminder - Ratha Yatra": (props)=>{
+
+        var { volunteers } = props.data
+        
+        const dates = [
+            "2023-01-07"
+        ]
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.serviceReminderSent){
+                umap[v.volunteerName]=v.volunteerPhone
+                return true
+            }
+            return false
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                    date: volunteers[i].date,
+                    service: volunteers[i].service,
+                    timings: volunteers[i].timings,
+                    coordinator: volunteers[i].coordinator,
+                    spoc: volunteers[i].spoc,
+                    spocPhone: volunteers[i].spocPhone,
+                    serviceDuration: volunteers[i].serviceDuration
+                })
+            }
+            }
+        })
+
+        Object.keys(umap).map(name=>{
+            voldet[name].majorService = voldet[name].services.sort((a,b)=>{
+                return b.serviceDuration-a.serviceDuration
+            })[0]
+        })
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+*Gentle Reminder - Ratha Yatra 2023 Volunteering*
+
+Hare Krishna 🙏
+    
+Hope you have got in touch with your service SPOC and are ready for volunteer services tomorrow.
+
+*Please carefully note the following guidelines*
+
+🆔 Please bring your volunteer ID card without fail
+
+🚗 Vehicle parking is not allowed inside the temple. Arrangement for parking is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into the parking area is allowed only against Volunteer ID Card
+
+🪪 PLEASE RETURN YOUR ID CARD AT THE _VOLUNTEER INFO DESK_ WHEN YOUR SERVICES ARE COMPLETED AND COLLECT TAKE-HOME PRASADAM. Volunteer Info desk will be located near the temple entrance.
+
+*IMPORTANT:*
+Please collect *Prasadam Coupons* for breakfast, lunch & dinner prasadam from your SPOC *${v.majorService.spoc} (${v.majorService.spocPhone})*. Prasadam will be served only against the prasadam coupon. ${v.services.length>1?`Although you have multiple services (and SPOCs), please collect your prasadam coupons from the above mentioned SPOC only.`:``}
+
+Here is your service details, once again for your reference.
+
+*Service Details:*
+
+Name: ${v.name}
+Phone: ${v.phone}
+
+${v.services.length>1?`You have been assigned the following *${v.services.length}* services:`:`You have been assigned the following service:`}
+
+${v.services.map(s=>{
+    return `
+🗓️ *Date*: ${s.date}
+🛐 *Service*: ${s.service}
+🕗 *Timings*: ${s.timings}
+👑 *Co-ordinator*: ${s.coordinator}
+🥇 *SPOC*: ${s.spoc}
+📞 *SPOC's Phone number*: ${s.spocPhone}`.trim()
+    }).join("\n\n")
+    }
+    
+*YOU CAN ALSO CHECK THESE SERVICE DETAILS USING THE LINK GIVEN BELOW*:
+${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore`.trim())}`})
+    },
 }
 
 export default templates
