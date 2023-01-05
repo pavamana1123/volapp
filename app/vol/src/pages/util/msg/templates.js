@@ -161,7 +161,7 @@ Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balaram 🙏 We
 Please go through the following guidelines and details about your services during the festival:
 
 *Guidelines*
-${hasServiceOnVE?`🪪 *ID card*: After you complete your service on Vaikunta Ekadashi day (Monday, 2nd January 2023), return your ID card of Vaikunta Ekadashi at Volunteer Info Desk and collect ID card for Ratha Yatra services`:`🪪 *ID card* for the services will be issued on *Friday, 6th January 2023* from *5 PM to 8.30 PM*. ID cards can be collected from *Volunteer Info Desk* located near the Homa-Kunda area. Note that ID cards will not be issued on festival day. So please collect it on Friday.`}
+${hasServiceOnVE?`🪪 *ID card*: After you complete your service on Vaikunta Ekadashi day (Monday, 2nd January 2023), return your ID card of Vaikunta Ekadashi at Volunteer Info Desk and collect ID card for Ratha Yatra services`:`🪪 *ID card* for the services will be issued on *Friday, 6th January 2023* from *5 PM to 9 PM*. ID cards can be collected from *Volunteer Info Desk* located near the Homa-Kunda area. Note that ID cards will not be issued on festival day. So please collect it on Friday.`}
 
 ‼️ Please note the vehicle parking and prasadam for volunteers will be facilitated only against the ID card. Please collect your ID card without fail
 
@@ -448,6 +448,193 @@ Regards,
 Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
     },
+    "Prasadam Coupons - Ratha Yatra": (props)=>{
+        var { volunteers, slots } = props.data
+
+        const slotMap = {}
+        slots.map(s=>{
+            slotMap[s.slot]=s
+        })
+
+        const dates = [
+            "2023-01-07"
+        ]
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && v.coordinator!=v.spoc){
+                umap[v.volunteerName]=v.volunteerPhone
+                return true
+            }
+            return false
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    b: !!(slotMap[volunteers[i].availability]||{}).b,
+                    l: !!(slotMap[volunteers[i].availability]||{}).l,
+                    d: !!(slotMap[volunteers[i].availability]||{}).d,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                    date: volunteers[i].date,
+                    service: volunteers[i].service,
+                    timings: volunteers[i].timings,
+                    coordinator: volunteers[i].coordinator,
+                    spoc: volunteers[i].spoc,
+                    spocPhone: volunteers[i].spocPhone,
+                    serviceDuration: volunteers[i].serviceDuration,
+                })
+            }
+            }
+        })
+
+        Object.keys(umap).map(name=>{
+            voldet[name].majorService = voldet[name].services.sort((a,b)=>{
+                return b.serviceDuration-a.serviceDuration
+            })[0]
+        })
+
+        var spocMap = {}
+
+        Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+            if(v.majorService.spoc=="" || v.majorService.spocPhone==""){
+                return
+            }
+            if(!spocMap[v.majorService.spoc]){
+                spocMap[v.majorService.spoc]={
+                    spoc: v.majorService.spoc,
+                    spocPhone: v.majorService.spocPhone,
+                    volunteers: {},
+                }
+            }
+            if(!spocMap[v.majorService.spoc].volunteers[v.name]){
+                spocMap[v.majorService.spoc].volunteers[v.name]=v
+            }
+        })
+
+        return Object.keys(spocMap).sort().map(n=>{
+            var s = spocMap[n]
+            return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
+*SPOC Prasadam Coupons - Ratha Yatra*
+
+Hare Krishna 🙏 Kind attention SPOC!
+
+You must collect prasadam coupons (breakfast, lunch & dinner) for the volunteers in your services. These prasadam coupons are to be used on 7th Jan.
+
+Prasadam coupons will be distributed on *Friday, 6th Jan from 5 PM to 9 PM* at the Volunteer Info Desk near Homa Kunda area.
+
+Please note that the number of prasadam coupons given to you is a close approximation. If you fall short of coupons, please collect the balance from Volunteer Info Desk. For any query call 9844675891 or 6364903722
+
+Below is the list of volunteers to whom you have to handover breakfast, lunch and dinner coupons:
+
+*Breakfast:*
+${Object.keys(s.volunteers).map(vv=>{
+    return s.volunteers[vv]
+}).filter(vv=>{
+    return vv.b
+}).map((vv,i)=>{
+    return `${i+1}. ${vv.name}`
+}).join(`
+`)}
+
+*Lunch:*
+${Object.keys(s.volunteers).map(vv=>{
+    return s.volunteers[vv]
+}).filter(vv=>{
+    return vv.l
+}).map((vv,i)=>{
+    return `${i+1}. ${vv.name}`
+}).join(`
+`)}
+
+*Dinner:*
+${Object.keys(s.volunteers).map(vv=>{
+    return s.volunteers[vv]
+}).filter(vv=>{
+    return vv.d
+}).map((vv,i)=>{
+    return `${i+1}. ${vv.name}`
+}).join(`
+`)}
+
+Recheck the services for which you are SPOC with the link below:
+https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(n)}
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore`.trim())}`
+        })
+    },
+    "ID Card Reminder - Ratha Yatra": (props)=>{
+        var { volunteers } = props.data
+        
+        const dates = [
+            "2023-01-07",
+        ]
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.idCardCollected){
+                umap[v.volunteerName]=v.volunteerPhone
+                return true
+            }
+            return false
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                date: volunteers[i].date,
+                service: volunteers[i].service,
+                timings: volunteers[i].timings,
+                coordinator: volunteers[i].coordinator,
+                spoc: volunteers[i].spoc,
+                spocPhone: volunteers[i].spocPhone
+                })
+            }
+            }
+        })
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`🪪 *Reminder to collect ID Card for Ratha Yatra Volunteering*
+
+Hare Krishna 🙏
+Your volunteer ID card for Ratha Yatra service will be issued *today (Friday 6th January 2023) from 5 PM to 9 PM* at Volunteer Info Desk near Homa Kunda area.
+
+Please collect the ID cards without fail today. ID cards will *NOT* be issued tomorrow.
+
+‼️ IMPORTANT NOTE: Please re-check your service using the below link before the festival. Sometimes your service may change due to unavoidable circumstances.
+https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}
+
+Please get in touch with your service SPOC and understand the service's details.
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore`)}`
+        })
+    }
 }
 
 export default templates

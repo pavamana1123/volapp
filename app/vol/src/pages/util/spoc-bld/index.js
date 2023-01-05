@@ -14,7 +14,7 @@ function SPOCBLD(props) {
   })
 
   volunteers = (volunteers||[]).filter(v=>{
-    return v.date=="2023-01-07" && v.volunteerName!=""
+    return v.date=="2023-01-06" && v.volunteerName!=""
   })
 
   var vl = {}
