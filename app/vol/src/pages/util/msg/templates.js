@@ -414,7 +414,7 @@ Hope you have got in touch with your service SPOC and are ready for volunteer se
 
 🆔 Please bring your volunteer ID card without fail
 
-🚗 Vehicle parking is not allowed inside the temple. Arrangement for parking is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into the parking area is allowed only against Volunteer ID Card
+🚗 Vehicle parking is not allowed inside the temple. You need to park outside.
 
 🪪 PLEASE RETURN YOUR ID CARD AT THE _VOLUNTEER INFO DESK_ WHEN YOUR SERVICES ARE COMPLETED AND COLLECT TAKE-HOME PRASADAM. Volunteer Info desk will be located near the temple entrance.
 
@@ -586,7 +586,7 @@ ISKCON Mysore`.trim())}`
         var voldet = {}
     
         var volunteers = volunteers.filter(v=>{
-            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.idCardCollected){
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.idCardCollected && !v.idReminderSent){
                 umap[v.volunteerName]=v.volunteerPhone
                 return true
             }
