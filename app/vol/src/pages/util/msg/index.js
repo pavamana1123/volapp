@@ -52,15 +52,33 @@ function Msg(props) {
               }}>{name}</div>
             })
           }
+
+
         </div>
         <div className='msgwa'>
           <div className='msgheader'>
             {selectedName}
           </div>
           <div className='msgMsg'>
-            <div className='msgMsgTxt'>
-              {selectedIndex==-1?"":decodeURIComponent(new URLSearchParams(new URL(links[selectedIndex]).search).get("text"))}
-            </div>
+            <div className='msgMsgTxt' dangerouslySetInnerHTML={{
+              __html: selectedIndex==-1?"":(()=>{
+                  const text = decodeURIComponent(new URLSearchParams(new URL(links[selectedIndex]).search).get("text"))
+                  var textArr = text.split("")
+                  var bc = 0
+                  var ic = 0
+                  for (let i=0; i < textArr.length; i++) {
+                    if(textArr[i]=="*"){
+                      textArr[i]=bc%2==0?"<b>":"</b>"
+                      bc++
+                    }else if(textArr[i]=="_"){
+                      textArr[i]=ic%2==0?"<i>":"</i>"
+                      ic++
+                    }
+                  }
+                  return textArr.join("")
+                })()
+              }}
+            />
           </div>
         </div>
         </div>

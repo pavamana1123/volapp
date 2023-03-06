@@ -680,7 +680,8 @@ ISKCON Mysore`)}`
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
 *Sri Gaura Purnima 2023 - Volunteering*
-    
+*Tuesday, 7th March 2023*
+   
 Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balaram 🙏 We thank you for registering for the *Sri Gaura Purnima* festival services.
 
 *Service Details:*
@@ -716,6 +717,61 @@ Regards,
 Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
     },
+    "SPOC Info - Gaura Purnima": (props)=>{
+
+        var { services } = props.data
+        const dates = [
+            "2023-03-07"
+        ]
+
+        services = services.filter(s=>{
+            return dates.indexOf(s.date)!=-1
+        })
+
+        var spocMap = {}
+
+        services.map(s=>{
+            if(s.coordinator==s.spoc || s.spoc=="" || s.spocPhone==""){
+                return
+            }
+
+            spocMap[s.spoc]=spocMap[s.spoc]||{
+                spoc: s.spoc,
+                spocPhone: s.spocPhone,
+                coordinator: s.coordinator,
+                coordinatorPhone: s.coordinatorPhone,
+                services : []
+            }
+            spocMap[s.spoc].services.indexOf(s.service)==-1 && spocMap[s.spoc].services.push({
+                    service: s.serviceName,
+                    date: s.date
+                })
+        })
+
+        var spocs = Object.keys(spocMap).sort()
+
+        return spocs.map(sp=>{
+        var s = spocMap[sp]
+
+      return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
+*SPOC for Sri Gaura Purnima 2023 services*
+*Tuesday, 7th March 2023*
+
+Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?`following *${s.services.length}* services:
+
+${s.services.map(sv=>{ return ` • *${sv.service}*`}).join(`
+`)}`:`*${s.services[0].service}* service.`}
+
+Please use this link to check the details of the service${s.services.length>1?`s`:``}:
+*https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}*
+
+Your service coordinator is ${s.coordinator}. Please get in touch with your coordinator and discuss the details of the service.
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore
+`.trim())}`})
+    }
 }
 
 export default templates
