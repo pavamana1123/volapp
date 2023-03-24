@@ -4,7 +4,7 @@ import './index.css';
 
 function Vols(props) {
 
-  var { volunteers } = props
+  var { volunteers, serviceView } = props
 
 
   return (
@@ -21,7 +21,7 @@ function Vols(props) {
                   </div>:null}
                   <div>
                     <div>{v.volunteerName}</div>
-                    <div className="servol_category">{v.category}</div>
+                    <div className="servol_category">{`${v.category} ${v.preacher && !serviceView?`(${v.preacher})`:""}`}</div>
                   </div>
                 </div>
                   <div className='volactbuttons'>

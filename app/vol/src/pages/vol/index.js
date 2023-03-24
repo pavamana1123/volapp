@@ -28,7 +28,11 @@ function Vol(props) {
         <Paper>{filter}</Paper>
         {dates.length?<Paper className="serpaper">{
           <Tab tabs={
-              dates.map((d)=>{
+              dates.filter(d=>{
+                return !!volunteers.filter(v=>{
+                  return v.date==d && v.volunteerName==filter && v.service!=""
+                }).length
+              }).map((d)=>{
 
               var svs = volunteers.filter(v=>{
                 return v.volunteerName==filter && v.date==d
