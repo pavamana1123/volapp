@@ -219,7 +219,7 @@ function Ser(props) {
                     }),d).map(s=>{
                     return <div className='svHolder'>
                       <Serv service={s} volunteers={volunteers.filter(v=>{return v.date==d && v.volunteerName != ""})}/>
-                      <Vols serviceView volunteers={volunteers.sort((v1,v2)=>{
+                      <Vols serviceView={serviceView} volunteers={volunteers.sort((v1,v2)=>{
                           if(v1.volunteerName > v2.volunteerName){
                             return 1
                           }

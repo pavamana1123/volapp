@@ -6,7 +6,6 @@ function Vols(props) {
 
   var { volunteers, serviceView } = props
 
-
   return (
     <div className='volsIndiv'>
       <Paper>
