@@ -76,9 +76,13 @@
     margin: .9vw;
     border-radius: .2vw;
     padding: .5vw;
-    font-size: 1vw;
+    font-size: 1.3vw;
     white-space: pre-wrap;
     font-family: emoji;
+}
+
+.msgMsgTxt > b {
+    font-size: 1.1vw;
 }
 
 .msgOptions {
