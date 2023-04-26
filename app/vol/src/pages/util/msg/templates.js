@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 var templates = {
     "Service Invite - Vaikunta Ekadashi": (props)=>{
 
@@ -59,7 +61,7 @@ Please go through the following guidelines and details about your services durin
 
 🪪 *PLEASE RETURN YOUR ID CARD TO VOLUNTEER INFO DESK WHEN YOUR SERVICES ARE COMPLETED AND COLLECT TAKE-HOME PRASADAM*
 
-1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. Please call your SPOC and discuss the details of service, dress code etc. The contact numbers of SPOC(s) are mentioned below
+1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. *Please call your SPOC and discuss the details of service*, dress code etc. The contact numbers of SPOC(s) are mentioned below
 
 😇 Please report to your services on time. Be responsible for your services.
 
@@ -92,6 +94,7 @@ Regards,
 Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
     },
+
     "Service Invite - Ratha Yatra": (props)=>{
 
         var { volunteers } = props.data
@@ -169,7 +172,7 @@ ${hasServiceOnVE?`🪪 *ID card*: After you complete your service on Vaikunta Ek
 
 🪪 *PLEASE RETURN YOUR ID CARD TO VOLUNTEER INFO DESK WHEN YOUR SERVICES ARE COMPLETED AND COLLECT TAKE-HOME PRASADAM*
 
-1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. Please call your SPOC and discuss the details of service, dress code etc. The contact numbers of SPOC(s) are mentioned below.
+1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. *Please call your SPOC and discuss the details of service*, dress code etc. The contact numbers of SPOC(s) are mentioned below.
 
 😇 Please report to your services on time. Be responsible for your services.
 
@@ -635,6 +638,7 @@ Pankajanghri Dasa
 ISKCON Mysore`)}`
         })
     },
+    
     "Service Invite - Gaura Purnima": (props)=>{
 
         var { volunteers } = props.data
@@ -708,7 +712,7 @@ You are the SPOC (Single-Point-of-Contact) for this service. Please meet your se
 ${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
 
 *Note:*
-1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. Please call your SPOC and discuss the details of service, dress code etc. The contact numbers of SPOC(s) are mentioned below.
+1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. *Please call your SPOC and discuss the details of service*, dress code etc. The contact numbers of SPOC(s) are mentioned below.
 😇 Please report to your services on time. Be responsible for your services.
 
 _Please re-check your service before the festival using the above link. Sometimes your service may change due to unavoidable circumstances._
@@ -772,6 +776,7 @@ Pankajanghri Dasa
 ISKCON Mysore
 `.trim())}`})
     },
+
     "Service Invite - Rama Navami": (props)=>{
 
         var { volunteers } = props.data
@@ -846,7 +851,7 @@ You are the SPOC (Single-Point-of-Contact) for this service. Please meet your se
 ${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
 
 *Note:*
-1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. Please call your SPOC and discuss the details of service, dress code etc. The contact numbers of SPOC(s) are mentioned below.
+1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. *Please call your SPOC and discuss the details of service*, dress code etc. The contact numbers of SPOC(s) are mentioned below.
 😇 Please report to your services on time. Be responsible for your services.
 
 _Please re-check your service before the festival using the above link. Sometimes your service may change due to unavoidable circumstances._
@@ -985,6 +990,256 @@ ${v.services.map(s=>{
 👑 *Co-ordinator*: ${s.coordinator}
 🥇 *SPOC*: ${s.spoc}
 📞 *SPOC's Phone number*: ${s.spocPhone}`.trim()
+    }).join("\n\n")
+    }
+    
+*YOU CAN ALSO CHECK THESE SERVICE DETAILS USING THE LINK GIVEN BELOW*:
+${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore`.trim())}`})
+    },
+
+    "SPOC Info - Narasimha Chaturdashi": (props)=>{
+
+        var { services } = props.data
+        const dates = [
+            "2023-05-03",
+            "2023-05-04",
+        ]
+
+        services = services.filter(s=>{
+            return dates.indexOf(s.date)!=-1
+        })  
+
+        var spocMap = {}
+
+        services.map(s=>{
+            if(s.coordinator==s.spoc || s.spoc=="" || s.spocPhone==""){
+                return
+            }
+
+            spocMap[s.spoc]=spocMap[s.spoc]||{
+                spoc: s.spoc,
+                spocPhone: s.spocPhone,
+                services : []
+            }
+            spocMap[s.spoc].services.indexOf(s.service)==-1 && spocMap[s.spoc].services.push({
+                    service: s.serviceName,
+                    date: s.date,
+                    coordinator: s.coordinator,
+                    coordinatorPhone: s.coordinatorPhone,
+                    timings: s.timings,
+                    requirement: s.requirement,
+                })
+        })
+
+        var spocs = Object.keys(spocMap).sort()
+
+        return spocs.map(sp=>{
+        var s = spocMap[sp]
+
+      return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
+*SPOC for Sri Narasimha Chaturdashi 2023 services*
+*Thursday, 4th May 2023*
+
+Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for below mentioned ${s.services.length>1?s.services.length:""} service${s.services.length>1?"s":""}. Kindly go through the details of the service${s.services.length>1?"s":""} carefully:
+
+Name: ${s.spoc}
+Phone: ${s.spocPhone}
+
+${s.services.map(sv=>{
+    return `
+🗓️ Date: *${moment(sv.date, "YYYY-MM-DD").format("dddd, Do MMMM")}*
+🛐 Service: *${sv.service}*
+🕗 Timings: *${sv.timings}*
+👑 Coordinator: *${sv.coordinator}*
+📞 Coordinator's Phone: *${sv.coordinatorPhone}*
+#️⃣ No. of volunteers: *${sv.requirement}*
+`.trim()
+}).join(`
+
+`)}
+
+Please use this link to check the details of the service${s.services.length>1?"s":""} and volunteers under you:
+*https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}*
+
+Your responsibilities:
+ • Please discuss with the service coordinator${s.services.length>1?"s":""} and understand all major and minor details of the service like dress code, timings etc.
+ • Please call volunteers under you and communicate all the details of the service to them. Phone numbers of all volunteers is availbale in the link shared above.
+ • Make sure that volunteers report at proper time and in appropriate dress code for their service.
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore
+`.trim())}`})
+    },
+    "Service Invite - Narasimha Chaturdashi": (props)=>{
+
+        var { volunteers } = props.data
+        
+        const dates = [
+            "2023-05-03",
+            "2023-05-04",
+        ]
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
+                umap[v.volunteerName]=v.volunteerPhone
+            }
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.invMsgSent
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                date: volunteers[i].date,
+                service: volunteers[i].service,
+                timings: volunteers[i].timings,
+                coordinator: volunteers[i].coordinator,
+                spoc: volunteers[i].spoc,
+                spocPhone: volunteers[i].spocPhone,
+                availability: volunteers[i].availability,
+                })
+            }
+            }
+        })
+
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+            var isDefault = !!v.services.filter(sss=>{ return (sss.availability=="Default" || sss.availability=="NOT AVAILABLE") }).length
+
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+*Sri Narasimha Chaturdashi 2023 - Volunteering*
+*Thursday, 30th March 2023*
+   
+Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balaram 🙏 ${isDefault ? "" : "We thank you for registering for the Sri Narasimha Chaturdashi festival services"}.
+
+*Service Details:*
+
+Name: ${v.name}
+Phone: ${v.phone}
+
+${v.services.length>1?`You have been assigned the following *${v.services.length}* services:`:`You have been assigned the following service:`}
+
+${v.services.map(s=>{
+    return `
+🗓️ Date: *${moment(s.date, "YYYY-MM-DD").format("dddd, Do MMMM")}*
+🛐 Service: *${s.service}*
+🕗 Timings: *${s.timings}*
+👑 Co-ordinator: *${s.coordinator}*
+🥇 SPOC: *${s.spoc}*
+📞 SPOC's Phone number: *${s.spocPhone}*${s.spoc.trim()==v.name?`
+You are the SPOC (Single-Point-of-Contact) for this service.`:``}
+    `.trim()
+    }).join("\n\n")
+    }
+    
+*YOU CAN ALSO CHECK THESE SERVICE DETAILS USING THE LINK GIVEN BELOW*:
+${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
+
+*Note:*
+1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. *Please call your SPOC and discuss the details of service* like dress code, timings etc. The contact numbers of SPOC(s) are mentioned above.
+😇 Please report to your services on time. Be responsible for your services.
+🌐 If you are not able click and open the above link, it may likely be because you have not stored this number. Please save this number as 'ISKCON Mysore'.
+
+_Please re-check your service before the festival using the above link. Sometimes your service may change due to unavoidable circumstances._
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore`.trim())}`})
+    },
+
+    "Service Reminder - Narasimha Chaturdashi": (props)=>{
+
+        var { volunteers } = props.data
+        
+        const dates = [
+            "2023-05-03",
+            "2023-05-04",
+        ]
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.serviceReminderSent){
+                umap[v.volunteerName]=v.volunteerPhone
+                return true
+            }
+            return false
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                    date: volunteers[i].date,
+                    service: volunteers[i].service,
+                    timings: volunteers[i].timings,
+                    coordinator: volunteers[i].coordinator,
+                    spoc: volunteers[i].spoc,
+                    spocPhone: volunteers[i].spocPhone,
+                    serviceDuration: volunteers[i].serviceDuration
+                })
+            }
+            }
+        })
+
+        Object.keys(umap).map(name=>{
+            voldet[name].majorService = voldet[name].services.sort((a,b)=>{
+                return b.serviceDuration-a.serviceDuration
+            })[0]
+        })
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+*Gentle Reminder - Sri Narasimha Chaturdashi 2023 Volunteering*
+
+Hare Krishna 🙏
+    
+Hope you have got in touch with your service SPOC and are ready for volunteer services.
+
+Here is your service details, once again for your reference:
+
+*Service Details:*
+
+Name: ${v.name}
+Phone: ${v.phone}
+
+${v.services.length>1?`You have been assigned the following *${v.services.length}* services:`:`You have been assigned the following service:`}
+
+${v.services.map(s=>{
+    return `
+🗓️ Date: *${moment(s.date, "YYYY-MM-DD").format("dddd, Do MMMM")}*
+🛐 Service: *${s.service}*
+🕗 Timings: *${s.timings}*
+👑 Co-ordinator: *${s.coordinator}*
+🥇 SPOC: *${s.spoc}*
+📞 SPOC's Phone number: *${s.spocPhone}*${s.spoc.trim()==v.name?`
+You are the SPOC (Single-Point-of-Contact) for this service.`:``}
+    `.trim()
     }).join("\n\n")
     }
     
