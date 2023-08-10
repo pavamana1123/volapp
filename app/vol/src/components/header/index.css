@@ -3,15 +3,11 @@
 }
 
 .appHeader {
-    position: relative;
-    display: flex;
-    height: 10vw;
-    width: 100%;
     background-color: var(--bar);
-    align-items: center;
-    justify-content: space-around;
     color: white;
     font-size: 4.3vw;
+    text-align: center;
+    padding: 2vw;
 }
 
 #menuButton {
@@ -36,8 +32,8 @@
 @media only screen and (min-width: 1080px) {
 
     .appHeader {
-        height: 4vw;
         font-size: 1.7vw;
+        padding: 1vw;
     }
    
 }

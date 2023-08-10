@@ -12,7 +12,7 @@ function Tab(props) {
           {
             tabs.map((tab, i)=>{
               return (
-                <div className='tabHeaderItem' key={i} onClick={()=>{
+                <div className={`tabHeaderItem ${i==tabs.length-1?"last-thi":""}`} key={i} onClick={()=>{
                   setActiveTab.bind(self)(i)
                   onTabChange(i)
                 }}>{tab.title}</div>

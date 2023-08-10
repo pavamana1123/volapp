@@ -12,7 +12,12 @@
 .tabHeaderItem {
     width: 100%;
     text-align: center;
-    cursor: pointer;
+    border-right: 1px solid #aaa;
+    user-select: none;
+}
+
+.last-thi {
+    border-right: none
 }
 
 
@@ -25,6 +30,7 @@
 
 .tabHeader {
     background-color: white;
+    margin-bottom: 2vw;
 }
 
 @media only screen and (min-width: 1080px) {
@@ -33,7 +39,15 @@
         height: 2.7vw;
     }
 
+    .tabHeaderItem {
+        cursor: pointer;
+    }
+
     .tabUnderline{
         height: 0.2vw;
+    }
+
+    .tabHeader {
+        margin-bottom: 1vw;
     }
 }

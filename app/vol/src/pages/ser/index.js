@@ -210,36 +210,36 @@ function Ser(props) {
                   return s.date==d && (serviceView?s.spoc==filterValue:true)
                 }).length
               }).map((d)=>{
-              return {
-                title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):(dates.length <5 ? moment(d,"YYYY-MM-DD").format("Do MMM"): moment(d,"YYYY-MM-DD").format("MMM D")),
-                component: <div className='serServ'>
-                  {
-                    applyServiceFilters(services.sort((s1,s2)=>{
-                      return s1.startTime-s2.startTime
-                    }),d).map(s=>{
-                    return <div className='svHolder'>
-                      <Serv service={s} volunteers={volunteers.filter(v=>{return v.date==d && v.volunteerName != ""})}/>
-                      <Vols serviceView={serviceView} volunteers={volunteers.sort((v1,v2)=>{
-                          if(v1.volunteerName > v2.volunteerName){
-                            return 1
-                          }
-                          return -1
-                        }).filter(v=>{
-                        return v.service==s.serviceName && v.date==d && v.volunteerName != "" && (()=>{
-                          switch(filter){
-                            case "Volunteer":
-                              return v.volunteerName==filterValue
-                            case "Category":
-                              return v.category==filterValue
-                            default:
-                              return true
-                          }
-                        })()
-                      })} />
-                    </div>
-                  })
-                }</div>
-              }
+                return {
+                  title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):(dates.length <5 ? moment(d,"YYYY-MM-DD").format("Do MMM"): moment(d,"YYYY-MM-DD").format("MMM D")),
+                  component: <div className='serServ'>
+                    {
+                      applyServiceFilters(services.sort((s1,s2)=>{
+                        return s1.startTime-s2.startTime
+                      }),d).map(s=>{
+                      return <div className='svHolder'>
+                        <Serv service={s} volunteers={volunteers.filter(v=>{return v.date==d && v.volunteerName != ""})}/>
+                        <Vols serviceView={serviceView} volunteers={volunteers.sort((v1,v2)=>{
+                            if(v1.volunteerName > v2.volunteerName){
+                              return 1
+                            }
+                            return -1
+                          }).filter(v=>{
+                          return v.service==s.serviceName && v.date==d && v.volunteerName != "" && (()=>{
+                            switch(filter){
+                              case "Volunteer":
+                                return v.volunteerName==filterValue
+                              case "Category":
+                                return v.category==filterValue
+                              default:
+                                return true
+                            }
+                          })()
+                        })} />
+                      </div>
+                    })
+                  }</div>
+                }
             })
           }/>:<Spinner/>
         }

@@ -1,7 +1,3 @@
-.volsIndiv {
-    margin-bottom: 5vw;
-}
-
 .eachVolDet {
     display: flex;
     justify-content: space-between;
@@ -39,6 +35,11 @@
     margin-bottom: 0.5vw;
 }
 
+.ser-vol {
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
+}
+
 @media only screen and (min-width: 1080px) {
     .servol_category {
         font-size: 1vw;
@@ -57,9 +58,5 @@
         color: indianred;
         font-size: 1.1vw;
         margin-bottom: 0.2vw;
-    }
-
-    .volsIndiv {
-        margin-bottom: 1vw;
     }
 }

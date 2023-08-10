@@ -1,13 +1,23 @@
 var config = require("./config.js")
-var APIHandler = require("./api.js")
+var Cacher = require("./api.js")
 
-var api = new APIHandler(config.scriptId)
+var cacher = new Cacher(config.scriptId)
+cacher.start()
 
 const express = require('express')
 const app = express()
 app.use(express.json())
 const port = 3005
 
-app.post('/api', api.call.bind(api))
+app.post('/api', (req, res)=>{
+    if(cacher.timestamp){
+        res.status(200).send({
+            data: cacher.data,
+            timestamp: cacher.timestamp
+        })
+    }else{
+        res.status(503).send()
+    }
+})
 
 app.listen(port, ()=>console.log("Server running on port :" + port))

@@ -8,20 +8,22 @@ import { useEffect, useState } from 'react';
 import Msg from './pages/util/msg';
 import Home from './pages/home';
 import SPOCBLD from './pages/util/spoc-bld';
+import moment from 'moment';
 
 function App() {
 
   var [data, setData] = useState({})
+  var [timestamp, setTimestamp] = useState({})
   var [dates, setDates] = useState([])
   var [isLoading, setIsLoading] = useState(true)
 
   var init = ()=>{
-    new API()
-    .setFunc("getData").setParams("1A_5H3BqWhiL8Q8MJQT2CoCEWIf1n1VrMwHoOse8M8Z8").call()
-    .then((data)=>{
-      setData(data)
+    new API().call()
+    .then((res)=>{
+      setData(res.data)
+      setTimestamp(res.timestamp)
       var d = {}
-      data.services.forEach(s => {
+      res.data.services.forEach(s => {
         d[s.date]=null
       });
       setDates(Object.keys(d).map(d=>{ return d }).filter(d=>{ return d!="" }).sort())
@@ -32,22 +34,25 @@ function App() {
 
   useEffect(()=>{
     init()
-    setInterval(init,60*1000)
+    setInterval(init, 60*1000)
   },[])
 
   return (
     <div className="App">
-    <Router>
-        <Routes>
-          <Route path="/vol" element={<Vol data={data} dates={dates}/>}></Route>
-          <Route path="/volist" element={<Vol data={data} dates={dates} showList/>}></Route>
-          <Route path="/ser" element={<Ser data={data} dates={dates}/>}></Route>
-          <Route path="/services" element={<Ser data={data} dates={dates}/>}></Route>
-          <Route path="/util/msg" element={<Msg data={data} isLoading={isLoading}/>}></Route>
-          <Route path="/util/spocbld" element={<SPOCBLD data={data} dates={dates}/>}></Route>
-          <Route path="/" element={<Home/>}></Route>
-        </Routes>
-    </Router>
+      <Router>
+          <Routes>
+            <Route path="/vol" element={<Vol data={data} dates={dates}/>}></Route>
+            <Route path="/volist" element={<Vol data={data} dates={dates} showList/>}></Route>
+            <Route path="/ser" element={<Ser data={data} dates={dates}/>}></Route>
+            <Route path="/services" element={<Ser data={data} dates={dates}/>}></Route>
+            <Route path="/util/msg" element={<Msg data={data} isLoading={isLoading}/>}></Route>
+            <Route path="/util/spocbld" element={<SPOCBLD data={data} dates={dates}/>}></Route>
+            <Route path="/" element={<Home/>}></Route>
+          </Routes>
+      </Router>
+      <div id="update-epoch">
+        {`Data last updated at ${moment(timestamp).format("HH:mm A")}`}
+      </div>
     </div>
   );
 }

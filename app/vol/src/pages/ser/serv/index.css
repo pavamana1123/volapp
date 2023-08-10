@@ -1,6 +1,5 @@
 .servIndiv {
     margin-top: 2vw;
-    margin-bottom: 2vw;
 }
 
 .serviceDetails {
@@ -24,6 +23,12 @@
     color: #555;
 }
 
+.ser-service {
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+    background: aliceblue;
+}
+
 @media only screen and (min-width: 1080px) {
     .serviceDetails{
         font-size: 1.3vw;
@@ -43,7 +48,4 @@
         margin-right: .7vw;
     }
 
-    .servIndiv {
-        margin-bottom: .8vw;
-    }
 }

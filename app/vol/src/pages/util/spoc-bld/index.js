@@ -45,7 +45,7 @@ function SPOCBLD(props) {
   majorServices.map(ms=>{
     spocMap[ms.spoc] = spocMap[ms.spoc] || {}
     spocMap[ms.spoc].availability = spocMap[ms.spoc].availability || []
-    spocMap[ms.spoc].availability.push(ms.availability=="NOT AVAILABLE"?"Whole Day":ms.availability)
+    spocMap[ms.spoc].availability.push(ms.availability=="NOT AVAILABLE"?"All slots":ms.availability)
   })
 
   var spocs = Object.keys(spocMap).sort()

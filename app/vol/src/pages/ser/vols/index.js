@@ -8,7 +8,7 @@ function Vols(props) {
 
   return (
     <div className='volsIndiv'>
-      <Paper>
+      <Paper className="ser-vol">
         
           <div className='voldetholder'>{
           volunteers.length?volunteers.map(v=>{
@@ -33,7 +33,7 @@ function Vols(props) {
               <div className="servol_category redlight">{v.availability=="NOT AVAILABLE"?"⚠️ Not available or not filled the form":null}</div>
               {
                 (()=>{
-                  if(v.availability=="Whole Day" || v.availability=="NOT AVAILABLE"){
+                  if(v.availability=="All slots" || v.availability=="NOT AVAILABLE"){
                     return null
                   }
                   return (()=>{
