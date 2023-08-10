@@ -33,6 +33,7 @@ function Vol(props) {
                   return v.date==d && v.volunteerName==filter && v.service!=""
                 }).length
               }).map((d)=>{
+
                 var svs = volunteers.filter(v=>{
                   return v.volunteerName==filter && v.date==d
                 }).map(s=>{
@@ -41,7 +42,17 @@ function Vol(props) {
 
                 return {
                   title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):(dates.length <5 ? moment(d,"YYYY-MM-DD").format("Do MMM"): moment(d,"YYYY-MM-DD").format("MMM D")),
-                  component: svs.length?svs:NoServ
+                  component: svs.length?
+                    <div>
+                        <div className='event-name'>{data.events.filter(e=>{
+                          return e.date==d
+                        })[0].event}</div>
+
+                        <div>
+                          {svs}
+                        </div>
+                    </div>
+                  :NoServ
                 }
             })
           }/>
