@@ -27,7 +27,7 @@ function Vols(props) {
                   {!isNaN(v.volunteerPhone)?<a href={`tel:+91${v.volunteerPhone}`}><i className="bi bi-telephone-fill"></i></a>:null }
                   {!isNaN(v.volunteerPhone)?<a href={`https://wa.me/91${v.volunteerPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>:null}
                   {!isNaN(v.volunteerPhone)?<a href={`https://wa.me/91${v.volunteerPhone}?text=${encodeURI(`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.volunteerName)}`)}`} target="_blank"><i className="bi bi-share-fill"></i></a>:null}
-                  <a href={`https://vol.iskconmysore.org/vol?name=${encodeURI(v.volunteerName)}`} target="_blank"><i className="bi bi-box-arrow-up-right"></i></a>
+                  <a href={`/vol?name=${encodeURI(v.volunteerName)}`}><i className="bi bi-box-arrow-up-right"></i></a>
                 </div>
               </div>
               <div className="servol_category redlight">{v.availability=="NOT AVAILABLE"?"⚠️ Not available or not filled the form":null}</div>
