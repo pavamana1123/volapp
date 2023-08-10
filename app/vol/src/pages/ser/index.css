@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-height: 70vh;
+    max-height: 73vh;
     overflow: scroll;
 }
 
@@ -103,6 +103,10 @@
     }
     .downlaodicon:hover {
         filter: invert(34%) sepia(88%) saturate(1001%) hue-rotate(182deg) brightness(45%) contrast(93%);
+    }
+
+    .serServ{
+        max-height: 70vh;
     }
    
   }
