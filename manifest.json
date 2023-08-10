@@ -10,6 +10,11 @@
       "src": "favicon.png",
       "type": "image/png",
       "sizes": "550x550"
+    },
+    {
+      "src": "favicon.ico",
+      "type": "image/ico",
+      "sizes": "256x256"
     }
   ],
   "display": "standalone",
