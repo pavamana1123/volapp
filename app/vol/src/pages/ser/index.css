@@ -13,7 +13,8 @@
     flex-direction: column;
     align-items: center;
     max-height: 73vh;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .svHolder {
@@ -38,7 +39,7 @@
 .fillabel {
     color: #555;
     margin-bottom: 0.1vw;
-    font-size: 3.2vw;
+    font-size: 3.75vw;
 }
 
 .pageMainDiv {
@@ -48,8 +49,20 @@
 .filselect {
     width: 40vw;
     margin-top: .5vw;
-    font-size: 3vw;
+    font-size: 4vw;
     padding: 1vw;
+}
+
+.ser-count {
+    width: 100%;
+    text-align: end;
+    margin-right: 15vw;
+    color: #666;
+}
+
+.noservices {
+    text-align: center;
+    margin-top: 10vw;
 }
 
 .downlaodicon {
@@ -107,6 +120,10 @@
 
     .serServ{
         max-height: 70vh;
+    }
+
+    .ser-count {
+        margin-right: 18vw;
     }
    
   }

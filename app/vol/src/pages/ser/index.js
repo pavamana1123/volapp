@@ -22,7 +22,8 @@ function Ser(props) {
     "SPOC",
     "Service",
     "Volunteer",
-    "Category"
+    "Category",
+    "Preacher"
   ]
 
   var [filter, setFilter] = useState(filters[0])
@@ -44,6 +45,7 @@ function Ser(props) {
       break
     case "Volunteer":
     case "Category":
+    case "Preacher":
       source = volunteers
     default:
   }
@@ -62,6 +64,8 @@ function Ser(props) {
           return s.volunteerName
         case "Category":
           return s.category
+        case "Preacher":
+          return s.preacher
         default:
           return null
       }
@@ -102,15 +106,15 @@ function Ser(props) {
               return volunteers.filter(v=>{
                 return v.date==d && v.service==s.serviceName && v.category==filterValue 
               }).length>0
+            case "Preacher":
+              return volunteers.filter(v=>{
+                return v.date==d && v.service==s.serviceName && v.preacher==filterValue 
+              }).length>0
             default:
               return true
           }                      
       })())
     })
-  }
-
-  const applyVolunteerFilters = (s)=>{
-      
   }
 
   return (
@@ -179,6 +183,8 @@ function Ser(props) {
                       return v.volunteerName==filterValue
                     case "Category":
                       return v.category==filterValue
+                    case "Preacher":
+                      return v.preacher==filterValue
                   }
                 }).map(v=>{
                   return [
@@ -210,35 +216,43 @@ function Ser(props) {
                   return s.date==d && (serviceView?s.spoc==filterValue:true)
                 }).length
               }).map((d)=>{
+
+                var dateServices = applyServiceFilters(services.sort((s1,s2)=>{
+                  return s1.startTime-s2.startTime
+                }),d)
+
                 return {
                   title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):(dates.length <5 ? moment(d,"YYYY-MM-DD").format("Do MMM"): moment(d,"YYYY-MM-DD").format("MMM D")),
-                  component: <div className='serServ'>
-                    {
-                      applyServiceFilters(services.sort((s1,s2)=>{
-                        return s1.startTime-s2.startTime
-                      }),d).map(s=>{
-                      return <div className='svHolder'>
-                        <Serv service={s} volunteers={volunteers.filter(v=>{return v.date==d && v.volunteerName != ""})}/>
-                        <Vols serviceView={serviceView} volunteers={volunteers.sort((v1,v2)=>{
-                            if(v1.volunteerName > v2.volunteerName){
-                              return 1
-                            }
-                            return -1
-                          }).filter(v=>{
-                          return v.service==s.serviceName && v.date==d && v.volunteerName != "" && (()=>{
-                            switch(filter){
-                              case "Volunteer":
-                                return v.volunteerName==filterValue
-                              case "Category":
-                                return v.category==filterValue
-                              default:
-                                return true
-                            }
-                          })()
-                        })} />
-                      </div>
-                    })
-                  }</div>
+                  component: dateServices.length?
+                    <div className='serServ'>
+                      {dateServices.length && <div className='ser-count'>{`${dateServices.length} service${dateServices.length>1?"s":""}`}</div>}
+                      {
+                        dateServices.map(s=>{
+                        return <div className='svHolder'>
+                          <Serv service={s} volunteers={volunteers.filter(v=>{return v.date==d && v.volunteerName != ""})}/>
+                          <Vols serviceView={serviceView} volunteers={volunteers.sort((v1,v2)=>{
+                              if(v1.volunteerName > v2.volunteerName){
+                                return 1
+                              }
+                              return -1
+                            }).filter(v=>{
+                            return v.service==s.serviceName && v.date==d && v.volunteerName != "" && (()=>{
+                              switch(filter){
+                                case "Volunteer":
+                                  return v.volunteerName==filterValue
+                                case "Category":
+                                  return v.category==filterValue
+                                case "Preacher":
+                                  return v.preacher==filterValue
+                                default:
+                                  return true
+                              }
+                            })()
+                          })} />
+                        </div>
+                      })
+                    }</div>
+                  :<div className='noservices'>{"No Services"}</div>
                 }
             })
           }/>:<Spinner/>
