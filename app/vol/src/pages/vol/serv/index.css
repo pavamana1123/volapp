@@ -11,6 +11,16 @@
     font-size: 4vw;
 }
 
+.vol-section {
+    display: flex;
+}
+
+.vol-sep {
+    width: 0.5vw;
+    margin: 0 3vw 0 3vw;
+    background: #aaaaaa86;
+}
+
 @media only screen and (min-width: 1080px) {
     .detailFeild{
         padding: .5vw 0 0 0;
@@ -23,5 +33,11 @@
 
     .service {
         padding: 1vw;
+    }
+
+    .vol-sep {
+        width: 0.1vw;
+        margin: 0 1vw 0 1vw;
+        background: #aaaaaa86;
     }
 }
