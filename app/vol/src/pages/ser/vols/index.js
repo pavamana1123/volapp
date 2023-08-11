@@ -1,10 +1,65 @@
 import HSep from '../../../components/HSep';
 import { Paper } from '../../../components/paper';
 import './index.css';
+import moment from 'moment';
 
 function Vols(props) {
 
   var { volunteers, serviceView } = props
+
+  function getCorrectDate(d, t) {
+    if((t||"").trim().endsWith("AM")){
+      return moment(d, 'YYYY-MM-DD').add(1, "d").format("YYYY-MM-DD")
+    }
+    return d
+  }
+
+  function getTimeCode(d, st, av) {
+    const stStart = moment(`${d} ${st.split(' - ')[0]}`, 'YYYY-MM-DD h A');
+    const stEnd = moment(`${getCorrectDate(d, st.split(' - ')[1])} ${st.split(' - ')[1]}`, 'YYYY-MM-DD h A');
+    const avStart = moment(`${d} ${av.split(' - ')[0]}`, 'YYYY-MM-DD h A');
+    const avEnd = moment(`${getCorrectDate(d, av.split(' - ')[1])} ${av.split(' - ')[1]}`, 'YYYY-MM-DD h A');
+
+    if (!stStart.isValid() || !stEnd.isValid() || !avStart.isValid() || !avEnd.isValid()) return 'U';
+    if ((avStart.isBetween(stStart, stEnd) && avEnd.isBetween(stStart, stEnd)) || (stStart.isSame(avStart) && stEnd.isSame(avEnd)) || (stStart.isSame(avStart) && stEnd.isBefore(avEnd)) || stStart.isAfter(avStart) && stEnd.isSame(avEnd)) return 'OK';
+    if (stStart.isSame(avStart) && stEnd.isAfter(avEnd) || (stStart.isBefore(avStart) && stEnd.isAfter(avEnd)) || (stStart.isBefore(avStart) && stEnd.isSame(avEnd)) ) return 'B';
+    if (stEnd.isAfter(avEnd)) return 'E';
+    if (stStart.isBefore(avStart)) return 'S';
+    if ((avStart.isAfter(stEnd) || avEnd.isBefore(stStart) || avEnd.isSame(stStart) || stEnd.isSame(avStart))) return 'M';
+    return 'U';
+  }
+
+  const getAvComment = (v)=>{
+
+    if(v.timings.includes(",") || v.availability.includes(",")){
+      return "Availability could not verified. Please check with the volunteer"
+    }
+
+    switch(v.availability){
+      case "All slots":
+        return ""
+      case "NOT AVAILABLE":
+        return "Volunteer may not be available for this service. Please check with the volunteer"
+      case "Default":
+        return "Availability is assumed by default. Please verify with the volunteer"
+    }
+
+    var timeCode = getTimeCode(v.date, v.timings, v.availability)
+    switch(timeCode){
+      case "S":
+        return `Volunteer may report late (Availability: ${v.availability})`
+      case "E":
+        return `Volunteer may leave early (Availability: ${v.availability})`
+      case "B":
+        return `Volunteer may be available only for sometime (Availability: ${v.availability})`
+      case "M":
+        return `Complete mismacth in timings (Availability: ${v.availability})`
+      case "OK":
+        return ``
+      default:
+        return "Availability could not verified. Please check with the volunteer"
+    }
+  }
 
   return (
     <div className='volsIndiv'>
@@ -13,68 +68,34 @@ function Vols(props) {
           <div className='voldetholder'>{
           volunteers.length?
             volunteers.map(v=>{
-              return v.volunteerName?<div className='eachVol'>
-                <div className='eachVolDet'>
-                  <div className='nameHolder'>
-                    {v.reported?<div>
-                      <i className="bi bi-check-circle-fill nameCheck"></i>
-                    </div>:null}
-                    <div>
-                      <div>{v.volunteerName}</div>
+              var avcomment = getAvComment(v)
+              return v.volunteerName?
+                <div className='eachVol'>
+                  <div className='eachVolDet'>
+                    <div className='nameHolder'>
+                      {v.reported?<div>
+                        <i className="bi bi-check-circle-fill nameCheck"></i>
+                      </div>:null}
+                      <div className='nameact'>
+                        <div>{v.volunteerName}</div>
+                        <div className='volactbuttons'>
+                          {!isNaN(v.volunteerPhone)?<a href={`tel:+91${v.volunteerPhone}`}><i className="bi bi-telephone-fill"></i></a>:null }
+                          {!isNaN(v.volunteerPhone)?<a href={`https://wa.me/91${v.volunteerPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>:null}
+                          {!isNaN(v.volunteerPhone)?<a href={`https://wa.me/91${v.volunteerPhone}?text=${encodeURI(`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.volunteerName)}`)}`} target="_blank"><i className="bi bi-share-fill"></i></a>:null}
+                          <a href={`/vol?name=${encodeURI(v.volunteerName)}`}><i className="bi bi-box-arrow-up-right"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='phonecat'>
+                      <div className="servol_phone">{`${v.volunteerPhone}`}</div>
                       <div className="servol_category">{`${v.category} ${v.preacher && !serviceView?`(${v.preacher})`:""}`}</div>
                     </div>
+
                   </div>
-                    <div className='volactbuttons'>
-                    {!isNaN(v.volunteerPhone)?<a href={`tel:+91${v.volunteerPhone}`}><i className="bi bi-telephone-fill"></i></a>:null }
-                    {!isNaN(v.volunteerPhone)?<a href={`https://wa.me/91${v.volunteerPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>:null}
-                    {!isNaN(v.volunteerPhone)?<a href={`https://wa.me/91${v.volunteerPhone}?text=${encodeURI(`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.volunteerName)}`)}`} target="_blank"><i className="bi bi-share-fill"></i></a>:null}
-                    <a href={`/vol?name=${encodeURI(v.volunteerName)}`}><i className="bi bi-box-arrow-up-right"></i></a>
-                  </div>
+                  {avcomment && <div className='avcomment'>{avcomment}</div>}
+                  <HSep/>
                 </div>
-                <div className="servol_category redlight">{v.availability=="NOT AVAILABLE"?"⚠️ Not available or not filled the form":null}</div>
-                {
-                  (()=>{
-                    if(v.availability=="All slots" || v.availability=="NOT AVAILABLE"){
-                      return null
-                    }
-                    return (()=>{
-                          const timeregex = /(\d{1,2}|(\d{1,2}\.\d{1,2}))(\s+)(A|P)M(\s+)-(\s+)(\d{1,2}|(\d{1,2}\.\d{1,2}))(\s+)(A|P)M/
-                          var isTimeParseable = !!v.availability.trim().match(timeregex) && !!v.timings.trim().match(timeregex)
-
-                          return <div>
-                            {isTimeParseable?(()=>{
-                              const set = (s)=>{
-                                var ps = s.split("-")
-                                var p1 = ps[0].trim()
-                                var p2 = ps[1].trim()
-
-                                var ts1 = p1.split(" ")
-                                var ts2 = p2.split(" ")
-
-                                var t1 = parseFloat(ts1[0].trim())
-                                var t2 = parseFloat(ts2[0].trim())
-
-                                t1+=ts1[1].trim()=="PM"?12:0
-                                t2+=ts2[1].trim()=="PM"?12:0
-
-                                return [t1,t2]
-                              }
-                              const matchTime = (t,a)=>{
-                                  return a[0]<=t[0] && a[1]>=t[1]
-                              }
-                              return matchTime(set(v.timings),set(v.availability))?null:<div>
-                                <div className='availRed'><b>{"Avialability "}</b>{`${v.availability} (mismatch)`}</div>
-                            </div>
-                          })():<div className='availRed'><b>{"Avialability "}</b>{`${v.availability} (not verified)`}</div>
-                            }
-                            </div>
-                        })()
-                      
-                    
-                  })()
-                }
-                <HSep/>
-              </div>:null
+                :null
             })
             :"No volunteers"
         }
