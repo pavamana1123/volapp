@@ -1,3 +1,11 @@
+const moment = require('moment')
+const originalConsoleLog = console.log;
+
+console.log = function (...args) {
+  const timestamp = new Date().toISOString();
+  originalConsoleLog.apply(console, [`[${moment(timestamp).format("YY-MMM-DD HH:mm")}]`, ...args]);
+};
+
 var config = require("./config.js")
 var Cacher = require("./api.js")
 
