@@ -34,7 +34,7 @@ function App() {
 
   useEffect(()=>{
     init()
-    setInterval(init, 60*1000)
+    setInterval(init, 2.5*60*1000)
   },[])
 
   return (
