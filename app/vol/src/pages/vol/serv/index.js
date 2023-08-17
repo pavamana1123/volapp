@@ -1,12 +1,9 @@
 import './index.css';
-import moment from 'moment'
 import HSep from '../../../components/HSep';
 
 function Serv(props) {
 
     var {details, i} = props
-
-    console.log(details)
 
     return (
         <div className='service'>
@@ -29,6 +26,7 @@ function Serv(props) {
                 <div className='light'>Co-Ordinator</div>
                 <div className='detailFeild'>{`${details.coordinator}`}</div>
             </div>
+
             <div className='detailsDiv'>
                 <div className='light'>In-charge (SPOC)</div>
                 {<div style={{
@@ -47,6 +45,7 @@ function Serv(props) {
                     </div>
                 </div>}
             </div>
+
             <HSep/>
         </div>
     )

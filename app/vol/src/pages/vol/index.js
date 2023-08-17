@@ -34,10 +34,16 @@ function Vol(props) {
                 }).length
               }).map((d)=>{
 
-                var svs = volunteers.filter(v=>{
+                var svs1 = volunteers.filter(v=>{
                   return v.volunteerName==filter && v.date==d
-                }).map((s, i, ss)=>{
-                  return <Serv details={s} i={i}/>
+                })
+
+                const mainService = svs1.sort((s1, s2)=>{
+                  return s2.serviceDuration-s1.serviceDuration
+                })[0]
+
+                var svs = svs1.map((s, i, ss)=>{
+                  return <Serv details={s} i={i} mainService={mainService}/>
                 })
 
                 return {
@@ -47,9 +53,27 @@ function Vol(props) {
                         <div className='event-name'>{`${data.events.filter(e=>{
                           return e.date==d
                         })[0].event} (${svs.length} services)`}</div>
-                        <div>
-                          {svs}
-                        </div>
+                        <div className='voldetholderv'>
+                            <div style={{width: '100%'}}>{svs}</div>
+                            <div className='pracoup'>
+                              <div className='dark'>Collect Prasadam Coupon from</div>
+                                  {<div style={{
+                                      display: "flex",
+                                      alignItems: "center"
+                                  }}>
+                                      <div className='spocdetholder'>
+                                          <div className='detailFeild' style={{marginRight: "2vw"}}>
+                                              <div>{`${mainService.spoc}`}</div>
+                                              <div className='spocdetphone'>{`${mainService.spocPhone}`}</div>
+                                          </div>
+                                          <div className='spocdeticons'>
+                                              {!isNaN(mainService.spocPhone)?<a href={`tel:+91${mainService.spocPhone}`}><i className="bi bi-telephone-fill spocdeticon"></i></a>:null}
+                                              {!isNaN(mainService.spocPhone)?<a href={`https://wa.me/91${mainService.spocPhone}`} target="_blank"><i className="bi bi-whatsapp spocdeticon"></i></a>:null}
+                                          </div>
+                                      </div>
+                                  </div>}
+                              </div>
+                            </div>
                     </div>
                   :NoServ
                 }
