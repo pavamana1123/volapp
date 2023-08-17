@@ -1,3 +1,5 @@
+const os = require('os')
+
 class Cacher {
     constructor(scriptId){
         this.scriptId = scriptId
@@ -18,7 +20,13 @@ class Cacher {
 
     start(){
         this.getData()
-        setInterval(this.getData.bind(this), 5*60*1000)
+        setInterval(this.getData.bind(this), (()=>{
+            if (os.platform() === 'win32') {
+                return 15*60*1000
+              } else {
+                return 5*60*1000
+              }
+        })())
     }
 
     getData(){

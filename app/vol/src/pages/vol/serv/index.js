@@ -4,12 +4,14 @@ import HSep from '../../../components/HSep';
 
 function Serv(props) {
 
-    var {details} = props
+    var {details, i} = props
+
+    console.log(details)
 
     return (
         <div className='service'>
             <div className='detailsDiv'>
-                <div className='light'>Service</div>
+                <div className='dark'>{`Service ${i+1}`}</div>
                 <div className='detailFeild'>{details.service}</div>
             </div>
             <div className='vol-section'>
@@ -33,9 +35,16 @@ function Serv(props) {
                     display: "flex",
                     alignItems: "center"
                 }}>
-                    <div className='detailFeild' style={{marginRight: "2vw"}}>{`${details.spoc}`}</div>
-                    {!isNaN(details.spocPhone)?<a href={`tel:+91${details.spocPhone}`}><i className="bi bi-telephone-fill"></i></a>:null}
-                    {!isNaN(details.spocPhone)?<a href={`https://wa.me/91${details.spocPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>:null}
+                    <div className='spocdetholder'>
+                        <div className='detailFeild' style={{marginRight: "2vw"}}>
+                            <div>{`${details.spoc}`}</div>
+                            <div className='spocdetphone'>{`${details.spocPhone}`}</div>
+                        </div>
+                        <div className='spocdeticons'>
+                            {!isNaN(details.spocPhone)?<a href={`tel:+91${details.spocPhone}`}><i className="bi bi-telephone-fill spocdeticon"></i></a>:null}
+                            {!isNaN(details.spocPhone)?<a href={`https://wa.me/91${details.spocPhone}`} target="_blank"><i className="bi bi-whatsapp spocdeticon"></i></a>:null}
+                        </div>
+                    </div>
                 </div>}
             </div>
             <HSep/>
