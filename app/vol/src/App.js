@@ -52,9 +52,9 @@ function App() {
             <Route path="/" element={<Home/>}></Route>
           </Routes>
       </Router>
-      <div id="update-epoch">
+      {window.location.pathname!="/util/service-list" && <div id="update-epoch">
         {`Data last updated at ${moment(timestamp).format("HH:mm A")}`}
-      </div>
+      </div>}
     </div>
   );
 }

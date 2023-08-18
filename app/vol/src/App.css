@@ -101,6 +101,15 @@ body {
   overflow: hidden;
 }
 
+body.sl-page {
+  max-height: none;
+  overflow: auto;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 #update-epoch {
   position: absolute;
   bottom: 0;

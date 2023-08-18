@@ -33,7 +33,8 @@ String.prototype.toCamelCase = function() {
   }
 
   String.prototype.toTimingCase = function() {
-    return this.split("and").map(t=>{
+
+    return this.trim()==""?"":this.split("and").map(t=>{
       return t.trim().split("-").map(p=>{
         const min = Math.ceil((parseFloat(p)-parseInt(p))*60)
         return moment(`${parseInt(p)%24}:${min}`, "HH:mm").format(`h${min>0?".mm":''} A`)
