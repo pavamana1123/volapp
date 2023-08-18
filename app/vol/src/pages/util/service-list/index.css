@@ -1,7 +1,7 @@
 .slmain {
     background-color: white;
     font-size: 1.5vw;
-    width: 95vw;
+    width: 85vw;
 }
 
 .sltable {
@@ -12,4 +12,23 @@
     border: .01vw solid black;
     padding: .5vw;
     text-align: left;
+}
+
+.slcellhead {
+    border: .01vw solid black;
+    padding: .5vw;
+    text-align: center;
+}
+
+.sltitle {
+    text-align: center;
+    padding: 1.5vw;
+    font-size: 1.5vw;
+    font-weight: bolder;
+    border: 0.1vw solid black;
+    margin-top: 2vw;
+}
+
+.page-break {
+    page-break-before: always; /* Start on a new page */
 }
