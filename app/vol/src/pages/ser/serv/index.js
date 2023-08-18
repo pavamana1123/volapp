@@ -16,7 +16,7 @@ function Serv(props) {
                 <div>{`${volCount>=service.requirement?"✅ ":"⚠️"} ${volCount}/${service.requirement}`}</div>
             </div>
             <div className='serviceDetails'>
-                {`⏱️ ${service.timings}`}
+                {`⏱️ ${service.timings.toTimingCase()}`}
             </div>
             <div className='serviceDetails'>
                 {`👑 ${service.coordinator}`}

@@ -14,12 +14,12 @@ function Serv(props) {
             <div className='vol-section'>
                 <div className='detailsDiv'>
                     <div className='light'>Timings</div>
-                    <div className='detailFeild'>{`⏱️ ${details.timings}`}</div>
+                    <div className='detailFeild'>{`⏱️ ${details.timings.toTimingCase()}`}</div>
                 </div>
                 <vl className="vol-sep"/>
                 <div className='detailsDiv'>
                     <div className='light'>Your Slot</div>
-                    <div className='detailFeild'>{`⏱️ ${details.availability=="All slots" || details.availability=="Default"?details.timings:details.availability}`}</div>
+                    <div className='detailFeild'>{`⏱️ ${details.availability=="All slots" || details.availability=="Default"?details.timings.toTimingCase():details.availability}`}</div>
                 </div>
             </div>
             <div className='detailsDiv'>

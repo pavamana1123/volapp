@@ -188,7 +188,7 @@ function Ser(props) {
                   return [
                     v.date,
                     v.service,
-                    v.timings,
+                    v.timings.toTimingCase(),
                     v.volunteerName,
                     v.volunteerPhone,
                     v.availability,

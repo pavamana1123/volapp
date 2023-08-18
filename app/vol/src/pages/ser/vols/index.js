@@ -31,7 +31,7 @@ function Vols(props) {
 
   const getAvComment = (v)=>{
 
-    if(v.timings.includes(",") || v.availability.includes(",")){
+    if(v.timings.toTimingCase().includes("and") || v.availability.includes(",")){
       return "Availability could not verified. Please check with the volunteer"
     }
 
@@ -44,7 +44,7 @@ function Vols(props) {
         return "Availability is assumed by default. Please verify with the volunteer"
     }
 
-    var timeCode = getTimeCode(v.date, v.timings, v.availability)
+    var timeCode = getTimeCode(v.date, v.timings.toTimingCase(), v.availability)
     switch(timeCode){
       case "S":
         return `Volunteer may report late (Availability: ${v.availability})`

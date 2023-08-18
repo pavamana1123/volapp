@@ -9,6 +9,7 @@ import Msg from './pages/util/msg';
 import Home from './pages/home';
 import SPOCBLD from './pages/util/spoc-bld';
 import moment from 'moment';
+import ServiceList from './pages/util/service-list';
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
             <Route path="/services" element={<Ser data={data} dates={dates}/>}></Route>
             <Route path="/util/msg" element={<Msg data={data} isLoading={isLoading}/>}></Route>
             <Route path="/util/spocbld" element={<SPOCBLD data={data} dates={dates}/>}></Route>
+            <Route path="/util/service-list" element={<ServiceList data={data} dates={dates}/>}></Route>
             <Route path="/" element={<Home/>}></Route>
           </Routes>
       </Router>

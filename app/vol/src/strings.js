@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 String.prototype.standardizeName = function(){
     var str = this
     str = str.replaceAll('.', ' ')
@@ -28,4 +30,13 @@ String.prototype.toCamelCase = function() {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
       }
     );
+  }
+
+  String.prototype.toTimingCase = function() {
+    return this.split("and").map(t=>{
+      return t.trim().split("-").map(p=>{
+        const min = Math.ceil((parseFloat(p)-parseInt(p))*60)
+        return moment(`${parseInt(p)%24}:${min}`, "HH:mm").format(`h${min>0?".mm":''} A`)
+      }).join(" - ")
+    }).join(" and ")
   }
