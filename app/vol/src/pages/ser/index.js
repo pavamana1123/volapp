@@ -1,13 +1,11 @@
 import './index.css';
 import Header from "../../components/header"
 import { useEffect, useRef, useState } from 'react';
-import { Paper } from '../../components/paper';
 import Tab from '../../components/tab';
 import {Spinner} from '../../components/spinner';
 import moment from 'moment'
 import Serv from './serv';
 import Vols from './vols';
-import { AutoIn } from '../../components/autoin';
 import {utils, writeFile} from "xlsx"
 
 function Ser(props) {

@@ -12,18 +12,19 @@ function Tab(props) {
           {
             tabs.map((tab, i)=>{
               return (
-                <div className={`tabHeaderItem ${i==tabs.length-1?"last-thi":""}`} key={i} onClick={()=>{
+                <div className={`tabHeaderItem ${activeTab==i?"selectedtab":""} ${i==tabs.length-1?"last-thi":""}`} key={i} onClick={()=>{
                   setActiveTab.bind(self)(i)
-                  onTabChange(i)
+                  onTabChange && onTabChange(i)
                 }}>{tab.title}</div>
               )
             })
           }
         </div>
-        <div className='tabUnderline' style={{
+        {false && <div className='tabUnderline' style={{
           width:`${100/tabs.length}%`,
           left: `${activeTab*(100/tabs.length)}%`
-          }}></div>
+          }}>
+        </div>}
       </div>
 
       <div className='tabChildren'>

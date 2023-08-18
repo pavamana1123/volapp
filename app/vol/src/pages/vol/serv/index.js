@@ -3,12 +3,12 @@ import HSep from '../../../components/HSep';
 
 function Serv(props) {
 
-    var {details, i} = props
+    var {details, i, sl} = props
 
     return (
         <div className='service'>
             <div className='detailsDiv'>
-                <div className='dark'>{`Service ${i+1}`}</div>
+                <div className='dark'>{`Service ${sl>1?i+1:""}`.trim()}</div>
                 <div className='detailFeild'>{details.service}</div>
             </div>
             <div className='vol-section'>

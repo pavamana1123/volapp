@@ -10,11 +10,16 @@
 }
 
 .tabHeaderItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     text-align: center;
     border-right: 1px solid #aaa;
     user-select: none;
     cursor: pointer;
+    height: 100%;
+    transition: all .25s ease-in-out;
 }
 
 .last-thi {
@@ -29,9 +34,16 @@
     transition: left .2s ease-in-out;
 }
 
+.selectedtab {
+    background-color: var(--bar);
+    color: white;
+}
+
 .tabHeader {
     background-color: white;
     margin-bottom: 2vw;
+    background: #6495ed2b;
+    border-radius: 1.5vw;
 }
 
 @media only screen and (min-width: 1080px) {
@@ -50,5 +62,6 @@
 
     .tabHeader {
         margin-bottom: 1vw;
+        border-radius: 0.5vw;
     }
 }

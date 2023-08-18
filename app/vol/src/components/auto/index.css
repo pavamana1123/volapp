@@ -1,0 +1,37 @@
+.auto-drop {
+    position: absolute;
+    background: white;
+    padding: 2vw;
+    max-height: 60vh;
+    overflow-y: scroll;
+    width: 81%;
+    box-shadow: -5px 5px 14px #aaaaaa80;
+}
+
+.auto-item {
+    padding: 1vw;
+    cursor: pointer;
+}
+
+.auto-item:hover {
+    background-color: #eee;
+}
+
+.autoRoot {
+    margin-bottom: 5vw;
+}
+
+@media only screen and (min-width: 1080px) {
+
+    .auto-drop {
+        padding: 0.25vw;
+        max-height: 60vh;
+        overflow-y: scroll;
+        box-shadow: -5px 5px 14px #aaaaaa80;
+    }
+
+    .autoRoot {
+        margin-bottom: 1vw;
+    }
+
+}
