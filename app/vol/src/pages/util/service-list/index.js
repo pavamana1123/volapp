@@ -1,49 +1,54 @@
 import moment from "moment";
 import "./index.css"
 import { useEffect, useState } from "react";
+import _ from "../../../_";
 
 function ServiceList(props){
 
-    const safePageHeight = 1800
-    var [ pageReady, setPageReady ] = useState(false)
-    var [ tableData, setTableData ] = useState([])
-    var [ event, setEvent ] = useState()
-    var [ breakPoint, setBreakPoint ] = useState()
+    const safePageHeight = 1075
+    var tableData = []
 
     const headers = [
         {
-            title: "Name",
+            title: "Name".toUpperCase(),
             key: "volunteerName"
         },
         {
-            title: "Service",
+            title: "Date".toUpperCase(),
+            key: "date"
+        },
+        {
+            title: "Service".toUpperCase(),
             key: "service"
         },
         {
-            title: "Timings",
+            title: "Timings".toUpperCase(),
             key: "timings"
         },
         {
-            title: "Co-Ordinator",
-            key: "coordinator"
+            title: "SPOC".toUpperCase(),
+            key: "spoc"
         },
         {
-            title: "SPOC",
-            key: "spoc"
+            title: "Co-Ordinator".toUpperCase(),
+            key: "coordinator"
         }
     ]
 
-    const getPage = (ev, tableData, headers, rowStart, rowEnd)=>{
+    const getPage = (ev, tableData, headers, rowStart, rowEnd, pg, total)=>{
         return `
             <div class="slpage">
-                <div class="sltitle">${ev.tentative?"Tentative":""} Service List - ${ev.event} (${moment(date, "YYYY-MM-DD").format('Do MMM YYYY')})</div>
+                <div class="sltitle">
+                    <div style="font-size: 1.5vw; font-weight: 900">Tentative Service List - Sri Krishna Janmashtami & Sri Vyasa Puja</div>
+                    <div style="margin-top: .3vw; font-size: 1.1vw; font-weight: 900">5th Sep - Pre-Arrangements • 6th Sep - Janmashtami Day-1 • 7th Sep - Janmashtami Day-2 • 8th Sep - Sri Vyasa Puja • 9th Sep - Winding Up</div>
+                </div>
                 <table class="sltable">
                     <tbody>
-                        <thead>
+                        <thead class="slheader">
                             <tr>
                                 ${
-                                    headers.map(h=>{
-                                        return `<th class="slcellhead">${h.title}</th>`
+                                    headers.map((h, i)=>{
+                                        return `<th class="slcellhead slhead-${i+1}">${h.title}</th>`
                                     }).join("\n").trim()
                                 }
                             </tr>
@@ -52,8 +57,8 @@ function ServiceList(props){
                             tableData.slice(rowStart, rowEnd).map(v=>{
                                 return `<tr>
                                     ${
-                                        v.map(vd=>{
-                                            return !vd.hide?`<td class="slcell" rowspan=${vd.span}>${vd.value}</td>`:""
+                                        v.map((vd, i)=>{
+                                            return !vd.hide?`<td class="slcell slcell-${i+1}" rowspan=${vd.span}>${vd.value}</td>`:""
                                         }).join("\n").trim()
                                     }                                
                                 </tr>`.trim()
@@ -61,6 +66,7 @@ function ServiceList(props){
                         }
                     </tbody>
                 </table>
+                <div class="page-num">${`Page ${pg+1} of ${total}`}</div>
                 <div class="page-break"/>
             </div>
         `.trim()
@@ -72,32 +78,46 @@ function ServiceList(props){
 
     var { data } = props
 
-    const urlParams = new URLSearchParams(window.location.search);
-    var date = moment(urlParams.get('date'), "YYYYMMDD").format("YYYY-MM-DD")
+    const urlParams = new URLSearchParams(window.location.search).get("date").trim()
+    var dates = urlParams=="*"?["*"]:urlParams.split(" ").map((u)=>{
+        return moment(u, "YYYYMMDD").format("YYYY-MM-DD")
+    })
 
     useEffect(()=>{
 
         if(Object.keys(data).length){
 
             var ev = data.events.filter(e=>{
-                return e.date==date
+                return (dates[0]=="*" || dates.includes(e.date))
             })[0]
 
-            setEvent(ev)
-        
             tableData = data.volunteers.filter(v=>{
-                return v.volunteerName!="" && v.date!="" && v.service != "" && v.date==date
+                return v.volunteerName!="" && v.date!="" && v.service != "" && (dates[0]=="*" || dates.includes(v.date))
             }).sort((v1, v2)=>{
                 return v1.serviceStartTime-v2.serviceStartTime
+            }).sort((v1, v2)=>{
+                return v1.date<v2.date?-1:1
             }).sort((v1, v2)=>{
                 return v1.volunteerName<v2.volunteerName?-1:1
             }).map(v=>{
                 return headers.map(h=>{
                     return {
-                        value: h.key=="timings"?v[h.key].toTimingCase():v[h.key],
+                        value: (()=>{
+                            switch(h.key) {
+                                case "timings":
+                                    return v[h.key].toTimingCase()
+                                case "date":
+                                    return moment(v[h.key]).format("ddd, Do MMM")
+                                // case "coordinator":
+                                //     return _.preachers[v[h.key]]
+                                default:
+                                    return v[h.key]
+                            } 
+                        })(),
                         span: 1,
                         hide: false,
-                        index: 0                    }
+                        index: 1                   
+                    }
                 })
             })
         
@@ -119,67 +139,85 @@ function ServiceList(props){
 
             console.log(tableData)
 
-            setTableData(tableData)
-
             const slmain = document.getElementsByClassName("slmain")[0]
             var pages = []
-
+            var page = 0
             var rowStart = 0
             var rowEnd = 1
-            while(rowEnd<tableData.length-1){
-                if(slmain){
+            var end = false
+            
+            if(slmain){
+                while(true){
                     var slmainHeight = slmain.getBoundingClientRect().height
-                    while(slmainHeight<safePageHeight && rowEnd<tableData.length-1){
+                    while(slmainHeight<safePageHeight){
+                        if(rowEnd>tableData.length){
+                            end = true
+                            break
+                        }
                         slmain.innerHTML = getPage(ev, tableData, headers, rowStart, rowEnd)
                         slmainHeight = slmain.getBoundingClientRect().height
                         rowEnd++
                     }
+
+                    // if(!end){
+                    //     rowEnd-=2
+                    //     if(tableData[rowEnd][0].hide){
+                    //         if(tableData[rowEnd][0].index < tableData[rowEnd][0].span){
+                    //             while(tableData[rowEnd][0].index!=1){
+                    //                 rowEnd--
+                    //             }
+                    //             rowEnd--
+                    //         }
+                    //     }else{
+                    //         rowEnd--
+                    //     }
+                    // }
                     rowEnd-=2
-                    if(tableData[rowEnd][0].hide){
-                        if(tableData[rowEnd][0].index < tableData[rowEnd][0].span){
-                            while(tableData[rowEnd][0].index!=0){
-                                rowEnd--
+                    
+                    pages.push([rowStart, rowEnd+1])
+                    rowStart = rowEnd+1
+                    rowEnd = rowEnd+2
+
+                    if(rowStart>=tableData.length){
+                        break
+                    }
+
+                    if(rowStart<tableData.length-1 && rowEnd>tableData.length){
+                        rowEnd=tableData.length
+                    }
+
+                    for(let i=0; i<tableData[rowStart].length; i++){
+                        if(tableData[rowStart][i].hide){
+                            tableData[rowStart][i].hide = false
+                            tableData[rowStart][i].span = tableData[rowStart][i].span-tableData[rowStart][i].index+1
+                            tableData[rowStart][i].index = 1
+
+                            for(let j=1; j<tableData[rowStart][i].span; j++){
+                                tableData[rowStart+j][i].span=tableData[rowStart][i].span
+                                tableData[rowStart+j][i].index=j+1
                             }
                         }
                     }
 
-                    pages.push(getPage(ev, tableData, headers, rowStart, rowEnd+1))
-                    rowStart = rowEnd+1
-                    rowEnd = rowEnd+2
                     slmain.innerHTML=""
+                    page++
                 }
             }
-            slmain.innerHTML = pages.join("\n")
+
+            console.log('pages', pages)
+
+            slmain.innerHTML = pages.map((p, i, pp)=>{
+                return getPage(ev, tableData, headers, p[0], p[1], i, pp.length)
+            }).join("\n")
         }
-
-
     }, [data])
 
     if(!data || !data.volunteers){
-        return <div>No data</div>
+        return <div>Loading...</div>
     }
 
     return (
-        <div className="slmain">
-            {false?<div className="slpage">
-                <div className="sltitle">{`${event.tentative?"Tentative":""} Service List - ${event.event} (${moment(date, "YYYY-MM-DD").format('Do MMM YYYY')})`}</div>
-                {pageReady && <table className="sltable">
-                    <tbody>
-                        {
-                            tableData.slice(0, breakPoint).map(v=>{
-                                return <tr>
-                                    {
-                                        v.map(vd=>{
-                                            return !vd.hide?<td className="slcell" rowSpan={vd.span}>{vd.value}</td>:null
-                                        })
-                                    }
-                                </tr>
-                            })
-                        }
-                    </tbody>
-                </table>}
-            </div>:null}
-        </div>
+        <div className="slmain"/>
     )
 }
 

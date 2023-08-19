@@ -1,7 +1,7 @@
 .slmain {
     background-color: white;
-    font-size: 1.5vw;
-    width: 85vw;
+    font-size: 1.2vw;
+    width: 95vw;
 }
 
 .sltable {
@@ -10,8 +10,15 @@
 
 .slcell {
     border: .01vw solid black;
-    padding: .5vw;
+    padding: .25vw;
     text-align: left;
+}
+
+.page-num {
+    text-align: center;
+    margin-top: 1.1vw;
+    font-size: 1vw;
+    color: #888;
 }
 
 .slcellhead {
@@ -22,11 +29,45 @@
 
 .sltitle {
     text-align: center;
-    padding: 1.5vw;
-    font-size: 1.5vw;
-    font-weight: bolder;
+    padding: .5vw;
+    font-size: 1.25vw;
+    font-weight: 900;
     border: 0.1vw solid black;
-    margin-top: 2vw;
+    background-color: aliceblue;
+    font-family: 'Poppins', sans-serif;
+}
+
+.slheader {
+    background-color: aliceblue;
+    font-family: 'Poppins', sans-serif;
+}
+
+.slhead-1 {
+    width: 14vw;
+}
+
+.slhead-2 {
+    width: 7.9vw;
+}
+
+.slhead-3 {
+    width: 30vw;
+}
+
+.slhead-4 {
+    width: 11vw;
+}
+
+.slhead-5 {
+    width: 15vw;
+}
+
+.slhead-6 {
+    width: 13vw;
+}
+
+.slcell-2, .slcell-4, .slcell-5, .slcell-6 {
+    text-align: center;
 }
 
 .page-break {
