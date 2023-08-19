@@ -21,7 +21,7 @@ function Vols(props) {
     const avEnd = moment(`${getCorrectDate(d, av.split(' - ')[1])} ${av.split(' - ')[1]}`, 'YYYY-MM-DD h A');
 
     if (!stStart.isValid() || !stEnd.isValid() || !avStart.isValid() || !avEnd.isValid()) return 'U';
-    if ((avStart.isBetween(stStart, stEnd) && avEnd.isBetween(stStart, stEnd)) || (stStart.isSame(avStart) && stEnd.isSame(avEnd)) || (stStart.isSame(avStart) && stEnd.isBefore(avEnd)) || stStart.isAfter(avStart) && stEnd.isSame(avEnd)) return 'OK';
+    if ((stStart.isSame(avStart) && stEnd.isSame(avEnd)) || (stStart.isSame(avStart) && stEnd.isBefore(avEnd)) || stStart.isAfter(avStart) && stEnd.isSame(avEnd)) return 'OK';
     if (stStart.isSame(avStart) && stEnd.isAfter(avEnd) || (stStart.isBefore(avStart) && stEnd.isAfter(avEnd)) || (stStart.isBefore(avStart) && stEnd.isSame(avEnd)) ) return 'B';
     if (stEnd.isAfter(avEnd)) return 'E';
     if (stStart.isBefore(avStart)) return 'S';
@@ -32,7 +32,7 @@ function Vols(props) {
   const getAvComment = (v)=>{
 
     if(v.timings.toTimingCase().includes("and") || v.availability.includes(",")){
-      return "Availability could not verified. Please check with the volunteer"
+      return `Availability could not verified. Please check with the volunteer (Availability: ${v.availability})`
     }
 
     switch(v.availability){
@@ -57,7 +57,7 @@ function Vols(props) {
       case "OK":
         return ``
       default:
-        return "Availability could not verified. Please check with the volunteer"
+        return `Availability could not verified. Please check with the volunteer (Availability: ${v.availability})`
     }
   }
 
