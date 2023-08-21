@@ -1,7 +1,7 @@
 import moment from 'moment'
 
 var templates = {
-    "Service Invite - Vaikunta Ekadashi": (props)=>{
+    "Service Info - Vaikunta Ekadashi": (props)=>{
 
         var { volunteers } = props.data
         
@@ -18,7 +18,7 @@ var templates = {
             if(dates.indexOf(v.date)!=-1 && v.volunteerName!="" ){
                 umap[v.volunteerName]=v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && v.volunteerName!="" && !v.invMsgSent
+            return dates.indexOf(v.date)!=-1 && v.volunteerName!="" && !v.infoMsgSent
         })
         
         Object.keys(umap).map(name=>{
@@ -95,7 +95,7 @@ Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
     },
 
-    "Service Invite - Ratha Yatra": (props)=>{
+    "Service Info - Ratha Yatra": (props)=>{
 
         var { volunteers } = props.data
 
@@ -120,7 +120,7 @@ ISKCON Mysore`.trim())}`})
             if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
                 umap[v.volunteerName]=v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.invMsgSent
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.infoMsgSent
         })
         
         Object.keys(umap).map(name=>{
@@ -205,6 +205,7 @@ Regards,
 Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
     },
+
     "SPOC Info - Ratha Yatra": (props)=>{
 
         var { services } = props.data
@@ -261,6 +262,7 @@ Pankajanghri Dasa
 ISKCON Mysore
 `.trim())}`})
     },
+
     "Service Reminder - Vaikunta Ekadashi": (props)=>{
 
         var { volunteers } = props.data
@@ -356,6 +358,7 @@ Regards,
 Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
     },
+
     "Service Reminder - Ratha Yatra": (props)=>{
 
         var { volunteers } = props.data
@@ -451,6 +454,7 @@ Regards,
 Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
     },
+
     "Prasadam Coupons - Ratha Yatra": (props)=>{
         var { volunteers, slots } = props.data
 
@@ -578,6 +582,7 @@ Pankajanghri Dasa
 ISKCON Mysore`.trim())}`
         })
     },
+
     "ID Card Reminder - Ratha Yatra": (props)=>{
         var { volunteers } = props.data
         
@@ -639,7 +644,7 @@ ISKCON Mysore`)}`
         })
     },
     
-    "Service Invite - Gaura Purnima": (props)=>{
+    "Service Info - Gaura Purnima": (props)=>{
 
         var { volunteers } = props.data
         
@@ -654,7 +659,7 @@ ISKCON Mysore`)}`
             if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
                 umap[v.volunteerName]=v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.invMsgSent
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.infoMsgSent
         })
         
         Object.keys(umap).map(name=>{
@@ -721,6 +726,7 @@ Regards,
 Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
     },
+
     "SPOC Info - Gaura Purnima": (props)=>{
 
         var { services } = props.data
@@ -777,7 +783,7 @@ ISKCON Mysore
 `.trim())}`})
     },
 
-    "Service Invite - Rama Navami": (props)=>{
+    "Service Info - Rama Navami": (props)=>{
 
         var { volunteers } = props.data
         
@@ -793,7 +799,7 @@ ISKCON Mysore
             if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
                 umap[v.volunteerName]=v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.invMsgSent
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.infoMsgSent
         })
         
         Object.keys(umap).map(name=>{
@@ -860,6 +866,7 @@ Regards,
 Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
     },
+
     "SPOC Info - Rama Navami": (props)=>{
 
         var { services } = props.data
@@ -915,6 +922,7 @@ Pankajanghri Dasa
 ISKCON Mysore
 `.trim())}`})
     },
+
     "Service Reminder - Rama Navami": (props)=>{
 
         var { volunteers } = props.data
@@ -1075,7 +1083,8 @@ Pankajanghri Dasa
 ISKCON Mysore
 `.trim())}`})
     },
-    "Service Invite - Narasimha Chaturdashi": (props)=>{
+
+    "Service Info - Narasimha Chaturdashi": (props)=>{
 
         var { volunteers } = props.data
         
@@ -1091,7 +1100,7 @@ ISKCON Mysore
             if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
                 umap[v.volunteerName]=v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.invMsgSent
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.infoMsgSent
         })
         
         Object.keys(umap).map(name=>{
@@ -1245,6 +1254,131 @@ You are the SPOC (Single-Point-of-Contact) for this service.`:``}
     
 *YOU CAN ALSO CHECK THESE SERVICE DETAILS USING THE LINK GIVEN BELOW*:
 ${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore`.trim())}`})
+    },
+
+    "Service Info - SBJ-SKJ-SVP": (props)=>{
+
+        var { volunteers } = props.data
+        
+        const dates = [
+            "2023-08-30",
+            "2023-08-31",
+            "2023-09-05",
+            "2023-09-06",
+            "2023-09-07",
+            "2023-09-08",
+            "2023-09-09"
+        ]
+
+        const sbjdates = [
+            "2023-08-30",
+            "2023-08-31"
+        ]
+
+        const skjdates = [
+            "2023-09-05",
+            "2023-09-06",
+            "2023-09-07",
+            "2023-09-09"
+        ]
+
+        const svpdates = [
+            "2023-09-08"
+        ]
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
+                umap[v.volunteerName]=v.volunteerPhone
+            }
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.infoMsgSent
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                date: volunteers[i].date,
+                service: volunteers[i].service,
+                timings: volunteers[i].timings,
+                coordinator: volunteers[i].coordinator,
+                spoc: volunteers[i].spoc,
+                spocPhone: volunteers[i].spocPhone,
+                availability: volunteers[i].availability,
+                })
+            }
+            }
+        })
+
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+            var isDefault = !!v.services.filter(sss=>{ return (sss.availability=="Default" || sss.availability=="NOT AVAILABLE") }).length
+
+            var vDateMap = {}
+            v.services.forEach(vv => {
+                vDateMap[vv.date]=1
+            })
+
+            var vDates = Object.keys(vDateMap).sort()
+
+            var isInSBJ = sbjdates.some(e=>{ return vDates.includes(e) })
+            var isInSKJ = skjdates.some(e=>{ return vDates.includes(e) })
+            var isInSVP = svpdates.some(e=>{ return vDates.includes(e) })
+
+            var fests = []
+            if(isInSBJ) fests.push("Sri Balaram Jayanthi")
+            if(isInSKJ) fests.push("Sri Krishna Janmashtami")
+            if(isInSVP) fests.push("Sri Vyasa Puja")
+
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+*Volunteering Info - ${fests.join(", ").replaceLastOccurance(", ", " & ")}*
+*Thursday, 30th March 2023*
+   
+Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balaram 🙏 ${isDefault ? "" : "We thank you for registering for the Sri Narasimha Chaturdashi festival services"}.
+
+*Service Details:*
+
+Name: ${v.name}
+Phone: ${v.phone}
+
+${v.services.length>1?`You have been assigned the following *${v.services.length}* services:`:`You have been assigned the following service:`}
+
+${v.services.map(s=>{
+    return `
+🗓️ Date: *${moment(s.date, "YYYY-MM-DD").format("dddd, Do MMMM")}*
+🛐 Service: *${s.service}*
+🕗 Timings: *${s.timings}*
+👑 Co-ordinator: *${s.coordinator}*
+🥇 SPOC: *${s.spoc}*
+📞 SPOC's Phone number: *${s.spocPhone}*${s.spoc.trim()==v.name?`
+You are the SPOC (Single-Point-of-Contact) for this service.`:``}
+    `.trim()
+    }).join("\n\n")
+    }
+    
+*YOU CAN ALSO CHECK THESE SERVICE DETAILS USING THE LINK GIVEN BELOW*:
+${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
+
+*Note:*
+1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. *Please call your SPOC and discuss the details of service* like dress code, timings etc. The contact numbers of SPOC(s) are mentioned above.
+😇 Please report to your services on time. Be responsible for your services.
+🌐 If you are not able click and open the above link, it may likely be because you have not stored this number. Please save this number as 'ISKCON Mysore'.
+
+_Please re-check your service before the festival using the above link. Sometimes your service may change due to unavoidable circumstances._
 
 Regards,
 Pankajanghri Dasa

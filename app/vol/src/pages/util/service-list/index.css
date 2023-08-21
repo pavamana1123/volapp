@@ -10,7 +10,7 @@
 
 .slcell {
     border: .01vw solid black;
-    padding: .25vw;
+    padding: .15vw;
     text-align: left;
 }
 
@@ -64,6 +64,10 @@
 
 .slhead-6 {
     width: 13vw;
+}
+
+.slcell-1 {
+    padding-left: 0.5vw;
 }
 
 .slcell-2, .slcell-4, .slcell-5, .slcell-6 {

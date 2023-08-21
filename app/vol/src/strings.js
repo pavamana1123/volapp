@@ -41,3 +41,15 @@ String.prototype.toCamelCase = function() {
       }).join(" - ")
     }).join(" and ")
   }
+
+
+  String.prototype.replaceLastOccurance = function(a, b) {
+    const lastIndex = this.lastIndexOf(', ');
+    if (lastIndex !== -1) {
+      const stringWithoutLastCommaSpace = this.substring(0, lastIndex) + ' & ' + this.substring(lastIndex + 2);
+      return stringWithoutLastCommaSpace;
+    }
+    return this;
+  }
+
+
