@@ -118,6 +118,34 @@
 
 @media only screen and (min-width: 1080px) {
 
+    .sv-coup {
+        background-color: var(--bar);
+        color: white;
+        padding: 0.5vw;
+        font-size: 1.1vw;
+        margin-right: 1.5vw;
+    }
+
+    .sv-count {
+        font-size: 1.5vw;
+        margin-left: 1vw;
+    }
+
+    .spoc-title {
+        margin-bottom: 1.5vw;
+        font-weight: 900;
+        text-align: center;
+    }
+
+    .spocresplink {
+        width: 100%;
+        text-decoration: underline;
+        color: var(--bar);
+        margin: 0 0 2vw 0;
+        text-align: center;
+        cursor: pointer;
+    }
+
     .fillabel {
         font-size: 1.2vw;
         margin-left: 1vw;

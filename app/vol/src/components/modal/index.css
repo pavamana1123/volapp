@@ -47,6 +47,24 @@
   color: white;
 }
 
+@media only screen and (min-width: 1080px) {
+  .mcb {
+    cursor: pointer;
+    width: 1.5vw;
+    height: 1.5vw;
+    font-size: .75vw;
+  }
+
+  .modalTitleHolder {
+    min-height: 0vw;
+    padding: .5% .5% .5% 1.5%;
+  }
+
+  .modalBody {
+    min-height: 30vh;
+  }
+}
+
 @keyframes showmodal {
   from {
     transform: scale(.75);
