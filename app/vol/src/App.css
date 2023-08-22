@@ -60,7 +60,12 @@ i {
 
 .dark-glass {
   background-color: black;
-  opacity: 0.75;
+  opacity: 0.1;
+}
+
+.light-glass {
+  background-color: white;
+  opacity: 0.6;
 }
 
 .clickable {

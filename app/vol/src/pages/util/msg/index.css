@@ -11,6 +11,23 @@
     width: 25vw;
 }
 
+.waholder {
+    display: flex;
+    flex-direction: column;
+}
+
+.msgcopy {
+    background-color: white;
+    color: black;
+    font-size: 1.2vw;
+    box-shadow: -0.2vw 0.2vw 0.2vw #aaa;
+    margin-top: 1vw;
+}
+
+.msgcopy:hover {
+    background-color: #eee;
+}
+
 .msgmain {
     display: flex;
     width: 100vw;

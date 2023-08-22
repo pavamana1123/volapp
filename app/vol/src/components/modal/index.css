@@ -5,22 +5,55 @@
   z-index: 999;
   left: 10vw;
   background-color: #2a3b45;
+  animation: showmodal .1s ease-in-out;
 }
 
 .modalBody {
   background-color: var(--bg);
   padding: 3%;
   min-height: 50vw;
+  box-shadow: -5px 5px 14px 1px #aaaaaa;
+  white-space: break-spaces;
+  max-height: 60vh;
+  overflow-y: scroll;
+  color: #222;
 }
 
-.modalTitle {
+.mcb {
+  background-color: #eee;
+  color: black;
+  width: 4.5vw;
+  height: 4.5vw;
+  border-radius: 50%;
+  font-size: 2vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.modalTitleHolder {
   padding: 2% 2% 2% 4%;
-  background-color: var(--secondaryBg);
+  background-color: var(--bar);
   min-height: 5vw;
-}
-
-.modalTitleItems{
+  color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.modal-title {
+  color: white;
+}
+
+@keyframes showmodal {
+  from {
+    transform: scale(.75);
+    opacity: .75;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

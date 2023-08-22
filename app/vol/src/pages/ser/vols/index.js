@@ -7,21 +7,18 @@ function Vols(props) {
 
   var { volunteers, serviceView } = props
 
-  function getCorrectDate(d, t) {
-    if((t||"").trim().endsWith("AM")){
-      return moment(d, 'YYYY-MM-DD').add(1, "d").format("YYYY-MM-DD")
-    }
-    return d
-  }
-
   function getTimeCode(d, st, av) {
-    const stStart = moment(`${d} ${st.split(' - ')[0]}`, 'YYYY-MM-DD h A');
-    const stEnd = moment(`${getCorrectDate(d, st.split(' - ')[1])} ${st.split(' - ')[1]}`, 'YYYY-MM-DD h A');
-    const avStart = moment(`${d} ${av.split(' - ')[0]}`, 'YYYY-MM-DD h A');
-    const avEnd = moment(`${getCorrectDate(d, av.split(' - ')[1])} ${av.split(' - ')[1]}`, 'YYYY-MM-DD h A');
+    const stStart = moment(`${d} ${st.split(' - ')[0]}`, 'YYYY-MM-DD h A')
+    const stEnd = moment(`${d} ${st.split(' - ')[1]}`, 'YYYY-MM-DD h A')
+    if(stEnd.isBefore(stStart)) stEnd.add(1, "d")
+
+    const avStart = moment(`${d} ${av.split(' - ')[0]}`, 'YYYY-MM-DD h A')
+    const avEnd = moment(`${d} ${av.split(' - ')[1]}`, 'YYYY-MM-DD h A')
+    if(avEnd.isBefore(avStart)) avEnd.add(1, "d")
+
 
     if (!stStart.isValid() || !stEnd.isValid() || !avStart.isValid() || !avEnd.isValid()) return 'U';
-    if ((stStart.isSame(avStart) && stEnd.isSame(avEnd)) || (stStart.isSame(avStart) && stEnd.isBefore(avEnd)) || stStart.isAfter(avStart) && stEnd.isSame(avEnd)) return 'OK';
+    if ((stStart.isSame(avStart) && stEnd.isSame(avEnd)) || (stStart.isSame(avStart) && stEnd.isBefore(avEnd)) || stStart.isAfter(avStart) && stEnd.isSame(avEnd) || stStart.isAfter(avStart) && stEnd.isBefore(avEnd)) return 'OK';
     if (stStart.isSame(avStart) && stEnd.isAfter(avEnd) || (stStart.isBefore(avStart) && stEnd.isAfter(avEnd)) || (stStart.isBefore(avStart) && stEnd.isSame(avEnd)) ) return 'B';
     if (stEnd.isAfter(avEnd)) return 'E';
     if (stStart.isBefore(avStart)) return 'S';

@@ -14,7 +14,7 @@ function Tab(props) {
               return (
                 <div className={`tabHeaderItem ${activeTab==i?"selectedtab":""} ${i==tabs.length-1?"last-thi":""}`} key={i} onClick={()=>{
                   setActiveTab.bind(self)(i)
-                  onTabChange && onTabChange(i)
+                  onTabChange && onTabChange(i, tab.value)
                 }}>{tab.title}</div>
               )
             })

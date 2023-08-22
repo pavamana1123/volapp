@@ -10,13 +10,11 @@ function Modal(props) {
    
   return (
     <div>
-      <div className="glass dark-glass"/>
+      <div className="glass light-glass"/>
       <div className='modalBox'>
-        <div className='modalTitle'>
-          <div className='modalTitleItems'>
-            <span>{title}</span>
-            <i class="bi bi-x-square-fill" onClick={onClose}></i>
-          </div>
+        <div className='modalTitleHolder'>
+            <div className='modal-title'>{title}</div>
+            <div className='mcb' onClick={onClose || (()=>{})}>❌</div>
         </div>
         <div className='modalBody'>{children}</div>
       </div>

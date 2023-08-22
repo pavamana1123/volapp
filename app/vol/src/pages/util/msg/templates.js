@@ -48,7 +48,7 @@ var templates = {
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
 *Sri Vaikunta Ekadashi 2023 - Volunteering*
     
-Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balaram 🙏 We thank you for registering for the Sri Vaikunta Ekadashi services.
+Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balarama 🙏 We thank you for registering for the Sri Vaikunta Ekadashi services.
 
 Please go through the following guidelines and details about your services during Vaikunta Ekadashi festival:
 
@@ -159,7 +159,7 @@ ISKCON Mysore`.trim())}`})
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
 *Ratha Yatra ${hasServiceOnChurnabhisheka?`& Churnabhisheka `:""}2023 - Volunteering*
     
-Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balaram 🙏 We thank you for registering for the *Sri Sri Krishna Balaram Ratha Yatra* festival services.
+Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balarama 🙏 We thank you for registering for the *Sri Sri Krishna Balarama Ratha Yatra* festival services.
 
 Please go through the following guidelines and details about your services during the festival:
 
@@ -691,7 +691,7 @@ ISKCON Mysore`)}`
 *Sri Gaura Purnima 2023 - Volunteering*
 *Tuesday, 7th March 2023*
    
-Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balaram 🙏 We thank you for registering for the *Sri Gaura Purnima* festival services.
+Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balarama 🙏 We thank you for registering for the *Sri Gaura Purnima* festival services.
 
 *Service Details:*
 
@@ -831,7 +831,7 @@ ISKCON Mysore
 *Sri Rama Navami 2023 - Volunteering*
 *Thursday, 30th March 2023*
    
-Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balaram 🙏 We thank you for registering for the *Sri Rama Navami* festival services.
+Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balarama 🙏 We thank you for registering for the *Sri Rama Navami* festival services.
 
 *Service Details:*
 
@@ -1135,7 +1135,7 @@ ISKCON Mysore
 *Sri Narasimha Chaturdashi 2023 - Volunteering*
 *Thursday, 30th March 2023*
    
-Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balaram 🙏 ${isDefault ? "" : "We thank you for registering for the Sri Narasimha Chaturdashi festival services"}.
+Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balarama 🙏 ${isDefault ? "" : "We thank you for registering for the Sri Narasimha Chaturdashi festival services"}.
 
 *Service Details:*
 
@@ -1286,6 +1286,12 @@ ISKCON Mysore`.trim())}`})
             "2023-09-09"
         ]
 
+        
+        const couponDates = [
+            "2023-09-06",
+            "2023-09-07",
+        ]
+
         const svpdates = [
             "2023-09-08"
         ]
@@ -1311,13 +1317,14 @@ ISKCON Mysore`.trim())}`})
                 }
                 }
                 voldet[name].services.push({
-                date: volunteers[i].date,
-                service: volunteers[i].service,
-                timings: volunteers[i].timings,
-                coordinator: volunteers[i].coordinator,
-                spoc: volunteers[i].spoc,
-                spocPhone: volunteers[i].spocPhone,
-                availability: volunteers[i].availability,
+                    date: volunteers[i].date,
+                    service: volunteers[i].service,
+                    timings: volunteers[i].timings,
+                    coordinator: volunteers[i].coordinator,
+                    spoc: volunteers[i].spoc,
+                    spocPhone: volunteers[i].spocPhone,
+                    availability: volunteers[i].availability,
+                    serviceDuration: volunteers[i].serviceDuration
                 })
             }
             }
@@ -1337,22 +1344,51 @@ ISKCON Mysore`.trim())}`})
 
             var isInSBJ = sbjdates.some(e=>{ return vDates.includes(e) })
             var isInSKJ = skjdates.some(e=>{ return vDates.includes(e) })
+            var isInOnlySKJ = couponDates.some(e=>{ return vDates.includes(e) })
             var isInSVP = svpdates.some(e=>{ return vDates.includes(e) })
 
             var fests = []
-            if(isInSBJ) fests.push("Sri Balaram Jayanthi")
+            if(isInSBJ) fests.push("Sri Balarama Jayanthi")
             if(isInSKJ) fests.push("Sri Krishna Janmashtami")
             if(isInSVP) fests.push("Sri Vyasa Puja")
+            var festivals = fests.join(", ").replaceLastOccurance(", ", " & ")
+
+            var mainService6 = (v.services.filter(vv=>{
+                return vv.date=="2023-09-06"
+            }).sort((vv1, vv2)=>{
+                return vv2.serviceDuration-vv1.serviceDuration
+            })[0])||{}
+
+            var mainService7 = (v.services.filter(vv=>{
+                return vv.date=="2023-09-07"
+            }).sort((vv1, vv2)=>{
+                return vv2.serviceDuration-vv1.serviceDuration
+            })[0])||{}
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteering Info - ${fests.join(", ").replaceLastOccurance(", ", " & ")}*
-*Thursday, 30th March 2023*
+*Volunteering Info - ${festivals}*
    
-Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balaram 🙏 ${isDefault ? "" : "We thank you for registering for the Sri Narasimha Chaturdashi festival services"}.
+Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balarama 🙏 ${isDefault ? "" : `We thank you for registering for volunteer services for ${festivals} festival${fests.length>1?"s":""}`}.
+
+*☝🏻 Before you go through this message, please save this number in your phone. If you don't, you may not be able to click and open important links given in this message!*
+
+*General Guidelines:*
+
+1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. *Please contact SPOC(s) of your service(s) and discuss the details of service like timings, dress code etc. The contact numbers of SPOC(s) are mentioned below.
+
+${isInOnlySKJ?`🪪 *Volunteer Badge (ID card)* will be issued on *Sunday, 3rd September 2023* in the temple at the Volunteer Care Cell. This badge is necessary and valid only for Janmashtami festival on 6th and 7th Sep. Exact time and place will be communicated to you shortly.
+
+🚗 Vehicle parking is not allowed inside temple. Arrangement for parking is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into parking area is allowed only against ID card
+
+🎫 Breakfast, lunch and dinner prasadam will be provided to you against prasadam coupons by SPOC. The details of the SPOC who will issue you coupons can be found in the link given at the end of this message.
+
+🪪 *PLEASE RETURN YOUR ID CARD TO VOLUNTEER CARE CELL WHEN YOUR SERVICES ARE COMPLETED AND COLLECT TAKE-HOME PRASADAM*
+
+`:""}😇 Please report to your services on time. Be responsible for your services.
 
 *Service Details:*
 
-Name: ${v.name}
+Your Name: ${v.name}
 Phone: ${v.phone}
 
 ${v.services.length>1?`You have been assigned the following *${v.services.length}* services:`:`You have been assigned the following service:`}
@@ -1361,7 +1397,7 @@ ${v.services.map(s=>{
     return `
 🗓️ Date: *${moment(s.date, "YYYY-MM-DD").format("dddd, Do MMMM")}*
 🛐 Service: *${s.service}*
-🕗 Timings: *${s.timings}*
+🕗 Timings: *${s.timings.toTimingCase()}*
 👑 Co-ordinator: *${s.coordinator}*
 🥇 SPOC: *${s.spoc}*
 📞 SPOC's Phone number: *${s.spocPhone}*${s.spoc.trim()==v.name?`
@@ -1372,11 +1408,6 @@ You are the SPOC (Single-Point-of-Contact) for this service.`:``}
     
 *YOU CAN ALSO CHECK THESE SERVICE DETAILS USING THE LINK GIVEN BELOW*:
 ${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
-
-*Note:*
-1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. *Please call your SPOC and discuss the details of service* like dress code, timings etc. The contact numbers of SPOC(s) are mentioned above.
-😇 Please report to your services on time. Be responsible for your services.
-🌐 If you are not able click and open the above link, it may likely be because you have not stored this number. Please save this number as 'ISKCON Mysore'.
 
 _Please re-check your service before the festival using the above link. Sometimes your service may change due to unavoidable circumstances._
 

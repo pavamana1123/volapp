@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
-import './index.css';
-import templates from './templates';
+import { useEffect, useRef, useState } from 'react'
+import './index.css'
+import templates from './templates'
+import clipboardy from "clipboardy"
 
 function Msg(props) {
 
@@ -55,31 +56,36 @@ function Msg(props) {
 
 
         </div>
-        <div className='msgwa'>
-          <div className='msgheader'>
-            {selectedName}
-          </div>
-          <div className='msgMsg'>
-            <div className='msgMsgTxt' dangerouslySetInnerHTML={{
-              __html: selectedIndex==-1?"":(()=>{
-                  const text = decodeURIComponent(new URLSearchParams(new URL(links[selectedIndex]).search).get("text"))
-                  var textArr = text.split("")
-                  var bc = 0
-                  var ic = 0
-                  for (let i=0; i < textArr.length; i++) {
-                    if(textArr[i]=="*"){
-                      textArr[i]=bc%2==0?"<b>":"</b>"
-                      bc++
-                    }else if(textArr[i]=="_"){
-                      textArr[i]=ic%2==0?"<i>":"</i>"
-                      ic++
+        <div className='waholder'>
+          <div className='msgwa'>
+            <div className='msgheader'>
+              {selectedName}
+            </div>
+            <div className='msgMsg'>
+              <div className='msgMsgTxt' dangerouslySetInnerHTML={{
+                __html: selectedIndex==-1?"":(()=>{
+                    const text = decodeURIComponent(new URLSearchParams(new URL(links[selectedIndex]).search).get("text"))
+                    var textArr = text.split("")
+                    var bc = 0
+                    var ic = 0
+                    for (let i=0; i < textArr.length; i++) {
+                      if(textArr[i]=="*"){
+                        textArr[i]=bc%2==0?"<b>":"</b>"
+                        bc++
+                      }else if(textArr[i]=="_"){
+                        textArr[i]=ic%2==0?"<i>":"</i>"
+                        ic++
+                      }
                     }
-                  }
-                  return textArr.join("")
-                })()
-              }}
-            />
+                    return textArr.join("")
+                  })()
+                }}
+              />
+            </div>
           </div>
+          <button className='msgcopy' onClick={()=>{
+            clipboardy.write(decodeURIComponent(new URLSearchParams(new URL(links[selectedIndex]).search).get("text")))
+          }}>{"Copy Message"}</button>
         </div>
         </div>
     </div>
