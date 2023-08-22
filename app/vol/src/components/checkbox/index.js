@@ -13,8 +13,6 @@ class CheckBoxCtl {
 
 function CheckBox(props) {
 
-  console.log("running")
-
   var self = this
 
   var [selIndex, setSelIndex] = useState(0)

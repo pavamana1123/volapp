@@ -11,6 +11,14 @@
     margin-top: 1vw;
 }
 
+.guidelink {
+    width: 100%;
+    text-decoration: underline;
+    color: var(--bar);
+    margin: 2vw 0 2vw 0;
+    text-align: center;
+}
+
 .autoinvol {
     width: 80vw;
     height: 3vw;

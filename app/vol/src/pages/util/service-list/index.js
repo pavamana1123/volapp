@@ -137,8 +137,6 @@ function ServiceList(props){
                 }
             }
 
-            console.log(tableData)
-
             const slmain = document.getElementsByClassName("slmain")[0]
             var pages = []
             var page = 0
@@ -203,8 +201,6 @@ function ServiceList(props){
                     page++
                 }
             }
-
-            console.log('pages', pages)
 
             slmain.innerHTML = pages.map((p, i, pp)=>{
                 return getPage(ev, tableData, headers, p[0], p[1], i, pp.length)
