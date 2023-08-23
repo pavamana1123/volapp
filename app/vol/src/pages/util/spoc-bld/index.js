@@ -1,8 +1,24 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './index.css';
 function SPOCBLD(props) {
 
-  var {slots, services, volunteers} = props.data
+  var { data } = props
+  var {slots, services, volunteers, events} = data
+
+  var [date, setDate] = useState('')
+
+  useEffect(()=>{
+
+    if(!data || !data.events){
+      return
+    }
+
+    if(date==""){
+      setDate(events.map(e=>{
+        return e.date
+      }).sort()[0])
+    }
+  }, [data])
 
   slots = slots || []
   var bld = {}
@@ -14,7 +30,7 @@ function SPOCBLD(props) {
   })
 
   volunteers = (volunteers||[]).filter(v=>{
-    return v.date=="2023-01-07" && v.volunteerName!=""
+    return v.date==date && v.volunteerName!=""
   })
 
   var vl = {}
@@ -69,17 +85,20 @@ function SPOCBLD(props) {
 
   return (
     services?<div className='bldroot'>
-      {null && <div className='spocdate'>
+      {true && <div className='spocdate'>
         Select date
-        <input type={"date"} className='spocdateip'/>
+        <input type={"date"} className='spocdateip' defaultValue={date} onChange={(e)=>{
+          console.log(e.target.value)
+          setDate(e.target.value)
+        }}/>
       </div>}
       <div className='spocbld'>
         <div className='countrow'>
           <div className='spochead spocell'>{"#"}</div>
           <div className='spochead spocell spocname'>{`SPOC Name (${bldCount.length})`}</div>
-          <div className='spochead spocell spocb'>{`Breakfast (${bldCount.map(p=>{return p.b}).reduce((a,b)=>{return a+b})})`}</div>
-          <div className='spochead spocell spocl'>{`Lunch (${bldCount.map(p=>{return p.l}).reduce((a,b)=>{return a+b})})`}</div>
-          <div className='spochead spocell spocd'>{`Dinner (${bldCount.map(p=>{return p.d}).reduce((a,b)=>{return a+b})})`}</div>
+          <div className='spochead spocell spocb'>{`Breakfast (${bldCount.map(p=>{return p.b}).reduce((a,b)=>{return a+b}, 0)})`}</div>
+          <div className='spochead spocell spocl'>{`Lunch (${bldCount.map(p=>{return p.l}).reduce((a,b)=>{return a+b}, 0)})`}</div>
+          <div className='spochead spocell spocd'>{`Dinner (${bldCount.map(p=>{return p.d}).reduce((a,b)=>{return a+b}, 0)})`}</div>
         </div>
         {
           bldCount.map((s,i)=>{
