@@ -51,6 +51,7 @@ function SPOCBLD(props) {
       name: n,
       service: ms.service,
       spoc: ms.spoc,
+      phone: ms.spocPhone,
       availability: ms.availability,
       timings: ms.timings
     }
@@ -60,8 +61,9 @@ function SPOCBLD(props) {
 
   majorServices.map(ms=>{
     spocMap[ms.spoc] = spocMap[ms.spoc] || {}
+    spocMap[ms.spoc].phone = ms.phone
     spocMap[ms.spoc].availability = spocMap[ms.spoc].availability || []
-    spocMap[ms.spoc].availability.push(ms.availability=="NOT AVAILABLE"?"All slots":ms.availability)
+    spocMap[ms.spoc].availability.push((ms.availability=="NOT AVAILABLE" || ms.availability=="Default")?"All slots":ms.availability)
   })
 
   var spocs = Object.keys(spocMap).sort()
@@ -74,14 +76,19 @@ function SPOCBLD(props) {
     })
   }
 
+  console.log(spocMap)
+
   var bldCount = spocs.map(s=>{
     return {
       name: s,
+      phone: spocMap[s].phone,
       b: getCount(s, "b"),
       l: getCount(s, "l"),
       d: getCount(s, "d")
     }
   })
+
+  console.log(bldCount)
 
   return (
     services?<div className='bldroot'>
@@ -104,7 +111,7 @@ function SPOCBLD(props) {
           bldCount.map((s,i)=>{
             return <div className='countrow'>
               <div className='spocell'>{i+1}</div>
-              <div className='spocell spocname'>{s.name}</div>
+              <div className='spocell spocname'><a href={`tel:+91${s.phone}`}>{s.name}</a></div>
               <div className='spocell spocb'>{s.b}</div>
               <div className='spocell spocl'>{s.l}</div>
               <div className='spocell spocd'>{s.d}</div>
