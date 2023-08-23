@@ -1,0 +1,8 @@
+.badge-list-root {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100vh;
+    font-size: 1.75vw;
+    page-break-before: always;
+}

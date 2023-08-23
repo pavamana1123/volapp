@@ -115,6 +115,15 @@ body.sl-page {
   justify-content: center;
 }
 
+body.badge-list-root {
+  max-height: none;
+  overflow: auto;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 #update-epoch {
   position: absolute;
   bottom: 0;
