@@ -1,0 +1,76 @@
+.service {
+    padding: 2vw;
+}
+
+.detailsDiv {
+    margin-bottom: 3vw;
+}
+
+.detailFeild{
+    padding: .5vw 0 0 0;
+    font-size: 4vw;
+}
+
+.vol-section {
+    display: flex;
+}
+
+.vol-sep {
+    width: 0.5vw;
+    margin: 0 3vw 0 3vw;
+    background: #aaaaaa86;
+}
+
+.spocdetholder {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.spocdetphone {
+    font-size: 3.5vw;
+    color: grey;
+    margin-top: 0.2vw;
+}
+
+.spocdeticon {
+    font-size: 5vw;
+}
+
+.dark {
+    color: black;
+    font-weight: 900;
+}
+
+@media only screen and (min-width: 1080px) {
+
+    .spocdeticon {
+        font-size: 1.5vw;
+    }
+
+    .spocdetphone {
+        font-size: 1.2vw;
+        margin-top: 0.2vw;
+    }
+
+    .detailFeild{
+        padding: .5vw 0 0 0;
+        font-size: 1.4vw;
+    }
+
+    .detailsDiv {
+        margin-bottom: 1vw;
+    }
+
+    .service {
+        padding: 1vw;
+    }
+
+    .vol-sep {
+        width: 0.1vw;
+        margin: 0 1vw 0 1vw;
+        background: #aaaaaa86;
+    }
+}

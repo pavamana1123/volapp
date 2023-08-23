@@ -1,0 +1,107 @@
+.vol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 85vh;
+    overflow-y: scroll;
+    margin-top: 3.1vh;
+}
+
+.serpaper {
+    margin-top: 1vw;
+}
+
+.guidelink {
+    width: 100%;
+    text-decoration: underline;
+    color: var(--bar);
+    margin: 2vw 0 2vw 0;
+    text-align: center;
+}
+
+.autoinvol {
+    width: 80vw;
+    height: 3vw;
+    padding: 2vw;
+    font-size: 4vw;
+}
+
+.admin-info-event-name {
+    background: aliceblue;
+    padding: 1vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.noserv {
+    color:#333;
+    margin: 5vw;
+    display: flex;
+    justify-content: center;
+}
+
+.pracoup {
+    background-color: #1976d21f;
+    padding: 2vw;
+    width: 90%;
+}
+
+.voldetholderv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.volnameintab {
+    font-size: 4.5vw;
+    color: #000000d4;
+    font-weight: bolder;
+    margin: 2vw 0 4vw 0;
+    display: flex;
+    justify-content: center;
+}
+
+.volnameauto {
+    font-size: 4.25vw;
+}
+
+@media only screen and (min-width: 1080px) {
+
+    .volnameauto {
+        font-size: 1.25vw;
+    }
+
+    .autoinvol {
+        width: 80vw;
+        height: 1vw;
+        padding: .75vw;
+        font-size: 1.2vw;
+    }
+
+    .volnameintab {
+        font-size: 1.5vw;
+        margin: .25vw 0 1.25vw 0;
+    }
+
+    .pracoup {
+        background-color: #1976d21f;
+        padding: 1vw;
+        width: 95%;
+    }
+
+    .serpaper {
+        margin-top: .6vw;
+    }
+
+    .vol {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-height: 85vh;
+        overflow-y: scroll;
+        margin-top: 3vh;
+    }
+   
+  }

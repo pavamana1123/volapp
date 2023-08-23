@@ -4,13 +4,20 @@
     padding: 2vw;
     max-height: 60vh;
     overflow-y: scroll;
+    overflow-y: hidden;
     width: 81%;
     box-shadow: -5px 5px 14px #aaaaaa80;
+    transition: opacity .1s ease-in-out;
 }
 
 .auto-item {
     padding: 1vw;
     cursor: pointer;
+}
+
+.auto-hide {
+    max-height: 0;
+    opacity: 0;
 }
 
 .auto-item:hover {

@@ -33,7 +33,9 @@ function Ser(props) {
 
 2. SPOC must communicate and orient the volunteers regarding all aspects of the service. The contact details of the volunteers are provided in this webpage.
 
-3. SPOC must collect Prasadam Coupons from Volunteer Care Cell and issue them volunteers on the previous day of service. Prasadam Coupons are meant to be used only on 6th and 7th September. Not on other days. You can find the list of volunteers to whom you must issue the coupons by clicking on "Prasadam Coupons" button.
+3. SPOC must make sure that volunteers report at proper time and in appropriate dress code for their service.
+
+4. SPOC must collect Prasadam Coupons from Volunteer Care Cell and issue them volunteers on the previous day of service. Prasadam Coupons are meant to be used only on 6th and 7th September. Not on other days. You can find the list of volunteers to whom you must issue the coupons by clicking on "Prasadam Coupons" button.
 `.trim() 
 
   var [filter, setFilter] = useState(filters[0])

@@ -10,6 +10,7 @@ import Home from './pages/home';
 import SPOCBLD from './pages/util/spoc-bld';
 import moment from 'moment';
 import ServiceList from './pages/util/service-list';
+import AdminInfo from './pages/admin-info';
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
           <Routes>
             <Route path="/vol" element={<Vol data={data} dates={dates}/>}></Route>
             <Route path="/volist" element={<Vol data={data} dates={dates} showList/>}></Route>
+            <Route path="/admin-info" element={<AdminInfo data={data} dates={dates} showList/>}></Route>
             <Route path="/ser" element={<Ser data={data} dates={dates}/>}></Route>
             <Route path="/services" element={<Ser data={data} dates={dates}/>}></Route>
             <Route path="/util/msg" element={<Msg data={data} isLoading={isLoading}/>}></Route>

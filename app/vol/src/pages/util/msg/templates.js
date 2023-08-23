@@ -1397,7 +1397,8 @@ ${v.services.map(s=>{
     return `
 🗓️ Date: *${moment(s.date, "YYYY-MM-DD").format("dddd, Do MMMM")}*
 🛐 Service: *${s.service}*
-🕗 Timings: *${s.timings.toTimingCase()}*
+🕗 Timings: *${s.timings.toTimingCase()}*${!(s.availability=="Default" || s.availability=="NOT AVAILABLE" || s.availability=="All slots")?`
+🕗 Your slot: *${s.availability}*`:""}
 👑 Co-ordinator: *${s.coordinator}*
 🥇 SPOC: *${s.spoc}*
 📞 SPOC's Phone number: *${s.spocPhone}*${s.spoc.trim()==v.name?`
@@ -1414,6 +1415,89 @@ _Please re-check your service before the festival using the above link. Sometime
 Regards,
 Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
+    },
+
+    "SPOC Info - SBJ-SKJ-SVP": (props)=>{
+
+        var { services } = props.data
+        const dates = [
+            "2023-08-30",
+            "2023-08-31",
+            "2023-09-05",
+            "2023-09-06",
+            "2023-09-07",
+            "2023-09-08",
+            "2023-09-09"
+        ]
+
+        services = services.filter(s=>{
+            return dates.indexOf(s.date)!=-1
+        })  
+
+        var spocMap = {}
+
+        services.map(s=>{
+            if(s.spoc=="" || s.spocPhone==""){
+                return
+            }
+
+            spocMap[s.spoc]=spocMap[s.spoc]||{
+                spoc: s.spoc,
+                spocPhone: s.spocPhone,
+                services : []
+            }
+            spocMap[s.spoc].services.indexOf(s.service)==-1 && spocMap[s.spoc].services.push({
+                    service: s.serviceName,
+                    date: s.date,
+                    coordinator: s.coordinator,
+                    coordinatorPhone: s.coordinatorPhone,
+                    timings: s.timings,
+                    requirement: s.requirement,
+                })
+        })
+
+        var spocs = Object.keys(spocMap).sort()
+
+        return spocs.map(sp=>{
+        var s = spocMap[sp]
+
+      return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
+*SPOC for Volunteering Services*
+
+Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for below mentioned ${s.services.length>1?s.services.length:""} service${s.services.length>1?"s":""}. Kindly go through the details of the service${s.services.length>1?"s":""} carefully:
+
+Name: ${s.spoc}
+Phone: ${s.spocPhone}
+
+${s.services.map(sv=>{
+    return `
+🗓️ Date: *${moment(sv.date, "YYYY-MM-DD").format("dddd, Do MMMM")}*
+🛐 Service: *${sv.service}*
+🕗 Timings: *${sv.timings.toTimingCase()}*
+👑 Coordinator: *${sv.coordinator}*
+📞 Coordinator's Phone: *${sv.coordinatorPhone}*
+#️⃣ No. of volunteers: *${sv.requirement}*
+`.trim()
+}).join(`
+
+`)}
+
+Please use this link to check the details of the service${s.services.length>1?"s":""} and volunteers under you:
+*https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}*
+
+Responsibilities of SPOC:
+1️⃣ SPOC must understand all the details of the service, timings, dress-code etc. from the co-ordinator.
+
+2️⃣ SPOC must communicate and orient the volunteers regarding all aspects of the service. The contact details of the volunteers are provided in the link given above.
+
+3️⃣ SPOC must make sure that volunteers report at proper time and in appropriate dress code for their service.
+
+4️⃣ SPOC must collect Prasadam Coupons from Volunteer Care Cell and issue them volunteers on the previous day of service. Prasadam Coupons are meant to be used only on 6th and 7th September. Not on other days. You can find the list of volunteers to whom you must issue the coupons by clicking on "Prasadam Coupons" button after opening the link given above.
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore
+`.trim())}`})
     },
 }
 

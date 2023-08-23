@@ -3,7 +3,9 @@ import './index.css';
 
 function Auto(props) {
 
-  var { filter, Drop, inputClass } = props
+  var autodrop = useRef(0)
+
+  var { filter, Drop, inputClass, placeholder } = props
 
   var [ list, setList ] = useState()
   var [ focus, setFocus ] = useState()
@@ -22,10 +24,8 @@ function Auto(props) {
     setFocus(true)
   }
 
-  const onBlur = ()=>{
-    setTimeout(()=>{
+  const onBlur = (e)=>{
       setFocus(false)
-    }, 100)
   }
 
   return(
@@ -34,8 +34,8 @@ function Auto(props) {
         onChange={onChangeDelay}
         onFocus={onFocus}
         onBlur={onBlur}
-        placeholder='Start typing your name...'/>
-      {list && focus && <div className='auto-drop'>
+        placeholder={placeholder || 'Start typing your name...'}/>
+      {list && <div className={`auto-drop ${focus?"auto-show":"auto-hide"}`} ref={autodrop}>
         {
           list.length?list.map((l, i, ll)=>{
             return (
