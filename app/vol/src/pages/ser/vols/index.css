@@ -11,6 +11,10 @@
     margin-top: 2.5vw;
 }
 
+.name-greyed {
+    color: grey;    
+}
+
 .servol_phone {
     font-size: 3.2vw;
     color: #777;

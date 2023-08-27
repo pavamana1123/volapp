@@ -1,11 +1,28 @@
+import { useEffect, useState } from 'react';
 import HSep from '../../../components/HSep';
 import { Paper } from '../../../components/paper';
 import './index.css';
 import moment from 'moment';
+import cookie from '../../../cookie';
 
 function Vols(props) {
 
-  var { volunteers, serviceView } = props
+  var { volunteers, filterValue, serviceView, date, service } = props
+  var [attendanceShare, setAttendanceShare] = useState({})
+
+  useEffect(()=>{
+    if(!serviceView){
+      return
+    }
+    var t = cookie.get(`@${filterValue}`)
+    if(t){
+      try {
+        setAttendanceShare(JSON.parse(t))
+      }catch{
+        setAttendanceShare({})
+      }
+    }
+  }, [filterValue])
 
   function getTimeCode(d, st, av) {
     const stStart = moment(`${d} ${st.split(' - ')[0]}`, 'YYYY-MM-DD h A')
@@ -65,13 +82,27 @@ function Vols(props) {
           <div className='voldetholder'>{
           volunteers.length?
             volunteers.map(v=>{
+
+              var attendanceKey = `${date}:${service.serviceName}:${v.volunteerName}`
+
               var avcomment = getAvComment(v)
               return v.volunteerName?
                 <div className='eachVol'>
                   <div className='eachVolDet'>
                     <div className='nameHolder'>
-                      {v.reported?<div>
-                        <i className="bi bi-check-circle-fill nameCheck"></i>
+                      {true?
+                      <div onClick={()=>{
+                        try {
+                          var copy = JSON.parse(cookie.get(`@${filterValue}`))
+                          copy[attendanceKey] = !!!copy[attendanceKey]
+                          cookie.set(`@${filterValue}`, JSON.stringify(copy, 2))
+                          setAttendanceShare(copy)
+                        }catch{
+                          alert("Could not mark attendance")
+                        }
+
+                      }}>
+                        <i className={`bi bi-check-circle-fill nameCheck ${!(v.reported || (serviceView && attendanceShare[attendanceKey]))?"name-greyed":""}`}></i>
                       </div>:null}
                       <div className='nameact'>
                         <div>{v.volunteerName}</div>
@@ -80,7 +111,7 @@ function Vols(props) {
                           {!isNaN(v.volunteerPhone)?<a href={`https://wa.me/91${v.volunteerPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>:null}
                           {!isNaN(v.volunteerPhone)?<a href={`https://wa.me/91${v.volunteerPhone}?text=${encodeURI(`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.volunteerName)}`)}`} target="_blank"><i className="bi bi-share-fill"></i></a>:null}
                           <a href={`/vol?name=${encodeURI(v.volunteerName)}`}><i className="bi bi-box-arrow-up-right"></i></a>
-                        </div>
+                        </div>  
                       </div>
                     </div>
                     <div className='phonecat'>

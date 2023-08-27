@@ -9,6 +9,7 @@ import Vols from './vols';
 import {utils, writeFile} from "xlsx"
 import { Paper } from '../../components/paper';
 import Modal from '../../components/modal';
+import cookie from '../../cookie';
 
 function Ser(props) {
 
@@ -28,14 +29,21 @@ function Ser(props) {
   ]
 
 
-  const spocResps = `
-1. SPOC must understand all the details of the service, timings, dress-code etc. from the co-ordinator.
+  const spocResps = `SPOC should -
 
-2. SPOC must communicate and orient the volunteers regarding all aspects of the service. The contact details of the volunteers are provided in this webpage.
+1. Meet the coordinator and understand all the details of the service, timings, dress code, etc. from him.
 
-3. SPOC must make sure that volunteers report at proper time and in appropriate dress code for their service.
+2. Organize a meeting between the coordinator and volunteers wherein the coordinator will discuss the details of the service with the volunteers. The meeting can be held either online or offline well in advance, before the festival. 
 
-4. SPOC must collect Prasadam Coupons from Volunteer Care Cell and issue them volunteers on the previous day of service. Prasadam Coupons are meant to be used only on 6th and 7th September. Not on other days. You can find the list of volunteers to whom you must issue the coupons by clicking on "Prasadam Coupons" button.
+3. Make sure that volunteers report at the proper time and in the appropriate dress code for their service.
+
+4. Update attendance of volunteers in your SPOC link by clicking grey color tick symbol against the volunteer name. Symbol turns green to indicate that attendance is marked. By end of the service, click on "Share Attendance" to share attendance data to Volunteer Care Cell over WhatsApp. As much as possible, marking of attendance must be done without the notice of volunteers. 
+
+5. Keep constant touch with the coordinator and update the coordinator about the service status.
+
+7. Ensure that volunteers are rendering service as per the instructions of the coordinator.
+
+6. Collect Prasadam Coupons from Volunteer Care Cell on Sunday, 3rd September 2023, and issue them to volunteers on the previous day of service. Prasadam Coupons are meant to be used only on the 6th and 7th of September. Not on other days. You can find the list of volunteers to whom you must issue the coupons by clicking on "Coupons" button in SPOC link.
 `.trim() 
 
   var [filter, setFilter] = useState(filters[0])
@@ -183,7 +191,7 @@ ${(()=>{
               <div className='filterBy'>
                 <div className='fillabel'>Filter By</div>
                 <select className='filselect'
-                  onChange={onFilterChange}>
+                  onChange={onFilterChange}>  
                   {
                     filters.map(f=>{
                       return <option value={f} key={f}>{f}</option>
@@ -303,11 +311,32 @@ ${(()=>{
                         {dateServices.length && (serviceView || filter=="SPOC") && 
                           <div className='sv-info-header'>
                             <div className='sv-count'>{`${dateServices.length} service${dateServices.length>1?"s":""}`}</div>
-                            {events.filter(e=>{
-                              return e.date==d
-                            })[0].coupon && <button className='sv-coup' onClick={(()=>{
-                              setShowCouponVols(true)
-                            })}>Prasadam Coupons</button>}
+
+                            <div>
+                              {events.filter(e=>{
+                                return e.date==d
+                              })[0].coupon && <button className='sv-coup' onClick={(()=>{
+                                setShowCouponVols(true)
+                              })}>Coupons</button>}
+
+                              {serviceView && <button className='sv-coup' onClick={()=>{
+                                try {
+                                  var attendance = JSON.parse(cookie.get(`@${filterValue}`)|| `{}`)
+                                  var msg = Object.keys(attendance).filter((a)=>{
+                                    return a.startsWith(d) && attendance[a]
+                                  }).map((a)=>{
+                                    var aparts = a.split(":")
+                                    return `${aparts[0]}\t${aparts[2]}`
+                                  }).join("\n")
+
+                                  var link = `https://wa.me/918123942324?text=${encodeURIComponent(msg)}`
+                                  window.open(link, "_blank")
+
+                                }catch{
+                                  alert("Unable to share attendance. Please contact volunteer care cell!")
+                                }
+                              }}>Share Attendance</button>}
+                            </div>
                           </div>
                         }
 
@@ -315,7 +344,7 @@ ${(()=>{
                           dateServices.map(s=>{
                           return <div className='svHolder'>
                             <Serv service={s} volunteers={volunteers.filter(v=>{return v.date==d && v.volunteerName != ""})}/>
-                            <Vols serviceView={serviceView} volunteers={volunteers.sort((v1,v2)=>{
+                            <Vols date={d} service={s} filterValue={filterValue} serviceView={serviceView} volunteers={volunteers.sort((v1,v2)=>{
                                 if(v1.volunteerName > v2.volunteerName){
                                   return 1
                                 }

@@ -1300,33 +1300,34 @@ ISKCON Mysore`.trim())}`})
         var voldet = {}
     
         var volunteers = volunteers.filter(v=>{
-            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="" && v.service!="") && !v.infoMsgSent){
                 umap[v.volunteerName]=v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.infoMsgSent
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="" && v.service!="") && !v.infoMsgSent
         })
         
         Object.keys(umap).map(name=>{
             for(var i=0; i<volunteers.length; i++){
-            if(volunteers[i].volunteerName==name){
-                if(!voldet[name]){
-                voldet[name]={
-                    name,
-                    phone: volunteers[i].volunteerPhone,
-                    services:[]
+                if(volunteers[i].volunteerName==name){
+                    if(!voldet[name]){
+                        voldet[name]={
+                            name,
+                            phone: volunteers[i].volunteerPhone,
+                            services:[]
+                        }
+                    }
+
+                    voldet[name].services.push({
+                        date: volunteers[i].date,
+                        service: volunteers[i].service,
+                        timings: volunteers[i].timings,
+                        coordinator: volunteers[i].coordinator,
+                        spoc: volunteers[i].spoc,
+                        spocPhone: volunteers[i].spocPhone,
+                        availability: volunteers[i].availability,
+                        serviceDuration: volunteers[i].serviceDuration
+                    })
                 }
-                }
-                voldet[name].services.push({
-                    date: volunteers[i].date,
-                    service: volunteers[i].service,
-                    timings: volunteers[i].timings,
-                    coordinator: volunteers[i].coordinator,
-                    spoc: volunteers[i].spoc,
-                    spocPhone: volunteers[i].spocPhone,
-                    availability: volunteers[i].availability,
-                    serviceDuration: volunteers[i].serviceDuration
-                })
-            }
             }
         })
 
