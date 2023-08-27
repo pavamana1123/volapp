@@ -93,7 +93,7 @@ function Vols(props) {
                       {true?
                       <div onClick={()=>{
                         try {
-                          var copy = JSON.parse(cookie.get(`@${filterValue}`))
+                          var copy = JSON.parse(cookie.get(`@${filterValue}`) || `{}`)
                           copy[attendanceKey] = !!!copy[attendanceKey]
                           cookie.set(`@${filterValue}`, JSON.stringify(copy, 2))
                           setAttendanceShare(copy)
