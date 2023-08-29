@@ -75,6 +75,8 @@ function Vols(props) {
     }
   }
 
+  const today = moment(moment().format("YYYY-MM-DD"))
+
   return (
     <div className='volsIndiv'>
       <Paper className="ser-vol">
@@ -90,8 +92,13 @@ function Vols(props) {
                 <div className='eachVol'>
                   <div className='eachVolDet'>
                     <div className='nameHolder'>
-                      {true?
+                      {today.isSameOrAfter(moment(date))?
                       <div onClick={()=>{
+
+                        if(!serviceView){
+                          return
+                        }
+
                         try {
                           var copy = JSON.parse(cookie.get(`@${filterValue}`) || `{}`)
                           copy[attendanceKey] = !!!copy[attendanceKey]
@@ -105,7 +112,10 @@ function Vols(props) {
                         <i className={`bi bi-check-circle-fill nameCheck ${!(v.reported || (serviceView && attendanceShare[attendanceKey]))?"name-greyed":""}`}></i>
                       </div>:null}
                       <div className='nameact'>
-                        <div>{v.volunteerName}</div>
+                        <div className='name-phone'>
+                          <div>{v.volunteerName}</div>
+                          <div className="servol_phone">{`${v.volunteerPhone}`}</div>
+                        </div>
                         <div className='volactbuttons'>
                           {!isNaN(v.volunteerPhone)?<a href={`tel:+91${v.volunteerPhone}`}><i className="bi bi-telephone-fill"></i></a>:null }
                           {!isNaN(v.volunteerPhone)?<a href={`https://wa.me/91${v.volunteerPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>:null}
@@ -115,12 +125,11 @@ function Vols(props) {
                       </div>
                     </div>
                     <div className='phonecat'>
-                      <div className="servol_phone">{`${v.volunteerPhone}`}</div>
                       <div className="servol_category">{`${v.category} ${v.preacher && !serviceView?`(${v.preacher})`:""}`}</div>
+                      {avcomment && <div className='avcomment'>{avcomment}</div>} 
                     </div>
-
                   </div>
-                  {avcomment && <div className='avcomment'>{avcomment}</div>}
+                  
                   <HSep/>
                 </div>
                 :null

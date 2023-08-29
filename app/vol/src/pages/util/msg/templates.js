@@ -1418,6 +1418,164 @@ Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
     },
 
+    "Service Reminder - SBJ": (props)=>{
+
+        var { volunteers } = props.data
+        
+        const dates = [
+            "2023-08-30",
+            "2023-08-31",
+            "2023-09-05",
+            "2023-09-06",
+            "2023-09-07",
+            "2023-09-08",
+            "2023-09-09"
+        ]
+
+        const sbjdates = [
+            "2023-08-30",
+            "2023-08-31"
+        ]
+
+        const skjdates = [
+            "2023-09-05",
+            "2023-09-06",
+            "2023-09-07",
+            "2023-09-09"
+        ]
+
+        
+        const couponDates = [
+            "2023-09-06",
+            "2023-09-07",
+        ]
+
+        const svpdates = [
+            "2023-09-08"
+        ]
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="" && v.service!="") && !v.infoMsgSent){
+                umap[v.volunteerName]=v.volunteerPhone
+            }
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="" && v.service!="") && !v.infoMsgSent
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+                if(volunteers[i].volunteerName==name){
+                    if(!voldet[name]){
+                        voldet[name]={
+                            name,
+                            phone: volunteers[i].volunteerPhone,
+                            services:[]
+                        }
+                    }
+
+                    voldet[name].services.push({
+                        date: volunteers[i].date,
+                        service: volunteers[i].service,
+                        timings: volunteers[i].timings,
+                        coordinator: volunteers[i].coordinator,
+                        spoc: volunteers[i].spoc,
+                        spocPhone: volunteers[i].spocPhone,
+                        availability: volunteers[i].availability,
+                        serviceDuration: volunteers[i].serviceDuration
+                    })
+                }
+            }
+        })
+
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+            var isDefault = !!v.services.filter(sss=>{ return (sss.availability=="Default" || sss.availability=="NOT AVAILABLE") }).length
+
+            var vDateMap = {}
+            v.services.forEach(vv => {
+                vDateMap[vv.date]=1
+            })
+
+            var vDates = Object.keys(vDateMap).sort()
+
+            var isInSBJ = sbjdates.some(e=>{ return vDates.includes(e) })
+            var isInSKJ = skjdates.some(e=>{ return vDates.includes(e) })
+            var isInOnlySKJ = couponDates.some(e=>{ return vDates.includes(e) })
+            var isInSVP = svpdates.some(e=>{ return vDates.includes(e) })
+
+            var fests = []
+            if(isInSBJ) fests.push("Sri Balarama Jayanthi")
+            if(isInSKJ) fests.push("Sri Krishna Janmashtami")
+            if(isInSVP) fests.push("Sri Vyasa Puja")
+            var festivals = fests.join(", ").replaceLastOccurance(", ", " & ")
+
+            var mainService6 = (v.services.filter(vv=>{
+                return vv.date=="2023-09-06"
+            }).sort((vv1, vv2)=>{
+                return vv2.serviceDuration-vv1.serviceDuration
+            })[0])||{}
+
+            var mainService7 = (v.services.filter(vv=>{
+                return vv.date=="2023-09-07"
+            }).sort((vv1, vv2)=>{
+                return vv2.serviceDuration-vv1.serviceDuration
+            })[0])||{}
+
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+*Volunteering Info - ${festivals}*
+   
+Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balarama 🙏 ${isDefault ? "" : `We thank you for registering for volunteer services for ${festivals} festival${fests.length>1?"s":""}`}.
+
+*☝🏻 Before you go through this message, please save this number in your phone. If you don't, you may not be able to click and open important links given in this message!*
+
+*General Guidelines:*
+
+1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. *Please contact SPOC(s) of your service(s) and discuss the details of service like timings, dress code etc. The contact numbers of SPOC(s) are mentioned below.
+
+${isInOnlySKJ?`🪪 *Volunteer Badge (ID card)* will be issued on *Sunday, 3rd September 2023* in the temple at the Volunteer Care Cell. This badge is necessary and valid only for Janmashtami festival on 6th and 7th Sep. Exact time and place will be communicated to you shortly.
+
+🚗 Vehicle parking is not allowed inside temple. Arrangement for parking is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into parking area is allowed only against ID card
+
+🎫 Breakfast, lunch and dinner prasadam will be provided to you against prasadam coupons by SPOC. The details of the SPOC who will issue you coupons can be found in the link given at the end of this message.
+
+🪪 *PLEASE RETURN YOUR ID CARD TO VOLUNTEER CARE CELL WHEN YOUR SERVICES ARE COMPLETED AND COLLECT TAKE-HOME PRASADAM*
+
+`:""}😇 Please report to your services on time. Be responsible for your services.
+
+*Service Details:*
+
+Your Name: ${v.name}
+Phone: ${v.phone}
+
+${v.services.length>1?`You have been assigned the following *${v.services.length}* services:`:`You have been assigned the following service:`}
+
+${v.services.map(s=>{
+    return `
+🗓️ Date: *${moment(s.date, "YYYY-MM-DD").format("dddd, Do MMMM")}*
+🛐 Service: *${s.service}*
+🕗 Timings: *${s.timings.toTimingCase()}*${!(s.availability=="Default" || s.availability=="NOT AVAILABLE" || s.availability=="All slots")?`
+🕗 Your slot: *${s.availability}*`:""}
+👑 Co-ordinator: *${s.coordinator}*
+🥇 SPOC: *${s.spoc}*
+📞 SPOC's Phone number: *${s.spocPhone}*${s.spoc.trim()==v.name?`
+You are the SPOC (Single-Point-of-Contact) for this service.`:``}
+    `.trim()
+    }).join("\n\n")
+    }
+    
+*YOU CAN ALSO CHECK THESE SERVICE DETAILS USING THE LINK GIVEN BELOW*:
+${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
+
+_Please re-check your service before the festival using the above link. Sometimes your service may change due to unavoidable circumstances._
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore`.trim())}`})
+    },
+
     "SPOC Info - SBJ-SKJ-SVP": (props)=>{
 
         var { services } = props.data

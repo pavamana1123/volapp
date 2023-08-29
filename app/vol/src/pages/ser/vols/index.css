@@ -8,7 +8,7 @@
 .servol_category {
     font-size: 3.2vw;
     color: #999;
-    margin-top: 2.5vw;
+    margin: 1vw 0 0 0;
 }
 
 .name-greyed {
@@ -44,6 +44,7 @@
 
 .phonecat {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     width: 100%;
 }
@@ -51,7 +52,7 @@
 .avcomment {
     color: indianred;
     font-size: 2.75vw;
-    margin-bottom: .8vw;
+    margin-top: 1.8vw;
     background: #eeeeeec4;
     padding: 1vw;
     border-radius: 1vw;
@@ -75,7 +76,22 @@
     border-top-right-radius: 0%;
 }
 
+.name-phone {
+    display: flex;
+    flex-direction: column;
+}
+
 @media only screen and (min-width: 1080px) {
+
+    .phonecat {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .nameCheck {
+        font-size: 2.5vw;
+    }
+
     .servol_category {
         font-size: 1vw;
         margin-top: .75vw;
@@ -99,6 +115,7 @@
         color: indianred;
         font-size: 1vw;
         margin-bottom: .3vw;
+        margin-top: .5vw;
         background: #eeeeeec4;
         padding: .5vw;
         border-radius: .5vw;

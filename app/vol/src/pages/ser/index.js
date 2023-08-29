@@ -44,6 +44,8 @@ function Ser(props) {
 7. Ensure that volunteers are rendering service as per the instructions of the coordinator.
 
 6. Collect Prasadam Coupons from Volunteer Care Cell on Sunday, 3rd September 2023, and issue them to volunteers on the previous day of service. Prasadam Coupons are meant to be used only on the 6th and 7th of September. Not on other days. You can find the list of volunteers to whom you must issue the coupons by clicking on "Coupons" button in SPOC link.
+
+7. SPOC should behave politely and patiently with everyone (visitors and volunteers) and should train the volunteers to also behave the same way. No one should loose temper at any point of time.
 `.trim() 
 
   var [filter, setFilter] = useState(filters[0])
@@ -152,7 +154,7 @@ function Ser(props) {
       {showCouponVols && <Modal title="Prasadam Coupons" onClose={()=>{
         setShowCouponVols(false)
       }}>
-        {filterValue=="None"?"Please select an SPOC!":`${serviceView?"Issue":"SPOC should issue"} Prasadam Coupons to following volunteers on ${moment(dates[selDate.current-1]).format("dddd, Do MMM")} and inform them to use this on the next day (${moment(dates[selDate.current]).format("dddd, Do MMM")})
+        {filterValue=="None"?"Please select an SPOC!":`${serviceView?"Issue":"SPOC should issue"} Prasadam Coupons to following volunteers:
         
 ${(()=>{
 
@@ -279,7 +281,7 @@ ${(()=>{
               </Paper>
               <div className='spocresplink' onClick={()=>{
                 setShowSPOCResp(true)
-              }}>Click here to read responsibilities of SPOC</div>
+              }}>Click here to read the responsibilities of SPOC</div>
             </div>
           }
           {dates.length?
