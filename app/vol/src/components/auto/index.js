@@ -40,10 +40,10 @@ function Auto(props) {
           list.length?list.map((l, i, ll)=>{
             return (
               <div className='auto-item'
-              key={i}
+                key={i}
                 onClick={()=>{
-                ip.current.value=l
-                setList([l])
+                  ip.current.value=l
+                  setList([l])
               }}>
                 <Drop item={l} value={l}/>
               </div>

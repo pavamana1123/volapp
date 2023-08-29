@@ -44,7 +44,7 @@ function Vol(props) {
     var { item, value } = props
     return <div className='volnameauto'
       onClick={()=>{
-      setFilter(value)
+        setFilter(value)
     }}>
       {item}
     </div>

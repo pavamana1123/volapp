@@ -3,11 +3,12 @@
     background: white;
     padding: 2vw;
     max-height: 60vh;
+    height: fit-content;
     overflow-y: scroll;
     overflow-y: hidden;
     width: 81%;
     box-shadow: -5px 5px 14px #aaaaaa80;
-    transition: opacity .1s ease-in-out;
+    transition: opacity .1s linear;
 }
 
 .auto-item {
@@ -16,7 +17,6 @@
 }
 
 .auto-hide {
-    max-height: 0;
     opacity: 0;
 }
 
