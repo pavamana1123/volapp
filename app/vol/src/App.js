@@ -50,7 +50,7 @@ function App() {
             <Route path="/ser" element={<Ser data={data} dates={dates}/>}></Route>
             <Route path="/services" element={<Ser data={data} dates={dates}/>}></Route>
             <Route path="/util/msg" element={<Msg data={data} isLoading={isLoading}/>}></Route>
-            <Route path="/util/spocbld" element={<SPOCBLD data={data} dates={dates}/>}></Route>
+            <Route path="/util/coupons" element={<SPOCBLD data={data} dates={dates}/>}></Route>
             <Route path="/util/service-list" element={<ServiceList data={data} dates={dates}/>}></Route>
             <Route path="/util/badge-list" element={<BadgeList data={data} dates={dates}/>}></Route>
             <Route path="/" element={<Home/>}></Route>

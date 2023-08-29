@@ -34,10 +34,10 @@
 
 .spocdateip {
     color: black;
-    width: 10vw;
+    width: 40vw;
     text-align: center;
     padding: 0.3vw;
-    font-size: 1vw;
+    font-size: 4vw;
     margin-top: 2vw;
     margin-left: 1vw;
 }
@@ -46,4 +46,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+@media only screen and (min-width: 1080px) {
+    .spocdateip {
+        font-size: 1vw;
+        width: 10vw;
+    }
+
+    .iph {
+        width: 80vw;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+    }
 }

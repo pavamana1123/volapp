@@ -6,6 +6,7 @@ function SPOCBLD(props) {
   var {slots, services, volunteers, events} = data
 
   var [date, setDate] = useState('')
+  var [dinnerCount, setDinnerCount] = useState(false)
 
   useEffect(()=>{
 
@@ -69,36 +70,59 @@ function SPOCBLD(props) {
   var spocs = Object.keys(spocMap).sort()
 
   const getCount = (spoc, section)=>{
-    return spocMap[spoc].availability.map(a=>{
+    var c = spocMap[spoc].availability.map(a=>{
       return bld[a][section]
     }).reduce((a,b)=>{
       return a+b
     })
+
+    if(c==0){
+      c=2
+    }
+
+    var x = Math.ceil(0.25 * c)
+    if(x==0){
+      x=1
+    }
+
+    return c+x
   }
 
-  console.log(spocMap)
 
   var bldCount = spocs.map(s=>{
+    var x = 0
+    
     return {
       name: s,
       phone: spocMap[s].phone,
       b: getCount(s, "b"),
       l: getCount(s, "l"),
-      d: getCount(s, "d")
+      d: dinnerCount?getCount(s, "d"): date=="2023-09-07"?0:getCount(s, "d")
     }
   })
 
-  console.log(bldCount)
+  console.log(dinnerCount)
+
 
   return (
     services?<div className='bldroot'>
-      {true && <div className='spocdate'>
-        Select date
-        <input type={"date"} className='spocdateip' defaultValue={date} onChange={(e)=>{
-          console.log(e.target.value)
-          setDate(e.target.value)
-        }}/>
-      </div>}
+
+      <div className='iph'>
+        <div className='spocdate'>
+          Select date
+          <input type={"date"} className='spocdateip' defaultValue={date} onChange={(e)=>{
+            setDate(e.target.value)
+          }}/>
+        </div>
+
+        <div>
+          <input type='checkbox' onChange={(e)=>{
+            setDinnerCount(e.target.checked)
+          }}/>
+          Include 7th night dinner count
+        </div>
+      </div>
+
       <div className='spocbld'>
         <div className='countrow'>
           <div className='spochead spocell'>{"#"}</div>
