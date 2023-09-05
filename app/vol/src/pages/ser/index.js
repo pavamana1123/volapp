@@ -154,68 +154,68 @@ function Ser(props) {
       {showCouponVols && <Modal title="Prasadam Coupons" onClose={()=>{
         setShowCouponVols(false)
       }}>
-        {filterValue=="None"?"Please select an SPOC!":`${serviceView?"Issue":"SPOC should issue"} Prasadam Coupons to following volunteers:
+        {filterValue=="None"?"Please select an SPOC!":`${serviceView?"Issue":"SPOC should issue"} Prasadam Coupons to following volunteers:`}
         
-${(()=>{
+        {(()=>{
 
-  var spocVols = volunteers.filter(v=>{
-    return v.date==selDateValue.current && v.spoc==filterValue && v.service!="" && v.volunteerName!=""
-  })
+          var spocVols = volunteers.filter(v=>{
+            return v.date==selDateValue.current && v.spoc==filterValue && v.service!="" && v.volunteerName!=""
+          })
 
-  var mainSpoc = {}
-  spocVols.forEach(v=>{
-    mainSpoc[v.volunteerName]=""
-  })
-  var volList = Object.keys(mainSpoc).sort()
+          var mainSpoc = {}
+          spocVols.forEach(v=>{
+            mainSpoc[v.volunteerName]=""
+          })
+          var volList = Object.keys(mainSpoc).sort()
 
-  volList.forEach(v=>{
-    mainSpoc[v]=volunteers.filter(vv=>{
-      return vv.volunteerName==v && vv.date==selDateValue.current
-    }).sort((v1, v2)=>{
-      return v2.serviceDuration-v1.serviceDuration
-    })[0].spoc
-  })
+          volList.forEach(v=>{
+            mainSpoc[v]=volunteers.filter(vv=>{
+              return vv.volunteerName==v && vv.date==selDateValue.current
+            }).sort((v1, v2)=>{
+              return v2.serviceDuration-v1.serviceDuration
+            })[0].spoc
+          })
 
-  var mainV = volList.filter(v=>{
-    return mainSpoc[v]==filterValue
-  }).sort().map((v, i)=>{
-    return v
-  })
+          var mainV = volList.filter(v=>{
+            return mainSpoc[v]==filterValue
+          }).sort().map((v, i)=>{
+            return v
+          })
 
-  var b = []
-  var l = []
-  var d = []
+          var b = []
+          var l = []
+          var d = []
 
-  mainV.forEach(v=>{
-    for(let i=0; i<spocVols.length; i++){
-      if(spocVols[i].volunteerName==v){
-        var av = spocVols[i].availability
-        for(let k=0; k<slots.length; k++){
-          if(slots[k].slot==av){
-            if(slots[k].b==1){
-              if(b.indexOf(v)==-1){
-                b.push(v)
+          mainV.forEach(v=>{
+            for(let i=0; i<spocVols.length; i++){
+              if(spocVols[i].volunteerName==v){
+                var av = spocVols[i].availability
+                for(let k=0; k<slots.length; k++){
+                  if(slots[k].slot==av){
+                    if(slots[k].b==1){
+                      if(b.indexOf(v)==-1){
+                        b.push(v)
+                      }
+                    }
+                    if(slots[k].b==1){
+                      if(l.indexOf(v)==-1){
+                        l.push(v)
+                      }
+                    }
+                    if(slots[k].d==1){
+                      if(d.indexOf(v)==-1){
+                        d.push(v)
+                      }
+                    }
+                    break
+                  }
+                }
+                continue
               }
             }
-            if(slots[k].b==1){
-              if(l.indexOf(v)==-1){
-                l.push(v)
-              }
-            }
-            if(slots[k].d==1){
-              if(d.indexOf(v)==-1){
-                d.push(v)
-              }
-            }
-            break
-          }
-        }
-        continue
-      }
-    }
-  })
+          })
 
-  return `Breakfast:
+          var tw = `Breakfast:
 ${b.map((bb, i)=>{
   return `${(i+1).toString().padStart(2, '0')}. ${bb}`
 }).join('\n')}
@@ -230,7 +230,38 @@ ${d.map((bb, i)=>{
   return `${(i+1).toString().padStart(2, '0')}. ${bb}`
 }).join('\n')}`.trim()
 
-})()}`}
+          var nw = mainV.map((vv, i)=>{
+            var bld = []
+            if(b.indexOf(vv)!=-1){
+              bld.push('B')
+            }
+            if(l.indexOf(vv)!=-1){
+              bld.push('L')
+            }
+            if(d.indexOf(vv)!=-1){
+              bld.push('D')
+            }
+
+            return `${(i+1).toString().padStart(2,'0')}. ${vv} (${bld.join(', ')})`
+
+          }).join('\n')
+
+
+          return <Tab tabs={[
+            {
+              title: 'Name Wise',
+              value: 'n',
+              component: <div>{nw}</div>
+            },
+            {
+              title: 'Time Wise',
+              value: 't',
+              component: <div>{tw}</div>
+            }
+          ]}/>
+
+        })()}
+
       </Modal>}   
 
       <div className='pageMainDiv'>
