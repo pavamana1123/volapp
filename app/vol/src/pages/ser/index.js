@@ -14,7 +14,7 @@ import cookie from '../../cookie';
 function Ser(props) {
 
   var { data, dates } = props
-  var { services, volunteers, events } = data
+  var { services, volunteers, events, slots } = data
   var selDate = useRef(0)
   var selDateValue = useRef(0)
 
@@ -179,10 +179,56 @@ ${(()=>{
   var mainV = volList.filter(v=>{
     return mainSpoc[v]==filterValue
   }).sort().map((v, i)=>{
-    return `${i+1}. ${v}`
+    return v
   })
 
-  return mainV.join("\n")
+  var b = []
+  var l = []
+  var d = []
+
+  mainV.forEach(v=>{
+    for(let i=0; i<spocVols.length; i++){
+      if(spocVols[i].volunteerName==v){
+        var av = spocVols[i].availability
+        for(let k=0; k<slots.length; k++){
+          if(slots[k].slot==av){
+            if(slots[k].b==1){
+              if(b.indexOf(v)==-1){
+                b.push(v)
+              }
+            }
+            if(slots[k].b==1){
+              if(l.indexOf(v)==-1){
+                l.push(v)
+              }
+            }
+            if(slots[k].d==1){
+              if(d.indexOf(v)==-1){
+                d.push(v)
+              }
+            }
+            break
+          }
+        }
+        continue
+      }
+    }
+  })
+
+  return `Breakfast:
+${b.map((bb, i)=>{
+  return `${(i+1).toString().padStart(2, '0')}. ${bb}`
+}).join('\n')}
+
+Lunch:
+${l.map((bb, i)=>{
+  return `${(i+1).toString().padStart(2, '0')}. ${bb}`
+}).join('\n')}
+
+Dinner:
+${d.map((bb, i)=>{
+  return `${(i+1).toString().padStart(2, '0')}. ${bb}`
+}).join('\n')}`.trim()
 
 })()}`}
       </Modal>}   
