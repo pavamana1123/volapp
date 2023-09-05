@@ -12,6 +12,7 @@ import moment from 'moment';
 import ServiceList from './pages/util/service-list';
 import AdminInfo from './pages/admin-info';
 import BadgeList from './pages/util/badge-list';
+import SPOCBLDLabel from './pages/util/coupon-label';
 
 function App() {
 
@@ -53,10 +54,11 @@ function App() {
             <Route path="/util/coupons" element={<SPOCBLD data={data} dates={dates}/>}></Route>
             <Route path="/util/service-list" element={<ServiceList data={data} dates={dates}/>}></Route>
             <Route path="/util/badge-list" element={<BadgeList data={data} dates={dates}/>}></Route>
+            <Route path="/util/coupon-label" element={<SPOCBLDLabel data={data} dates={dates}/>}></Route>
             <Route path="/" element={<Home/>}></Route>
           </Routes>
       </Router>
-      {(window.location.pathname!="/util/service-list" && window.location.pathname!="/util/badge-list") && <div id="update-epoch">
+      {(window.location.pathname!="/util/service-list" && window.location.pathname!="/util/badge-list" && window.location.pathname!="/util/coupon-label") && <div id="update-epoch">
         {`Data last updated at ${moment(timestamp).format("HH:mm A")}`}
       </div>}
     </div>

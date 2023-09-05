@@ -124,6 +124,12 @@ body.badge-list-root {
   justify-content: center;
 }
 
+
+body.cotable {
+  background-color: white;
+}
+
+
 #update-epoch {
   position: absolute;
   bottom: 0;

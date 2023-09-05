@@ -328,7 +328,7 @@ ${(()=>{
                                     return a.startsWith(d) && attendance[a]
                                   }).map((a)=>{
                                     var aparts = a.split(":")
-                                    return `${aparts[0]}\t${aparts[2]}`
+                                    return `${aparts[0]}\t${aparts[2]}\t${aparts[1]}`
                                   }).join("\n")
 
                                   var link = `https://wa.me/918123942324?text=${encodeURIComponent(msg)}`

@@ -1,13 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import './index.css';
-function SPOCBLD(props) {
+import moment from 'moment';
+function SPOCBLDLabel(props) {
 
   var { data } = props
   var {slots, services, volunteers, events} = data
 
   var [date, setDate] = useState('')
   var [dinnerCount, setDinnerCount] = useState(false)
-  var [extraCoupons, setExtraCoupons] = useState(true)
+
+  useEffect(()=>{
+    const urlParams = new URLSearchParams(window.location.search);
+    setDate(urlParams.get('date'))
+  })
 
   useEffect(()=>{
 
@@ -81,8 +86,8 @@ function SPOCBLD(props) {
       c=2
     }
 
-    var x = Math.ceil((extraCoupons?0.25:0) * c)
-    if(x==0 && extraCoupons){
+    var x = Math.ceil(0.25 * c)
+    if(x==0){
       x=1
     }
 
@@ -104,48 +109,27 @@ function SPOCBLD(props) {
 
 
   return (
-    services?<div className='bldroot'>
+    services?<div className='colabel-bldroot'>
 
-      <div className='iph'>
-        <div className='spocdate'>
-          Select date
-          <input type={"date"} className='spocdateip' defaultValue={date} onChange={(e)=>{
-            setDate(e.target.value)
-          }}/>
-        </div>
-
-        <div>
-          <input type='checkbox' onChange={(e)=>{
-            setDinnerCount(e.target.checked)
-          }}/>
-          Include 7th night dinner count
-        </div>
-
-        <div>
-          <input type='checkbox' onChange={(e)=>{
-            setExtraCoupons(!e.target.checked)
-          }}/>
-          Exclude 25% extra count
-        </div>
-
-      </div>
-
-      <div className='spocbld'>
-        <div className='countrow'>
-          <div className='spochead spocell'>{"#"}</div>
-          <div className='spochead spocell spocname'>{`SPOC Name (${bldCount.length})`}</div>
-          <div className='spochead spocell spocb'>{`Breakfast (${bldCount.map(p=>{return p.b}).reduce((a,b)=>{return a+b}, 0)})`}</div>
-          <div className='spochead spocell spocl'>{`Lunch (${bldCount.map(p=>{return p.l}).reduce((a,b)=>{return a+b}, 0)})`}</div>
-          <div className='spochead spocell spocd'>{`Dinner (${bldCount.map(p=>{return p.d}).reduce((a,b)=>{return a+b}, 0)})`}</div>
-        </div>
+      <div className='colabel-Label'>
         {
           bldCount.map((s,i)=>{
-            return <div className='countrow'>
-              <div className='spocell'>{i+1}</div>
-              <div className='spocell spocname'><a href={`tel:+91${s.phone}`}>{s.name}</a></div>
-              <div className='spocell spocb'>{s.b}</div>
-              <div className='spocell spocl'>{s.l}</div>
-              <div className='spocell spocd'>{s.d}</div>
+            return <div className='colabel-countrow'>
+              <table className='colabel-cotable'>
+                <tbody>
+                  <tr>
+                    <td className='colabel-cocell' colSpan={3}>{s.name}</td>
+                  </tr>
+                  <tr>
+                    <td className='colabel-cocell' colSpan={3}>{moment(date).format('ddd, Do MMM')}</td>
+                  </tr>
+                  <tr>
+                    <td className='colabel-cocell'>{`B - ${s.b}`}</td>
+                    <td className='colabel-cocell'>{`L - ${s.l}`}</td>
+                    <td className='colabel-cocell'>{`D - ${s.d}`}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           })
         }
@@ -154,4 +138,4 @@ function SPOCBLD(props) {
   );
 }
 
-export default SPOCBLD;
+export default SPOCBLDLabel;

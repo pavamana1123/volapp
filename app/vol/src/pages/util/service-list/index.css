@@ -10,7 +10,7 @@
 
 .slcell {
     border: .01vw solid black;
-    padding: .15vw;
+    padding: .1vw;
     text-align: left;
 }
 
@@ -56,6 +56,7 @@
 
 .slhead-4 {
     width: 11vw;
+    font-size: .9vw;
 }
 
 .slhead-5 {

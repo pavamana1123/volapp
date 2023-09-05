@@ -1377,13 +1377,17 @@ Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balarama 🙏 $
 
 1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. *Please contact SPOC(s) of your service(s) and discuss the details of service like timings, dress code etc. The contact numbers of SPOC(s) are mentioned below.
 
-${isInOnlySKJ?`🪪 *Volunteer Badge (ID card)* will be issued on *Sunday, 3rd September 2023* in the temple at the Volunteer Care Cell. This badge is necessary and valid only for Janmashtami festival on 6th and 7th Sep. Exact time and place will be communicated to you shortly.
+${isInOnlySKJ?`🪪 *Volunteer Badge (ID card)* will be issued on Sunday, 5th September 2023 near Sridham Hall from 2 PM to 8 PM. This badge is necessary and valid only for Janmashtami festival on 6th and 7th Sep.
 
 🚗 Vehicle parking is not allowed inside temple. Arrangement for parking is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into parking area is allowed only against ID card
+
+➡️ Volunteer entry is through temple main gate (Gate 1).
 
 🎫 Breakfast, lunch and dinner prasadam will be provided to you against prasadam coupons by SPOC. The details of the SPOC who will issue you coupons can be found in the link given at the end of this message.
 
 🪪 *PLEASE RETURN YOUR ID CARD TO VOLUNTEER CARE CELL WHEN YOUR SERVICES ARE COMPLETED AND COLLECT TAKE-HOME PRASADAM*
+
+🏃 Inform SPOC before you leave (particularly if you are leaving the service in middle due an emergency)
 
 `:""}😇 Please report to your services on time. Be responsible for your services.
 
@@ -1594,6 +1598,123 @@ Pankajanghri Dasa
 ISKCON Mysore
 `.trim())}`})
     },
+
+    "Volunteer Badge Info - SKJ": (props)=>{
+    var { volunteers } = props.data
+    
+    const dates = [
+        "2023-09-06",
+        "2023-09-07"
+    ]
+    
+    var umap = {}
+    var voldet = {}
+
+    var volunteers = volunteers.filter(v=>{
+        if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.idCardCollected && !v.idReminderSent){
+            umap[v.volunteerName]=v.volunteerPhone
+            return true
+        }
+        return false
+    })
+    
+    Object.keys(umap).map(name=>{
+        for(var i=0; i<volunteers.length; i++){
+        if(volunteers[i].volunteerName==name){
+            if(!voldet[name]){
+            voldet[name]={
+                name,
+                phone: volunteers[i].volunteerPhone,
+                services:[]
+            }
+            }
+            voldet[name].services.push({
+            date: volunteers[i].date,
+            service: volunteers[i].service,
+            timings: volunteers[i].timings,
+            coordinator: volunteers[i].coordinator,
+            spoc: volunteers[i].spoc,
+            spocPhone: volunteers[i].spocPhone
+            })
+        }
+        }
+    })
+
+    return Object.keys(voldet).sort().map(n=>{
+        var v = voldet[n]
+
+        return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`🪪 *Volunteer Badge (ID Card) for Sri Krishna Janmashtami Volunteering*
+
+Hare Krishna 🙏
+Your volunteer badge will be issued *tomorrow (Sunday, 3rd September 2023)* in *Sridham Hall* from *9.30 AM to 11 AM and 5 PM to 7 PM.* Please collect the badge without fail. This badge is necessary and valid only for Janmashtami festival on 6th and 7th Sep.
+
+Note:
+1) Volunteer badge is necessary for your vehicle parking also. Vehicle parking is not allowed inside temple on 6th and 7th September. Arrangement for parking is made in _Pailvan Basavayya Community Hall_ in front of the temple. Parking can be availed against the Volunteer Badge.
+
+2) Please return your volunteer badge to volunteer care cell when your services are completed (on 6th or 7th, as applicable to you) and collect take-home prasadam.
+
+If you have any queries regarding issuing of Volunteer Badges, please reply here.
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore`)}`
+    })
+    },
+
+    "Volunteer Badge Reminder - SKJ": (props)=>{
+        var { volunteers } = props.data
+        
+        const dates = [
+            "2023-09-06",
+            "2023-09-07"
+        ]
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.idCardCollected){
+                umap[v.volunteerName]=v.volunteerPhone
+                return true
+            }
+            return false
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                date: volunteers[i].date,
+                service: volunteers[i].service,
+                timings: volunteers[i].timings,
+                coordinator: volunteers[i].coordinator,
+                spoc: volunteers[i].spoc,
+                spocPhone: volunteers[i].spocPhone
+                })
+            }
+            }
+        })
+    
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+    
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`Gentle reminder to collect your volunteer badge today.
+            
+Time: 2 PM to 8 PM.
+Venue: Volunteer Care Cell near Sridham Hall
+
+Hare Krishna.`)}`
+        })
+        },
+        
+    
 }
 
 export default templates
