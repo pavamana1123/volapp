@@ -5,6 +5,7 @@ function Tab(props) {
   var [activeTab, setActiveTab] = useState(0)
   var self=this
   const {tabs, onTabChange} = props
+
   return (
     <div className='tab'>
       <div className='tabHeader'>

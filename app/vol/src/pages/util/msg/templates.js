@@ -1402,7 +1402,7 @@ ${v.services.map(s=>{
     return `
 🗓️ Date: *${moment(s.date, "YYYY-MM-DD").format("dddd, Do MMMM")}*
 🛐 Service: *${s.service}*
-🕗 Timings: *${s.timings.toTimingCase()}*${!(s.availability=="Default" || s.availability=="NOT AVAILABLE" || s.availability=="All slots")?`
+🕗 Timings: *${s.timings.toTimingCase()}*${!(s.availability=="Default" || s.availability=="NOT AVAILABLE" || s.availability=="Whole Day")?`
 🕗 Your slot: *${s.availability}*`:""}
 👑 Co-ordinator: *${s.coordinator}*
 🥇 SPOC: *${s.spoc}*
@@ -1495,7 +1495,7 @@ ${v.services.map(s=>{
     return `
 🗓️ Date: *${moment(s.date, "YYYY-MM-DD").format("dddd, Do MMMM")}*
 🛐 Service: *${s.service}*
-🕗 Timings: *${s.timings.toTimingCase()}*${!(s.availability=="Default" || s.availability=="NOT AVAILABLE" || s.availability=="All slots")?`
+🕗 Timings: *${s.timings.toTimingCase()}*${!(s.availability=="Default" || s.availability=="NOT AVAILABLE" || s.availability=="Whole Day")?`
 🕗 Your slot: *${s.availability}*`:""}
 👑 Co-ordinator: *${s.coordinator}*
 🥇 SPOC: *${s.spoc}*
