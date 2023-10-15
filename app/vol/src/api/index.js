@@ -10,11 +10,13 @@ class API {
         return this
     }
 
-    async call(){
+    async call(endpoint){
+        endpoint ||= "/"
         const res = await fetch('/api', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                endpoint
             },
         })
         return res.json().then((res)=>{
