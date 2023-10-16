@@ -14,7 +14,7 @@ function Vol(props) {
   var [preset, setPreset] = useState('')
   var [volunteerNames, setVolunteerNames] = useState('')
   var { data, dates, showList } = props
-  var { volunteers } = data
+  var { volunteers, services } = data
 
   useEffect(()=>{
     const urlParams = new URLSearchParams(window.location.search);
@@ -79,7 +79,7 @@ function Vol(props) {
                     })[0]
 
                     var svs = svs1.map((s, i, ss)=>{
-                      return <Serv details={s} i={i} sl={ss.length} mainService={mainService}/>
+                      return <Serv details={s} services={services} i={i} sl={ss.length} mainService={mainService}/>
                     })
 
                     return {
