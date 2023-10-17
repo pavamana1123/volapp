@@ -34,7 +34,7 @@ class Cacher {
         this.client.scripts.run({
             resource: {
                 function: "getData",
-                parameters: "1A_5H3BqWhiL8Q8MJQT2CoCEWIf1n1VrMwHoOse8M8Z8"
+                parameters: "1Wa7fGBn6yxD1w7JIavIrIXNL9M5ZWbnxko3momuLQDs"
             },
             scriptId: this.scriptId,
         }, function(error, response) {

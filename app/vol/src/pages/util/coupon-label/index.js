@@ -70,7 +70,7 @@ function SPOCBLDLabel(props) {
     spocMap[ms.spoc] = spocMap[ms.spoc] || {}
     spocMap[ms.spoc].phone = ms.phone
     spocMap[ms.spoc].availability = spocMap[ms.spoc].availability || []
-    spocMap[ms.spoc].availability.push((ms.availability=="NOT AVAILABLE" || ms.availability=="Default")?"All slots":ms.availability)
+    spocMap[ms.spoc].availability.push((ms.availability=="NOT AVAILABLE" || ms.availability=="Default")?"Whole Day":ms.availability)
   })
 
   var spocs = Object.keys(spocMap).sort()

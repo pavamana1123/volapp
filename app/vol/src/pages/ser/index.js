@@ -356,9 +356,9 @@ ${d.map((bb, i)=>{
               <Paper className="spoc-title">
                 <div>SPOC - {filterValue}</div>
               </Paper>
-              <div className='spocresplink' onClick={()=>{
+              {null && <div className='spocresplink' onClick={()=>{
                 setShowSPOCResp(true)
-              }}>Click here to read the responsibilities of SPOC</div>
+              }}>Click here to read the responsibilities of SPOC</div>}
             </div>
           }
           {dates.length?

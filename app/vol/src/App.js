@@ -26,11 +26,9 @@ function App() {
     .then((res)=>{
       setData(res.data)
       setTimestamp(res.timestamp)
-      var d = {}
-      res.data.services.forEach(s => {
-        d[s.date]=null
-      });
-      setDates(Object.keys(d).map(d=>{ return d }).filter(d=>{ return d!="" }).sort())
+      setDates(res.data.events.map(e=>{
+        return e.date
+      }).sort())
       setIsLoading(false)
     })
     .catch(()=>{})
