@@ -1,6 +1,7 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
 
 :root {
+
   --bar: #1976d2;
   --bg: #e7ebf0;
   --secondaryBg: #1f2c34;
@@ -9,7 +10,7 @@
 }
 
 body {
-  background-color: var(--bg);  
+  background-color: var(--bg);
   color: white;
   font-size: 4vw;
 }
@@ -35,7 +36,7 @@ input:focus {
 }
 
 i {
-  color:#00a356;
+  color: #00a356;
   font-size: 4vw;
   cursor: pointer;
   user-select: none;
@@ -45,8 +46,8 @@ i {
 .App {
   display: grid;
   grid-template-areas:
-  'header'
-  'body'
+    'header'
+    'body'
 }
 
 .glass {
@@ -76,7 +77,8 @@ i {
 }
 
 span.ripple {
-  position: absolute; /* The absolute position we mentioned earlier */
+  position: absolute;
+  /* The absolute position we mentioned earlier */
   border-radius: 50%;
   transform: scale(0);
   animation: ripple 600ms linear;
@@ -84,10 +86,14 @@ span.ripple {
 }
 
 .unsel {
-  -webkit-user-select: none; /* Safari */        
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */
 }
 
 @keyframes ripple {
@@ -155,5 +161,3 @@ body.cotable {
   }
 
 }
-
-
