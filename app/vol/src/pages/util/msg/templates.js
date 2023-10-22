@@ -2018,7 +2018,69 @@ _Please re-check your service before the festival using the above link. Sometime
 Regards,
 Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
-        },        
+        },       
+        
+        
+    "Volunteer Badge Info - ISKCON Dasara": (props)=>{
+        var { volunteers } = props.data
+        
+        const dates = [
+            "2023-10-24"
+        ]
+        
+        var umap = {}
+        var voldet = {}
+
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.idCardCollected && !v.idReminderSent){
+                umap[v.volunteerName]=v.volunteerPhone
+                return true
+            }
+            return false
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                date: volunteers[i].date,
+                service: volunteers[i].service,
+                timings: volunteers[i].timings,
+                coordinator: volunteers[i].coordinator,
+                spoc: volunteers[i].spoc,
+                spocPhone: volunteers[i].spocPhone
+                })
+            }
+            }
+        })
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+
+        return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`🪪 *Volunteer Badge (ID Card) for ISKCON Dasara*
+
+Hare Krishna 🙏
+Your volunteer badge will be issued *this Sunday, (22nd October 2023)* in *Sridham Hall* from *9.30 AM to 11 AM and 5 PM to 7 PM*. Please collect the badge without fail.
+
+Note:
+1) Volunteer badge is necessary for your availing vehicle parking and dinner prasadam. Parking space is made available in _Pailvan Basavayya Community Hall_ in front of the temple.
+
+2) Dinner prasadam for volunteers will be served in Sridham Hall. Return the volunteer badge at dinner prasadam counter after your service.
+
+If you have any queries regarding issuing of Volunteer Badges, please reply here.
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore`)}`
+        })
+        },
     
 }
 
