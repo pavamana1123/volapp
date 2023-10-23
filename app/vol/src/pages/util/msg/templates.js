@@ -1903,16 +1903,17 @@ ISKCON Mysore
                         name,
                         phone: volunteers[i].volunteerPhone,
                         availability: volunteers[i].availability,
+                        idCardCollected: volunteers[i].idCardCollected,
                         services:[]
                     }
                     }
                     voldet[name].services.push({
-                    date: volunteers[i].date,
-                    service: volunteers[i].service,
-                    timings: volunteers[i].timings,
-                    coordinator: volunteers[i].coordinator,
-                    spoc: volunteers[i].spoc,
-                    spocPhone: volunteers[i].spocPhone
+                        date: volunteers[i].date,
+                        service: volunteers[i].service,
+                        timings: volunteers[i].timings,
+                        coordinator: volunteers[i].coordinator,
+                        spoc: volunteers[i].spoc,
+                        spocPhone: volunteers[i].spocPhone
                     })
                 }
                 }
@@ -1958,9 +1959,9 @@ ${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
 1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. *Please call your SPOC and discuss the details of service*, dress code etc. The contact numbers of SPOC(s) are mentioned below.
 
 😇 Please report to your services on time. Be responsible for your services.
-
-🪪 *Volunteer Badges will be issued on Sunday, 22nd October 2023 near Sridham Hall. Please collect the badges without fail*
-
+${!v.idCardCollected?`
+🪪 *Volunteer Badges will be issued on Tuesday, 24th October 2023. Please collect the badges without fail*
+`:``}
 🚗 Vehicle parking is not allowed inside temple on 24th. Arrangement for parking is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into parking area is allowed only against ID card
 
 _Please re-check your service before the festival using the above link. Sometimes your service may change due to unavoidable circumstances._
