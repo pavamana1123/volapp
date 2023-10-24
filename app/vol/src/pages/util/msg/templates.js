@@ -2081,6 +2081,71 @@ Pankajanghri Dasa
 ISKCON Mysore`)}`
         })
         },
+
+    "Volunteer Badge Reminder - ISKCON Dasara": (props)=>{
+            var { volunteers } = props.data
+            
+            const dates = [
+                "2023-10-24"
+            ]
+            
+            var umap = {}
+            var voldet = {}
+        
+            var volunteers = volunteers.filter(v=>{
+                if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.idCardCollected){
+                    umap[v.volunteerName]=v.volunteerPhone
+                    return true
+                }
+                return false
+            })
+            
+            Object.keys(umap).map(name=>{
+                for(var i=0; i<volunteers.length; i++){
+                if(volunteers[i].volunteerName==name){
+                    if(!voldet[name]){
+                    voldet[name]={
+                        name,
+                        phone: volunteers[i].volunteerPhone,
+                        services:[]
+                    }
+                    }
+                    voldet[name].services.push({
+                    date: volunteers[i].date,
+                    service: volunteers[i].service,
+                    timings: volunteers[i].timings,
+                    coordinator: volunteers[i].coordinator,
+                    spoc: volunteers[i].spoc,
+                    spocPhone: volunteers[i].spocPhone
+                    })
+                }
+                }
+            })
+
+
+            let phoneMap = {}
+
+        
+            return Object.keys(voldet).sort().map(n=>{
+                var v = voldet[n]
+
+                if(!!phoneMap[v.phone]){
+                    return ""
+                }
+
+                phoneMap[v.phone]=1
+
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+Gentle reminder to collect your volunteer badge today.
+            
+Time: *9.30 AM to 11 AM and 5 PM to 7 PM*
+Venue: Volunteer Care Cell *inside Sridham Hall*
+
+Hare Krishna.`.trim())}`
+            }).filter(x=>{
+                return x!=""
+            })
+            },    
     
 }
 
