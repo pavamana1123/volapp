@@ -9,7 +9,7 @@ console.log = function (...args) {
 var config = require("./config.js")
 var Cacher = require("./api.js")
 
-var cacher = new Cacher(config.scriptId)
+var cacher = new Cacher(config)
 cacher.start()
 
 const express = require('express')
