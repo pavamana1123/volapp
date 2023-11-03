@@ -29,7 +29,7 @@ const BadgeList = (props)=>{
     }, [data])
 
     return (
-        vols.shard(90).map((vv)=>{
+        vols.shard(120).map((vv)=>{
           return (
             <div className="badge-list-root">
                 {

@@ -2010,7 +2010,7 @@ ${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
 
 😇 Please report to your services on time. Be responsible for your services.
 ${!v.idCardCollected?`
-🪪 *Volunteer Badges will be issued on Tuesday, 24th October 2023. Please collect the badges without fail*
+🪪 *Volunteer Badges will be issued today from 10 AM to 1 PM and 3 PM to 7 PM at Volunteer Care Cell inside Sridham Hall*. Please collect without fail.
 `:``}
 🚗 Vehicle parking is not allowed inside temple on 24th. Arrangement for parking is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into parking area is allowed only against ID card
 
@@ -2139,7 +2139,7 @@ ISKCON Mysore`)}`
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
 Gentle reminder to collect your volunteer badge today.
             
-Time: *9.30 AM to 11 AM and 5 PM to 7 PM*
+Time: *10 AM to 1 PM and 3 PM to 7 PM*
 Venue: Volunteer Care Cell *inside Sridham Hall*
 
 Hare Krishna.`.trim())}`
