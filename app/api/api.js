@@ -1,8 +1,9 @@
 const os = require('os')
 
 class Cacher {
-    constructor(scriptId){
-        this.scriptId = scriptId
+    constructor(config){
+        this.scriptId = config.scriptId
+        this.sheetID = config.sheetID
         const fs = require('fs')
         const {google} = require('googleapis')
         var credentials = JSON.parse(fs.readFileSync('credentials.json'))
@@ -34,7 +35,7 @@ class Cacher {
         this.client.scripts.run({
             resource: {
                 function: "getData",
-                parameters: "1Wa7fGBn6yxD1w7JIavIrIXNL9M5ZWbnxko3momuLQDs"
+                parameters: this.sheetID
             },
             scriptId: this.scriptId,
         }, function(error, response) {
