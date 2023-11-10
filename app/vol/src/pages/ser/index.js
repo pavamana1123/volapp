@@ -112,9 +112,16 @@ function Ser(props) {
   }, [])
 
   let eventMap = {}
-  events.forEach(e=>{
-    eventMap[e.date]=e.event
-  })
+
+  useEffect(()=>{
+
+    if(data.events){
+      events.forEach(e=>{
+        eventMap[e.date]=e.event
+      })
+    }
+  }, [data])
+
 
   const applyServiceFilters = (s,d)=>{
     return s.filter(s=>{
