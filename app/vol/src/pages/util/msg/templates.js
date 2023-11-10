@@ -2146,7 +2146,166 @@ Hare Krishna.`.trim())}`
             }).filter(x=>{
                 return x!=""
             })
-            },    
+            }, 
+            
+    "Service Info - GOV-SPD": (props)=>{
+
+        var { master, volunteers, events } = props.data
+
+        master = master.filter(m=>{
+            return m.name!=""
+        }).sort((m1, m2)=>{
+            return m1.name<m2.name?-1:1
+        })
+        
+        volunteers = volunteers.filter(v=>{
+            return v.date!="" && v.volunteerName!="" && v.volunteerPhone!= "" && v.service!=""
+        }).sort((v1, v2)=>{
+            return v1.date>v2.date?1:-1
+        })
+
+        let eventMap = {}
+        events.forEach(e=>{
+            eventMap[e.date] = e.event.trim()
+        })
+
+        var volunteerDetails = master.map(v=>{
+            v.services = volunteers.filter(vv=>{
+                return vv.volunteerName==v.name
+            })
+
+            v.festivals = v.services.map(vv=>{
+                return vv.date
+            }).unique().map(d=>{
+                return eventMap[d]
+            })
+
+            return v
+        })
+
+        return volunteerDetails.filter(v=>{
+            return !(v.default && v.services.length==0)
+        }).map(v=>{
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+*Volunteering Info - ${v.festivals.join(" & ")}*
+    
+${v.services.length>0?`Hare Krishna 🙏 Please accept the blessings of Sri Sri Krishna Balarama 🙏 ${v.default ? "" : `We thank you for registering for volunteer services for ${v.festivals.join(" & ")} festival${v.festivals.length>1?"s":""}`}.
+
+Service Details:
+Your Name: ${v.name}
+Phone: ${v.phone}
+
+${v.services.length>1?`You have been assigned the following *${v.services.length}* services:`:`You have been assigned the following service:`}
+
+${v.services.map(s=>{
+    return `
+🗓️ Date: *${moment(s.date, "YYYY-MM-DD").format("dddd, Do MMMM")}* (${eventMap[s.date]})
+🛐 Service: *${s.service}*
+🕗 Timings: *${s.timings.toTimingCase()}*
+👑 Co-ordinator: *${s.coordinator}*
+🥇 SPOC: *${s.spoc}*
+📞 SPOC's Phone number: *${s.spocPhone}*${s.spoc.trim()==v.name?`
+You are the SPOC (Single-Point-of-Contact) for this service.`:``}
+    `.trim()
+    }).join("\n\n")
+    }
+
+*Service Details Link:*
+You can also check these service details using the link given below:
+${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
+
+*General Guidelines:*
+
+1️⃣ Every service has a Single-Point-of-Contact (SPOC) volunteer. Please contact the SPOC(s) of your service(s) to discuss details such as timings and dress code. Their contact numbers are provided above.
+
+🪪 Your volunteer badge will be issued *this Sunday, (12th November 2023)* in *Sridham Hall* from *9.30 AM to 11 AM and 5 PM to 7 PM*. Please collect the badge without fail.
+
+🪪 Please return your ID card at Temple Book-Counter when your services are completed.
+
+😇 Please report to your services on time. Be responsible for your services.
+
+✅ _Please re-check your service before the festival using the above link. Sometimes your service may change due to unavoidable circumstances._`:`We regret to inform you that we are currently unable to assign you a service for Govardhan Puja. The service slots are full due to the low service requirement for this occasion. However, we invite you to join us in the festival celebrations on Tuesday, 14th November, at 5:30 PM.
+In the event of an unforeseen service requirement, we may assign you service and in that case, you will receive confirmation message.`}
+
+Regards,
+${v.services.length>0?`Pankajanghri Dasa`:`Volunteer Care Cell`}
+ISKCON Mysore`.trim())}`
+        })
+    },   
+    
+    "SPOC Info - GOV": (props)=>{
+
+        var { services } = props.data
+        const dates = [
+            "2023-11-14",
+        ]
+
+        services = services.filter(s=>{
+            return dates.indexOf(s.date)!=-1
+        })  
+
+        var spocMap = {}
+
+        services.map(s=>{
+            if(s.coordinator==s.spoc || s.spoc=="" || s.spocPhone==""){
+                return
+            }
+
+            spocMap[s.spoc]=spocMap[s.spoc]||{
+                spoc: s.spoc,
+                spocPhone: s.spocPhone,
+                services : []
+            }
+            spocMap[s.spoc].services.indexOf(s.service)==-1 && spocMap[s.spoc].services.push({
+                    service: s.serviceName,
+                    date: s.date,
+                    coordinator: s.coordinator,
+                    coordinatorPhone: s.coordinatorPhone,
+                    timings: s.timings,
+                    supply: s.supply,
+                })
+        })
+
+        var spocs = Object.keys(spocMap).sort()
+
+        return spocs.map(sp=>{
+        var s = spocMap[sp]
+
+        return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
+*SPOC for Sri Govardhan Puja 2023 services*
+*Tuesday, 14th November 2023*
+
+Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for below mentioned ${s.services.length>1?s.services.length:""} service${s.services.length>1?"s":""}. Kindly go through the details of the service${s.services.length>1?"s":""} carefully:
+
+Your Name: ${s.spoc}
+Phone: ${s.spocPhone}
+
+${s.services.map(sv=>{
+return `
+🗓️ Date: *${moment(sv.date, "YYYY-MM-DD").format("dddd, Do MMMM")}*
+🛐 Service: *${sv.service}*
+🕗 Timings: *${sv.timings.toTimingCase()}*
+👑 Coordinator: *${sv.coordinator}*
+📞 Coordinator's Phone: *${sv.coordinatorPhone}*
+#️⃣ No. of volunteers: *${sv.supply}*
+`.trim()
+}).join(`
+
+`)}
+
+Please use this link to check the details of the service${s.services.length>1?"s":""} and volunteers under you:
+*https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}*
+
+Your responsibilities:
+• Please discuss with the service coordinator${s.services.length>1?"s":""} and understand all major and minor details of the service like dress code, timings etc.
+• Please call volunteers under you and communicate all the details of the service to them. Phone numbers of all volunteers is availbale in the link shared above.
+• Make sure that volunteers report at proper time and in appropriate dress code for their service.
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore
+`.trim())}`})
+    }, 
     
 }
 

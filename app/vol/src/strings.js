@@ -81,7 +81,7 @@ String.prototype.toCamelCase = function() {
     return splitArrays;
   }
 
-  Array.prototype.shard = function(n) {
+  Array.prototype.shard = function(n, pad) {
     if (n <= 0) {
       throw new Error("Shard size must be a positive integer.");
     }
@@ -92,6 +92,18 @@ String.prototype.toCamelCase = function() {
     while (currentIndex < this.length) {
       shardArrays.push(this.slice(currentIndex, currentIndex + n));
       currentIndex += n;
+    }
+
+
+    if(!shardArrays.length){
+      return shardArrays
+    }
+   
+    var lastLength = shardArrays[shardArrays.length-1].length
+    if(shardArrays.length && pad && lastLength<n){
+      for(let i=0; i<n-lastLength; i++){
+        shardArrays[shardArrays.length-1].push(pad)
+      }
     }
   
     return shardArrays;
@@ -115,4 +127,37 @@ String.prototype.toCamelCase = function() {
       return `${g[0][0].toUpperCase()}-${gg!=ggg.length-1?getPrev(g[g.length-1][0].toUpperCase()):g[g.length-1][0].toUpperCase()}`
     })
   }
+
+  Array.prototype.interleave = function(insert, interval) {
+    if (interval <= 0) {
+      return this.slice(); 
+    }
+  
+    const res = [];
+    for (let i = 0; i < this.length; i++) {
+      if (i > 0) {
+        if (i % interval === 0) {
+          res.push(insert);
+        }
+      }
+      res.push(this[i]);
+    }
+  
+    return res;
+  }
+
+  Array.prototype.unique = function() {
+    let x = {}
+    this.forEach(e=>{
+      x[e]=0
+    })
+
+    return Object.keys(x)
+  }
+
+  Array.prototype.sonique = function() {
+    return this.unique().sort()
+  }
+
+
 

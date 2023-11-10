@@ -109,8 +109,12 @@ function Ser(props) {
       setFilterValue(spoc)
       setServiceView(true)
     }
-  })
+  }, [])
 
+  let eventMap = {}
+  events.forEach(e=>{
+    eventMap[e.date]=e.event
+  })
 
   const applyServiceFilters = (s,d)=>{
     return s.filter(s=>{
@@ -385,6 +389,7 @@ ${d.map((bb, i)=>{
                     value: d,
                     component: dateServices.length?
                       <div className='serServ'>
+
                         {dateServices.length && (!serviceView && (serviceView && filter!="SPOC")) && <div className='ser-count'>{`${dateServices.length} service${dateServices.length>1?"s":""}`}</div>}
 
                         {dateServices.length && (serviceView || filter=="SPOC") && 

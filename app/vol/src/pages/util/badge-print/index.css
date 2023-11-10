@@ -1,0 +1,47 @@
+@page {
+    size: 19in 13in;
+    margin: 0;
+}
+
+.bp-page {
+    display: flex;
+    flex-direction: column;
+    width: 19in;
+    justify-content: center;
+}
+
+.bp-single {
+    display: flex;
+    flex-wrap: wrap;
+    width: 19in;
+}
+
+.bp-entry {
+    position: relative;
+    font-size: .2in;
+    font-weight: bold;
+    text-transform: uppercase;
+    left: 1in;
+    height: .6in;
+    padding: 0;
+    margin: 0;
+    top: -2.89in;
+    width: 2.8in;
+}
+
+.bp-name {
+    height: .64in;
+}
+
+.bp-seva {
+    height: .63in;
+}
+
+.bp-badge {
+    height: 5in;
+}
+
+.bp-image, .bp-badge {
+    width: 3.75in;
+    height: 5in;
+}
