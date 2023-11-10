@@ -8,25 +8,26 @@
     flex-direction: column;
     width: 19in;
     justify-content: center;
+    align-items: center;
 }
 
-.bp-single {
+.bp-grid {
     display: flex;
     flex-wrap: wrap;
-    width: 19in;
+    margin: 0 0 0 0.125in
 }
 
 .bp-entry {
     position: relative;
-    font-size: .2in;
+    font-size: .24in;
     font-weight: bold;
     text-transform: uppercase;
     left: 1in;
     height: .6in;
     padding: 0;
     margin: 0;
-    top: -2.89in;
-    width: 2.8in;
+    top: -2.88in;
+    width: 2.5in;
 }
 
 .bp-name {
@@ -34,7 +35,7 @@
 }
 
 .bp-seva {
-    height: .63in;
+    height: .64in;
 }
 
 .bp-badge {
