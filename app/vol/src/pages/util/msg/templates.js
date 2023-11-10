@@ -2082,6 +2082,54 @@ Pankajanghri Dasa
 ISKCON Mysore`)}`
         })
         },
+
+        "Volunteer Badge Return Reminder - ISKCON Dasara": (props)=>{
+            var { volunteers } = props.data
+            
+            const dates = [
+                "2023-10-24"
+            ]
+            
+            var umap = {}
+            var voldet = {}
+        
+            var volunteers = volunteers.filter(v=>{
+                if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && v.idCardCollected && !v.idCardReturned){
+                    umap[v.volunteerName]=v.volunteerPhone
+                    return true
+                }
+                return false
+            })
+            
+            Object.keys(umap).map(name=>{
+                for(var i=0; i<volunteers.length; i++){
+                if(volunteers[i].volunteerName==name){
+                    if(!voldet[name]){
+                    voldet[name]={
+                        name,
+                        phone: volunteers[i].volunteerPhone,
+                        services:[]
+                    }
+                    }
+                    voldet[name].services.push({
+                    date: volunteers[i].date,
+                    service: volunteers[i].service,
+                    timings: volunteers[i].timings,
+                    coordinator: volunteers[i].coordinator,
+                    spoc: volunteers[i].spoc,
+                    spocPhone: volunteers[i].spocPhone
+                    })
+                }
+                }
+            })
+        
+            return Object.keys(voldet).sort().map(n=>{
+                var v = voldet[n]
+        
+                return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`Gentle reminder to *return* your ISKCON Dasara volunteer badge before Sunday, 5th November 2023 at temple book counter.
+Hare Krishna.`)}`
+            })
+            },
     
 }
 
