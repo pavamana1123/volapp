@@ -3,14 +3,30 @@ import "./index.css"
 
 const Badge = (props) =>{
     const { name, seva, spoc } = props.details
+    const { back } = props
+
     return (
-        <div className="bp-badge">
-            <img className="bp-image" src="../img/badge.jpeg"/>
-            <div className="bp-entry">
-                <div className="bp-feild bp-name">{name}</div>
-                <div className="bp-feild bp-seva">{seva}</div>
-                <div className="bp-feild bp-spoc">{spoc}</div>
-            </div>
+        <div className="bp-badge" style={{
+                backgroundImage: `url(${process.env.PUBLIC_URL}/img/${back?'back':'front'}.png)`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                width: '3.75in',
+                height: '5in'
+            }}>
+                {!back?<div className="bp-details">
+                    <div className="bp-detail">
+                        <div className="bp-detail-label">NAME</div>
+                        <div className="bp-detail-text">{name}</div>
+                    </div>
+                    <div className="bp-detail">
+                        <div className="bp-detail-label">SEVA</div>
+                        <div className="bp-detail-text">{seva}</div>
+                    </div>
+                    <div className="bp-detail">
+                        <div className="bp-detail-label">SPOC</div>
+                        <div className="bp-detail-text">{spoc}</div>
+                    </div>
+                </div>:null}
         </div>
     )
 }
@@ -20,15 +36,25 @@ const BadgePrint = (props)=>{
     let { data } = props
     let [ badgeList, setBadgeList ] = useState([])
 
+    let serviceNameMap = {}
+
+    const emptyBadge = {
+        name: "", seva: "", spoc: ""
+    }
+
     useEffect(()=>{
 
         if(!data || !Object.keys(data).length){
             return
         }
 
-        let { volunteers } = data
+        let { volunteers, services } = data
         volunteers = volunteers.filter(v=>{
             return !v.idCardWritten && v.volunteerName && v.volunteerPhone && v.service && v.date=="2023-11-14"
+        })
+
+        services = services.filter(s=>{
+            return s.date=="2023-11-14"
         })
     
         let volunteersMap = {}
@@ -41,39 +67,68 @@ const BadgePrint = (props)=>{
                 volunteersMap[v.volunteerName]=v
             }
         })
-    
+
+        services.forEach(s => {
+            serviceNameMap[s.serviceName]=s.mainService
+        })
+
         setBadgeList(Object.keys(volunteersMap).sort().map(v=>{
             return {
                 name: v,
-                seva: volunteersMap[v].service,
+                seva: serviceNameMap[volunteersMap[v].service],
                 spoc: volunteersMap[v].spoc
             }
-        }))
-  
+        }).concat(new Array(20).fill(emptyBadge)))
+
+
     }, [data])
 
-    const emptyBadge = {
-        name: "",
-        seva: "",
-        spoc: ""
-    }
-
-    const PageBreak = <div className="page-break"></div>
+    let badgeShard = badgeList.shard(10, emptyBadge)
 
     return (
-        <div className="bp-page">
+        <div className="bp-root">
             {
-                badgeList.shard(5, emptyBadge).map(s=>{
-                    return <div className="bp-single">
-                        {
-                            s.map(b=>{
-                                return <Badge details={b} key={b.name}/>
-                            })
-                        }
-                    </div>
-                    
+                badgeShard.map((s, i)=>{
+                    return [
+                        <div className="bp-page" key={`s-${i}`}>
+                            <div className="bp-row">
+                                {
+                                    s.slice(0, s.length/2).map(b=>{
+                                        return <Badge details={b}/>
+                                    })
+                                }
+                            </div>
+                            <div className="bp-row">
+                                {
+                                    s.slice(s.length/2, s.length).map(b=>{
+                                        return <Badge details={b}/>
+                                    })
+                                }
+                            </div>
+                            <div className="page-break"></div>
+                        </div>,
+
+                        <div className="bp-page" key={`s-${i}`}>
+                            <div className="bp-row">
+                                {
+                                    s.slice(0, s.length/2).map(b=>{
+                                        return <Badge details={b} back/>
+                                    })
+                                }
+                            </div>
+                            <div className="bp-row">
+                                {
+                                    s.slice(s.length/2, s.length).map(b=>{
+                                        return <Badge details={b} back/>
+                                    })
+                                }
+                            </div>
+                            {!(i==badgeShard.length-1)?<div className="page-break"></div>:null}
+                        </div>
+                    ]
                 })
             }
+
         </div>
     )
 }

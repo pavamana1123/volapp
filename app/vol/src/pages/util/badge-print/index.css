@@ -6,42 +6,57 @@
 .bp-page {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    height: 13in;
     width: 19in;
     justify-content: center;
+    background-color: white;
 }
 
-.bp-single {
+.bp-row {
     display: flex;
-    flex-wrap: wrap;
-    width: 19in;
-}
-
-.bp-entry {
-    position: relative;
-    font-size: .2in;
-    font-weight: bold;
-    text-transform: uppercase;
-    left: 1in;
-    height: .6in;
-    padding: 0;
-    margin: 0;
-    top: -2.89in;
-    width: 2.8in;
-}
-
-.bp-name {
-    height: .64in;
-}
-
-.bp-seva {
-    height: .63in;
 }
 
 .bp-badge {
     height: 5in;
+    width: 3.75in;
 }
 
-.bp-image, .bp-badge {
-    width: 3.75in;
-    height: 5in;
+.bp-details {
+    font-size: .235in;
+    position: relative;
+    font-weight: 900;
+    text-transform: uppercase;
+    top: 2.15in;
+    height: 2.1in;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.bp-detail {
+    display: flex;
+    width: 95%;
+}
+
+.bp-detail-label {
+    width: 23%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    color: #393185;
+    font-weight: bolder;
+}
+
+.bp-detail-text {
+    width: 72%;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    border-bottom: .019in solid #393185b7;
 }

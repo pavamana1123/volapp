@@ -159,5 +159,18 @@ String.prototype.toCamelCase = function() {
     return this.unique().sort()
   }
 
+  Array.prototype.interleave = function(element, last = false) {
+    const result = []
+  
+    for (let i = 0; i < this.length; i++) {
+      result.push(this[i])
+      
+      if (i < this.length - 1 || (i === this.length - 1 && last)) {
+        result.push(element)
+      }
+    }
+  
+    return result
+  }
 
 
