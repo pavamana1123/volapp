@@ -15,7 +15,7 @@ const BadgeList = (props)=>{
       }
 
       var v = data.volunteers.filter(v=>{
-        return (v.date=="2023-10-24") && v.volunteerName!="" && v.service!=""
+        return (v.date=="2023-11-14") && v.volunteerName!="" && v.service!=""
       }).map(v=>{
         col.current[v.volunteerName]=v.idCardCollected
         return v.volunteerName
@@ -29,7 +29,7 @@ const BadgeList = (props)=>{
     }, [data])
 
     return (
-        vols.shard(120).map((vv)=>{
+        vols.shard(87).map((vv)=>{
           return (
             <div className="badge-list-root">
                 {

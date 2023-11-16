@@ -14,7 +14,7 @@ function Vol(props) {
   var [preset, setPreset] = useState('')
   var [volunteerNames, setVolunteerNames] = useState('')
   var { data, dates, showList } = props
-  var { volunteers, services } = data
+  var { volunteers, services, events } = data
 
   useEffect(()=>{
     const urlParams = new URLSearchParams(window.location.search);
@@ -67,7 +67,9 @@ function Vol(props) {
                   dates.filter(d=>{
                     return !!volunteers.filter(v=>{
                       return v.date==d && v.volunteerName==filter && v.service!=""
-                    }).length
+                    }).length && !events.filter(e=>{
+                      return e.date==d
+                    })[0].hide
                   }).map((d)=>{
 
                     var svs1 = volunteers.filter(v=>{

@@ -2159,7 +2159,7 @@ Hare Krishna.`.trim())}`
         })
         
         volunteers = volunteers.filter(v=>{
-            return v.date!="" && v.volunteerName!="" && v.volunteerPhone!= "" && v.service!=""
+            return v.date!="" && v.volunteerName!="" && v.volunteerPhone!= "" && v.service!="" && !v.infoMsgSent
         }).sort((v1, v2)=>{
             return v1.date>v2.date?1:-1
         })
@@ -2229,6 +2229,93 @@ In the event of an unforeseen service requirement, we may assign you service and
 
 Regards,
 ${v.services.length>0?`Pankajanghri Dasa`:`Volunteer Care Cell`}
+ISKCON Mysore`.trim())}`
+        })
+    },   
+
+    "Service Info - SPD": (props)=>{
+
+        var { volunteers } = props.data
+            
+        const dates = [
+            "2023-11-17",
+        ]
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
+                umap[v.volunteerName]=v.volunteerPhone
+            }
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="")
+        })
+
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    availability: volunteers[i].availability,
+                    idCardCollected: volunteers[i].idCardCollected,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                    date: volunteers[i].date,
+                    service: volunteers[i].service,
+                    timings: volunteers[i].timings,
+                    coordinator: volunteers[i].coordinator,
+                    spoc: volunteers[i].spoc,
+                    spocPhone: volunteers[i].spocPhone
+                })
+            }
+            }
+        })
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+*Volunteering Info - Srila Prabhupada Disappearance Day*
+Friday, 17th November 2023
+
+Hare Krishna. Please go through your service details:
+Your Name: ${v.name}
+Phone: ${v.phone}
+
+${v.services.length>1?`You have been assigned the following *${v.services.length}* services:`:`You have been assigned the following service:`}
+
+${v.services.map(s=>{
+    return `
+🗓️ Date: *${moment(s.date, "YYYY-MM-DD").format("dddd, Do MMMM")}*
+🛐 Service: *${s.service}*
+🕗 Timings: *${s.timings.toTimingCase()}*
+👑 Co-ordinator: *${s.coordinator}*
+🥇 SPOC: *${s.spoc}*
+📞 SPOC's Phone number: *${s.spocPhone}*${s.spoc.trim()==v.name?`
+You are the SPOC (Single-Point-of-Contact) for this service.`:``}
+    `.trim()
+    }).join("\n\n")
+    }
+
+*Service Details Link:*
+You can also check these service details using the link given below:
+${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
+
+*General Guidelines:*
+
+1️⃣ Every service has a Single-Point-of-Contact (SPOC) volunteer. Please contact the SPOC(s) of your service(s) to discuss details such as timings and dress code. Their contact numbers are provided above.
+
+🪪 No volunteer badge will be issued for this festival.
+
+😇 Please report to your services on time. Be responsible for your services.
+
+✅ _Please re-check your service before the festival using the above link. Sometimes your service may change due to unavoidable circumstances._
+
+Regards,
+Volunteer Care Cell
 ISKCON Mysore`.trim())}`
         })
     },   
@@ -2305,6 +2392,225 @@ Regards,
 Pankajanghri Dasa
 ISKCON Mysore
 `.trim())}`})
+    }, 
+
+    
+    "Service Reminder - GOV": (props)=>{
+
+        var { volunteers } = props.data
+        
+        const dates = [
+            "2023-11-14"
+        ]
+
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="" && v.service!="")){
+                umap[v.volunteerName]=v.volunteerPhone
+            }
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="" && v.service!="")
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+                if(volunteers[i].volunteerName==name){
+                    if(!voldet[name]){
+                        voldet[name]={
+                            name,
+                            phone: volunteers[i].volunteerPhone,
+                            services:[]
+                        }
+                    }
+
+                    voldet[name].services.push({
+                        date: volunteers[i].date,
+                        service: volunteers[i].service,
+                        timings: volunteers[i].timings,
+                        coordinator: volunteers[i].coordinator,
+                        spoc: volunteers[i].spoc,
+                        spocPhone: volunteers[i].spocPhone,
+                        availability: volunteers[i].availability,
+                        serviceDuration: volunteers[i].serviceDuration
+                    })
+                }
+            }
+        })
+
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+            var isDefault = !!v.services.filter(sss=>{ return (sss.availability=="Default" || sss.availability=="NOT AVAILABLE") }).length
+
+            var vDateMap = {}
+            v.services.forEach(vv => {
+                vDateMap[vv.date]=1
+            })
+
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+*Gentle Reminder - Govardhana Puja Volunteering Service*
+*Tuesday, 14th Nov 2023*
+
+Hare Krishna 🙏
+
+Given below is the details of your service, provided once again for your reference:
+
+*Service Details:*
+
+Your Name: ${v.name}
+Phone: ${v.phone}
+
+${v.services.length>1?`You have been assigned the following *${v.services.length}* services:`:`You have been assigned the following service:`}
+
+${v.services.map(s=>{
+    return `
+🗓️ Date: *${moment(s.date, "YYYY-MM-DD").format("dddd, Do MMMM")}*
+🛐 Service: *${s.service}*
+🕗 Timings: *${s.timings.toTimingCase()}*
+👑 Co-ordinator: *${s.coordinator}*
+🥇 SPOC: *${s.spoc}*
+📞 SPOC's Phone number: *${s.spocPhone}*${s.spoc.trim()==v.name?`
+You are the SPOC (Single-Point-of-Contact) for this service.`:``}
+    `.trim()
+    }).join("\n\n")
+    }
+    
+*YOU CAN ALSO CHECK THESE SERVICE DETAILS USING THE LINK GIVEN BELOW*:
+
+${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
+
+_Please re-check your service before the festival using the above link. Sometimes your service may change due to unavoidable circumstances._
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore`.trim())}`})
+    },
+
+    "Volunteer Badge Reminder - GOV": (props)=>{
+        var { volunteers } = props.data
+        
+        const dates = [
+            "2023-11-14"
+        ]
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.idCardCollected){
+                umap[v.volunteerName]=v.volunteerPhone
+                return true
+            }
+            return false
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                date: volunteers[i].date,
+                service: volunteers[i].service,
+                timings: volunteers[i].timings,
+                coordinator: volunteers[i].coordinator,
+                spoc: volunteers[i].spoc,
+                spocPhone: volunteers[i].spocPhone
+                })
+            }
+            }
+        })
+
+
+        let phoneMap = {}
+
+    
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+
+            if(!!phoneMap[v.phone]){
+                return ""
+            }
+
+            phoneMap[v.phone]=1
+
+        return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+*Volunteer Badge* - Gentle reminder to collect your volunteer badge today.
+        
+Time: *3.30 PM to 6 PM*
+Venue: Near Homa Kunda area
+
+Hare Krishna.`.trim())}`
+        }).filter(x=>{
+            return x!=""
+        })
+        }, 
+
+    "Volunteer Badge Return Reminder - GOV": (props)=>{
+    var { volunteers } = props.data
+    
+    const dates = [
+        "2023-11-14"
+    ]
+    
+    var umap = {}
+    var voldet = {}
+
+    var volunteers = volunteers.filter(v=>{
+        if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && v.idCardCollected && !v.idCardReturned){
+            umap[v.volunteerName]=v.volunteerPhone
+            return true
+        }
+        return false
+    })
+    
+    Object.keys(umap).map(name=>{
+        for(var i=0; i<volunteers.length; i++){
+        if(volunteers[i].volunteerName==name){
+            if(!voldet[name]){
+            voldet[name]={
+                name,
+                phone: volunteers[i].volunteerPhone,
+                services:[]
+            }
+            }
+            voldet[name].services.push({
+            date: volunteers[i].date,
+            service: volunteers[i].service,
+            timings: volunteers[i].timings,
+            coordinator: volunteers[i].coordinator,
+            spoc: volunteers[i].spoc,
+            spocPhone: volunteers[i].spocPhone
+            })
+        }
+        }
+    })
+
+
+    let phoneMap = {}
+
+
+    return Object.keys(voldet).sort().map(n=>{
+        var v = voldet[n]
+
+        if(!!phoneMap[v.phone]){
+            return ""
+        }
+
+        phoneMap[v.phone]=1
+
+    return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+Hare Krishna.
+Kindly return your volunteer badge of Govardhan Puja festival at Temple Book Counter on or before Sunday, 19th Nov`.trim())}`
+    }).filter(x=>{
+        return x!=""
+    })
     }, 
     
 }
