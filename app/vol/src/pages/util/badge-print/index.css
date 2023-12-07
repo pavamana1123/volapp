@@ -60,3 +60,12 @@
 
     border-bottom: .019in solid #393185b7;
 }
+
+.bp-qr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    top: 1.7in;
+}

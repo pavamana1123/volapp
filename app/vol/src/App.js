@@ -14,6 +14,7 @@ import AdminInfo from './pages/admin-info';
 import BadgeList from './pages/util/badge-list';
 import SPOCBLDLabel from './pages/util/coupon-label';
 import BadgePrint from './pages/util/badge-print';
+import Test from './pages/util/test/index.js';
 
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
             <Route path="/util/badge-list" element={<BadgeList data={data} dates={dates}/>}></Route>
             <Route path="/util/badge-print" element={<BadgePrint data={data} dates={dates}/>}></Route>
             <Route path="/util/coupon-label" element={<SPOCBLDLabel data={data} dates={dates}/>}></Route>
+            <Route path="/util/test" element={<Test data={data} dates={dates}/>}></Route>
             <Route path="/" element={<Home/>}></Route>
           </Routes>
       </Router>
