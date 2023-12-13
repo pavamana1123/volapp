@@ -25,6 +25,7 @@ const PrasadamQR = (props)=>{
                     scanDelay={300}
                     onResult={handleScan}
                     className="pqr-camcont"
+                    constraints={{ facingMode: 'environment' }}
                 />
             </div>
         </div>
