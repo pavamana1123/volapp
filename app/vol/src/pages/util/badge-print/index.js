@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
+import QRCode from 'qrcode.react';
 import "./index.css"
 
 const Badge = (props) =>{
@@ -13,20 +14,28 @@ const Badge = (props) =>{
                 width: '3.75in',
                 height: '5in'
             }}>
-                {!back?<div className="bp-details">
-                    <div className="bp-detail">
-                        <div className="bp-detail-label">NAME</div>
-                        <div className="bp-detail-text">{name}</div>
+                {!back?
+                    <div className="bp-details">
+                        <div className="bp-detail">
+                            <div className="bp-detail-label">NAME</div>
+                            <div className="bp-detail-text">{name}</div>
+                        </div>
+                        <div className="bp-detail">
+                            <div className="bp-detail-label">SEVA</div>
+                            <div className="bp-detail-text">{seva}</div>
+                        </div>
+                        <div className="bp-detail">
+                            <div className="bp-detail-label">SPOC</div>
+                            <div className="bp-detail-text">{spoc}</div>
+                        </div>
+                    </div>:
+                    <div className="bp-qr">
+                        <QRCode
+                            value={name?`https://vol.iskconmysore.org/vol?name=${name}`:`https://vol.iskconmysore.org/vol`}
+                            size={210}
+                        />
                     </div>
-                    <div className="bp-detail">
-                        <div className="bp-detail-label">SEVA</div>
-                        <div className="bp-detail-text">{seva}</div>
-                    </div>
-                    <div className="bp-detail">
-                        <div className="bp-detail-label">SPOC</div>
-                        <div className="bp-detail-text">{spoc}</div>
-                    </div>
-                </div>:null}
+                }
         </div>
     )
 }
@@ -50,11 +59,11 @@ const BadgePrint = (props)=>{
 
         let { volunteers, services } = data
         volunteers = volunteers.filter(v=>{
-            return !v.idCardWritten && v.volunteerName && v.volunteerPhone && v.service && v.date=="2023-11-14"
+            return !v.idCardWritten && v.volunteerName && v.volunteerPhone && v.service && v.date=="2023-12-23"
         })
 
         services = services.filter(s=>{
-            return s.date=="2023-11-14"
+            return s.date=="2023-12-23"
         })
     
         let volunteersMap = {}
