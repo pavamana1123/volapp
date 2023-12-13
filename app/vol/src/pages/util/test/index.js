@@ -9,12 +9,8 @@ const Test = (props) =>{
     return (
         <div ref={qr}>
             <QRCode
-                value={"https://vol.iskconmysore.org/vol?name=Abhishek R"}
+                value={"https://vol.iskconmysore.org/vol?name=asdasdasd"}
                 size={512}
-                imageSettings={{
-                    src: "https://logowik.com/content/uploads/images/apple-black8038.jpg",
-                    excavate: true
-                }}
             />
         </div>
     )

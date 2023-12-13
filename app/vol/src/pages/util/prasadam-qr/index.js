@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import "./index.css"
 import { QrReader } from 'react-qr-reader'
 import Header from "../../../components/header"
@@ -8,12 +8,13 @@ const PrasadamQR = (props)=>{
     var { data } = props
 
     var x = useRef(0)
-
+    
+    var [res, setRes] = useState("")
     
     const handleScan = (data) => {
         if(data && data!==""){
             console.log(data.text)
-            window.open(data.text)
+            setRes(data.text)
         }
     }
 
@@ -28,6 +29,7 @@ const PrasadamQR = (props)=>{
                     constraints={{ facingMode: 'environment' }}
                 />
             </div>
+            <div>{res}</div>
         </div>
     )
 }
