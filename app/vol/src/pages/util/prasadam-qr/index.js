@@ -3,6 +3,7 @@ import "./index.css"
 import { QrReader } from 'react-qr-reader'
 import Header from "../../../components/header"
 
+
 const PrasadamQR = (props)=>{
 
     var { data } = props
@@ -22,14 +23,17 @@ const PrasadamQR = (props)=>{
         <div className="pqr-main">
             <Header title={data.title} hideOptions/>
             <div className="pqr-root">
-                <QrReader
-                    scanDelay={300}
-                    onResult={handleScan}
-                    className="pqr-camcont"
-                    videoId="pqr-cam"
-                    constraints={{ facingMode: 'environment' }}
-                />
+                <div className="pqr-holder">
+                    <QrReader
+                        scanDelay={300}
+                        onResult={handleScan}
+                        constraints={{ facingMode: 'environment' }}
+                        videoId="pqr-cam"
+                        videoContainerStyle={{ padding: "0", width: "100vw" }}
+                    />
+                </div>
             </div>
+
             <div>{res}</div>
         </div>
     )
