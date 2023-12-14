@@ -156,11 +156,11 @@ function Ser(props) {
     <div>
       <Header title={data.title} hideOptions/>
 
-      {showSPOCResp && <Modal title="Responsibilities of SPOC" onClose={()=>{
+      {false?showSPOCResp && <Modal title="Responsibilities of SPOC" onClose={()=>{
         setShowSPOCResp(false)
       }}>
         {spocResps}
-      </Modal>}
+      </Modal>:null}
 
       {showCouponVols && <Modal title="Prasadam Coupons" onClose={()=>{
         setShowCouponVols(false)
@@ -381,7 +381,9 @@ ${d.map((bb, i)=>{
                 dates.filter(d=>{
                   return !!services.filter(s=>{
                     return s.date==d && (serviceView?s.spoc==filterValue:true)
-                  }).length
+                  }).length && !events.filter(e=>{
+                    return e.date==d
+                  })[0].hide
                 }).map((d)=>{
                   var dateServices = applyServiceFilters(services.sort((s1,s2)=>{
                     return s1.startTime-s2.startTime
@@ -396,6 +398,10 @@ ${d.map((bb, i)=>{
                     value: d,
                     component: dateServices.length?
                       <div className='serServ'>
+
+                        <div className='ser-event-name'>{events.filter(e=>{
+                          return e.date==d
+                        })[0].event}</div>
 
                         {dateServices.length && (!serviceView && (serviceView && filter!="SPOC")) && <div className='ser-count'>{`${dateServices.length} service${dateServices.length>1?"s":""}`}</div>}
 

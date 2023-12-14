@@ -117,7 +117,25 @@
     color: blue;
 }
 
+.ser-event-name {
+    width: 100%;
+    text-align: left;
+    margin-left: 15vw;
+    color: #555;
+    font-size: 3.5vw;
+    margin-top: 1vw;
+}
+
 @media only screen and (min-width: 1080px) {
+
+    /* Desktop */
+
+    .ser-event-name {
+        margin-left: 17vw;
+        font-size: 1.25vw;
+        margin-top: .5vw;
+        margin-bottom: -1.5vw;
+    }
 
     .sv-coup {
         background-color: var(--bar);

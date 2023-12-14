@@ -8,3 +8,8 @@
     flex-direction: column;
     align-items: center;
 }
+
+#pqr-cam {
+    width: 50vw !important;
+    height: 50vw !important;
+}
