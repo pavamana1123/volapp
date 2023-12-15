@@ -35,8 +35,6 @@ const BadgeIssueQR = (props)=>{
             return
         }
 
-        console.log(vname, lastUpdate)
-
         var apiBody = {
             date: moment().format("YYYY-MM-DD"),
             time: moment().format("HH:mm"),
@@ -44,15 +42,17 @@ const BadgeIssueQR = (props)=>{
             vname
         }
 
-        setLastUpdate(apiBody)
-
-        new API().call('set-badge-issue', apiBody)
-        .then((res)=>{
-            console.log(vname, res)
-            
-        })
-        .catch((error)=>{
-            console.log(error)
+        setLastUpdate((prevState)=>{
+            if(!prevState ||  prevState.vname!=apiBody.vname){
+                new API().call('set-badge-issue', apiBody)
+                .then((res)=>{
+                    console.log(vname, res)
+                })
+                .catch((error)=>{
+                    console.log(error)
+                })
+            }
+            return apiBody
         })
     }
 
