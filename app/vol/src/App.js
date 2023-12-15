@@ -14,7 +14,7 @@ import AdminInfo from './pages/admin-info';
 import BadgeList from './pages/util/badge-list';
 import SPOCBLDLabel from './pages/util/coupon-label';
 import BadgePrint from './pages/util/badge-print';
-import PrasadamQR from './pages/util/prasadam-qr/index.js';
+import BadgeIssueQR from './pages/util/badge-issue-qr/index.js';
 import Test from './pages/util/test/index.js';
 
 function App() {
@@ -57,7 +57,7 @@ function App() {
             <Route path="/util/badge-list" element={<BadgeList data={data} dates={dates}/>}></Route>
             <Route path="/util/badge-print" element={<BadgePrint data={data} dates={dates}/>}></Route>
             <Route path="/util/coupon-label" element={<SPOCBLDLabel data={data} dates={dates}/>}></Route>
-            <Route path="/util/prasadam-qr" element={<PrasadamQR data={data} dates={dates}/>}></Route>
+            <Route path="/util/badge-issue-qr" element={<BadgeIssueQR data={data} dates={dates}/>}></Route>
             <Route path="/util/test" element={<Test data={data} dates={dates}/>}></Route>
             <Route path="/" element={<Home/>}></Route>
           </Routes>
