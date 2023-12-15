@@ -10,12 +10,18 @@ class API {
         return this
     }
 
-    async call(){
+    async call(endpoint, body){
+
+        endpoint = endpoint || ""
+        body = body || {}
+
         const res = await fetch('/api', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                endpoint
             },
+            body: JSON.stringify(body)
         })
         return res.json().then((res)=>{
             return res
