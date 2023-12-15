@@ -27,9 +27,9 @@ function App() {
   var init = ()=>{
     new API().call()
     .then((res)=>{
-      setData(res.data)
-      setTimestamp(res.timestamp)
-      setDates(res.data.events.map(e=>{
+      setData(res.res.data)
+      setTimestamp(res.res.timestamp)
+      setDates(res.res.data.events.map(e=>{
         return e.date
       }).sort())
       setIsLoading(false)
@@ -65,7 +65,7 @@ function App() {
       {(window.location.pathname!="/util/service-list"
         && window.location.pathname!="/util/badge-list"
         && window.location.pathname!="/util/badge-print"
-        && window.location.pathname!="/util/prasadam-qr"
+        && window.location.pathname!="/util/badge-issue-qr"
         && window.location.pathname!="/util/coupon-label")
         && <div id="update-epoch">
         {`Data last updated at ${moment(timestamp).format("HH:mm A")}`}

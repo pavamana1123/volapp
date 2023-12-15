@@ -49,7 +49,7 @@ const QRCam = (props)=>{
             </div>
             {cameraState?<QrReader
                 className="qr-cam"
-                scanDelay={300}
+                scanDelay={500}
                 onResult={onRes}
                 constraints={{ facingMode: cameraOrientation?'user':'environment' }}
                 videoId="qr-cam"

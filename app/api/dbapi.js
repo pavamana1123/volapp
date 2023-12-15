@@ -2,11 +2,11 @@ const dbapi = async (req, res, dbcon)=>{
     const endpoint = req.headers.endpoint
     const body = req.body
     switch(endpoint){
-        case "set-badge-collect":
+        case "set-badge-issue":
             return setBadgeCollect(res, dbcon, body)
-        case "get-badge-collect":
+        case "get-badge-issue":
             return getBadgeCollect(res, dbcon, body)
-        case "unset-badge-collect":
+        case "unset-badge-issue":
             return unsetBadgeCollect(res, dbcon, body)
         default:
             res.status(404).send("Invalid endpoint")
