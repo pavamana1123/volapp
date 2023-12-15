@@ -416,7 +416,7 @@ ${d.map((bb, i)=>{
                                 setShowCouponVols(true)
                               })}>Coupons</button>}
 
-                              {serviceView && <button className='sv-coup' onClick={()=>{
+                              {null && serviceView && <button className='sv-coup' onClick={()=>{
                                 try {
                                   var attendance = JSON.parse(cookie.get(`@${filterValue}`)|| `{}`)
                                   var msg = Object.keys(attendance).filter((a)=>{

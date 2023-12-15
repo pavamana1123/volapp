@@ -37,7 +37,7 @@ const BadgeList = (props)=>{
                       
                       return <div key={a}>{`${col.current[a]?"☑":"☐"} (${a[0]}) ${a.trim()} ${!data.volunteers.filter(x=>{
                         return x.volunteerName==a
-                      })[0].idCardWritten?"(⚠️NP)":""}`}</div> 
+                      })[0].idCardPrinted?"(⚠️NP)":""}`}</div> 
                     })
                 }
             </div>

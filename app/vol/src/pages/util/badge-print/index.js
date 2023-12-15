@@ -14,6 +14,17 @@ const Badge = (props) =>{
                 width: '3.75in',
                 height: '5in'
             }}>
+                <div className="bp-plus-holder">
+                    <div className="bp-plus-row-holder">
+                        <div className="bp-plus bp-plus-lt"></div>
+                        <div className="bp-plus bp-plus-rt"></div>
+                    </div>
+                    <div className="bp-plus-row-holder">
+                        <div className="bp-plus bp-plus-lb"></div>
+                        <div className="bp-plus bp-plus-rb"></div>
+                    </div>
+                </div>
+
                 {!back?
                     <div className="bp-details">
                         <div className="bp-detail">
@@ -31,11 +42,12 @@ const Badge = (props) =>{
                     </div>:
                     <div className="bp-qr">
                         <QRCode
-                            value={name?`https://vol.iskconmysore.org/vol?name=${name}`:`https://vol.iskconmysore.org/vol`}
-                            size={210}
+                            value={name?`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(name)}`:`https://vol.iskconmysore.org/vol`}
+                            size={230}
                         />
                     </div>
                 }
+
         </div>
     )
 }
@@ -59,7 +71,7 @@ const BadgePrint = (props)=>{
 
         let { volunteers, services } = data
         volunteers = volunteers.filter(v=>{
-            return !v.idCardWritten && v.volunteerName && v.volunteerPhone && v.service && v.date=="2023-12-23"
+            return !v.idCardPrinted && v.volunteerName && v.volunteerPhone && v.service && v.date=="2023-12-23"
         })
 
         services = services.filter(s=>{
@@ -87,7 +99,7 @@ const BadgePrint = (props)=>{
                 seva: serviceNameMap[volunteersMap[v].service],
                 spoc: volunteersMap[v].spoc
             }
-        }).concat(new Array(20).fill(emptyBadge)))
+        }))
 
 
     }, [data])
