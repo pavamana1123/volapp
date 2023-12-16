@@ -56,6 +56,21 @@ const BadgeIssueQR = (props)=>{
         })
     }
 
+    const handleDelete = (vname)=>{
+        const deleteConfirm = window.confirm(`Do you want to delete this entry of ${vname}?`)
+
+        if (deleteConfirm) {
+            setDate(edate=>{
+                new API().call('unset-badge-issue', { edate, vname }).then((res)=>{
+                    setIssued(res)
+                }).catch(console.log)
+                return edate
+            })
+        }else{
+            console.log("Deletion canceled")
+        }
+    }
+
     return (
         <div className="pqr-main">
             <Header title={`Badge issue for ${moment(date).format("DD MMM 'YY")}`} hideOptions/>
@@ -74,7 +89,9 @@ const BadgeIssueQR = (props)=>{
                                     <div className="bi-list-time">{moment(i.date).format("DD MMM YYYY hh:mm A")}</div>
                                 </div>
                                 <div>
-                                    <Icon name="trash" color="#aaa" size="6vw"/>
+                                    <Icon name="trash" color="#aaa" size="6vw" onClick={()=>{
+                                        handleDelete(i.vname)
+                                    }}/>
                                 </div>
                             </div>
                         }):<div className="bi-empty-list">No badges are issued</div>
