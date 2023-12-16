@@ -1,11 +1,7 @@
 import "./index.css"
 import {useState, version } from "react"
 import Icon from "../icon"
-import { QrReader } from 'react-qr-reader'
-
-navigator?.mediaDevices?.getUserMedia({ video: { facingMode: 'environment' } }).then(() => {
-	alert('success');
-}).catch((err) => alert(err));
+import QrReader from 'react-qr-scanner'
 
 const QRCam = (props)=>{
 
@@ -63,11 +59,12 @@ const QRCam = (props)=>{
             </div>
             {cameraState?<QrReader
                 className="qr-cam"
-                scanDelay={500}
-                onResult={onRes}
-                constraints={{ facingMode: cameraOrientation?'user':'environment' }}
-                videoId="qr-cam"
-                videoContainerStyle={{ padding: "0", width: "100vw" }}
+                delay={300}
+                // onResult={onRes}
+                // constraints={{ facingMode: cameraOrientation?'user':'environment' }}
+                facingMode={cameraOrientation?'front':'rear' }
+                // videoId="qr-cam"
+                // videoContainerStyle={{ padding: "0", width: "100vw" }}
             />:<div className="qr-cam-off-msg">Camera is turned off</div>}
         </div>
     )
