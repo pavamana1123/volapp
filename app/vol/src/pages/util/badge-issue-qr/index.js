@@ -1,32 +1,36 @@
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import "./index.css"
 import Header from "../../../components/header"
 import QRCam from "../../../components/qrcam"
 import moment from "moment"
 import API from '../../../api';
+import Icon from "../../../components/icon"
 
 const BadgeIssueQR = (props)=>{
 
     var { data } = props
-    var [res, setRes] = useState("")
-    var [dates, setDates] = useState([])
     var [date, setDate] = useState()
-    var [ lastUpdate, setLastUpdate ] = useState()
+    var [issued, setIssued] = useState()
+
+    const getDate = (d)=>{
+        return d.events.filter(e=>{
+            return e.badge && moment(e.date).isSameOrAfter(moment(), 'day')
+        }).map(e=>{
+            return e.date
+        })[0]
+    }
 
     useEffect(()=>{
         if(!data.events){
             return
         }
-
-        var d = data.events.filter(e=>{
-            return e.badge && moment(e.date).isSameOrAfter(moment(), 'day')
-        }).map(e=>{
-            return e.date
+        var edate = getDate(data)
+        setDate(edate)
+        new API().call('get-badge-issue', {edate}).then(setIssued).catch((e)=>{
+            console.log(e)
         })
-
-        setDates(d)
-        setDate(d[0])
     }, [data])
+
 
     const onScan = (vname, err)=>{
 
@@ -35,39 +39,48 @@ const BadgeIssueQR = (props)=>{
             return
         }
 
-        var apiBody = {
-            date: moment().format("YYYY-MM-DD"),
-            time: moment().format("HH:mm"),
-            edate: date,
-            vname
+        if(!vname){
+            console.log("Empty name!")
+            return
         }
 
-        setLastUpdate((prevState)=>{
-            if(!prevState ||  prevState.vname!=apiBody.vname){
-                new API().call('set-badge-issue', apiBody)
-                .then((res)=>{
-                    console.log(vname, res)
-                })
-                .catch((error)=>{
-                    console.log(error)
-                })
-            }
-            return apiBody
+        setDate((edate)=>{
+            new API().call('set-badge-issue', {
+                date: moment().format("YYYY-MM-DD HH:mm:ss"),
+                edate,
+                vname
+            }).then(setIssued).catch((e)=>{
+                console.log(e)
+            })
+            return edate
         })
     }
 
     return (
         <div className="pqr-main">
-            <Header title={data.title} hideOptions/>
+            <Header title={`Badge issue for ${moment(date).format("DD MMM 'YY")}`} hideOptions/>
             <div className="pqr-root">
-                <div className="bi-title">
-                    <div>{dates.length?`Badge issue for `:"... "}</div>
-                    <div className="bi-date">{`${moment(date).format("DD MMM 'YY")}`}</div>
-                </div>
-                <QRCam className="bi-cam" size={"85vw"} onResult={onScan}/>
+                <QRCam className="bi-cam" size={"100vw"} onResult={onScan} debounce/>
             </div>
 
-            {lastUpdate?<div>{lastUpdate.vname}</div>:null}
+            {issued?
+                <div className="bi-issued-holder">
+                    <div className="bi-issued-label">ISSUED BADGES</div>
+                    <div className="bi-issued-list">{
+                        issued.length?issued.map(i=>{
+                            return <div className="bi-list-item">
+                                <div>
+                                    <div>{i.vname}</div>
+                                    <div className="bi-list-time">{moment(i.date).format("DD MMM YYYY hh:mm A")}</div>
+                                </div>
+                                <div>
+                                    <Icon name="trash" color="#aaa" size="6vw"/>
+                                </div>
+                            </div>
+                        }):<div className="bi-empty-list">No badges are issued</div>
+                    }</div>
+                </div>
+            :null}
         </div>
     )
 }

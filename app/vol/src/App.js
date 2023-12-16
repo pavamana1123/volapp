@@ -27,9 +27,9 @@ function App() {
   var init = ()=>{
     new API().call()
     .then((res)=>{
-      setData(res.res.data)
-      setTimestamp(res.res.timestamp)
-      setDates(res.res.data.events.map(e=>{
+      setData(res.data)
+      setTimestamp(res.timestamp)
+      setDates(res.data.events.map(e=>{
         return e.date
       }).sort())
       setIsLoading(false)

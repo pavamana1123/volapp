@@ -6,9 +6,28 @@
 
 }
 
-.bi-cam {
-    border-radius: 3vw;
-    box-shadow: 0vw 0vw 2vw .2vw #00000088;
+.bi-issued-holder {
+    padding: 0 2vw 0 2vw;
+}
+
+.bi-issued-label {
+    color: #555;
+    font-weight: bold;
+    margin-bottom: .75vw;
+}
+
+.bi-list-time {
+    font-size: 3vw;
+    color: #666;
+    margin-top: .5vw;
+}
+
+.bi-list-item {
+    border-bottom: .1vw solid #ccc;
+    padding: 1.2vw;
+
+    display: flex;
+    justify-content: space-between;
 }
 
 .bi-title {

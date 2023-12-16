@@ -26,13 +26,10 @@ class API {
 
         if(res.ok){
             return res.json().then((res)=>{
-                return {res}
+                return res
             })
         }else{
-            return {
-                error: res.statusText,
-                statusCode: res.status
-            }
+            throw new Error(`${res.status}: ${res.statusText}`)
         }
 
     }

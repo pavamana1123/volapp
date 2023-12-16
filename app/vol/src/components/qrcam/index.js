@@ -1,5 +1,5 @@
 import "./index.css"
-import {useState } from "react"
+import {useState, version } from "react"
 import Icon from "../icon"
 import { QrReader } from 'react-qr-reader'
 
@@ -7,8 +7,9 @@ const QRCam = (props)=>{
 
     var [ cameraState, setCameraState ] = useState(true)
     var [ cameraOrientation, setCameraOrientation ] = useState(true)
+    var [ scanResult, setScanResult ] = useState()
 
-    var { size, onResult, style, className } = props
+    var { size, onResult, style, className, debounce } = props
     size = size || "90vw"
     style = style || {}
     className = className || ""
@@ -35,7 +36,16 @@ const QRCam = (props)=>{
             onResult(null, true)
             return
         }
-        onResult(url.searchParams.get("name"))
+
+        setScanResult(pname=>{
+            var name = url.searchParams.get("name")
+            if(!debounce || name!=pname){
+                onResult(name)
+                return name
+            }else{
+                return pname
+            }
+        })
     }
 
     return (
