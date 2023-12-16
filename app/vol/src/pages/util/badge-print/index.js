@@ -132,14 +132,14 @@ const BadgePrint = (props)=>{
                         <div className="bp-page" key={`s-${i}`}>
                             <div className="bp-row">
                                 {
-                                    s.slice(0, s.length/2).map(b=>{
+                                    s.slice(0, s.length/2).reverse().map(b=>{
                                         return <Badge details={b} back/>
                                     })
                                 }
                             </div>
                             <div className="bp-row">
                                 {
-                                    s.slice(s.length/2, s.length).map(b=>{
+                                    s.slice(s.length/2, s.length).reverse().map(b=>{
                                         return <Badge details={b} back/>
                                     })
                                 }
