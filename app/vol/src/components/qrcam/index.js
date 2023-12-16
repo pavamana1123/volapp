@@ -4,8 +4,8 @@ import Icon from "../icon"
 import { QrReader } from 'react-qr-reader'
 
 navigator?.mediaDevices?.getUserMedia({ video: { facingMode: 'environment' } }).then(() => {
-	console.log('success');
-}).catch((err) => console.error(err));
+	alert('success');
+}).catch((err) => alert(err));
 
 const QRCam = (props)=>{
 
