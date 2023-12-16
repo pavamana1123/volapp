@@ -13,7 +13,7 @@
 .bi-issued-label {
     color: #555;
     font-weight: bold;
-    margin-bottom: .75vw;
+    margin: 3.75vw 0 .75vw 0;
 }
 
 .bi-list-time {

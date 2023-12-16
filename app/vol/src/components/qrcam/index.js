@@ -9,6 +9,9 @@ const QRCam = (props)=>{
     var [ cameraOrientation, setCameraOrientation ] = useState(true)
     var [ scanResult, setScanResult ] = useState()
     var [ cameraSwitching, setCameraSwitching ] = useState(false)
+    var [ speakState, setSpeakState ] = useState(true)
+
+    const synthesis = window.speechSynthesis;
 
     var { size, onResult, style, className, debounce } = props
     size = size || "90vw"
@@ -57,6 +60,13 @@ const QRCam = (props)=>{
         })
     }
 
+    const speak = () => {
+        const utterance = new SpeechSynthesisUtterance("Nilesh Rajpurothith")
+        const indianFemaleVoice = synthesis.getVoices().find(voice => voice.lang === 'hi-IN')
+        utterance.voice = indianFemaleVoice
+        synthesis.speak(utterance)
+      }
+
     return (
         <div className={`qr-holder ${className}`}style={ {
                 width: size,
@@ -65,6 +75,7 @@ const QRCam = (props)=>{
             <div className="qr-options">
                 <Icon name={cameraState?"toggle-on":"toggle-off"} color={cameraState?"white":"grey"} onClick={toggleCameraState}/>
                 <Icon name="rotate-360" onClick={cameraState?toggleCameraOrientation:()=>{}} color={cameraState?"white":"grey"}/>
+                <Icon name="campaign" color={cameraState?"white":"grey"} onClick={speak}/>
             </div>
             {cameraState?<QrReader
                 className="qr-cam"

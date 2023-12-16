@@ -11,6 +11,7 @@ const BadgeIssueQR = (props)=>{
     var { data } = props
     var [date, setDate] = useState()
     var [issued, setIssued] = useState()
+    var totalBadges = useRef(0)
 
     const getDate = (d)=>{
         return d.events.filter(e=>{
@@ -29,6 +30,16 @@ const BadgeIssueQR = (props)=>{
         new API().call('get-badge-issue', {edate}).then(setIssued).catch((e)=>{
             console.log(e)
         })
+
+        var vmap = {}
+        data.volunteers.filter(v=>{
+            return v.date==edate && v.service!="" && v.volunteerName!=""
+        }).map(v=>{
+            vmap[v.volunteerName]=0
+        })
+
+        totalBadges.current = Object.keys(vmap).length
+
     }, [data])
 
 
@@ -80,7 +91,7 @@ const BadgeIssueQR = (props)=>{
 
             {issued?
                 <div className="bi-issued-holder">
-                    <div className="bi-issued-label">ISSUED BADGES</div>
+                    <div className="bi-issued-label">{`ISSUED BADGES (${issued.length}${totalBadges.current?`/${totalBadges.current}`:""})`}</div>
                     <div className="bi-issued-list">{
                         issued.length?issued.map(i=>{
                             return <div className="bi-list-item">
