@@ -3,6 +3,10 @@ import {useState, version } from "react"
 import Icon from "../icon"
 import { QrReader } from 'react-qr-reader'
 
+navigator?.mediaDevices?.getUserMedia({ video: { facingMode: 'environment' } }).then(() => {
+	console.log('success');
+}).catch((err) => console.error(err));
+
 const QRCam = (props)=>{
 
     var [ cameraState, setCameraState ] = useState(true)
