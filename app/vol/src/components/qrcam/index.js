@@ -8,6 +8,7 @@ const QRCam = (props)=>{
     var [ cameraState, setCameraState ] = useState(true)
     var [ cameraOrientation, setCameraOrientation ] = useState(true)
     var [ scanResult, setScanResult ] = useState()
+    var [ cameraSwitching, setCameraSwitching ] = useState(false)
 
     var { size, onResult, style, className, debounce } = props
     size = size || "90vw"
@@ -19,7 +20,15 @@ const QRCam = (props)=>{
     }
 
     const toggleCameraOrientation = ()=>{
-        setCameraOrientation(!cameraOrientation)
+        setCameraState(()=>{
+            setCameraSwitching(true)
+            setTimeout(()=>{
+                setCameraOrientation(p=>!p)
+                setCameraState(true)
+                setCameraSwitching(false)
+            }, 1000)
+            return false
+        })
     }
 
     const onRes = (data, error)=>{
@@ -64,7 +73,7 @@ const QRCam = (props)=>{
                 constraints={{ facingMode: !cameraOrientation?'user':'environment' }}
                 videoId="qr-cam"
                 videoContainerStyle={{ padding: "0", width: "100vw" }}
-            />:<div className="qr-cam-off-msg">Camera is turned off</div>}
+            />:<div className="qr-cam-off-msg">{cameraSwitching?"Switching camera..":"Camera is turned off"}</div>}
         </div>
     )
 }

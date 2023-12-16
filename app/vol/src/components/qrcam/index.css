@@ -32,4 +32,6 @@
     text-align: center;
     font-size: 5vw;
     color: #555;
+    position: relative;
+    top: 32%;
 }
