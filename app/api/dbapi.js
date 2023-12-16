@@ -3,48 +3,50 @@ const dbapi = async (req, res, dbcon)=>{
     const body = req.body
     switch(endpoint){
         case "set-badge-issue":
-            return setBadgeCollect(res, dbcon, body)
+            return setBadgeIssue(res, dbcon, body)
         case "get-badge-issue":
-            return getBadgeCollect(res, dbcon, body)
+            return getBadgeIssue(res, dbcon, body)
         case "unset-badge-issue":
-            return unsetBadgeCollect(res, dbcon, body)
+            return unsetBadgeIssue(res, dbcon, body)
         default:
             res.status(404).send("Invalid endpoint")
     }
 }
 
-const setBadgeCollect = async (res, dbcon, body)=>{
-    const query = `insert into badgeCollect (date, time, edate, vname, cname, cphone)
+const setBadgeIssue = async (res, dbcon, body)=>{
+    const query = `insert into badgeissue (date, edate, vname, cname, cphone)
     values(
         "${body.date}",
-        "${body.time}",
         "${body.edate}",
         "${body.vname}",
         ${body.cname?`"${body.cname}"`:"NULL"},
         ${body.cphone?`"${body.cphone}"`:"NULL"}
-    )`
+    ) on duplicate key update date="${body.date}", cname=${body.cname?`"${body.cname}"`:"NULL"}, cphone=${body.cphone?`"${body.cphone}"`:"NULL"};
+    select * from badgeissue where edate="${body.edate}"
+    `
 
     try {
         var result = await dbcon.execQuery(query)
-        res.status(result.affectedRows?200:204).end()
+        res.status(200).end(JSON.stringify(result[1]))
     }catch(error){
         res.status(500).send(error.toString())
     }
 }
 
-const unsetBadgeCollect = async (res, dbcon, body)=>{
-    const query = `delete from badgeCollect where edate="${body.edate}" and vname="${body.vname}"`
+const unsetBadgeIssue = async (res, dbcon, body)=>{
+    const query = `delete from badgeissue where edate="${body.edate}" and vname="${body.vname}";
+    select * from badgeissue where edate="${body.edate}"`
 
     try {
         var result = await dbcon.execQuery(query)
-        res.status(result.affectedRows?200:204).end()
+        res.status(200).send(JSON.stringify(result[1]))
     }catch(error){
         res.status(500).send(error.toString())
     }
 }
 
-const getBadgeCollect = async (res, dbcon, body)=>{
-    const query = `select * from badgeCollect where edate="${body.edate}"`
+const getBadgeIssue = async (res, dbcon, body)=>{
+    const query = `select * from badgeissue where edate="${body.edate}"`
 
     try {
         var result = await dbcon.execQuery(query)
