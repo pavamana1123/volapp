@@ -23,9 +23,18 @@ class API {
             },
             body: JSON.stringify(body)
         })
-        return res.json().then((res)=>{
-            return res
-        })
+
+        if(res.ok){
+            return res.json().then((res)=>{
+                return {res}
+            })
+        }else{
+            return {
+                error: res.statusText,
+                statusCode: res.status
+            }
+        }
+
     }
 }
 
