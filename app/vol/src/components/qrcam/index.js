@@ -61,7 +61,7 @@ const QRCam = (props)=>{
                 className="qr-cam"
                 scanDelay={500}
                 onResult={onRes}
-                constraints={{ facingMode: cameraOrientation?'user':'environment' }}
+                constraints={{ facingMode: !cameraOrientation?'user':'environment' }}
                 videoId="qr-cam"
                 videoContainerStyle={{ padding: "0", width: "100vw" }}
             />:<div className="qr-cam-off-msg">Camera is turned off</div>}
