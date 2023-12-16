@@ -8,6 +8,8 @@
 
 .bi-issued-holder {
     padding: 0 2vw 0 2vw;
+    max-height: 75vw;
+    overflow-y: scroll;
 }
 
 .bi-issued-label {

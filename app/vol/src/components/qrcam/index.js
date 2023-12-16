@@ -1,7 +1,12 @@
 import "./index.css"
-import {useState, version } from "react"
+import {useRef, useState } from "react"
 import Icon from "../icon"
 import { QrReader } from 'react-qr-reader'
+
+const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+console.log((viewportHeight - 1.443 * viewportWidth)/viewportWidth)
 
 const QRCam = (props)=>{
 
@@ -10,8 +15,8 @@ const QRCam = (props)=>{
     var [ scanResult, setScanResult ] = useState()
     var [ cameraSwitching, setCameraSwitching ] = useState(false)
     var [ speakState, setSpeakState ] = useState(true)
-
-    const synthesis = window.speechSynthesis;
+    const synthesis = window.speechSynthesis
+    const chime = useRef(new Audio(`${process.env.PUBLIC_URL}/aud/chime.mp3`))
 
     var { size, onResult, style, className, debounce } = props
     size = size || "90vw"
@@ -52,6 +57,13 @@ const QRCam = (props)=>{
         setScanResult(pname=>{
             var name = url.searchParams.get("name")
             if(!debounce || name!=pname){
+                setSpeakState(p=>{
+                    if(p){
+                        chime.current.play()
+                        speak(name)
+                    }
+                    return p
+                })
                 onResult(name)
                 return name
             }else{
@@ -60,12 +72,16 @@ const QRCam = (props)=>{
         })
     }
 
-    const speak = () => {
-        const utterance = new SpeechSynthesisUtterance("Nilesh Rajpurothith")
-        const indianFemaleVoice = synthesis.getVoices().find(voice => voice.lang === 'hi-IN')
-        utterance.voice = indianFemaleVoice
+    const speak = (text) => {
+        const utterance = new SpeechSynthesisUtterance(text)
+        const voice = synthesis.getVoices().find(voice => voice.lang === 'hi-IN')
+        utterance.voice = voice
         synthesis.speak(utterance)
-      }
+    }
+
+    const toggleSpeakState = ()=>{
+        setSpeakState(p=>!p)
+    }
 
     return (
         <div className={`qr-holder ${className}`}style={ {
@@ -75,7 +91,7 @@ const QRCam = (props)=>{
             <div className="qr-options">
                 <Icon name={cameraState?"toggle-on":"toggle-off"} color={cameraState?"white":"grey"} onClick={toggleCameraState}/>
                 <Icon name="rotate-360" onClick={cameraState?toggleCameraOrientation:()=>{}} color={cameraState?"white":"grey"}/>
-                <Icon name="campaign" color={cameraState?"white":"grey"} onClick={speak}/>
+                <Icon name={speakState?"volume-up":"volume-off"} color={cameraState && speakState ?"white":"grey"} onClick={toggleSpeakState}/>
             </div>
             {cameraState?<QrReader
                 className="qr-cam"
