@@ -102,7 +102,6 @@ const QRCam = (props)=>{
                 videoId="qr-cam"
                 videoContainerStyle={{ padding: "0", width: "100vw" }}
             />:<div className="qr-cam-off-msg">{cameraSwitching?"Switching camera..":"Camera is turned off"}</div>}
-            <button id={"testclick"}>Click</button>
         </div>
     )
 }
