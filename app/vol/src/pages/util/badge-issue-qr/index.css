@@ -34,6 +34,14 @@
     align-items: center;
 }
 
+.bi-hidden-cam {
+    max-height: 90vh !important;
+}
+
+.bi-issued-list {
+    margin-bottom: 50vw;
+}
+
 .bi-title {
     color: #555;
     font-size: 5vw;

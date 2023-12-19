@@ -11,6 +11,7 @@ const BadgeIssueQR = (props)=>{
     var { data } = props
     var [date, setDate] = useState()
     var [issued, setIssued] = useState()
+    var [cameraShowHide, setCameraShowHide] = useState()
     var totalBadges = useRef(0)
     const tap = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/tap.mp3`))
 
@@ -93,11 +94,11 @@ const BadgeIssueQR = (props)=>{
         <div className="bi-main">
             <Header title={`Badge issue for ${moment(date).format("DD MMM 'YY")}`} hideOptions/>
             <div className="bi-root">
-                <QRCam className="bi-cam" size={"100vw"} onResult={onScan} debounce/>
+                <QRCam className="bi-cam" size={"100vw"} onResult={onScan} debounce onCameraShowHide={setCameraShowHide}/>
             </div>
 
             {issued?
-                <div className="bi-issued-holder">
+                <div className={`bi-issued-holder ${!cameraShowHide?"bi-hidden-cam":""}`}>
                     <div className="bi-issued-label">{`ISSUED BADGES (${issued.length}${totalBadges.current?`/${totalBadges.current}`:""})`}</div>
                     <div className="bi-issued-list">{
                         issued.length?issued.map(i=>{

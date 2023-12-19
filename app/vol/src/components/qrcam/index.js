@@ -16,7 +16,7 @@ const QRCam = (props)=>{
     const synthesis = window.speechSynthesis
     const chime = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/capture.mp3`))
 
-    var { size, onResult, style, className, debounce } = props
+    var { size, onResult, style, className, debounce, onCameraShowHide } = props
     size = size || "90vw"
     style = style || {}
     className = className || ""
@@ -100,6 +100,9 @@ const QRCam = (props)=>{
             <div className={`qr-show-cam ${showCamera?"qr-hide-float":""}`} onClick={()=>{
                 setshowCamera(true)
                 setCameraState(true)
+                if(onCameraShowHide){
+                    onCameraShowHide(true)
+                }
             }}>
                 <Icon name="photo-camera" color="white"></Icon>
             </div>
@@ -112,6 +115,9 @@ const QRCam = (props)=>{
                 <Icon name={"expand-less"} color={"white"} onClick={()=>{
                     setshowCamera(false)
                     setCameraState(false)
+                    if(onCameraShowHide){
+                        onCameraShowHide(false)
+                    }
                 }}/>
             </div>
             {cameraState?<QrReader
