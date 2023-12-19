@@ -3,11 +3,6 @@ import {useEffect, useRef, useState } from "react"
 import Icon from "../icon"
 import { QrReader } from 'react-qr-reader'
 
-const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-
-console.log((viewportHeight - 1.443 * viewportWidth)/viewportWidth)
-
 const QRCam = (props)=>{
 
     var [ cameraState, setCameraState ] = useState(false)
@@ -15,6 +10,8 @@ const QRCam = (props)=>{
     var [ scanResult, setScanResult ] = useState()
     var [ cameraSwitching, setCameraSwitching ] = useState(false)
     var [ speakState, setSpeakState ] = useState(true)
+    var [ showCamera, setshowCamera ] = useState(true)
+    
     const synthesis = window.speechSynthesis
     const chime = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/capture.mp3`))
 
@@ -24,7 +21,6 @@ const QRCam = (props)=>{
     className = className || ""
 
     const toggleCameraState = ()=>{
-
         setCameraState(!cameraState)
     }
 
@@ -93,6 +89,7 @@ const QRCam = (props)=>{
                 <Icon name={cameraState?"toggle-on":"toggle-off"} color={cameraState?"white":"grey"} onClick={toggleCameraState}/>
                 <Icon name="rotate-360" onClick={cameraState?toggleCameraOrientation:()=>{}} color={cameraState?"white":"grey"}/>
                 <Icon name={speakState?"volume-up":"volume-off"} color={cameraState && speakState ?"white":"grey"} onClick={toggleSpeakState}/>
+                <Icon name={"expand-less"} color={"white"} onClick={toggleSpeakState}/>
             </div>
             {cameraState?<QrReader
                 className="qr-cam"

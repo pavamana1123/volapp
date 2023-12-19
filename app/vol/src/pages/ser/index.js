@@ -120,7 +120,9 @@ function Ser(props) {
       events.forEach(e=>{
         eventMap[e.date]=e.event
       })
-      unlockIp.current.focus()
+      if(!serviceView){
+        unlockIp.current.focus()
+      }
     }
   }, [data])
 
@@ -166,7 +168,7 @@ function Ser(props) {
     <div>
 
       {
-        !unlocked?<div className='ser-lock-bg'>
+        (!serviceView && !unlocked)?<div className='ser-lock-bg'>
           <div className='ser-pass-holder'>
             <input ref={unlockIp} type='password' className='ser-pass' placeholder='Passcode' onChange={unlock} pattern="[0-9]*" inputmode="numeric"/>
           </div>
