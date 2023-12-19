@@ -24,6 +24,9 @@ const QRCam = (props)=>{
     className = className || ""
 
     const toggleCameraState = ()=>{
+
+        chime.current.play()
+
         setCameraState(!cameraState)
     }
 
