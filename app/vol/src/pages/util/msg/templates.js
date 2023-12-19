@@ -2691,7 +2691,69 @@ You can reply here regarding any queries.
 Regards,
 Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
-    },      
+    },  
+    
+    "Volunteer Badge Reminder - VKE23": (props)=>{
+
+        var { volunteers } = props.data
+        
+        const dates = [
+            "2023-12-23",
+        ]
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
+                umap[v.volunteerName]=v.volunteerPhone
+            }
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && v.idCardPrinted && !v.idReminderSent
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    availability: volunteers[i].availability,
+                    idCardCollected: volunteers[i].idCardCollected,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                    date: volunteers[i].date,
+                    service: volunteers[i].service,
+                    timings: volunteers[i].timings,
+                    coordinator: volunteers[i].coordinator,
+                    spoc: volunteers[i].spoc,
+                    spocPhone: volunteers[i].spocPhone
+                })
+            }
+            }
+        })
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+*Volunteer Badge - Vaikunta Ekadashi 2023 - Volunteering*
+    
+Hare Krishna 🙏
+
+🪪 *Volunteer Badges will be issued today (Sunday, 17th December 2023) from 10 AM to 1 PM and 3 PM to 8 PM at Volunteer Care Cell inside Sridham Hall*. Please collect without fail.
+
+🚗 Vehicle parking is not allowed inside the temple on the festival day. Parking arrangement is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into the parking area is allowed only with Volunteer Badge.
+
+🪪 Volunteer Coupon can be shown for honoring Volunteer Prasadam. This badge can be used as volunteer prasadam coupon. 
+
+You can reply here regarding any queries.
+
+Regards,
+ISKCON Mysore`.trim())}`})
+    },
 
     "SPOC Info - VKE23": (props)=>{
 

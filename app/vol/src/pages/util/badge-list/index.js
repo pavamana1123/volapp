@@ -15,13 +15,12 @@ const BadgeList = (props)=>{
       }
 
       var v = data.volunteers.filter(v=>{
-        return (v.date=="2023-11-14") && v.volunteerName!="" && v.service!=""
+        return (v.date=="2023-12-23") && v.volunteerName!="" && v.service!=""
       }).map(v=>{
         col.current[v.volunteerName]=v.idCardCollected
         return v.volunteerName
       }).unique().sort()
 
-      console.log(v)
       setVols(v)
 
       console.log(v.deskShard(2), v.length)
