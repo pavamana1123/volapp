@@ -12,6 +12,7 @@ const BadgeIssueQR = (props)=>{
     var [date, setDate] = useState()
     var [issued, setIssued] = useState()
     var totalBadges = useRef(0)
+    const tap = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/tap.mp3`))
 
     const getDate = (d)=>{
         return d.events.filter(e=>{
@@ -60,7 +61,10 @@ const BadgeIssueQR = (props)=>{
                 date: moment().format("YYYY-MM-DD HH:mm:ss"),
                 edate,
                 vname
-            }).then(setIssued).catch((e)=>{
+            }).then((res)=>{
+                setIssued(res)
+                tap.current.play()
+            }).catch((e)=>{
                 console.log(e)
             })
             return edate
