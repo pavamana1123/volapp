@@ -23,20 +23,7 @@ const QRCam = (props)=>{
     style = style || {}
     className = className || ""
 
-    useEffect(()=>{
-        document.getElementById("testclick").addEventListener('click', ()=>{
-            chime.current.play()
-        })
-    }, [])
-
     const toggleCameraState = ()=>{
-
-        try {
-            chime.current.play()
-        }catch (error) {
-            console.error('Error playing sound:', error)
-            alert(error)
-        }
 
         setCameraState(!cameraState)
     }
