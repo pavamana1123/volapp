@@ -5,7 +5,7 @@ function Auto(props) {
 
   var autodrop = useRef(0)
 
-  var { filter, Drop, inputClass, placeholder } = props
+  var { filter, Drop, className, placeholder } = props
 
   var [ list, setList ] = useState()
   var [ focus, setFocus ] = useState()
@@ -30,7 +30,7 @@ function Auto(props) {
 
   return(
     <div className='autoRoot'>
-      <input className={`autoin ${inputClass}`} ref={ip} 
+      <input className={`autoin ${className}`} ref={ip} 
         onChange={onChangeDelay}
         onFocus={onFocus}
         onBlur={onBlur}

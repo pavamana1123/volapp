@@ -4,10 +4,10 @@ import './index.css';
 function Modal(props) {
   var self = this
 
-  var {title, children, onClose} = props
-  useEffect(()=>{
-  },[])
-   
+  var {title, children, onClose, className} = props
+
+  className = className || ""
+
   return (
     <div>
       <div className="glass light-glass"/>
@@ -16,7 +16,7 @@ function Modal(props) {
             <div className='modal-title'>{title}</div>
             <div className='mcb' onClick={onClose || (()=>{})}>❌</div>
         </div>
-        <div className='modalBody'>{children}</div>
+        <div className={`modalBody ${className}`}>{children}</div>
       </div>
     </div>
 

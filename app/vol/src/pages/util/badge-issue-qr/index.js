@@ -3,15 +3,24 @@ import "./index.css"
 import Header from "../../../components/header"
 import QRCam from "../../../components/qrcam"
 import moment from "moment"
-import API from '../../../api';
+import API from '../../../api'
 import Icon from "../../../components/icon"
+import clipboardy from "clipboardy"
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import Modal from "../../../components/modal"
+import Auto from "../../../components/auto"
 
 const BadgeIssueQR = (props)=>{
 
     var { data } = props
     var [date, setDate] = useState()
     var [issued, setIssued] = useState()
+    var [searchFilter, setSearchFilter] = useState("")
     var [cameraShowHide, setCameraShowHide] = useState()
+    var [showManualEntry, setShowManualEntry] = useState(true)
+    var volunteers = useRef()
+    
     var totalBadges = useRef(0)
     const tap = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/tap.mp3`))
 
@@ -40,7 +49,8 @@ const BadgeIssueQR = (props)=>{
             vmap[v.volunteerName]=0
         })
 
-        totalBadges.current = Object.keys(vmap).length
+        volunteers.current = Object.keys(vmap).sort()
+        totalBadges.current = volunteers.current.length
 
     }, [data])
 
@@ -90,6 +100,39 @@ const BadgeIssueQR = (props)=>{
         }
     }
 
+    const handleCopy = ()=>{
+        clipboardy.write(issued.map(i=>{
+            return i.vname
+        }).join("\n")).then(()=>{
+            toast.success('Names copied to clipboard');
+        })
+    }
+
+    var timer = useRef()
+
+    const handleSearch = (e)=>{
+        clearTimeout(timer.current)
+        timer.current = setTimeout(()=>{
+            setSearchFilter(e.target.value)
+        }, 300)
+    }
+
+    const manualFilter = (f)=>{
+        return volunteers.current.filter(v=>{
+            return v.toLowerCase().indexOf(f.toLowerCase())!=-1
+        })
+    }
+
+    const Drop = (props)=>{
+        var { item, value } = props
+        return <div className='bi-manual-drop'
+            onClick={()=>{
+            // setFilter(value)
+        }}>
+            {item}
+        </div>
+    }
+
     return (
         <div className="bi-main">
             <Header title={`Badge issue for ${moment(date).format("DD MMM 'YY")}`} hideOptions/>
@@ -100,8 +143,26 @@ const BadgeIssueQR = (props)=>{
             {issued?
                 <div className={`bi-issued-holder ${!cameraShowHide?"bi-hidden-cam":""}`}>
                     <div className="bi-issued-label">{`ISSUED BADGES (${issued.length}${totalBadges.current?`/${totalBadges.current}`:""})`}</div>
+
+                    {showManualEntry?<Modal title="Manual Entry" className="bi-manual-modal">
+                        <div>Search and click on a volunteer name to add it manually</div>
+                        <Auto 
+                            className="bi-auto"
+                            filter={manualFilter}
+                            Drop={Drop}
+                            placeholder="Start typing volunteer name.."/>
+                    </Modal>:null}
+
+                    <div className="bi-issue-util">
+                        <input className="bi-issue-search" placeholder="Search..." onChange={handleSearch}/>
+                        {date?<Icon className="bi-util-icon" name="person-add" color="#888"/>:null}
+                        <Icon className="bi-util-icon" name="content-copy" color="#888" onClick={handleCopy}/>
+                    </div>
+
                     <div className="bi-issued-list">{
-                        issued.length?issued.map(i=>{
+                        issued.length?issued.filter(i=>{
+                            return searchFilter=="" || i.vname.toLowerCase().indexOf(searchFilter.toLowerCase())!=-1
+                        }).map(i=>{
                             return <div className="bi-list-item">
                                 <div>
                                     <div>{i.vname}</div>

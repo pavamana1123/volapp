@@ -59,7 +59,7 @@ function AdminInfo(props) {
         {preset?
           <Paper>{filter}</Paper>
           :
-          <Auto inputClass="autoinvol" filter={filterFunc} Drop={Drop} placeholder={"Start typing volunteer's name"}/>
+          <Auto className="autoinvol" filter={filterFunc} Drop={Drop} placeholder={"Start typing volunteer's name"}/>
         }
         {filter && dates.length?
           <Paper className="serpaper">

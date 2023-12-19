@@ -17,6 +17,9 @@ import BadgePrint from './pages/util/badge-print';
 import BadgeIssueQR from './pages/util/badge-issue-qr/index.js';
 import Test from './pages/util/test/index.js';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
 
   var [data, setData] = useState({})
@@ -44,6 +47,7 @@ function App() {
 
   return (
     <div className="App">
+      <ToastContainer />
       <Router>
           <Routes>
             <Route path="/vol" element={<Vol data={data} dates={dates}/>}></Route>

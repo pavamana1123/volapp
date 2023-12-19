@@ -8,7 +8,7 @@
 
 .bi-issued-holder {
     padding: 0 2vw 0 2vw;
-    max-height: 75vw;
+    max-height: 90vw;
     overflow-y: scroll;
 }
 
@@ -22,6 +22,58 @@
     font-size: 3vw;
     color: #666;
     margin-top: .5vw;
+}
+
+.bi-manual-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bi-auto {
+    width: 60vw;
+    height: 2vw;
+    padding: 3vw;
+    font-size: 3.5vw;
+    outline: none;
+
+    border-radius: 1.5vw;
+    border: .25vw solid #aaa;
+}
+
+.bi-auto:focus {
+    border: .25vw solid #aaa;
+}
+
+
+.bi-issue-search {
+    width: 70vw;
+    margin-right: 1vw;
+    outline: none;
+    padding: 1vw 1vw 1vw 3vw;
+    font-size: 4vw;
+
+    height: 5vw;
+    border-radius: 1.5vw;
+
+    border: .25vw solid #aaa;
+
+}
+
+.bi-issue-search:focus {
+    outline: none;
+    border: .25vw solid #aaa;
+}
+
+.bi-util-icon {
+    margin: 0 1vw 0 1vw;
+}
+
+.bi-issue-util {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 2vw 0 2vw 0;
 }
 
 .bi-list-item {

@@ -57,7 +57,7 @@ function Vol(props) {
         {preset?
           <Paper>{filter}</Paper>
           :
-          <Auto inputClass="autoinvol" filter={filterFunc} Drop={Drop}/>
+          <Auto className="autoinvol" filter={filterFunc} Drop={Drop}/>
         }
         {filter && dates.length?
           <Paper className="serpaper">
