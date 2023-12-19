@@ -10,7 +10,7 @@ console.log((viewportHeight - 1.443 * viewportWidth)/viewportWidth)
 
 const QRCam = (props)=>{
 
-    var [ cameraState, setCameraState ] = useState(true)
+    var [ cameraState, setCameraState ] = useState(false)
     var [ cameraOrientation, setCameraOrientation ] = useState(true)
     var [ scanResult, setScanResult ] = useState()
     var [ cameraSwitching, setCameraSwitching ] = useState(false)
@@ -25,7 +25,12 @@ const QRCam = (props)=>{
 
     const toggleCameraState = ()=>{
 
-        chime.current.play()
+        try {
+            chime.current.play()
+        }catch (error) {
+            console.error('Error playing sound:', error)
+            alert(error)
+        }
 
         setCameraState(!cameraState)
     }
