@@ -80,6 +80,7 @@ const BadgeIssueQR = (props)=>{
             setDate(edate=>{
                 new API().call('unset-badge-issue', { edate, vname }).then((res)=>{
                     setIssued(res)
+                    tap.current.play()
                 }).catch(console.log)
                 return edate
             })
@@ -89,9 +90,9 @@ const BadgeIssueQR = (props)=>{
     }
 
     return (
-        <div className="pqr-main">
+        <div className="bi-main">
             <Header title={`Badge issue for ${moment(date).format("DD MMM 'YY")}`} hideOptions/>
-            <div className="pqr-root">
+            <div className="bi-root">
                 <QRCam className="bi-cam" size={"100vw"} onResult={onScan} debounce/>
             </div>
 
