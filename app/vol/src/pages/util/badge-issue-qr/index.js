@@ -20,8 +20,8 @@ const BadgeIssueQR = (props)=>{
     var [searchFilter, setSearchFilter] = useState("")
     var [cameraShowHide, setCameraShowHide] = useState()
     var [showManualEntry, setShowManualEntry] = useState(false)
+    var [activeRequests, setActiveRequests] = useState(0) 
     var volunteers = useRef()
-    var activeRequests = useRef(0)
     
     var totalBadges = useRef(0)
     const tap = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/tap.mp3`))
@@ -70,7 +70,7 @@ const BadgeIssueQR = (props)=>{
         }
 
         setDate((edate)=>{
-            activeRequests.current++
+            setActiveRequests(p=>p+1)
             new API().call('set-badge-issue', {
                 date: moment().format("YYYY-MM-DD HH:mm:ss"),
                 edate,
@@ -79,11 +79,11 @@ const BadgeIssueQR = (props)=>{
                 setTimeout(()=>{
                     setIssued(res)
                     tap.current.play()
+                    setActiveRequests(p=>p-1)
                 }, 1000)
             }).catch((e)=>{
                 console.log(e)
-            }).finally(()=>{
-                activeRequests.current--
+                setActiveRequests(p=>p-1)
             })
             return edate
         })
@@ -94,13 +94,13 @@ const BadgeIssueQR = (props)=>{
 
         if (deleteConfirm) {
             setDate(edate=>{
-                activeRequests.current++
+                setActiveRequests(p=>p+1)
                 new API().call('unset-badge-issue', { edate, vname }).then((res)=>{
                     setIssued(res) 
                     tap.current.play()
                 }).catch(console.log)
                 .finally(()=>{
-                    activeRequests.current--
+                    setActiveRequests(p=>p-1)
                 })
                 return edate
             })
@@ -162,7 +162,7 @@ const BadgeIssueQR = (props)=>{
                 <div className={`bi-issued-holder ${!cameraShowHide?"bi-hidden-cam":""}`}>
                     <div className="bi-issue-spin">
                         <div className="bi-issued-label">{`ISSUED BADGES (${issued.length}${totalBadges.current?`/${totalBadges.current}`:""})`}</div>
-                        {activeRequests.current?<Spinner/>:null}
+                        {activeRequests?<Spinner/>:null}
                     </div>
 
                     {showManualEntry?<Modal title="Manual Entry" className="bi-manual-modal" onClose={closeModal}>
