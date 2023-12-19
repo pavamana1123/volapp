@@ -79,10 +79,10 @@ const BadgeIssueQR = (props)=>{
                 setTimeout(()=>{
                     setIssued(res)
                     tap.current.play()
-                    activeRequests.current--
                 }, 1000)
             }).catch((e)=>{
                 console.log(e)
+            }).finally(()=>{
                 activeRequests.current--
             })
             return edate
