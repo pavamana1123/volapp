@@ -12,6 +12,11 @@
     overflow-y: scroll;
 }
 
+.bi-manual-info {
+    margin: 1vw 5vw 4vw 5vw;
+    color: #555;
+}
+
 .bi-issued-label {
     color: #555;
     font-weight: bold;
@@ -24,6 +29,12 @@
     margin-top: .5vw;
 }
 
+.bi-issue-spin {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
 .bi-manual-modal {
     display: flex;
     flex-direction: column;
@@ -34,7 +45,7 @@
     width: 60vw;
     height: 2vw;
     padding: 3vw;
-    font-size: 3.5vw;
+    font-size: 4vw;
     outline: none;
 
     border-radius: 1.5vw;

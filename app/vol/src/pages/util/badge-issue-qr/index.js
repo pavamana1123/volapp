@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Modal from "../../../components/modal"
 import Auto from "../../../components/auto"
+import { Spinner } from "../../../components/spinner"
 
 const BadgeIssueQR = (props)=>{
 
@@ -18,8 +19,9 @@ const BadgeIssueQR = (props)=>{
     var [issued, setIssued] = useState()
     var [searchFilter, setSearchFilter] = useState("")
     var [cameraShowHide, setCameraShowHide] = useState()
-    var [showManualEntry, setShowManualEntry] = useState(true)
+    var [showManualEntry, setShowManualEntry] = useState(false)
     var volunteers = useRef()
+    var activeRequests = useRef(0)
     
     var totalBadges = useRef(0)
     const tap = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/tap.mp3`))
@@ -68,6 +70,7 @@ const BadgeIssueQR = (props)=>{
         }
 
         setDate((edate)=>{
+            activeRequests.current++
             new API().call('set-badge-issue', {
                 date: moment().format("YYYY-MM-DD HH:mm:ss"),
                 edate,
@@ -76,9 +79,11 @@ const BadgeIssueQR = (props)=>{
                 setTimeout(()=>{
                     setIssued(res)
                     tap.current.play()
+                    activeRequests.current--
                 }, 1000)
             }).catch((e)=>{
                 console.log(e)
+                activeRequests.current--
             })
             return edate
         })
@@ -89,10 +94,14 @@ const BadgeIssueQR = (props)=>{
 
         if (deleteConfirm) {
             setDate(edate=>{
+                activeRequests.current++
                 new API().call('unset-badge-issue', { edate, vname }).then((res)=>{
-                    setIssued(res)
+                    setIssued(res) 
                     tap.current.play()
                 }).catch(console.log)
+                .finally(()=>{
+                    activeRequests.current--
+                })
                 return edate
             })
         }else{
@@ -123,11 +132,20 @@ const BadgeIssueQR = (props)=>{
         })
     }
 
+    const closeModal = ()=>{
+        setShowManualEntry(false)
+    }
+
+    const showModal = ()=>{
+        setShowManualEntry(true)
+    }
+
     const Drop = (props)=>{
         var { item, value } = props
         return <div className='bi-manual-drop'
             onClick={()=>{
-            // setFilter(value)
+            onScan(value)
+            setTimeout(closeModal, 100)
         }}>
             {item}
         </div>
@@ -142,10 +160,13 @@ const BadgeIssueQR = (props)=>{
 
             {issued?
                 <div className={`bi-issued-holder ${!cameraShowHide?"bi-hidden-cam":""}`}>
-                    <div className="bi-issued-label">{`ISSUED BADGES (${issued.length}${totalBadges.current?`/${totalBadges.current}`:""})`}</div>
+                    <div className="bi-issue-spin">
+                        <div className="bi-issued-label">{`ISSUED BADGES (${issued.length}${totalBadges.current?`/${totalBadges.current}`:""})`}</div>
+                        {activeRequests.current?<Spinner/>:null}
+                    </div>
 
-                    {showManualEntry?<Modal title="Manual Entry" className="bi-manual-modal">
-                        <div>Search and click on a volunteer name to add it manually</div>
+                    {showManualEntry?<Modal title="Manual Entry" className="bi-manual-modal" onClose={closeModal}>
+                        <div className="bi-manual-info">Search and click on a volunteer name to add manually</div>
                         <Auto 
                             className="bi-auto"
                             filter={manualFilter}
@@ -155,7 +176,7 @@ const BadgeIssueQR = (props)=>{
 
                     <div className="bi-issue-util">
                         <input className="bi-issue-search" placeholder="Search..." onChange={handleSearch}/>
-                        {date?<Icon className="bi-util-icon" name="person-add" color="#888"/>:null}
+                        {date?<Icon className="bi-util-icon" name="person-add" color="#888" onClick={showModal}/>:null}
                         <Icon className="bi-util-icon" name="content-copy" color="#888" onClick={handleCopy}/>
                     </div>
 
