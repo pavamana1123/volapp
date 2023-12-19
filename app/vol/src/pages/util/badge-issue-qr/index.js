@@ -62,8 +62,10 @@ const BadgeIssueQR = (props)=>{
                 edate,
                 vname
             }).then((res)=>{
-                setIssued(res)
-                tap.current.play()
+                setTimeout(()=>{
+                    setIssued(res)
+                    tap.current.play()
+                }, 1000)
             }).catch((e)=>{
                 console.log(e)
             })
