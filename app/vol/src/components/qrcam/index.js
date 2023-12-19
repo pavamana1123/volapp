@@ -16,7 +16,7 @@ const QRCam = (props)=>{
     var [ cameraSwitching, setCameraSwitching ] = useState(false)
     var [ speakState, setSpeakState ] = useState(true)
     const synthesis = window.speechSynthesis
-    const chime = useRef(new Audio(`${process.env.PUBLIC_URL}/aud/chime.mp3`))
+    const chime = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/chime.mp3`))
 
     var { size, onResult, style, className, debounce } = props
     size = size || "90vw"
