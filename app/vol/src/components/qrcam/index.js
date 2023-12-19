@@ -10,7 +10,8 @@ const QRCam = (props)=>{
     var [ scanResult, setScanResult ] = useState()
     var [ cameraSwitching, setCameraSwitching ] = useState(false)
     var [ speakState, setSpeakState ] = useState(true)
-    var [ showCamera, setshowCamera ] = useState(true)
+    var [ vibrationState, setVibrationState ] = useState(true)
+    var [ showCamera, setshowCamera ] = useState(false)
     
     const synthesis = window.speechSynthesis
     const chime = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/capture.mp3`))
@@ -61,6 +62,12 @@ const QRCam = (props)=>{
                     }
                     return p
                 })
+                setVibrationState(p=>{
+                    if(p){
+                        navigator.vibrate(200)
+                    }
+                    return p
+                })
                 onResult(name)
                 return name
             }else{
@@ -80,16 +87,32 @@ const QRCam = (props)=>{
         setSpeakState(p=>!p)
     }
 
+    const toggleVibrationState = ()=>{
+        setVibrationState(p=>!p)
+    }
+
     return (
-        <div className={`qr-holder ${className}`}style={ {
+        <div className={`qr-holder ${!showCamera?"qr-hide-cam":""} ${className}`}style={ {
                 width: size,
                 height: size,
                 ...style}}>
+
+            <div className={`qr-show-cam ${showCamera?"qr-hide-float":""}`} onClick={()=>{
+                setshowCamera(true)
+                setCameraState(true)
+            }}>
+                <Icon name="photo-camera" color="white"></Icon>
+            </div>
+
             <div className="qr-options">
                 <Icon name={cameraState?"toggle-on":"toggle-off"} color={cameraState?"white":"grey"} onClick={toggleCameraState}/>
                 <Icon name="rotate-360" onClick={cameraState?toggleCameraOrientation:()=>{}} color={cameraState?"white":"grey"}/>
                 <Icon name={speakState?"volume-up":"volume-off"} color={cameraState && speakState ?"white":"grey"} onClick={toggleSpeakState}/>
-                <Icon name={"expand-less"} color={"white"} onClick={toggleSpeakState}/>
+                <Icon name={"vibration"} color={cameraState && vibrationState ?"white":"grey"} onClick={toggleVibrationState}/>
+                <Icon name={"expand-less"} color={"white"} onClick={()=>{
+                    setshowCamera(false)
+                    setCameraState(false)
+                }}/>
             </div>
             {cameraState?<QrReader
                 className="qr-cam"

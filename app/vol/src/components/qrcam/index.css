@@ -1,10 +1,39 @@
 .qr-holder {
     overflow: hidden;
+    transition: height .4s ease-in-out;
+}
+
+.qr-hide-cam {
+    height: 0 !important;
 }
 
 #qr-cam {
     z-index: -999 !important;
     position: inherit !important;
+}
+
+.qr-show-cam {
+    background: var(--bar);
+    width: 13vw;
+    height: 13vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+
+    position: absolute;
+    top: 88vh;
+    left: 82vw;
+
+    box-shadow: -1vw 0vw 1vw #55555555;
+
+    cursor: pointer;
+
+    transition: transform .2s ease-in-out;
+}
+
+.qr-hide-float {
+    transform: scale(0);
 }
 
 .qr-cam {
