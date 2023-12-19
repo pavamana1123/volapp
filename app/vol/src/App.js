@@ -19,6 +19,7 @@ import Test from './pages/util/test/index.js';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PrasadamIssueQR from './pages/util/prasadam-issue-qr/index.js';
 
 function App() {
 
@@ -62,6 +63,7 @@ function App() {
             <Route path="/util/badge-print" element={<BadgePrint data={data} dates={dates}/>}></Route>
             <Route path="/util/coupon-label" element={<SPOCBLDLabel data={data} dates={dates}/>}></Route>
             <Route path="/util/badge-issue-qr" element={<BadgeIssueQR data={data} dates={dates}/>}></Route>
+            <Route path="/util/prasadam-issue-qr" element={<PrasadamIssueQR data={data} dates={dates}/>}></Route>
             <Route path="/util/test" element={<Test data={data} dates={dates}/>}></Route>
             <Route path="/" element={<Home/>}></Route>
           </Routes>
@@ -70,6 +72,7 @@ function App() {
         && window.location.pathname!="/util/badge-list"
         && window.location.pathname!="/util/badge-print"
         && window.location.pathname!="/util/badge-issue-qr"
+        && window.location.pathname!="/util/prasadam-issue-qr"
         && window.location.pathname!="/util/coupon-label")
         && <div id="update-epoch">
         {`Data last updated at ${moment(timestamp).format("HH:mm A")}`}

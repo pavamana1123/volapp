@@ -1,0 +1,119 @@
+.pi-root {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.pi-issued-holder {
+    padding: 0 2vw 0 2vw;
+    max-height: 90vw;
+    overflow-y: scroll;
+}
+
+.pi-manual-info {
+    margin: 1vw 5vw 4vw 5vw;
+    color: #555;
+}
+
+.pi-issued-label {
+    color: #555;
+    font-weight: bold;
+    margin: 3.75vw 0 .75vw 0;
+}
+
+.pi-list-time {
+    font-size: 3vw;
+    color: #666;
+    margin-top: .5vw;
+}
+
+.pi-issue-spin {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.pi-manual-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pi-auto {
+    width: 60vw;
+    height: 2vw;
+    padding: 3vw;
+    font-size: 4vw;
+    outline: none;
+
+    border-radius: 1.5vw;
+    border: .25vw solid #aaa;
+}
+
+.pi-auto:focus {
+    border: .25vw solid #aaa;
+}
+
+
+.pi-issue-search {
+    width: 70vw;
+    margin-right: 1vw;
+    outline: none;
+    padding: 1vw 1vw 1vw 3vw;
+    font-size: 4vw;
+
+    height: 5vw;
+    border-radius: 1.5vw;
+
+    border: .25vw solid #aaa;
+
+}
+
+.pi-issue-search:focus {
+    outline: none;
+    border: .25vw solid #aaa;
+}
+
+.pi-util-icon {
+    margin: 0 1vw 0 1vw;
+}
+
+.pi-issue-util {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 2vw 0 2vw 0;
+}
+
+.pi-list-item {
+    border-bottom: .1vw solid #ccc;
+    padding: 1.2vw;
+
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.pi-hidden-cam {
+    max-height: 90vh !important;
+}
+
+.pi-issued-list {
+    margin-bottom: 50vw;
+}
+
+.pi-title {
+    color: #555;
+    font-size: 5vw;
+    margin: 3vw;
+    display: flex;
+    white-space: pre;
+}
+
+.pi-date {
+    cursor: pointer;
+    border-bottom: .5vw dotted #000;
+}

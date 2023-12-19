@@ -8,6 +8,13 @@ const dbapi = async (req, res, dbcon)=>{
             return getBadgeIssue(res, dbcon, body)
         case "unset-badge-issue":
             return unsetBadgeIssue(res, dbcon, body)
+
+        case "set-prasadam-issue":
+            return setPrasadamIssue(res, dbcon, body)
+        case "get-prasadam-issue":
+            return getPrasadamIssue(res, dbcon, body)
+        case "unset-prasadam-issue":
+            return unsetPrasadamIssue(res, dbcon, body)
         default:
             res.status(404).send("Invalid endpoint")
     }
@@ -47,6 +54,48 @@ const unsetBadgeIssue = async (res, dbcon, body)=>{
 
 const getBadgeIssue = async (res, dbcon, body)=>{
     const query = `select * from badgeissue where edate="${body.edate}" order by date desc`
+
+    try {
+        var result = await dbcon.execQuery(query)
+        res.status(200).send(JSON.stringify(result))
+    }catch(error){
+        res.status(500).send(error.toString())
+    }
+}
+
+const setPrasadamIssue = async (res, dbcon, body)=>{
+    const query = `insert into prasadamissue (date, edate, vname, bld)
+    values(
+        "${body.date}",
+        "${body.edate}",
+        "${body.vname}",
+        "${body.bld}"
+    ) on duplicate key update date="${body.date}";
+    select * from prasadamissue where edate="${body.edate}" order by date desc
+    `
+
+    try {
+        var result = await dbcon.execQuery(query)
+        res.status(200).end(JSON.stringify(result[1]))
+    }catch(error){
+        res.status(500).send(error.toString())
+    }
+}
+
+const unsetPrasadamIssue = async (res, dbcon, body)=>{
+    const query = `delete from prasadamissue where edate="${body.edate}" and vname="${body.vname}";
+    select * from prasadamissue where edate="${body.edate}" order by date desc`
+
+    try {
+        var result = await dbcon.execQuery(query)
+        res.status(200).send(JSON.stringify(result[1]))
+    }catch(error){
+        res.status(500).send(error.toString())
+    }
+}
+
+const getPrasadamIssue = async (res, dbcon, body)=>{
+    const query = `select * from prasadamissue where edate="${body.edate}" order by date desc`
 
     try {
         var result = await dbcon.execQuery(query)

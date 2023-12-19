@@ -12,7 +12,7 @@ import Modal from "../../../components/modal"
 import Auto from "../../../components/auto"
 import { Spinner } from "../../../components/spinner"
 
-const BadgeIssueQR = (props)=>{
+const PrasadamIssueQR = (props)=>{
 
     var { data } = props
     var [date, setDate] = useState()
@@ -23,12 +23,12 @@ const BadgeIssueQR = (props)=>{
     var [activeRequests, setActiveRequests] = useState(0) 
     var volunteers = useRef()
     
-    var totalBadges = useRef(0)
+    var totalPrasadamCount = useRef(0)
     const tap = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/tap.mp3`))
 
     const getDate = (d)=>{
         return d.events.filter(e=>{
-            return e.badge && moment(e.date).isSameOrAfter(moment(), 'day')
+            return e.prasadam && moment(e.date).isSameOrAfter(moment(), 'day')
         }).map(e=>{
             return e.date
         })[0]
@@ -40,7 +40,7 @@ const BadgeIssueQR = (props)=>{
         }
         var edate = getDate(data)
         setDate(edate)
-        new API().call('get-badge-issue', {edate}).then(setIssued).catch((e)=>{
+        new API().call('get-prasadam-issue', {edate}).then(setIssued).catch((e)=>{
             console.log(e)
         })
 
@@ -52,7 +52,7 @@ const BadgeIssueQR = (props)=>{
         })
 
         volunteers.current = Object.keys(vmap).sort()
-        totalBadges.current = volunteers.current.length
+        totalPrasadamCount.current = volunteers.current.length
 
     }, [data])
 
@@ -70,11 +70,13 @@ const BadgeIssueQR = (props)=>{
         }
 
         setDate((edate)=>{
+            const bld = "b"
             setActiveRequests(p=>p+1)
-            new API().call('set-badge-issue', {
+            new API().call('set-prasadam-issue', {
                 date: moment().format("YYYY-MM-DD HH:mm:ss"),
                 edate,
-                vname
+                vname,
+                bld
             }).then((res)=>{
                 setTimeout(()=>{
                     setIssued(res)
@@ -95,7 +97,7 @@ const BadgeIssueQR = (props)=>{
         if (deleteConfirm) {
             setDate(edate=>{
                 setActiveRequests(p=>p+1)
-                new API().call('unset-badge-issue', { edate, vname }).then((res)=>{
+                new API().call('unset-prasadam-issue', { edate, vname }).then((res)=>{
                     setIssued(res) 
                     tap.current.play()
                 }).catch(console.log)
@@ -142,7 +144,7 @@ const BadgeIssueQR = (props)=>{
 
     const Drop = (props)=>{
         var { item, value } = props
-        return <div className='bi-manual-drop'
+        return <div className='pi-manual-drop'
             onClick={()=>{
             onScan(value)
             setTimeout(closeModal, 100)
@@ -152,42 +154,42 @@ const BadgeIssueQR = (props)=>{
     }
 
     return (
-        <div className="bi-main">
-            <Header title={`Badge issue for ${moment(date).format("DD MMM 'YY")}`} hideOptions/>
-            <div className="bi-root">
-                <QRCam className="bi-cam" size={"100vw"} onResult={onScan} debounce onCameraShowHide={setCameraShowHide}/>
+        <div className="pi-main">
+            <Header title={`Volunteer Prasadam for ${moment(date).format("DD MMM 'YY")}`} hideOptions/>
+            <div className="pi-root">
+                <QRCam className="pi-cam" size={"100vw"} onResult={onScan} debounce onCameraShowHide={setCameraShowHide}/>
             </div>
 
             {issued?
-                <div className={`bi-issued-holder ${!cameraShowHide?"bi-hidden-cam":""}`}>
-                    <div className="bi-issue-spin">
-                        <div className="bi-issued-label">{`ISSUED BADGES (${issued.length}${totalBadges.current?`/${totalBadges.current}`:""})`}</div>
+                <div className={`pi-issued-holder ${!cameraShowHide?"pi-hidden-cam":""}`}>
+                    <div className="pi-issue-spin">
+                        <div className="pi-issued-label">{`VOLUNTEERS TAKEN PRASADAM (${issued.length}${totalPrasadamCount.current?`/${totalPrasadamCount.current}`:""})`}</div>
                         {activeRequests?<Spinner/>:null}
                     </div>
 
-                    {showManualEntry?<Modal title="Manual Entry" className="bi-manual-modal" onClose={closeModal}>
-                        <div className="bi-manual-info">Search and click on a volunteer name to add manually</div>
+                    {showManualEntry?<Modal title="Manual Entry" className="pi-manual-modal" onClose={closeModal}>
+                        <div className="pi-manual-info">Search and click on a volunteer name to add manually</div>
                         <Auto 
-                            className="bi-auto"
+                            className="pi-auto"
                             filter={manualFilter}
                             Drop={Drop}
                             placeholder="Start typing volunteer name.."/>
                     </Modal>:null}
 
-                    {issued.length?<div className="bi-issue-util">
-                        <input className="bi-issue-search" placeholder="Search..." onChange={handleSearch}/>
-                        {date?<Icon className="bi-util-icon" name="person-add" color="#888" onClick={showModal}/>:null}
-                        <Icon className="bi-util-icon" name="content-copy" color="#888" onClick={handleCopy}/>
+                    {issued.length?<div className="pi-issue-util">
+                        <input className="pi-issue-search" placeholder="Search..." onChange={handleSearch}/>
+                        {date?<Icon className="pi-util-icon" name="person-add" color="#888" onClick={showModal}/>:null}
+                        <Icon className="pi-util-icon" name="content-copy" color="#888" onClick={handleCopy}/>
                     </div>:null}
 
-                    <div className="bi-issued-list">{
+                    <div className="pi-issued-list">{
                         issued.length?issued.filter(i=>{
                             return searchFilter=="" || i.vname.toLowerCase().indexOf(searchFilter.toLowerCase())!=-1
                         }).map(i=>{
-                            return <div className="bi-list-item">
+                            return <div className="pi-list-item">
                                 <div>
                                     <div>{i.vname}</div>
-                                    <div className="bi-list-time">{moment(i.date).format("DD MMM YYYY hh:mm A")}</div>
+                                    <div className="pi-list-time">{moment(i.date).format("DD MMM YYYY hh:mm A")}</div>
                                 </div>
                                 <div>
                                     <Icon name="trash" color="#aaa" size="6vw" onClick={()=>{
@@ -195,7 +197,7 @@ const BadgeIssueQR = (props)=>{
                                     }}/>
                                 </div>
                             </div>
-                        }):<div className="bi-empty-list">No badges are issued</div>
+                        }):<div className="pi-empty-list">Volunteers are yet to honor prasadam</div>
                     }</div>
                 </div>
             :null}
@@ -203,4 +205,4 @@ const BadgeIssueQR = (props)=>{
     )
 }
 
-export default BadgeIssueQR
+export default PrasadamIssueQR
