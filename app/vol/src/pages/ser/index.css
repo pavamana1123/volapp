@@ -14,6 +14,33 @@
     text-align: center;
 }
 
+.ser-pass {
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    outline: none;
+    text-align: center;
+    font-size: 8vw;
+    width: 50vw;
+
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.ser-lock-bg {
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 100vh;
+    width: 100vw;
+
+    position: absolute;
+    top: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 999;
+}
+
 .spocresplink {
     width: 100%;
     text-decoration: underline;
@@ -130,6 +157,11 @@
 
     /* Desktop */
 
+    .ser-pass {
+        font-size: 2vw;
+        width: 15vw;
+    }
+    
     .ser-event-name {
         margin-left: 17vw;
         font-size: 1.25vw;

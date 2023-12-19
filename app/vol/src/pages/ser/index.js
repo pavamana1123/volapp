@@ -51,6 +51,7 @@ function Ser(props) {
   var [filter, setFilter] = useState(filters[0])
   var [showSPOCResp, setShowSPOCResp] = useState(false)
   var [showCouponVols, setShowCouponVols] = useState(false)
+  var [unlocked, setUnlocked] = useState(false)
 
   const onFilterChange = (e)=>{
     setFilter(e.target.value)
@@ -119,6 +120,7 @@ function Ser(props) {
       events.forEach(e=>{
         eventMap[e.date]=e.event
       })
+      unlockIp.current.focus()
     }
   }, [data])
 
@@ -152,8 +154,25 @@ function Ser(props) {
     })
   }
 
+  var unlockIp = useRef()
+
+  const unlock = (e)=>{
+    if(e.target.value=="1966"){
+      setUnlocked(true)
+    }
+  }
+
   return (
     <div>
+
+      {
+        !unlocked?<div className='ser-lock-bg'>
+          <div className='ser-pass-holder'>
+            <input ref={unlockIp} type='password' className='ser-pass' placeholder='Passcode' onChange={unlock} pattern="[0-9]*" inputmode="numeric"/>
+          </div>
+        </div>:null
+      }
+
       <Header title={data.title} hideOptions/>
 
       {false?showSPOCResp && <Modal title="Responsibilities of SPOC" onClose={()=>{
