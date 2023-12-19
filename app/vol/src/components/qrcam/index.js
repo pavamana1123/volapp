@@ -80,7 +80,9 @@ const QRCam = (props)=>{
         const utterance = new SpeechSynthesisUtterance(text)
         const voice = synthesis.getVoices().find(voice => voice.lang === 'hi-IN')
         utterance.voice = voice
-        synthesis.speak(utterance)
+        if (!synthesis.speaking) {
+            synthesis.speak(utterance);
+        }
     }
 
     const toggleSpeakState = ()=>{
