@@ -1,5 +1,5 @@
 import "./index.css"
-import {useRef, useState } from "react"
+import {useEffect, useRef, useState } from "react"
 import Icon from "../icon"
 import { QrReader } from 'react-qr-reader'
 
@@ -22,6 +22,12 @@ const QRCam = (props)=>{
     size = size || "90vw"
     style = style || {}
     className = className || ""
+
+    useEffect(()=>{
+        document.getElementById("testclick").addEventListener('click', ()=>{
+            chime.current.play()
+        })
+    }, [])
 
     const toggleCameraState = ()=>{
 
@@ -109,6 +115,7 @@ const QRCam = (props)=>{
                 videoId="qr-cam"
                 videoContainerStyle={{ padding: "0", width: "100vw" }}
             />:<div className="qr-cam-off-msg">{cameraSwitching?"Switching camera..":"Camera is turned off"}</div>}
+            <button id={"testclick"}>Click</button>
         </div>
     )
 }
