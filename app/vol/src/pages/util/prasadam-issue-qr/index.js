@@ -57,7 +57,7 @@ const PrasadamIssueQR = (props)=>{
     }, [data])
 
 
-    const onScan = (vname, err)=>{
+    const onScan = useCallback((vname, err)=>{
 
         if(err){
             console.log("Invalid URL")
@@ -69,47 +69,41 @@ const PrasadamIssueQR = (props)=>{
             return
         }
 
-        setDate((edate)=>{
-            const bld = "b"
-            setActiveRequests(p=>p+1)
-            new API().call('set-prasadam-issue', {
-                date: moment().format("YYYY-MM-DD HH:mm:ss"),
-                edate,
-                vname,
-                bld
-            }).then((res)=>{
-                setTimeout(()=>{
-                    setIssued(res)
-                    tap.current.play()
-                    setActiveRequests(p=>p-1)
-                }, 1000)
-            }).catch((e)=>{
-                console.log(e)
+        const bld = "b"
+        setActiveRequests(p=>p+1)
+        new API().call('set-prasadam-issue', {
+            date: moment().format("YYYY-MM-DD HH:mm:ss"),
+            edate: date,
+            vname,
+            bld
+        }).then((res)=>{
+            setTimeout(()=>{
+                setIssued(res)
+                tap.current.play()
                 setActiveRequests(p=>p-1)
-            })
-            return edate
+            }, 1000)
+        }).catch((e)=>{
+            console.log(e)
+            setActiveRequests(p=>p-1)
         })
-    }
+    }, [date])
 
-    const handleDelete = (vname)=>{
+    const handleDelete = useCallback((vname)=>{
         const deleteConfirm = window.confirm(`Do you want to delete this entry of ${vname}?`)
 
         if (deleteConfirm) {
-            setDate(edate=>{
-                setActiveRequests(p=>p+1)
-                new API().call('unset-prasadam-issue', { edate, vname }).then((res)=>{
-                    setIssued(res) 
-                    tap.current.play()
-                }).catch(console.log)
-                .finally(()=>{
-                    setActiveRequests(p=>p-1)
-                })
-                return edate
+            setActiveRequests(p=>p+1)
+            new API().call('unset-prasadam-issue', { edate: date, vname }).then((res)=>{
+                setIssued(res) 
+                tap.current.play()
+            }).catch(console.log)
+            .finally(()=>{
+                setActiveRequests(p=>p-1)
             })
         }else{
             console.log("Deletion canceled")
         }
-    }
+    }, [date])
 
     const handleCopy = ()=>{
         clipboardy.write(issued.map(i=>{
