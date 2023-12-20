@@ -157,7 +157,7 @@ const PrasadamIssueQR = (props)=>{
         <div className="pi-main">
             <Header title={`Volunteer Prasadam for ${moment(date).format("DD MMM 'YY")}`} hideOptions/>
             <div className="pi-root">
-                <QRCam className="pi-cam" size={"100vw"} onResult={onScan} debounce onCameraShowHide={setCameraShowHide}/>
+                <QRCam className="pi-cam" size={"100vw"} onResult={onScan} onCameraShowHide={setCameraShowHide}/>
             </div>
 
             {issued?
@@ -179,7 +179,7 @@ const PrasadamIssueQR = (props)=>{
                     {issued.length?<div className="pi-issue-util">
                         <input className="pi-issue-search" placeholder="Search..." onChange={handleSearch}/>
                         {date?<Icon className="pi-util-icon" name="person-add" color="#888" onClick={showModal}/>:null}
-                        <Icon className="pi-util-icon" name="content-copy" color="#888" onClick={handleCopy}/>
+                        {false?<Icon className="pi-util-icon" name="content-copy" color="#888" onClick={handleCopy}/>:null}
                     </div>:null}
 
                     <div className="pi-issued-list">{

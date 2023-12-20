@@ -155,7 +155,7 @@ const BadgeIssueQR = (props)=>{
         <div className="bi-main">
             <Header title={`Badge issue for ${moment(date).format("DD MMM 'YY")}`} hideOptions/>
             <div className="bi-root">
-                <QRCam className="bi-cam" size={"100vw"} onResult={onScan} debounce onCameraShowHide={setCameraShowHide}/>
+                <QRCam className="bi-cam" size={"100vw"} onResult={onScan} onCameraShowHide={setCameraShowHide}/>
             </div>
 
             {issued?
