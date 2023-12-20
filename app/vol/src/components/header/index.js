@@ -10,7 +10,7 @@ function Header(props) {
         {!hideOptions && <MainMenu ctl={mainMenu} list={[1,2,3,4]}/>}
         <div className="appHeader">
           {!hideOptions && <i className="bi bi-list clickable clickableIcon" id="slideMenuButton" onClick={()=>{mainMenu.show()}}></i>}
-          {title || "Loading..."}
+          <div className='head-title'>{title || "Loading..."}</div>
           {!hideOptions && <i className="bi bi-three-dots-vertical clickable clickableIcon" id="menuButton" onClick={onPageMenuClick}></i>}
         </div>
     </div>

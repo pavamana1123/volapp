@@ -12,6 +12,13 @@
     overflow-y: scroll;
 }
 
+.pi-header {
+    display: flex;
+    color: white !important;
+    align-items: center;
+    white-space: pre;
+}
+
 .pi-manual-info {
     margin: 1vw 5vw 4vw 5vw;
     color: #555;
