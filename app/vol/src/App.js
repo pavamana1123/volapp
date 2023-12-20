@@ -11,15 +11,16 @@ import SPOCBLD from './pages/util/spoc-bld';
 import moment from 'moment';
 import ServiceList from './pages/util/service-list';
 import AdminInfo from './pages/admin-info';
-import BadgeList from './pages/util/badge-list';
+import BadgeList from './pages/util/badge/badge-list';
 import SPOCBLDLabel from './pages/util/coupon-label';
-import BadgePrint from './pages/util/badge-print';
-import BadgeIssueQR from './pages/util/badge-issue-qr/index.js';
+import BadgePrint from './pages/util/badge/badge-print';
+import BadgeIssueQR from './pages/util/badge/badge-issue-qr/index.js';
 import Test from './pages/util/test/index.js';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PrasadamIssueQR from './pages/util/prasadam-issue-qr/index.js';
+import BadgePreview from './pages/util/badge/badge-preview/index.js';
 
 function App() {
 
@@ -61,6 +62,7 @@ function App() {
             <Route path="/util/service-list" element={<ServiceList data={data} dates={dates}/>}></Route>
             <Route path="/util/badge-list" element={<BadgeList data={data} dates={dates}/>}></Route>
             <Route path="/util/badge-print" element={<BadgePrint data={data} dates={dates}/>}></Route>
+            <Route path="/util/badge-preview" element={<BadgePreview data={data} dates={dates}/>}></Route>
             <Route path="/util/coupon-label" element={<SPOCBLDLabel data={data} dates={dates}/>}></Route>
             <Route path="/util/badge-issue-qr" element={<BadgeIssueQR data={data} dates={dates}/>}></Route>
             <Route path="/util/prasadam-issue-qr" element={<PrasadamIssueQR data={data} dates={dates}/>}></Route>

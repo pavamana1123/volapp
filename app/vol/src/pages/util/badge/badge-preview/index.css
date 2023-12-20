@@ -1,0 +1,22 @@
+.bpr-root {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bpr-badge {
+    height: 5in;
+    width: 3.75in;
+}
+
+.bpr-drop {
+    border: .25vw dashed #aaa;
+    border-radius: 1vw;
+}
+
+.bpr-prompt-text {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+}

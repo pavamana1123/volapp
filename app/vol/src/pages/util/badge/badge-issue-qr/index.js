@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import "./index.css"
-import Header from "../../../components/header"
-import QRCam from "../../../components/qrcam"
+import Header from "../../../../components/header"
+import QRCam from "../../../../components/qrcam"
 import moment from "moment"
-import API from '../../../api'
-import Icon from "../../../components/icon"
+import API from '../../../../api'
+import Icon from "../../../../components/icon"
 import clipboardy from "clipboardy"
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import Modal from "../../../components/modal"
-import Auto from "../../../components/auto"
-import { Spinner } from "../../../components/spinner"
+import Modal from "../../../../components/modal"
+import Auto from "../../../../components/auto"
+import { Spinner } from "../../../../components/spinner"
 
 const BadgeIssueQR = (props)=>{
 
