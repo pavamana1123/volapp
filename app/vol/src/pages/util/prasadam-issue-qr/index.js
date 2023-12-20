@@ -12,8 +12,8 @@ import Modal from "../../../components/modal"
 import Auto from "../../../components/auto"
 import { Spinner } from "../../../components/spinner"
 
-const PrasadamIssueQR = (props)=>{
 
+const PrasadamIssueQR = (props)=>{
     var { data } = props
     var [date, setDate] = useState()
     var [issued, setIssued] = useState()
@@ -176,11 +176,11 @@ const PrasadamIssueQR = (props)=>{
                             placeholder="Start typing volunteer name.."/>
                     </Modal>:null}
 
-                    {issued.length?<div className="pi-issue-util">
+                   <div className="pi-issue-util">
                         <input className="pi-issue-search" placeholder="Search..." onChange={handleSearch}/>
                         {date?<Icon className="pi-util-icon" name="person-add" color="#888" onClick={showModal}/>:null}
                         {false?<Icon className="pi-util-icon" name="content-copy" color="#888" onClick={handleCopy}/>:null}
-                    </div>:null}
+                    </div>
 
                     <div className="pi-issued-list">{
                         issued.length?issued.filter(i=>{

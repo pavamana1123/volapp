@@ -174,11 +174,11 @@ const BadgeIssueQR = (props)=>{
                             placeholder="Start typing volunteer name.."/>
                     </Modal>:null}
 
-                    {issued.length?<div className="bi-issue-util">
+                    <div className="bi-issue-util">
                         <input className="bi-issue-search" placeholder="Search..." onChange={handleSearch}/>
                         {date?<Icon className="bi-util-icon" name="person-add" color="#888" onClick={showModal}/>:null}
                         <Icon className="bi-util-icon" name="content-copy" color="#888" onClick={handleCopy}/>
-                    </div>:null}
+                    </div>
 
                     <div className="bi-issued-list">{
                         issued.length?issued.filter(i=>{
