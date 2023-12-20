@@ -2668,9 +2668,11 @@ Please accept the blessings of Sri Sri Krishna Balarama 🙏 ${(v.availability!=
 
 *Guidelines:*
 
+👀 Please read this message completely. It takes only a minute ⌛
+
 💾 Please save this number as ISKCON Mysore Volunteering or with any other convenient name. If you do not do this, you may NOT be able to click on the links given below.
 
-🪪 *Volunteer Badges will be issued on Sunday, 17th December 2023 from 10 AM to 1 PM and 3 PM to 8 PM at Volunteer Care Cell inside Sridham Hall*. Please collect without fail.
+🪪 *Volunteer Badges will be issued on Friday, 22nd December 2023 from 10 AM to 1.30 PM and 3 PM to 9 PM at Volunteer Care Cell near Sridham Hall*. Please collect without fail.
 
 🚗 Vehicle parking is not allowed inside the temple on the festival day. Parking arrangement is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into the parking area is allowed only with Volunteer Badge.
 
