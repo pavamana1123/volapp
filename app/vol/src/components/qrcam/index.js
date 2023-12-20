@@ -14,7 +14,7 @@ const QRCam = (props)=>{
     var [ showCamera, setshowCamera ] = useState(false)
     
     const synthesis = window.speechSynthesis
-    const chime = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/capture.mp3`))
+    const capture = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/capture.mp3`))
 
     var { size, onResult, style, className, debounce, onCameraShowHide } = props
     size = size || "90vw"
@@ -37,12 +37,20 @@ const QRCam = (props)=>{
         })
     }
 
-    const onRes = (data, error)=>{
-        if(error){
-            return
+    useEffect(()=>{
+        if(speakState){
+            capture.current.play()
+            speak(scanResult)
         }
+        if(vibrationState){
+            navigator.vibrate(200)
+        }
+        onResult(scanResult)
+    }, [scanResult])
 
-        if(!onRes){
+    const onRes = (data, error)=>{
+
+        if(error || !onRes){
             return
         }
 
@@ -52,28 +60,7 @@ const QRCam = (props)=>{
             return
         }
 
-        setScanResult(pname=>{
-            var name = url.searchParams.get("name")
-            if(!debounce || name!=pname){
-                setSpeakState(p=>{
-                    if(p){
-                        chime.current.play()
-                        speak(name)
-                    }
-                    return p
-                })
-                setVibrationState(p=>{
-                    if(p){
-                        navigator.vibrate(200)
-                    }
-                    return p
-                })
-                onResult(name)
-                return name
-            }else{
-                return pname
-            }
-        })
+        setScanResult(url.searchParams.get("name"))
     }
 
     const speak = (text) => {
@@ -124,7 +111,7 @@ const QRCam = (props)=>{
             </div>
             {cameraState?<QrReader
                 className="qr-cam"
-                scanDelay={500}
+                scanDelay={300}
                 onResult={onRes}
                 constraints={{ facingMode: !cameraOrientation?'user':'environment' }}
                 videoId="qr-cam"
