@@ -92,23 +92,24 @@ const BadgeIssueQR = (props)=>{
         }
     }, [date])
 
-    const onScan = useCallback((vname, err)=>{
+    const onScan = useCallback(scanResult=>{
 
-        if(err){
-            console.log("Invalid URL")
-            return
-        }
+        var url = new URL(scanResult)
+        var vname = url.searchParams.get("name")
+        var edate = url.searchParams.get("date")
 
         if(!vname){
-            console.log("Empty name!")
+            toast.warn("No name found in the badge! Enter manually")
+            setShowManualEntry(true)
             return
         }
 
         setActiveRequests(p=>p+1)
         new API().call('set-badge-issue', {
             date: moment().format("YYYY-MM-DD HH:mm:ss"),
-            edate: date,
-            vname
+            edate,
+            vname,
+            listedDate: date
         }).then((res)=>{
             setTimeout(()=>{
                 setIssued(res)
@@ -137,6 +138,10 @@ const BadgeIssueQR = (props)=>{
             console.log("Deletion canceled")
         }
     }, [date])
+
+    const readOut = useCallback((d)=>{
+        return new URL(d).searchParams.get("name") || ""
+    })
 
     const handleCopy = ()=>{
         clipboardy.write(issued.map(i=>{
@@ -202,7 +207,14 @@ const BadgeIssueQR = (props)=>{
             />:null}
 
             <div className="bi-root">
-                <QRCam className="bi-cam" size={"100vw"} onResult={onScan} onCameraShowHide={setCameraShowHide}/>
+                <QRCam
+                    className="bi-cam"
+                    size={"100vw"}
+                    onResult={onScan}
+                    matchPattern={/https:\/\/vol.iskconmysore.org/}
+                    onCameraShowHide={setCameraShowHide}
+                    readOut={readOut}
+                />
             </div>
 
             {issued?
