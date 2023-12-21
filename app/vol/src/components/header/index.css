@@ -10,6 +10,12 @@
     padding: 2vw;
 }
 
+.head-title {
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
 #menuButton {
     margin: 0% 3% 0% 0%;
     font-size: 4vw;

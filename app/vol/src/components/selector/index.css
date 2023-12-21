@@ -1,0 +1,58 @@
+.cel-root {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background: #00000058;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    animation: celviewbg .2s ease-in-out;
+
+}
+
+
+.cel-items {
+    position: relative;
+    top: -20vh;
+    background-color: white;
+    width: 75vw;
+    padding: 2vw;
+    border-radius: 1vw;
+
+    animation: celview .2s ease-in-out;
+}
+
+.cel-item {
+    padding: 2vw;
+    font-size: 4vw;
+    border-bottom: .5vw solid #eee;
+    cursor: pointer;
+}
+
+.cel-item.last {
+    border-bottom: none;
+}
+
+@keyframes celview {
+    from {
+        transform: scale(.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes celviewbg {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
