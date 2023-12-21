@@ -59,6 +59,8 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+
+    margin: 0 .01in 0 .1in;
 }
 
 .bp-detail {
@@ -84,6 +86,7 @@
     flex-wrap: wrap;
 
     border-bottom: .019in solid #393185b7;
+    padding-left: .1in;
 }
 
 .bp-qr {

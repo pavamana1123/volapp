@@ -2750,6 +2750,8 @@ We now request you to please *recheck your service details and dates of service*
 
 *${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
 
+‼️🪪 *DO NOT FORGET TO BRING YOUR VOLUNTEER BADGE ON FESTIVAL DAY (23rd)*
+
 You can reply here regarding any queries.
 
 Regards,
@@ -2873,7 +2875,62 @@ Regards,
 Pankajanghri Dasa
 ISKCON Mysore
 `.trim())}`})
-    },     
+    },
+    
+    "SPOC Reminder - VKE23": (props)=>{
+
+        var { services } = props.data
+        const dates = [
+            "2023-12-23",
+        ]
+
+        services = services.filter(s=>{
+            return dates.indexOf(s.date)!=-1
+        })  
+
+        var spocMap = {}
+
+        services.map(s=>{
+            if(s.coordinator==s.spoc || s.spoc=="" || s.spocPhone==""){
+                return
+            }
+
+            spocMap[s.spoc]=spocMap[s.spoc]||{
+                spoc: s.spoc,
+                spocPhone: s.spocPhone,
+                services : []
+            }
+            spocMap[s.spoc].services.indexOf(s.service)==-1 && spocMap[s.spoc].services.push({
+                    service: s.serviceName,
+                    date: s.date,
+                    coordinator: s.coordinator,
+                    coordinatorPhone: s.coordinatorPhone,
+                    timings: s.timings,
+                    supply: s.supply,
+                })
+        })
+
+        var spocs = Object.keys(spocMap).sort()
+
+        return spocs.map(sp=>{
+        var s = spocMap[sp]
+
+        return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
+*SPOC - Reminder - Vaikunta Ekadashi Volunteering*
+
+Hare Krishna 🙏
+
+Hope you have discussed with the service coordinator${s.services.length>1?"s":""} and understood the details of your service${s.services.length>1?"s":""} and also have called your volunteers. If not please do it by today.
+
+You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. *Some service details and volunteers were updated recently*. So kindly recheck the service details by clicking on the below link:
+
+*https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}*
+
+Regards,
+Pankajanghri Dasa
+ISKCON Mysore
+`.trim())}`})
+    },    
     
 }
 
