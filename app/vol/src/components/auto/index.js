@@ -13,6 +13,10 @@ function Auto(props) {
   var ip = useRef()
   var timer = useRef()
 
+  useEffect(()=>{
+    ip.current.focus()
+  }, [])
+
   const onChangeDelay = (e)=>{
     clearTimeout(timer.current)
     timer.current = setTimeout(()=>{
