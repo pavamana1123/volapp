@@ -2693,7 +2693,68 @@ You can reply here regarding any queries.
 Regards,
 Pankajanghri Dasa
 ISKCON Mysore`.trim())}`})
-    },  
+    }, 
+    
+    "Service Reminder - VKE23": (props)=>{
+
+        var { volunteers } = props.data
+        
+        const dates = [
+            "2023-12-23",
+        ]
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
+                umap[v.volunteerName]=v.volunteerPhone
+            }
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.serviceReminderSent
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    availability: volunteers[i].availability,
+                    idCardCollected: volunteers[i].idCardCollected,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                    date: volunteers[i].date,
+                    service: volunteers[i].service,
+                    timings: volunteers[i].timings,
+                    coordinator: volunteers[i].coordinator,
+                    spoc: volunteers[i].spoc,
+                    spocPhone: volunteers[i].spocPhone
+                })
+            }
+            }
+        })
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+*Service Reminder - Vaikunta Ekadashi 2023 - Volunteering*
+    
+Hare Krishna 🙏
+We hope that you have gone through the service details and have contacted your SPOC(s) regarding the service details.
+
+We now request you to please *recheck your service details and dates of service* by clicking on the link given below:
+
+*${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
+
+You can reply here regarding any queries.
+
+Regards,
+ISKCON Mysore`.trim())}`})
+    },     
     
     "Volunteer Badge Reminder - VKE23": (props)=>{
 

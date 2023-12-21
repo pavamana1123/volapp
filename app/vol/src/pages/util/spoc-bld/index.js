@@ -98,7 +98,7 @@ function SPOCBLD(props) {
       phone: spocMap[s].phone,
       b: getCount(s, "b"),
       l: getCount(s, "l"),
-      d: dinnerCount?getCount(s, "d"): date=="2023-09-07"?0:getCount(s, "d")
+      d: dinnerCount?getCount(s, "d"): date=="2023-12-23"?0:getCount(s, "d")
     }
   })
 
@@ -118,7 +118,7 @@ function SPOCBLD(props) {
           <input type='checkbox' onChange={(e)=>{
             setDinnerCount(e.target.checked)
           }}/>
-          Include 7th night dinner count
+          Include dinner count
         </div>
 
         <div>
