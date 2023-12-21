@@ -2,7 +2,7 @@ import './index.css';
 import { useState, useEffect, useRef } from 'react';
 
 function Tab(props) {
-  var [activeTab, setActiveTab] = useState(0)
+  var [activeTab, setActiveTab] = useState(props.defaultActive || 0)
   var self=this
   const {tabs, onTabChange} = props
 

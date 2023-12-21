@@ -28,6 +28,7 @@ const BadgeIssueQR = (props)=>{
     
     var totalBadges = useRef(0)
     const tap = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/tap.mp3`))
+    const warn = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/warn.mp3`))
 
     useEffect(()=>{
         if(!data.events){
@@ -58,14 +59,11 @@ const BadgeIssueQR = (props)=>{
             console.log(e)
         })
 
-        var vmap = {}
-        data.volunteers.filter(v=>{
+        volunteers.current = data.volunteers.filter(v=>{
             return v.date==edate && v.service!="" && v.volunteerName!=""
         }).map(v=>{
-            vmap[v.volunteerName]=0
-        })
-
-        volunteers.current = Object.keys(vmap).sort()
+            return v.volunteerName
+        }).sonique()
         totalBadges.current = volunteers.current.length
 
     }, [data])
@@ -80,27 +78,38 @@ const BadgeIssueQR = (props)=>{
         })
 
         if(data.volunteers){
-            var vmap = {}
-            data.volunteers.filter(v=>{
+            volunteers.current = data.volunteers.filter(v=>{
                 return v.date==date && v.service!="" && v.volunteerName!=""
             }).map(v=>{
-                vmap[v.volunteerName]=0
-            })
-
-            volunteers.current = Object.keys(vmap).sort()
+                return v.volunteerName
+            }).sonique()
             totalBadges.current = volunteers.current.length
         }
     }, [date])
 
-    const onScan = useCallback(scanResult=>{
+    const onScan = useCallback((scanResult, notURL)=>{
 
-        var url = new URL(scanResult)
-        var vname = url.searchParams.get("name")
-        var edate = url.searchParams.get("date")
+        var vname, edate
+        if(notURL){
+            vname=scanResult
+            edate=date
+        }else{
+            var url = new URL(scanResult)
+            vname = url.searchParams.get("name")
+            edate = url.searchParams.get("date")
+        }
 
         if(!vname){
             toast.warn("No name found in the badge! Enter manually")
             setShowManualEntry(true)
+            return
+        }
+
+        const found = volunteers.current.indexOf(vname)!=-1
+        if(!found){
+            warn.current.play()
+            navigator.vibrate(200)
+            toast.error(`This volunteer ${vname} has not been assigned any service!`)
             return
         }
 
@@ -141,7 +150,7 @@ const BadgeIssueQR = (props)=>{
 
     const readOut = useCallback((d)=>{
         return new URL(d).searchParams.get("name") || ""
-    })
+    }, [])
 
     const handleCopy = ()=>{
         clipboardy.write(issued.map(i=>{
@@ -178,7 +187,7 @@ const BadgeIssueQR = (props)=>{
         var { item, value } = props
         return <div className='bi-manual-drop'
             onClick={()=>{
-            onScan(value)
+            onScan(value, true)
             setTimeout(closeModal, 100)
         }}>
             {item}

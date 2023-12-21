@@ -64,12 +64,12 @@ const getBadgeIssue = async (res, dbcon, body)=>{
 }
 
 const setPrasadamIssue = async (res, dbcon, body)=>{
-    const query = `insert into prasadamissue (date, edate, vname, bld)
+    const query = `insert into prasadamissue (date, edate, vname, tod)
     values(
         "${body.date}",
         "${body.edate}",
         "${body.vname}",
-        "${body.bld}"
+        "${body.tod}"
     ) on duplicate key update date="${body.date}";
     select * from prasadamissue where edate="${body.edate}" order by date desc
     `
