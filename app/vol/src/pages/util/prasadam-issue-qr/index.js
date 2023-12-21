@@ -186,12 +186,12 @@ const PrasadamIssueQR = (props)=>{
         })
     }, [date, todIssued])
 
-    const handleDelete = useCallback((vname)=>{
+    const handleDelete = useCallback((vname, tod)=>{
         const deleteConfirm = window.confirm(`Do you want to delete this entry of ${vname}?`)
 
         if (deleteConfirm) {
             setActiveRequests(p=>p+1)
-            new API().call('unset-prasadam-issue', { edate: date, vname }).then((res)=>{
+            new API().call('unset-prasadam-issue', { edate: date, vname, tod }).then((res)=>{
                 setIssued(res) 
                 tap.current.play()
             }).catch(console.log)
@@ -332,7 +332,7 @@ const PrasadamIssueQR = (props)=>{
                                                 </div>
                                                 <div>
                                                     <Icon name="trash" color="#aaa" size="6vw" onClick={()=>{
-                                                        handleDelete(i.vname)
+                                                        handleDelete(i.vname, i.tod)
                                                     }}/>
                                                 </div>
                                             </div>

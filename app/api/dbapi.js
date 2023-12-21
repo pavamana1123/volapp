@@ -83,7 +83,7 @@ const setPrasadamIssue = async (res, dbcon, body)=>{
 }
 
 const unsetPrasadamIssue = async (res, dbcon, body)=>{
-    const query = `delete from prasadamissue where edate="${body.edate}" and vname="${body.vname}";
+    const query = `delete from prasadamissue where edate="${body.edate}" and vname="${body.vname}" and tod="${body.tod}";
     select * from prasadamissue where edate="${body.edate}" order by date desc`
 
     try {
