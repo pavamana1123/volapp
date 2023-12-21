@@ -163,10 +163,9 @@
     }
     
     .ser-event-name {
-        margin-left: 17vw;
-        font-size: 1.25vw;
-        margin-top: .5vw;
-        margin-bottom: -1.5vw;
+        margin-bottom: 1vw;
+        font-size: 1.5vw;
+        margin-left: 15.5vw;
     }
 
     .sv-coup {

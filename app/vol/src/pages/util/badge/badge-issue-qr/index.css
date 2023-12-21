@@ -12,6 +12,13 @@
     overflow-y: scroll;
 }
 
+.bi-header {
+    display: flex;
+    color: white !important;
+    align-items: center;
+    white-space: pre;
+}
+
 .bi-manual-info {
     margin: 1vw 5vw 4vw 5vw;
     color: #555;

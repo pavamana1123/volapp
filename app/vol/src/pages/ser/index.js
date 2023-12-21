@@ -120,7 +120,7 @@ function Ser(props) {
       events.forEach(e=>{
         eventMap[e.date]=e.event
       })
-      if(!serviceView){
+      if(!serviceView && unlockIp && unlockIp.current){
         unlockIp.current.focus()
       }
     }

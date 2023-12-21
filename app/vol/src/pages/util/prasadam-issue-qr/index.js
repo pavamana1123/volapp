@@ -13,7 +13,6 @@ import Auto from "../../../components/auto"
 import { Spinner } from "../../../components/spinner"
 import Selector from "../../../components/selector"
 
-
 const PrasadamIssueQR = (props)=>{
     var { data } = props
     var [date, setDate] = useState()
@@ -78,8 +77,19 @@ const PrasadamIssueQR = (props)=>{
         }).catch((e)=>{
             console.log(e)
         })
-    }, [date])
 
+        if(data.volunteers){
+            var vmap = {}
+            data.volunteers.filter(v=>{
+                return v.date==date && v.service!="" && v.volunteerName!=""
+            }).map(v=>{
+                vmap[v.volunteerName]=0
+            })
+
+            volunteers.current = Object.keys(vmap).sort()
+            totalPrasadamCount.current = volunteers.current.length
+        }
+    }, [date])
 
     const onScan = useCallback((vname, err)=>{
 

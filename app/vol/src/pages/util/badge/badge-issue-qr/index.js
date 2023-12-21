@@ -11,36 +11,50 @@ import 'react-toastify/dist/ReactToastify.css'
 import Modal from "../../../../components/modal"
 import Auto from "../../../../components/auto"
 import { Spinner } from "../../../../components/spinner"
+import Selector from "../../../../components/selector"
 
 const BadgeIssueQR = (props)=>{
 
     var { data } = props
     var [date, setDate] = useState()
+    var [dates, setDates] = useState()
     var [issued, setIssued] = useState()
     var [searchFilter, setSearchFilter] = useState("")
     var [cameraShowHide, setCameraShowHide] = useState()
     var [showManualEntry, setShowManualEntry] = useState(false)
     var [activeRequests, setActiveRequests] = useState(0) 
+    var [showDateSelector, setShowDateSelector] = useState(false) 
     var volunteers = useRef()
     
     var totalBadges = useRef(0)
     const tap = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/tap.mp3`))
 
-    const getDate = (d)=>{
-        return d.events.filter(e=>{
-            return e.badge && moment(e.date).isSameOrAfter(moment(), 'day')
-        }).map(e=>{
-            return e.date
-        })[0]
-    }
-
     useEffect(()=>{
         if(!data.events){
             return
         }
-        var edate = getDate(data)
+        
+        var ds = data.events.filter(e=>{
+            return e.prasadam && moment(e.date).isSameOrAfter(moment(), 'day')
+        }).map(e=>{
+            return e.date
+        })
+
+        setDates(ds)
+        var fdates = ds.filter(d=>moment(d).isAfter(moment()))
+        var edate
+        if(fdates.length){
+            edate = fdates[0]
+        }else{
+            edate = ds[ds.length-1]
+        }
         setDate(edate)
-        new API().call('get-badge-issue', {edate}).then(setIssued).catch((e)=>{
+
+        setActiveRequests(p=>p+1)
+        new API().call('get-badge-issue', {edate}).then((res)=>{
+            setIssued(res)
+            setActiveRequests(p=>p-1)
+        }).catch((e)=>{
             console.log(e)
         })
 
@@ -56,6 +70,27 @@ const BadgeIssueQR = (props)=>{
 
     }, [data])
 
+    useEffect(()=>{
+        setActiveRequests(p=>p+1)
+        new API().call('get-badge-issue', {edate: date}).then((res)=>{
+            setIssued(res)
+            setActiveRequests(p=>p-1)
+        }).catch((e)=>{
+            console.log(e)
+        })
+
+        if(data.volunteers){
+            var vmap = {}
+            data.volunteers.filter(v=>{
+                return v.date==date && v.service!="" && v.volunteerName!=""
+            }).map(v=>{
+                vmap[v.volunteerName]=0
+            })
+
+            volunteers.current = Object.keys(vmap).sort()
+            totalBadges.current = volunteers.current.length
+        }
+    }, [date])
 
     const onScan = useCallback((vname, err)=>{
 
@@ -147,7 +182,25 @@ const BadgeIssueQR = (props)=>{
 
     return (
         <div className="bi-main">
-            <Header title={`Badge issue for ${moment(date).format("DD MMM 'YY")}`} hideOptions/>
+            <Header title={date?
+                <div className="bi-header">
+                    <span>{`Volunteer Prasadam for `}</span>
+                    <span>{moment(date).format("DD MMM 'YY")}</span>
+                    <Icon name="arrow-drop-down" color="white" onClick={()=>{
+                        setShowDateSelector(true)
+                    }}/>
+                </div>
+            :null} hideOptions/>
+
+            {showDateSelector?<Selector
+                display={dates.map(d=>moment(d).format('ddd, DD MMM YYYY'))}
+                value={dates}
+                onSelect={setDate}
+                onClose={()=>{
+                    setShowDateSelector(false)
+                }}
+            />:null}
+
             <div className="bi-root">
                 <QRCam className="bi-cam" size={"100vw"} onResult={onScan} onCameraShowHide={setCameraShowHide}/>
             </div>
