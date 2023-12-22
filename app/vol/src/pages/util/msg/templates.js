@@ -2812,7 +2812,7 @@ Hare Krishna 🙏
 
 🚗 Vehicle parking is not allowed inside the temple on the festival day. Parking arrangement is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into the parking area is allowed only with Volunteer Badge.
 
-🪪 Volunteer Coupon can be shown for honoring Volunteer Prasadam. This badge can be used as volunteer prasadam coupon. 
+🪪 This volunteer-badge must be presented for honoring volunteer prasadam. It can be used as volunteer prasadam coupon. 
 
 You can reply here regarding any queries.
 
