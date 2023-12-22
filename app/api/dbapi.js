@@ -29,7 +29,7 @@ const setBadgeIssue = async (res, dbcon, body)=>{
         ${body.cname?`"${body.cname}"`:"NULL"},
         ${body.cphone?`"${body.cphone}"`:"NULL"}
     ) on duplicate key update date="${body.date}", cname=${body.cname?`"${body.cname}"`:"NULL"}, cphone=${body.cphone?`"${body.cphone}"`:"NULL"};
-    select * from badgeissue where edate="${body.edate}" order by date desc
+    select * from badgeissue where edate="${body.listedDate || body.edate}" order by date desc
     `
 
     try {
@@ -42,7 +42,7 @@ const setBadgeIssue = async (res, dbcon, body)=>{
 
 const unsetBadgeIssue = async (res, dbcon, body)=>{
     const query = `delete from badgeissue where edate="${body.edate}" and vname="${body.vname}";
-    select * from badgeissue where edate="${body.edate}" order by date desc`
+    select * from badgeissue where edate="${body.listedDate || body.edate}" order by date desc`
 
     try {
         var result = await dbcon.execQuery(query)
@@ -64,12 +64,12 @@ const getBadgeIssue = async (res, dbcon, body)=>{
 }
 
 const setPrasadamIssue = async (res, dbcon, body)=>{
-    const query = `insert into prasadamissue (date, edate, vname, bld)
+    const query = `insert into prasadamissue (date, edate, vname, tod)
     values(
         "${body.date}",
         "${body.edate}",
         "${body.vname}",
-        "${body.bld}"
+        "${body.tod}"
     ) on duplicate key update date="${body.date}";
     select * from prasadamissue where edate="${body.edate}" order by date desc
     `
@@ -83,7 +83,7 @@ const setPrasadamIssue = async (res, dbcon, body)=>{
 }
 
 const unsetPrasadamIssue = async (res, dbcon, body)=>{
-    const query = `delete from prasadamissue where edate="${body.edate}" and vname="${body.vname}";
+    const query = `delete from prasadamissue where edate="${body.edate}" and vname="${body.vname}" and tod="${body.tod}";
     select * from prasadamissue where edate="${body.edate}" order by date desc`
 
     try {

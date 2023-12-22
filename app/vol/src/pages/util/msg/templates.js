@@ -2773,7 +2773,7 @@ ISKCON Mysore`.trim())}`})
             if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
                 umap[v.volunteerName]=v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && v.idCardPrinted && !v.idReminderSent
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && v.idCardPrinted && !v.idReminderSent && !v.idCardCollected
         })
         
         Object.keys(umap).map(name=>{
@@ -2808,7 +2808,7 @@ ISKCON Mysore`.trim())}`})
     
 Hare Krishna 🙏
 
-🪪 *Volunteer Badges will be issued today (Sunday, 17th December 2023) from 10 AM to 1 PM and 3 PM to 8 PM at Volunteer Care Cell inside Sridham Hall*. Please collect without fail.
+🪪 *Volunteer Badges will be issued today (Friday, 22nd December 2023) from 10 AM to 1.30 PM and 3 PM to 9 PM at Volunteer Care Cell near Homa-Kunda area* in the temple. Please collect without fail.
 
 🚗 Vehicle parking is not allowed inside the temple on the festival day. Parking arrangement is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into the parking area is allowed only with Volunteer Badge.
 

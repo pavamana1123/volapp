@@ -16,7 +16,7 @@ const QRCam = (props)=>{
     const synthesis = window.speechSynthesis
     const capture = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/capture.mp3`))
 
-    var { size, onResult, style, className, match, onCameraShowHide } = props
+    var { size, onResult, style, className, matchPattern, onCameraShowHide, readOut } = props
     size = size || "90vw"
     style = style || {}
     className = className || ""
@@ -40,16 +40,14 @@ const QRCam = (props)=>{
     var prevScanResult = useRef()
 
     useEffect(()=>{
-
         if(scanResult==prevScanResult.current){
             return
         }
-
         prevScanResult.current=scanResult
 
         if(speakState){
             capture.current.play()
-            speak(scanResult)
+            speak(readOut?readOut(scanResult):scanResult)
         }
         if(vibrationState){
             navigator.vibrate(200)
@@ -58,18 +56,10 @@ const QRCam = (props)=>{
     }, [scanResult])
 
     const onRes = (data, error)=>{
-
-        if(error || !onRes){
+        if(error || !onRes || !matchPattern.test(data)){
             return
         }
-
-        var url = new URL(data)
-        if(url.host!="vol.iskconmysore.org"){
-            onResult(null, true)
-            return
-        }
-
-        setScanResult(url.searchParams.get("name"))
+        setScanResult(data.text)
     }
 
     const speak = (text) => {
