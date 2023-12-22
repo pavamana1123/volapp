@@ -4,10 +4,12 @@ import { Paper } from '../../../components/paper';
 import './index.css';
 import moment from 'moment';
 import cookie from '../../../cookie';
+import API from '../../../api'
+
 
 function Vols(props) {
 
-  var { volunteers, filterValue, serviceView, date, service } = props
+  var { volunteers, filterValue, serviceView, date, service, reporting, onReportUpdate, dates } = props
   var [attendanceShare, setAttendanceShare] = useState({})
 
   useEffect(()=>{
@@ -99,17 +101,29 @@ function Vols(props) {
                           return
                         }
 
-                        try {
-                          var copy = JSON.parse(cookie.get(`@${filterValue}`) || `{}`)
-                          copy[attendanceKey] = !!!copy[attendanceKey]
-                          cookie.set(`@${filterValue}`, JSON.stringify(copy, 2))
-                          setAttendanceShare(copy)
-                        }catch{
-                          alert("Could not mark attendance")
+                        if(dates.length){
+                          new API().call(`${reporting && reporting[v.date] && reporting[v.date][v.service] && reporting[v.date][v.service][v.volunteerName]?"un":""}set-reporting`, 
+                          {
+                            service: v.service,
+                            volunteer: v.volunteerName,
+                            date: v.date,
+                            dates
+                          }).then(onReportUpdate).catch((e)=>{
+                              console.log(e)
+                          })
                         }
 
+                        // try {
+                        //   var copy = JSON.parse(cookie.get(`@${filterValue}`) || `{}`)
+                        //   copy[attendanceKey] = !!!copy[attendanceKey]
+                        //   cookie.set(`@${filterValue}`, JSON.stringify(copy, 2))
+                        //   setAttendanceShare(copy)
+                        // }catch{
+                        //   alert("Could not mark attendance")
+                        // }
+
                       }}>
-                        <i className={`bi bi-check-circle-fill nameCheck ${!(v.reported || (serviceView && attendanceShare[attendanceKey]))?"name-greyed":""}`}></i>
+                        <i className={`bi bi-check-circle-fill nameCheck ${!(reporting && reporting[v.date] && reporting[v.date][v.service] && reporting[v.date][v.service][v.volunteerName])?"name-greyed":""}`}></i>
                       </div>:null}
                       <div className='nameact'>
                         <div className='name-phone'>

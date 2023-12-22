@@ -15,6 +15,13 @@ const dbapi = async (req, res, dbcon)=>{
             return getPrasadamIssue(res, dbcon, body)
         case "unset-prasadam-issue":
             return unsetPrasadamIssue(res, dbcon, body)
+
+        case "set-reporting":
+            return setReporting(res, dbcon, body)
+        case "get-reporting":
+            return getReporting(res, dbcon, body)
+        case "unset-reporting":
+            return unsetReporting(res, dbcon, body)            
         default:
             res.status(404).send("Invalid endpoint")
     }
@@ -96,6 +103,54 @@ const unsetPrasadamIssue = async (res, dbcon, body)=>{
 
 const getPrasadamIssue = async (res, dbcon, body)=>{
     const query = `select * from prasadamissue where edate="${body.edate}" order by date desc`
+
+    try {
+        var result = await dbcon.execQuery(query)
+        res.status(200).send(JSON.stringify(result))
+    }catch(error){
+        res.status(500).send(error.toString())
+    }
+}
+
+
+const setReporting = async (res, dbcon, body)=>{
+    const query = `insert into reporting (date, service, volunteer)
+    values(
+        "${body.date}",
+        "${body.service}",
+        "${body.volunteer}"
+    ) on duplicate key update date="${body.date}";
+    select * from reporting where ${body.dates.map(d=>{
+        return `date="${d}"`
+    }).join(" or ")} order by date;
+    `
+
+    try {
+        var result = await dbcon.execQuery(query)
+        res.status(200).end(JSON.stringify(result[1]))
+    }catch(error){
+        res.status(500).send(error.toString())
+    }
+}
+
+const unsetReporting = async (res, dbcon, body)=>{
+    const query = `delete from reporting where date="${body.date}" and volunteer="${body.volunteer}" and service="${body.service}";
+    select * from reporting where ${body.dates.map(d=>{
+        return `date="${d}"`
+    }).join(" or ")} order by date;`
+
+    try {
+        var result = await dbcon.execQuery(query)
+        res.status(200).send(JSON.stringify(result[1]))
+    }catch(error){
+        res.status(500).send(error.toString())
+    }
+}
+
+const getReporting = async (res, dbcon, body)=>{
+    const query = `select * from reporting where ${body.dates.map(d=>{
+        return `date="${d}"`
+    }).join(" or ")};`
 
     try {
         var result = await dbcon.execQuery(query)
