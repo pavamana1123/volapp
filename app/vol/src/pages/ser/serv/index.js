@@ -19,7 +19,9 @@ function Serv(props) {
                 {`⏱️ ${service.timings.toTimingCase()}`}
             </div>
             <div className='serviceDetails'>
-                {`👑 ${service.coordinator}`}
+                <div>{`👑 ${service.coordinator}`}</div>
+                {!isNaN(service.coordinatorPhone)?<a href={`tel:+91${service.coordinatorPhone}`}><i className="bi bi-telephone-fill"></i></a> : null}
+                    {!isNaN(service.coordinatorPhone)?<a href={`https://wa.me/91${service.coordinatorPhone}`} target="_blank"><i className="bi bi-whatsapp"></i></a>:null}    
             </div>
             <div className='serviceDetails'>
                 <div className='spocPhoneDet'>

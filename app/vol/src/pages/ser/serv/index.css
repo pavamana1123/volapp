@@ -3,6 +3,7 @@
 }
 
 .serviceDetails {
+    display: flex;
     color: #555;
     font-size: 3.5vw;
     margin: 1vw;
