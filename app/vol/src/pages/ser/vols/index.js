@@ -111,6 +111,7 @@ function Vols(props) {
                       }}>
                         <i className={`bi bi-check-circle-fill nameCheck ${!(v.reported || (serviceView && attendanceShare[attendanceKey]))?"name-greyed":""}`}></i>
                       </div>:null}
+                      
                       <div className='nameact'>
                         <div className='name-phone'>
                           <div>{v.volunteerName}</div>
