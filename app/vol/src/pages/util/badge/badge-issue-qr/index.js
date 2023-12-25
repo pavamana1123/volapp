@@ -36,13 +36,13 @@ const BadgeIssueQR = (props)=>{
         }
         
         var ds = data.events.filter(e=>{
-            return e.prasadam && moment(e.date).isSameOrAfter(moment(), 'day')
+            return e.badge
         }).map(e=>{
             return e.date
         })
 
         setDates(ds)
-        var fdates = ds.filter(d=>moment(d).isAfter(moment()))
+        var fdates = ds.filter(d=>moment(d).isSameOrAfter(moment(), 'day'))
         var edate
         if(fdates.length){
             edate = fdates[0]

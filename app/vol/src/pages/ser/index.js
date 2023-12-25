@@ -10,6 +10,7 @@ import {utils, writeFile} from "xlsx"
 import { Paper } from '../../components/paper';
 import Modal from '../../components/modal';
 import cookie from '../../cookie';
+import API from '../../api'
 
 function Ser(props) {
 
@@ -100,9 +101,29 @@ function Ser(props) {
 
   var [filterValue, setFilterValue] = useState(filterValues[0])
   var [serviceView, setServiceView] = useState(false)
+  var [reporting, setReporting] = useState({})
+
+  const getReporting = (res)=>{
+    var rep = {}
+    res.map(r=>{
+      if(rep[r.date]){
+        if(rep[r.date][r.service]){
+          rep[r.date][r.service][r.volunteer]=1
+        }else{
+          rep[r.date][r.service] = {}
+          rep[r.date][r.service][r.volunteer]=1
+        }
+      }else{
+        rep[r.date]={}
+        rep[r.date][r.service] = {}
+        rep[r.date][r.service][r.volunteer]=1
+      }
+    })
+    return rep
+  }
 
   useEffect(()=>{
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(window.location.search)
     
     if(urlParams.has("SPOC")){
       var spoc = decodeURIComponent(urlParams.get("SPOC"))
@@ -110,6 +131,7 @@ function Ser(props) {
       setFilterValue(spoc)
       setServiceView(true)
     }
+
   }, [])
 
   let eventMap = {}
@@ -124,7 +146,18 @@ function Ser(props) {
         unlockIp.current.focus()
       }
     }
+
   }, [data])
+
+  useEffect(()=>{
+    if(dates && dates.length){
+      new API().call('get-reporting', {dates}).then((res)=>{
+          setReporting(getReporting(res))
+      }).catch((e)=>{
+          console.log(e)
+      })
+    }
+  }, [dates])
 
 
   const applyServiceFilters = (s,d)=>{
@@ -462,7 +495,17 @@ ${d.map((bb, i)=>{
                           dateServices.map(s=>{
                           return <div className='svHolder'>
                             <Serv service={s} volunteers={volunteers.filter(v=>{return v.date==d && v.volunteerName != ""})}/>
-                            <Vols date={d} service={s} filterValue={filterValue} serviceView={serviceView} volunteers={volunteers.sort((v1,v2)=>{
+                            <Vols
+                              date={d}
+                              dates={dates}
+                              service={s}
+                              filterValue={filterValue}
+                              serviceView={serviceView}
+                              reporting={reporting}
+                              onReportUpdate={(res)=>{
+                                setReporting(getReporting(res))
+                              }}
+                              volunteers={volunteers.sort((v1,v2)=>{
                                 if(v1.volunteerName > v2.volunteerName){
                                   return 1
                                 }
