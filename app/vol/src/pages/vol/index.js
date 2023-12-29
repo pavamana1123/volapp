@@ -81,7 +81,7 @@ function Vol(props) {
                     })[0]
 
                     var svs = svs1.map((s, i, ss)=>{
-                      return <Serv details={s} services={services} i={i} sl={ss.length} mainService={mainService}/>
+                      return <Serv details={s} services={services} i={i} sl={ss.length} mainService={mainService} name={filter} preset={preset}/>
                     })
 
                     return {

@@ -15,6 +15,18 @@
     display: flex;
 }
 
+.vol-show-vol {
+    display: flex;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: var(--bar);
+    color: white;
+    padding: 1vw;
+    margin: 1vw 0 1vw 0;
+    justify-content: center;
+    border-radius: .5vw;
+}
+
 .volJoinGroup {
     font-size: 3vw;
     text-decoration: none;

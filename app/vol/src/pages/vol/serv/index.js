@@ -3,7 +3,7 @@ import HSep from '../../../components/HSep';
 
 function Serv(props) {
 
-    var {details, i, sl, services} = props
+    var {details, i, sl, services, name, preset} = props
 
     let waGroupLink = services.filter(s=>{
         return s.serviceName == details.service
@@ -54,6 +54,10 @@ function Serv(props) {
                     </div>
                 </div>}
             </div>
+
+            {preset && name==details.spoc? 
+                <a href={`/services?SPOC=${encodeURIComponent(name)}`} className='vol-show-vol'>Show Volunteers</a>
+            :null}
 
             <HSep/>
         </div>
