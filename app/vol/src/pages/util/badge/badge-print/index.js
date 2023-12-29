@@ -21,11 +21,11 @@ const BadgePrint = (props)=>{
 
         let { volunteers, services } = data
         volunteers = volunteers.filter(v=>{
-            return !v.idCardPrinted && v.volunteerName && v.volunteerPhone && v.service && v.date=="2023-12-23"
+            return !v.idCardPrinted && v.volunteerName && v.volunteerPhone && v.service && v.date=="2024-01-06"
         })
 
         services = services.filter(s=>{
-            return s.date=="2023-12-23"
+            return s.date=="2024-01-06"
         })
     
         let volunteersMap = {}

@@ -199,6 +199,14 @@ const BadgePreview = ({data, dates}) => {
                   spoc: "ok"
               }} back/>:<div className='bpr-prompt-text'>Drop BACK IMAGE here</div>}
           </div>
+
+          <div className='bpr-names'>
+            {
+              volunteers?volunteers.map(v=>{
+                return <div>{v.volunteerName}</div>
+              }):null
+            }
+          </div>
         </div>
     </div>
   )

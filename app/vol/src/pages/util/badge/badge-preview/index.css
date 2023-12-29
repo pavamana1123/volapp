@@ -10,6 +10,14 @@
     width: 3.75in;
 }
 
+.bpr-names {
+    max-height: 5in;
+    overflow-y: scroll;
+    background: white;
+    padding: 0 1vw 0 1vw;
+    user-select: all;
+}
+
 .bpr-date-input-label {
     font-size: 1vw;
     color: #555;

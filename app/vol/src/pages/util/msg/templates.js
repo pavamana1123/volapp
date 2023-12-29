@@ -106,7 +106,7 @@ ISKCON Mysore
 *Saturday, 6th January 2024*
     
 Hare Krishna 🙏
-Please accept the blessings of Sri Sri Krishna Balarama 🙏 ${(v.availability!="Default" && v.availability!="NOT AVAILABLE")?"We thank you for registering for the *Vaikunta Ekadashi* festival service.":""}
+Please accept the blessings of Sri Sri Krishna Balarama 🙏 ${(v.availability!="Default" && v.availability!="NOT AVAILABLE")?"We thank you for registering for the *Ratha Yatra* festival service.":""}
 
 *Guidelines:*
 
@@ -114,7 +114,7 @@ Please accept the blessings of Sri Sri Krishna Balarama 🙏 ${(v.availability!=
 
 💾 Please save this number as ISKCON Mysore Volunteering or with any other convenient name. If you do not do this, you may NOT be able to click on the links given below.
 
-🪪 *Volunteer Badges will be issued on Friday, 22nd December 2023 from 10 AM to 1.30 PM and 3 PM to 9 PM at Volunteer Care Cell near Sridham Hall*. Please collect without fail.
+🪪 *Volunteer Badges will be issued on Sunday, 31st December 2023 from 9.30 AM to 1 PM and 4 PM to 8.30 PM at Volunteer Care Cell outside Sridham Hall*. Please collect without fail.
 
 🚗 Vehicle parking is not allowed inside the temple on the festival day. Parking arrangement is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into the parking area is allowed only with Volunteer Badge.
 
@@ -231,7 +231,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Reminder - Vaikunta Ekadashi Volunteering*
+*SPOC - Reminder - Ratha Yatra Volunteering*
 
 Hare Krishna 🙏
 
