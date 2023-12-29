@@ -6,7 +6,6 @@
     height: fit-content;
     overflow-y: scroll;
     overflow-y: hidden;
-    width: 81%;
     box-shadow: -5px 5px 14px #aaaaaa80;
     transition: opacity .1s linear;
 }

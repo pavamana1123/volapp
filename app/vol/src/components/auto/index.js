@@ -5,7 +5,7 @@ function Auto(props) {
 
   var autodrop = useRef(0)
 
-  var { filter, Drop, className, placeholder } = props
+  var { filter, Drop, className, placeholder, autoValue, rootStyle } = props
 
   var [ list, setList ] = useState()
   var [ focus, setFocus ] = useState()
@@ -33,20 +33,22 @@ function Auto(props) {
   }
 
   return(
-    <div className='autoRoot'>
+    <div className='autoRoot' style={rootStyle || {}}>
       <input className={`autoin ${className}`} ref={ip} 
         onChange={onChangeDelay}
         onFocus={onFocus}
         onBlur={onBlur}
         placeholder={placeholder || 'Start typing your name...'}/>
-      {list && <div className={`auto-drop ${focus?"auto-show":"auto-hide"}`} ref={autodrop}>
+      {list && <div className={`auto-drop ${focus?"auto-show":"auto-hide"}`} ref={autodrop} style={ip.current?{
+        width: ip.current?`${ip.current.getBoundingClientRect().width}px`:"50vw"
+      }:{}}>
         {
           list.length?list.map((l, i, ll)=>{
             return (
               <div className='auto-item'
                 key={i}
                 onClick={()=>{
-                  ip.current.value=l
+                  ip.current.value=autoValue?autoValue(l):l
                   setList([l])
               }}>
                 <Drop item={l} value={l}/>
