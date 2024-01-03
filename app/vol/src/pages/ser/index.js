@@ -371,7 +371,7 @@ ${d.map((bb, i)=>{
                   "SPOC Phone"
                 ]]
                 var worksheet = utils.aoa_to_sheet(header.concat(volunteers.filter(v=>{
-                  return v.date==dates[selDate.current] && v.volunteerName!=""
+                  return v.date==selDateValue.current && v.volunteerName!=""
                 }).sort((a,b)=>{
                   return a.volunteerName>b.volunteerName?1:-1
                 }).sort((a,b)=>{
@@ -410,7 +410,7 @@ ${d.map((bb, i)=>{
                   ]
                 })))
                 utils.book_append_sheet(workbook,worksheet,"Service Details")
-                writeFile(workbook, `${filter=="None"||filterValue=="None"?"Service Details":`${filter}-${filterValue}`}-${dates[selDate.current]}.xlsx`);
+                writeFile(workbook, `${filter=="None"||filterValue=="None"?"Service Details":`${filter}-${filterValue}`}-${selDateValue.current}.xlsx`);
               }}>
                 <img className="downlaodicon" src="filetype-xls.svg" title="Download XL sheet"/>
               </div>
