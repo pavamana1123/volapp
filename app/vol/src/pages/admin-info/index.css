@@ -11,6 +11,10 @@
     margin-top: 1vw;
 }
 
+.adin-root {
+    margin-top: 2vw;
+}
+
 .guidelink {
     width: 100%;
     text-decoration: underline;
@@ -68,6 +72,10 @@
 }
 
 @media only screen and (min-width: 1080px) {
+
+    .adin-root {
+        margin-top: 1vw;
+    }
 
     .volnameauto {
         font-size: 1.25vw;

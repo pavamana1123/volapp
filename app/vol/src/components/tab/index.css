@@ -41,7 +41,6 @@
 
 .tabHeader {
     background-color: white;
-    margin-bottom: 2vw;
     background: #6495ed2b;
     border-radius: 1.5vw;
 }
@@ -61,7 +60,6 @@
     }
 
     .tabHeader {
-        margin-bottom: 1vw;
         border-radius: 0.5vw;
     }
 }

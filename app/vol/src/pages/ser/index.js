@@ -370,7 +370,8 @@ ${d.map((bb, i)=>{
                   "SPOC",
                   "SPOC Phone"
                 ]]
-                var worksheet = utils.aoa_to_sheet(header.concat(volunteers.filter(v=>{
+
+                var sheetData = header.concat(volunteers.filter(v=>{
                   return v.date==selDateValue.current && v.volunteerName!=""
                 }).sort((a,b)=>{
                   return a.volunteerName>b.volunteerName?1:-1
@@ -408,8 +409,14 @@ ${d.map((bb, i)=>{
                     v.spoc,
                     v.spocPhone
                   ]
-                })))
-                utils.book_append_sheet(workbook,worksheet,"Service Details")
+                }))
+
+                var worksheet = utils.aoa_to_sheet(sheetData)
+
+                worksheet["!cols"] = sheetData.maxColWidth().map(w=>{ return {wch: w} })
+
+                utils.book_append_sheet(workbook, worksheet, "Service Details")
+
                 writeFile(workbook, `${filter=="None"||filterValue=="None"?"Service Details":`${filter}-${filterValue}`}-${selDateValue.current}.xlsx`);
               }}>
                 <img className="downlaodicon" src="filetype-xls.svg" title="Download XL sheet"/>
