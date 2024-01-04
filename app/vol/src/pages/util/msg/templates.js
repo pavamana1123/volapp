@@ -183,13 +183,13 @@ ISKCON Mysore`.trim())}`})
     
 Hare Krishna 🙏
 
-🪪 *Volunteer Badges will be issued today (Friday, 22nd December 2023) from 10 AM to 1.30 PM and 3 PM to 9 PM at Volunteer Care Cell near Homa-Kunda area* in the temple. Please collect without fail.
+🪪 *Volunteer Badges will be issued today (Friday, 5th January 2023) from 9.30 AM to 1 PM and 4 PM to 9 PM at Volunteer Care Cell near Homa-Kunda area*. Please collect without fail.
 
 🚗 Vehicle parking is not allowed inside the temple on the festival day. Parking arrangement is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into the parking area is allowed only with Volunteer Badge.
 
 🪪 This volunteer-badge must be presented for honoring volunteer prasadam. It can be used as volunteer prasadam coupon. 
 
-You can reply here regarding any queries.
+You can call this number- 6360028651 (ISKCON Mysore Volunteering) or reply here regarding any queries.
 
 Regards,
 ISKCON Mysore`.trim())}`})
