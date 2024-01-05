@@ -99,6 +99,15 @@ const BadgeIssueQR = (props)=>{
             edate = url.searchParams.get("date")
         }
 
+        if(moment(edate).isBefore(moment(), 'day')){
+            warn.current.play()
+            if(navigator && navigator.vibrate){
+                navigator.vibrate(200)
+            }
+            toast.error(`Cannot issue badge of older date ${moment(edate).format("Do MMM YYYY")}!`)
+            return
+        }
+
         if(!vname){
             toast.warn("No name found in the badge! Enter manually")
             setShowManualEntry(true)
@@ -108,7 +117,9 @@ const BadgeIssueQR = (props)=>{
         const found = volunteers.current.indexOf(vname)!=-1
         if(!found){
             warn.current.play()
-            navigator.vibrate(200)
+            if(navigator && navigator.vibrate){
+                navigator.vibrate(200)
+            }
             toast.error(`This volunteer ${vname} has not been assigned any service!`)
             return
         }
