@@ -366,7 +366,7 @@ ISKCON Mysore
 `.trim())}`})
     },   
 
-    "06 - Service Reminder": (props)=>{
+    "07 - Service Reminder": (props)=>{
 
         var { volunteers } = props.data
         
@@ -424,6 +424,92 @@ You can reply here regarding any queries.
 Regards,
 ISKCON Mysore`.trim())}`})
     }, 
+
+    "08 - General Info": (props)=>{
+
+        var { volunteers } = props.data
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
+                umap[v.volunteerName]=v.volunteerPhone
+            }
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="")
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    availability: volunteers[i].availability,
+                    idCardCollected: volunteers[i].idCardCollected,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                    date: volunteers[i].date,
+                    service: volunteers[i].service,
+                    timings: volunteers[i].timings,
+                    coordinator: volunteers[i].coordinator,
+                    spoc: volunteers[i].spoc,
+                    spocPhone: volunteers[i].spocPhone
+                })
+            }
+            }
+        })
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+
+return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+⭐ *Important Info - Ratha Yatra 2024 - Volunteering*
+*Saturday, 6th January 2024*
+    
+Hare Krishna 🙏 Hoping that you are ready for services. Here are some important points you need to know. Please note.
+
+1️⃣ 🙏 *Prasadam Timings and Venue:*
+
+    👉🏻 Breakfast prasadam:
+    🕗 Time: 8.15 AM - 9.15 AM
+    📍 Location: Sridham Hall
+
+    👉🏻 Lunch prasadam:
+    🕗 Time: 1 PM - 2 PM
+    📍 Location: Sridham Hall
+    
+    👉🏻 Dinner prasadam:
+    🕗 Time: *15 minutes after Ratha arrives at ISKCON temple* 
+    📍 Location: Sridham Hall
+
+2️⃣ 🚍 *Bus Facility:*
+
+    🚌 Onward Bus facility is arranged for devotees to go from ISKCON temple to Kote Anjaneya temple. Buses will leave at below mentioned times:
+    🚎 Bus 1 Departure: 3.30 PM
+    🚎 Bus 2 Departure: 3.45 PM
+    
+    🚌 Return Bus facility is arranged *ONLY FOR THOSE VOLUNTEERS WHO HAVE PRASADAM SERVING OR QUE MANAGEMENT SERVICE IN TEMPLE*. Others should NOT use this bus facility.
+    🚎 🚎 Bus 1 and Bus 2 Departure: 6.45 PM
+    📍 Departure from: Ramaswamy Circle
+
+3️⃣ Volunteer Care Cell will be located in front of the temple parking shed, diagonally opposite to Sridham Hall. You can contact the cell for any queries or call 6360028651.
+
+4️⃣ 🪪 *Use of Volunteer Badge:*
+
+    Your volunteer badge can be used for the below-mentioned purposes. Please keep it carefully and do not lose it.
+    👉🏻 Show the QR code on the back side of the volunteer badge to avail prasadam.
+    👉🏻 *Return volunteer badge to Volunteer Care Cell and collect take-home prasadam.*
+
+You can reply here regarding any queries or call 6360028651.
+
+Regards,
+Volunteer Care Cell
+ISKCON Mysore`.trim())}`})
+    },     
     
 }
 
