@@ -91,7 +91,7 @@ function AdminInfo(props) {
                     return {
                       title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):(dates.length <5 ? moment(d,"YYYY-MM-DD").format("Do MMM"): moment(d,"YYYY-MM-DD").format("MMM D")),
                       component: 
-                        <div>
+                        <div className='adin-root'>
                             <div className='admin-info-event-name'>
                               <div>{`${data.events.filter(e=>{
                                 return e.date==d

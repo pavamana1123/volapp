@@ -87,7 +87,7 @@ function Vol(props) {
                     return {
                       title: dates.length==1?moment(d,"YYYY-MM-DD").format("dddd, Do MMMM YYYY"):(dates.length <5 ? moment(d,"YYYY-MM-DD").format("Do MMM"): moment(d,"YYYY-MM-DD").format("MMM D")),
                       component: svs.length?
-                        <div>
+                        <div className='vol-events-holder'>
                             <div className='event-name'>{`${data.events.filter(e=>{
                               return e.date==d
                             })[0].event} (${svs.length} service${svs.length>1?"s":""})`.trim()}</div>

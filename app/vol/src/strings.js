@@ -173,4 +173,29 @@ String.prototype.toCamelCase = function() {
     return result
   }
 
+  Array.prototype.maxColWidth = function() {
+    if (this.length === 0 || this[0].length === 0) {
+        return []
+    }
+
+    const numCols = this[0].length
+    const result = []
+
+    for (let col = 0; col < numCols; col++) {
+        let maxLength = 0
+
+        for (let row = 0; row < this.length; row++) {
+            const currentLength = this[row][col].length
+
+            if (currentLength > maxLength) {
+                maxLength = currentLength
+            }
+        }
+
+        result.push(maxLength)
+    }
+
+    return result;
+}
+
 

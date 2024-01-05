@@ -137,6 +137,15 @@ const PrasadamIssueQR = (props)=>{
             edate = url.searchParams.get("date")
         }
 
+        if(moment(edate).isBefore(moment(), 'day')){
+            warn.current.play()
+            if(navigator && navigator.vibrate){
+                navigator.vibrate(200)
+            }
+            toast.error(`Badge issued for older date ${moment(edate).format("Do MMM YYYY")} cannot be accepted!`)
+            return
+        }
+
         if(!vname){
             toast.warn("No name found in the badge! Enter manually")
             setShowManualEntry(true)
@@ -146,7 +155,9 @@ const PrasadamIssueQR = (props)=>{
         const found = volunteers.current.indexOf(vname)!=-1
         if(!found){
             warn.current.play()
-            navigator.vibrate(200)
+            if(navigator && navigator.vibrate){
+                navigator.vibrate(200)
+            }
             toast.error(`This volunteer ${vname} has not been assigned any service!`)
             return
         }
@@ -154,7 +165,9 @@ const PrasadamIssueQR = (props)=>{
         const repeat = !!todIssued[todLabelIndex()].filter(i=>vname==i.vname).length
         if(repeat){
             warn.current.play()
-            navigator.vibrate(200)
+            if(navigator && navigator.vibrate){
+                navigator.vibrate(200)
+            }
             toast.error(`This volunteer ${vname} has already taken ${todLabel(true).toLowerCase()} prasadam!`)
             return
         }

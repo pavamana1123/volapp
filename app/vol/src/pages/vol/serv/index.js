@@ -1,5 +1,4 @@
 import './index.css';
-import HSep from '../../../components/HSep';
 
 function Serv(props) {
 
@@ -59,7 +58,7 @@ function Serv(props) {
                 <a href={`/services?SPOC=${encodeURIComponent(name)}`} className='vol-show-vol'>Show Volunteers</a>
             :null}
 
-            <HSep/>
+            {i!=sl-1?<hr/>:null}
         </div>
     )
 

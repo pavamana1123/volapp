@@ -114,7 +114,7 @@ Please accept the blessings of Sri Sri Krishna Balarama 🙏 ${(v.availability!=
 
 💾 Please save this number as ISKCON Mysore Volunteering or with any other convenient name. If you do not do this, you may NOT be able to click on the links given below.
 
-🪪 *Volunteer Badges will be issued on Sunday, 31st December 2023 from 9.30 AM to 1 PM and 4 PM to 8.30 PM at Volunteer Care Cell outside Sridham Hall*. Please collect without fail.
+🪪 *Volunteer Badges will be issued on Friday, 5th January 2024 from 9.30 AM to 1 PM and 4 PM to 9 PM at Volunteer Care Cell near Homa-Kunda area*. Please collect without fail.
 
 🚗 Vehicle parking is not allowed inside the temple on the festival day. Parking arrangement is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into the parking area is allowed only with Volunteer Badge.
 
@@ -128,7 +128,7 @@ Now please see your service details by clicking on the link given below:
 
 *${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
 
-_Please re-check your service before the festival using the above link. Sometimes your service may change due to unavoidable circumstances._
+*❗ IMPORTANT: As a general practice, please re-check your service details everyday until the festival using the above link; because your service may be changed/updated due to unavoidable circumstances.*
 
 You can reply here regarding any queries.
 
@@ -183,19 +183,138 @@ ISKCON Mysore`.trim())}`})
     
 Hare Krishna 🙏
 
-🪪 *Volunteer Badges will be issued today (Sunday, 31st December 2023) from 9.30 AM to 1 PM and 4 PM to 8.30 PM at Volunteer Care Cell (inside Sridham Hall in the morning and outside Sridham Hall in the evening)*. Please collect without fail.
+🪪 *Volunteer Badges will be issued today (Friday, 5th January 2024) from 9.30 AM to 1 PM and 4 PM to 9 PM at Volunteer Care Cell near Homa-Kunda area*. Please collect without fail.
 
 🚗 Vehicle parking is not allowed inside the temple on the festival day. Parking arrangement is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into the parking area is allowed only with Volunteer Badge.
 
 🪪 This volunteer-badge must be presented for honoring volunteer prasadam. It can be used as volunteer prasadam coupon. 
 
-You can reply here regarding any queries.
+You can call this number- 6360028651 (ISKCON Mysore Volunteering) or reply here regarding any queries.
 
 Regards,
 ISKCON Mysore`.trim())}`})
-    },    
+    },
 
-    "04 - SPOC Reminder": (props)=>{
+    "04 - Service Update Alert for SPOCs": (props)=>{
+
+        var { services } = props.data
+
+        services = services.filter(s=>{
+            return dates.indexOf(s.date)!=-1
+        })  
+
+        var spocMap = {}
+
+        services.map(s=>{
+            if(s.coordinator==s.spoc || s.spoc=="" || s.spocPhone==""){
+                return
+            }
+
+            spocMap[s.spoc]=spocMap[s.spoc]||{
+                spoc: s.spoc,
+                spocPhone: s.spocPhone,
+                services : []
+            }
+            spocMap[s.spoc].services.indexOf(s.service)==-1 && spocMap[s.spoc].services.push({
+                    service: s.serviceName,
+                    date: s.date,
+                    coordinator: s.coordinator,
+                    coordinatorPhone: s.coordinatorPhone,
+                    timings: s.timings,
+                    supply: s.supply,
+                })
+        })
+
+        var spocs = Object.keys(spocMap).sort()
+
+        return spocs.map(sp=>{
+        var s = spocMap[sp]
+
+        return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
+*SPOC - Service Update Alert ⚠️ - Ratha Yatra 2024*
+*Saturday, 6th January 2024*
+    
+Hare Krishna 🙏
+
+This is to bring to your notice that *some* services were updated/changed recently. These changes may include change/addition of service, change/addition of volunteers, change of service timings or change of SPOC/Coordinator.
+
+*NOTE*: Services/Volunteers under you may be changed/updated or may not be. *Therefore we request you to please re-check your SPOC service details by clicking on the link given below:*
+
+*${`https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}`}*
+
+*❗ IMPORTANT: As a general practice, please re-check your service details everyday until the festival using the above link; because your service may be changed/updated due to unavoidable circumstances.*
+
+You can reply here regarding any queries.
+
+Regards,
+Volunteer Care Cell
+ISKCON Mysore
+`.trim())}`})
+    }, 
+    
+    "05 - Service Update Alert for Volunteers": (props)=>{
+
+        var { volunteers } = props.data
+        
+        var umap = {}
+        var voldet = {}
+    
+        var volunteers = volunteers.filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
+                umap[v.volunteerName]=v.volunteerPhone
+            }
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && v.infoMsgSent
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    availability: volunteers[i].availability,
+                    idCardCollected: volunteers[i].idCardCollected,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                    date: volunteers[i].date,
+                    service: volunteers[i].service,
+                    timings: volunteers[i].timings,
+                    coordinator: volunteers[i].coordinator,
+                    spoc: volunteers[i].spoc,
+                    spocPhone: volunteers[i].spocPhone
+                })
+            }
+            }
+        })
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+*Service Update Alert ⚠️ - Ratha Yatra 2024 - Volunteering*
+*Saturday, 6th January 2024*
+    
+Hare Krishna 🙏
+
+This is to bring to your notice that *some* services were updated/changed recently. These changes may include change/addition of service, change of service timings or change of SPOC/Coordinator.
+
+*NOTE*: Your service may be changed/updated or may not be. *Therefore we request you to please re-check your service details by clicking on the link given below:*
+
+*${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
+
+*❗ IMPORTANT: As a general practice, please re-check your service details everyday until the festival using the above link; because your service may be changed/updated due to unavoidable circumstances.*
+
+You can reply here regarding any queries.
+
+Regards,
+Volunteer Care Cell
+ISKCON Mysore`.trim())}`})
+    }, 
+
+    "06 - SPOC Reminder": (props)=>{
 
         var { services } = props.data
 
@@ -247,7 +366,7 @@ ISKCON Mysore
 `.trim())}`})
     },   
 
-    "05 - Service Reminder": (props)=>{
+    "06 - Service Reminder": (props)=>{
 
         var { volunteers } = props.data
         

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import HSep from '../../../components/HSep';
 import { Paper } from '../../../components/paper';
 import './index.css';
 import moment from 'moment';
@@ -85,7 +84,7 @@ function Vols(props) {
         
           <div className='voldetholder'>{
           volunteers.length?
-            volunteers.map(v=>{
+            volunteers.map((v, ii, vv)=>{
 
               var attendanceKey = `${date}:${service.serviceName}:${v.volunteerName}`
 
@@ -145,7 +144,7 @@ function Vols(props) {
                     </div>
                   </div>
                   
-                  <HSep/>
+                  {ii!=vv.length-1?<hr/>:null}
                 </div>
                 :null
             })

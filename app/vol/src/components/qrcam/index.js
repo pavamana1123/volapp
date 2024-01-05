@@ -50,7 +50,9 @@ const QRCam = (props)=>{
             speak(readOut?readOut(scanResult):scanResult)
         }
         if(vibrationState){
-            navigator.vibrate(200)
+            if(navigator && navigator.vibrate){
+                navigator.vibrate(200)
+            }
         }
         onResult(scanResult)
     }, [scanResult])

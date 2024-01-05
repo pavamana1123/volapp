@@ -63,6 +63,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 4vw;
 }
 
 .filterBody {
@@ -147,15 +148,18 @@
 .ser-event-name {
     width: 100%;
     text-align: left;
-    margin-left: 15vw;
     color: #555;
     font-size: 3.5vw;
-    margin-top: 1vw;
+    margin: 2vw 0 2vw 14.5vw;
 }
 
 @media only screen and (min-width: 1080px) {
 
     /* Desktop */
+
+    .svHolder {
+        margin-bottom: 1.5vw;
+    }
 
     .ser-pass {
         font-size: 2vw;
@@ -163,9 +167,8 @@
     }
     
     .ser-event-name {
-        margin-bottom: 1vw;
-        font-size: 1.5vw;
-        margin-left: 15.5vw;
+        font-size: 1.25vw;
+        margin: 0.75vw 0 1vw 16.5vw;
     }
 
     .sv-coup {
