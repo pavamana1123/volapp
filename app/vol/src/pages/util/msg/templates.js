@@ -1,7 +1,7 @@
 import moment from 'moment'
 
 var dates = [
-    "2024-01-06",
+    "2024-02-22",
 ]
 
 var templates = {
@@ -42,10 +42,10 @@ var templates = {
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Ratha Yatra 2024 services*
-*Saturday, 6th January 2024*
+*SPOC for Sri Nityananda Trayodashi 2024 services*
+*Thursday, 22nd February 2024*
 
-Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. Kindly click on the below link and through the details of the service${s.services.length>1?"s":""} carefully:
+Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. Kindly click on the below link and go through the details of the service${s.services.length>1?"s":""} carefully:
 
 *https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}*
 
@@ -102,38 +102,18 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Details - Ratha Yatra 2024 - Volunteering*
-*Saturday, 6th January 2024*
+*Service Details - Sri Nityananda Trayodashi 2024 - Volunteering*
+*Thursday, 22nd February 2024*
     
 Hare Krishna 🙏
-Please accept the blessings of Sri Sri Krishna Balarama 🙏 ${(v.availability!="Default" && v.availability!="NOT AVAILABLE")?"We thank you for registering for the *Ratha Yatra* festival service.":""}
-
-*Guidelines:*
-
-👀 Please read this message completely. It takes only a minute ⌛
-
-💾 Please save this number as ISKCON Mysore Volunteering or with any other convenient name. If you do not do this, you may NOT be able to click on the links given below.
-
-🪪 *Volunteer Badges will be issued on Friday, 5th January 2024 from 9.30 AM to 1 PM and 4 PM to 9 PM at Volunteer Care Cell near Homa-Kunda area*. Please collect without fail.
-
-🚗 Vehicle parking is not allowed inside the temple on the festival day. Parking arrangement is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into the parking area is allowed only with Volunteer Badge.
-
-1️⃣ Every service has got a Single-Point-of-Contact (SPOC) volunteer. *Please call your SPOC and discuss the details of service*, dress code, etc. The contact numbers of SPOC(s) are mentioned in the link below.
-
-😇 Please report to your services on time. Be responsible for your services.
-
-*Service Details:*
-
-Now please see your service details by clicking on the link given below:
+Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service tomorrow for Sri Nityananda Trayodashi festival. Please check your service details by clicking on the link given below:
 
 *${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
-
-*❗ IMPORTANT: As a general practice, please re-check your service details everyday until the festival using the above link; because your service may be changed/updated due to unavoidable circumstances.*
 
 You can reply here regarding any queries.
 
 Regards,
-Pankajanghri Dasa
+Volunteer Care Cell
 ISKCON Mysore`.trim())}`})
     }, 
 
@@ -179,7 +159,7 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteer Badge - Ratha Yatra 2024 - Volunteering*
+*Volunteer Badge - Sri Nityananda Trayodashi 2024 - Volunteering*
     
 Hare Krishna 🙏
 
@@ -231,8 +211,8 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Ratha Yatra 2024*
-*Saturday, 6th January 2024*
+*SPOC - Service Update Alert ⚠️ - Sri Nityananda Trayodashi 2024*
+*Thursday, 22nd February 2024*
     
 Hare Krishna 🙏
 
@@ -294,8 +274,8 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Ratha Yatra 2024 - Volunteering*
-*Saturday, 6th January 2024*
+*Service Update Alert ⚠️ - Sri Nityananda Trayodashi 2024 - Volunteering*
+*Thursday, 22nd February 2024*
     
 Hare Krishna 🙏
 
@@ -350,7 +330,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Reminder - Ratha Yatra Volunteering*
+*SPOC - Reminder - Sri Nityananda Trayodashi Volunteering*
 
 Hare Krishna 🙏
 
@@ -408,7 +388,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Reminder - Ratha Yatra 2024 - Volunteering*
+*Service Reminder - Sri Nityananda Trayodashi 2024 - Volunteering*
     
 Hare Krishna 🙏
 We hope that you have gone through the service details and have contacted your SPOC(s) regarding the service details.
@@ -467,10 +447,10 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
 return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Ratha Yatra 2024 - Volunteering*
-*Saturday, 6th January 2024*
+⭐ *Important Info - Sri Nityananda Trayodashi 2024 - Volunteering*
+*Thursday, 22nd February 2024*
     
-Hare Krishna 🙏 Hoping that you are ready for services. Here are some important points you need to know. Please note.
+Hare Krishna 🙏 Hoping that you are ready for the Sri Nityananda Trayodashi services. Here are some important points you need to know. Please note.
 
 1️⃣ 🙏 *Prasadam Timings and Venue:*
 
