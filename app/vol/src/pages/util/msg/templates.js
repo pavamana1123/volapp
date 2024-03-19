@@ -106,7 +106,7 @@ ISKCON Mysore
 *Thursday, 22nd February 2024*
     
 Hare Krishna 🙏
-Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service tomorrow for Sri Nityananda Trayodashi festival. Please check your service details by clicking on the link given below:
+Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service today for Sri Nityananda Trayodashi festival. Please check your service details by clicking on the link given below:
 
 *${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
 
