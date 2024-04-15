@@ -1,7 +1,7 @@
 import moment from 'moment'
 
 var dates = [
-    "2024-02-22",
+    "2024-03-25",
 ]
 
 var templates = {
@@ -42,8 +42,8 @@ var templates = {
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Sri Nityananda Trayodashi 2024 services*
-*Thursday, 22nd February 2024*
+*SPOC for Sri Gaura Purnima 2024 services*
+*Monday, 25th March 2024*
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. Kindly click on the below link and go through the details of the service${s.services.length>1?"s":""} carefully:
 
@@ -102,11 +102,11 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Details - Sri Nityananda Trayodashi 2024 - Volunteering*
-*Thursday, 22nd February 2024*
+*Service Details - Sri Gaura Purnima 2024 - Volunteering*
+*Monday, 25th March 2024*
     
 Hare Krishna 🙏
-Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service today for Sri Nityananda Trayodashi festival. Please check your service details by clicking on the link given below:
+Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service today for Sri Gaura Purnima festival. Please check your service details by clicking on the link given below:
 
 *${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
 
@@ -159,7 +159,7 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteer Badge - Sri Nityananda Trayodashi 2024 - Volunteering*
+*Volunteer Badge - Sri Gaura Purnima 2024 - Volunteering*
     
 Hare Krishna 🙏
 
@@ -211,8 +211,8 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Sri Nityananda Trayodashi 2024*
-*Thursday, 22nd February 2024*
+*SPOC - Service Update Alert ⚠️ - Sri Gaura Purnima 2024*
+*Monday, 25th March 2024*
     
 Hare Krishna 🙏
 
@@ -274,8 +274,8 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Sri Nityananda Trayodashi 2024 - Volunteering*
-*Thursday, 22nd February 2024*
+*Service Update Alert ⚠️ - Sri Gaura Purnima 2024 - Volunteering*
+*Monday, 25th March 2024*
     
 Hare Krishna 🙏
 
@@ -330,7 +330,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Reminder - Sri Nityananda Trayodashi Volunteering*
+*SPOC - Reminder - Sri Gaura Purnima Volunteering*
 
 Hare Krishna 🙏
 
@@ -388,7 +388,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Reminder - Sri Nityananda Trayodashi 2024 - Volunteering*
+*Service Reminder - Sri Gaura Purnima 2024 - Volunteering*
     
 Hare Krishna 🙏
 We hope that you have gone through the service details and have contacted your SPOC(s) regarding the service details.
@@ -447,10 +447,10 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
 return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Sri Nityananda Trayodashi 2024 - Volunteering*
-*Thursday, 22nd February 2024*
+⭐ *Important Info - Sri Gaura Purnima 2024 - Volunteering*
+*Monday, 25th March 2024*
     
-Hare Krishna 🙏 Hoping that you are ready for the Sri Nityananda Trayodashi services. Here are some important points you need to know. Please note.
+Hare Krishna 🙏 Hoping that you are ready for the Sri Gaura Purnima services. Here are some important points you need to know. Please note.
 
 1️⃣ 🙏 *Prasadam Timings and Venue:*
 
