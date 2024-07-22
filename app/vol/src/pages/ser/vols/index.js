@@ -53,7 +53,7 @@ function Vols(props) {
     switch(v.availability){
       case "Whole Day":
         return ""
-      case "NOT AVAILABLE":
+      case "":
         return "Volunteer may not be available for this service. Please check with the volunteer"
       case "Default":
         return "Availability is assumed by default. Please verify with the volunteer"

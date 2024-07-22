@@ -1,7 +1,7 @@
 import moment from 'moment'
 
 var dates = [
-    "2024-03-25",
+    "2024-06-20",
 ]
 
 var templates = {
@@ -17,9 +17,9 @@ var templates = {
         var spocMap = {}
 
         services.map(s=>{
-            if(s.coordinator==s.spoc || s.spoc=="" || s.spocPhone==""){
-                return
-            }
+            // if(s.coordinator==s.spoc || s.spoc=="" || s.spocPhone==""){
+            //     return
+            // }
 
             spocMap[s.spoc]=spocMap[s.spoc]||{
                 spoc: s.spoc,
@@ -42,8 +42,8 @@ var templates = {
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Sri Gaura Purnima 2024 services*
-*Monday, 25th March 2024*
+*SPOC for Panihati Chida-Dahi Utsav services*
+*Thursday, 20th June 2024*
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. Kindly click on the below link and go through the details of the service${s.services.length>1?"s":""} carefully:
 
@@ -102,11 +102,11 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Details - Sri Gaura Purnima 2024 - Volunteering*
-*Monday, 25th March 2024*
+*Service Details - Panihati Chida-Dahi Utsav - Volunteering*
+*Thursday, 20th June 2024*
     
 Hare Krishna 🙏
-Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service today for Sri Gaura Purnima festival. Please check your service details by clicking on the link given below:
+Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service for Sri Narasimha Jayanthi festival. Please check your service details by clicking on the link given below:
 
 *${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
 
@@ -159,7 +159,7 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteer Badge - Sri Gaura Purnima 2024 - Volunteering*
+*Volunteer Badge - Panihati Chida-Dahi Utsav - Volunteering*
     
 Hare Krishna 🙏
 
@@ -211,8 +211,8 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Sri Gaura Purnima 2024*
-*Monday, 25th March 2024*
+*SPOC - Service Update Alert ⚠️ - Panihati Chida-Dahi Utsav*
+*Thursday, 20th June 2024*
     
 Hare Krishna 🙏
 
@@ -274,8 +274,8 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Sri Gaura Purnima 2024 - Volunteering*
-*Monday, 25th March 2024*
+*Service Update Alert ⚠️ - Panihati Chida-Dahi Utsav - Volunteering*
+*Thursday, 20th June 2024*
     
 Hare Krishna 🙏
 
@@ -330,7 +330,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Reminder - Sri Gaura Purnima Volunteering*
+*SPOC - Reminder - Sri Narasimha Jayanthi Volunteering*
 
 Hare Krishna 🙏
 
@@ -388,7 +388,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Reminder - Sri Gaura Purnima 2024 - Volunteering*
+*Service Reminder - Panihati Chida-Dahi Utsav - Volunteering*
     
 Hare Krishna 🙏
 We hope that you have gone through the service details and have contacted your SPOC(s) regarding the service details.
@@ -447,10 +447,10 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
 return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Sri Gaura Purnima 2024 - Volunteering*
-*Monday, 25th March 2024*
+⭐ *Important Info - Panihati Chida-Dahi Utsav - Volunteering*
+*Thursday, 20th June 2024*
     
-Hare Krishna 🙏 Hoping that you are ready for the Sri Gaura Purnima services. Here are some important points you need to know. Please note.
+Hare Krishna 🙏 Hoping that you are ready for the Sri Narasimha Jayanthi services. Here are some important points you need to know. Please note.
 
 1️⃣ 🙏 *Prasadam Timings and Venue:*
 
