@@ -1,12 +1,12 @@
 import moment from 'moment'
 
 var dates = [
-    "2024-06-23",
-    "2024-06-24",
-    "2024-06-25",
-    "2024-06-26",
-    "2024-06-27",
-    "2024-06-28"
+    "2024-08-23",
+    "2024-08-24",
+    "2024-08-25",
+    "2024-08-26",
+    "2024-08-27",
+    "2024-08-28"
 ]
 
 var templates = {
@@ -47,8 +47,7 @@ var templates = {
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Panihati Chida-Dahi Utsav services*
-*Thursday, 20th June 2024*
+*SPOC for Sri Krishna Janmashtami Festival services*
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. Kindly click on the below link and go through the details of the service${s.services.length>1?"s":""} carefully:
 
@@ -107,13 +106,20 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Details - Panihati Chida-Dahi Utsav - Volunteering*
-*Thursday, 20th June 2024*
-    
-Hare Krishna 🙏
-Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service for Sri Narasimha Jayanthi festival. Please check your service details by clicking on the link given below:
+*Volunteering Details - Sri Krishna Janmashtami Festival*
 
-*${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
+Hare Krishna 🙏
+
+‼️PLEASE READ THE MESSAGE *COMPLETELY*
+
+☝🏻 First things first
+Please save this number as "ISKCON Mysore Volunteering" or in any other convenient name. If you do not save the number, you may be unable to click on the links in this message.
+
+🌸
+
+Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service for Sri Krishna Janmashtami festival. Please check your service details by clicking on the link given below:
+
+${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
 
 You can reply here regarding any queries.
 
@@ -164,7 +170,7 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteer Badge - Panihati Chida-Dahi Utsav - Volunteering*
+*Volunteer Badge - Sri Krishna Janmashtami Festival - Volunteering*
     
 Hare Krishna 🙏
 
@@ -216,8 +222,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Panihati Chida-Dahi Utsav*
-*Thursday, 20th June 2024*
+*SPOC - Service Update Alert ⚠️ - Sri Krishna Janmashtami Festival*
     
 Hare Krishna 🙏
 
@@ -279,8 +284,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Panihati Chida-Dahi Utsav - Volunteering*
-*Thursday, 20th June 2024*
+*Service Update Alert ⚠️ - Sri Krishna Janmashtami Festival - Volunteering*
     
 Hare Krishna 🙏
 
@@ -335,7 +339,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Reminder - Sri Narasimha Jayanthi Volunteering*
+*SPOC - Reminder - Sri Krishna Janmashtami Volunteering*
 
 Hare Krishna 🙏
 
@@ -393,7 +397,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Reminder - Panihati Chida-Dahi Utsav - Volunteering*
+*Service Reminder - Sri Krishna Janmashtami Festival - Volunteering*
     
 Hare Krishna 🙏
 We hope that you have gone through the service details and have contacted your SPOC(s) regarding the service details.
@@ -452,10 +456,9 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
 return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Panihati Chida-Dahi Utsav - Volunteering*
-*Thursday, 20th June 2024*
+⭐ *Important Info - Sri Krishna Janmashtami Festival - Volunteering*
     
-Hare Krishna 🙏 Hoping that you are ready for the Sri Narasimha Jayanthi services. Here are some important points you need to know. Please note.
+Hare Krishna 🙏 Hoping that you are ready for the Sri Krishna Janmashtami services. Here are some important points you need to know. Please note.
 
 1️⃣ 🙏 *Prasadam Timings and Venue:*
 

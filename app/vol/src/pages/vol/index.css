@@ -78,6 +78,17 @@
     font-size: 3.5vw;
 }
 
+.vol-note {
+    margin-top: 2vw;
+    font-size: 3.5vw;
+    text-align: justify;
+}
+
+.vol-note-li {
+    margin-top: 2vw;
+    width: 95%;
+}
+
 .vol-app-spin {
     display: flex;
     justify-content: center;

@@ -84,12 +84,16 @@ function Vol(props) {
       <Header title={data.title} hideOptions />
 
       <div className='vol-main'>
+
         <div className='vol'>
           {preset ?
             <Paper>{filter}</Paper>
             :
             <Auto className="autoinvol" filter={filterFunc} Drop={Drop} />
           }
+
+
+
           {filter && dates.length ?
             <Paper className="serpaper">
               {!preset && <div className='volnameintab'>{filter}</div>}
@@ -157,13 +161,23 @@ function Vol(props) {
             (filter && <Spinner style={{ marginTop: "2vw" }} size={2} />)}
         </div>
 
+        <Paper className="vol-note">
+          <b>Note:</b>
+          <ol>
+            <li className='vol-note-li'>Every service has got a Single Point-of-Contact (SPOC). Contact your SPOC(s) and understand all details of your service like timings, dress code etc.</li>
+            <li className='vol-note-li'>Volunteer Badge will be issued on Sunday, 18th August 2024. Collect without fail.</li>
+            <li className='vol-note-li'>Volunteer Badge must be used to avail parking facility and prasadam during Sri Krishna Janmashtami festival (25th & 26th Aug)</li>
+            <li className='vol-note-li'>Service allocation for Sri Vyasa Puja festival is pending. It will be complete by 15th Aug 2024.</li>
+          </ol>
+        </Paper>
+
         {showApp &&
           <Paper className='vol-app-paper'>
             <div className='vol-note-main'>
-              <div className='vol-app-note'>Please note</div>
+              <div className='vol-app-note'>SevaBase App</div>
               <div className='vol-app-desch'>
                 <img src="sevabase.png" width="100vw" height="100vw" />
-                <div className='vol-app-cta'>We are planning to build an app for all volunteering purposes in future. To make this app, we need details of all the volunteers. Click the button below to fill your details for the the app.</div>
+                <div className='vol-app-cta'>We are planning to build an app called SevaBase for all volunteering purposes in future. To make this app, we need details of all the volunteers. Click the button below to fill your details for the the app.</div>
               </div>
               <div className='vol-app-action' onClick={register}>Click here to fill your details</div>
             </div>
