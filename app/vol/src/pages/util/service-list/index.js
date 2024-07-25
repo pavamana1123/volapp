@@ -5,7 +5,7 @@ import _ from "../../../_";
 
 function ServiceList(props){
 
-    const safePageHeight = 965
+    const safePageHeight = 1100
     var tableData = []
 
     const headers = [
