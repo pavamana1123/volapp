@@ -92,8 +92,6 @@ function Vol(props) {
             <Auto className="autoinvol" filter={filterFunc} Drop={Drop} />
           }
 
-
-
           {filter && dates.length ?
             <Paper className="serpaper">
               {!preset && <div className='volnameintab'>{filter}</div>}
@@ -183,8 +181,8 @@ function Vol(props) {
             </div>
           </Paper>
         }
+        <div style={{ margin: "15vw" }} />
       </div>
-      <div style={{ margin: "15vw" }} />
     </div>
   );
 }
