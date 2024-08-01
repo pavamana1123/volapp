@@ -2,7 +2,7 @@
   "name": "ISKCON Mysore Volunteering",
   "short_name": "VSeva",
   "start_url": "./ser",
-  "id": "./",
+  "id": "./ser",
   "theme_color": "#000",
   "background_color": "#000",
   "icons": [
