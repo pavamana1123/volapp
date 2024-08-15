@@ -1,12 +1,7 @@
 import moment from 'moment'
 
 var dates = [
-    "2024-08-23",
-    "2024-08-24",
-    "2024-08-25",
-    "2024-08-26",
-    "2024-08-27",
-    "2024-08-28"
+    "2024-08-19",
 ]
 
 var templates = {
@@ -47,11 +42,11 @@ var templates = {
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Sri Krishna Janmashtami Festival services*
+*SPOC for Sri Balarama Purnima Festival services*
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. Kindly click on the below link and go through the details of the service${s.services.length>1?"s":""} carefully:
 
-*https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}*
+*https://sbj.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}*
 
 Your responsibilities:
 • Please discuss with the service coordinator${s.services.length>1?"s":""} and understand all major and minor details of the service like dress code, timings etc.
@@ -106,20 +101,13 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteering Details - Sri Krishna Janmashtami Festival*
+*Volunteering Details - Sri Balarama Purnima Festival*
 
 Hare Krishna 🙏
 
-‼️PLEASE READ THE MESSAGE *COMPLETELY*
+Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service for Sri Balarama Purnima festival. Please check your service details by clicking on the link given below:
 
-☝🏻 First things first
-Please save this number as "ISKCON Mysore Volunteering" or in any other convenient name. If you do not save the number, you may be unable to click on the links in this message.
-
-🌸
-
-Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service for Sri Krishna Janmashtami festival. Please check your service details by clicking on the link given below:
-
-${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
+${`https://sbj.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
 
 You can reply here regarding any queries.
 
@@ -170,7 +158,7 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteer Badge - Sri Krishna Janmashtami Festival - Volunteering*
+*Volunteer Badge - Sri Balarama Purnima Festival - Volunteering*
     
 Hare Krishna 🙏
 
@@ -222,7 +210,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Sri Krishna Janmashtami Festival*
+*SPOC - Service Update Alert ⚠️ - Sri Balarama Purnima Festival*
     
 Hare Krishna 🙏
 
@@ -230,7 +218,7 @@ This is to bring to your notice that *some* services were updated/changed recent
 
 *NOTE*: Services/Volunteers under you may be changed/updated or may not be. *Therefore we request you to please re-check your SPOC service details by clicking on the link given below:*
 
-*${`https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}`}*
+*${`https://sbj.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}`}*
 
 *❗ IMPORTANT: As a general practice, please re-check your service details everyday until the festival using the above link; because your service may be changed/updated due to unavoidable circumstances.*
 
@@ -284,7 +272,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Sri Krishna Janmashtami Festival - Volunteering*
+*Service Update Alert ⚠️ - Sri Balarama Purnima Festival - Volunteering*
     
 Hare Krishna 🙏
 
@@ -292,7 +280,7 @@ This is to bring to your notice that *some* services were updated/changed recent
 
 *NOTE*: Your service may be changed/updated or may not be. *Therefore we request you to please re-check your service details by clicking on the link given below:*
 
-*${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
+*${`https://sbj.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
 
 *❗ IMPORTANT: As a general practice, please re-check your service details everyday until the festival using the above link; because your service may be changed/updated due to unavoidable circumstances.*
 
@@ -339,7 +327,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Reminder - Sri Krishna Janmashtami Volunteering*
+*SPOC - Reminder - Sri Balarama Purnima Volunteering*
 
 Hare Krishna 🙏
 
@@ -347,7 +335,7 @@ Hope you have discussed with the service coordinator${s.services.length>1?"s":""
 
 You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. *Some service details and volunteers were updated recently*. So kindly recheck the service details by clicking on the below link:
 
-*https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}*
+*https://sbj.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}*
 
 Regards,
 Pankajanghri Dasa
@@ -397,14 +385,14 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Reminder - Sri Krishna Janmashtami Festival - Volunteering*
+*Service Reminder - Sri Balarama Purnima Festival - Volunteering*
     
 Hare Krishna 🙏
 We hope that you have gone through the service details and have contacted your SPOC(s) regarding the service details.
 
 We now request you to please *recheck your service details and dates of service* by clicking on the link given below:
 
-*${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
+*${`https://sbj.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
 
 ‼️🪪 *DO NOT FORGET TO BRING YOUR VOLUNTEER BADGE ON FESTIVAL DAY (23rd)*
 
@@ -456,9 +444,9 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
 return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Sri Krishna Janmashtami Festival - Volunteering*
+⭐ *Important Info - Sri Balarama Purnima Festival - Volunteering*
     
-Hare Krishna 🙏 Hoping that you are ready for the Sri Krishna Janmashtami services. Here are some important points you need to know. Please note.
+Hare Krishna 🙏 Hoping that you are ready for the Sri Balarama Purnima services. Here are some important points you need to know. Please note.
 
 1️⃣ 🙏 *Prasadam Timings and Venue:*
 
