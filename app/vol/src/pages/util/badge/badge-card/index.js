@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import "./index.css"
 
 const Badge = (props) =>{
-    const { name, seva, spoc } = props.details
+    const { name, seva, spoc, dates } = props.details
     const { back, style } = props
 
     var [frontImage, setFrontImage] = useState()
@@ -58,7 +58,7 @@ const Badge = (props) =>{
                     </div>:
                     <div className="bp-qr" style={back?style:{}}>
                         <QRCode
-                            value={name?`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(name)}&date=2024-01-06`:`https://vol.iskconmysore.org/vol`}
+                            value={name?`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(name)}&date=${dates.join("+")}`:`https://vol.iskconmysore.org/vol`}
                             size={230}
                         />
                     </div>
