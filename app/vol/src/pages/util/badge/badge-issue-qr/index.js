@@ -93,6 +93,7 @@ const BadgeIssueQR = (props)=>{
         if(notURL){
             vname=scanResult
             edate=date
+            edates = [edate]
         }else{
             var url = new URL(scanResult)
             vname = url.searchParams.get("name")
