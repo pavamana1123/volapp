@@ -58,7 +58,7 @@ const Badge = (props) =>{
                     </div>:
                     <div className="bp-qr" style={back?style:{}}>
                         <QRCode
-                            value={name?`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(name)}&date=${dates.join("+")}`:`https://vol.iskconmysore.org/vol`}
+                            value={name?`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(name)}&date=${(dates||[]).join("+")}`:`https://vol.iskconmysore.org/vol`}
                             size={230}
                         />
                     </div>

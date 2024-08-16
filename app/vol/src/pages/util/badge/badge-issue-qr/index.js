@@ -60,7 +60,7 @@ const BadgeIssueQR = (props)=>{
         })
 
         volunteers.current = data.volunteers.filter(v=>{
-            return v.date==edate && v.service!="" && v.volunteerName!=""
+            return fdates.indexOf(v.date)!=-1 && v.service!="" && v.volunteerName!=""
         }).map(v=>{
             return v.volunteerName
         }).sonique()
@@ -68,38 +68,39 @@ const BadgeIssueQR = (props)=>{
 
     }, [data])
 
-    useEffect(()=>{
-        setActiveRequests(p=>p+1)
-        new API().call('get-badge-issue', {edate: date}).then((res)=>{
-            setIssued(res)
-            setActiveRequests(p=>p-1)
-        }).catch((e)=>{
-            console.log(e)
-        })
+    // useEffect(()=>{
+    //     setActiveRequests(p=>p+1)
+    //     new API().call('get-badge-issue', {edate: date}).then((res)=>{
+    //         setIssued(res)
+    //         setActiveRequests(p=>p-1)
+    //     }).catch((e)=>{
+    //         console.log(e)
+    //     })
 
-        if(data.volunteers){
-            volunteers.current = data.volunteers.filter(v=>{
-                return v.date==date && v.service!="" && v.volunteerName!=""
-            }).map(v=>{
-                return v.volunteerName
-            }).sonique()
-            totalBadges.current = volunteers.current.length
-        }
-    }, [date])
+    //     if(data.volunteers){
+    //         volunteers.current = data.volunteers.filter(v=>{
+    //             return v.date==date && v.service!="" && v.volunteerName!=""
+    //         }).map(v=>{
+    //             return v.volunteerName
+    //         }).sonique()
+    //         totalBadges.current = volunteers.current.length
+    //     }
+    // }, [date])
 
     const onScan = useCallback((scanResult, notURL)=>{
 
-        var vname, edate
+        var vname, edate, edates
         if(notURL){
             vname=scanResult
             edate=date
         }else{
             var url = new URL(scanResult)
             vname = url.searchParams.get("name")
-            edate = url.searchParams.get("date")
+            edates = url.searchParams.get("date").split(" ")
+            edate = edates[0]
         }
 
-        if(moment(edate).isBefore(moment(), 'day')){
+        if(moment(edates[edates.length-1]).isBefore(moment(), 'day')){
             warn.current.play()
             if(navigator && navigator.vibrate){
                 navigator.vibrate(200)
@@ -209,11 +210,11 @@ const BadgeIssueQR = (props)=>{
         <div className="bi-main">
             <Header title={date?
                 <div className="bi-header">
-                    <span>{`Volunteer Prasadam for `}</span>
-                    <span>{moment(date).format("DD MMM 'YY")}</span>
+                    <span>{`Volunteer Badge Issue`}</span>
+                    {/* <span>{moment(date).format("DD MMM 'YY")}</span>
                     <Icon name="arrow-drop-down" color="white" onClick={()=>{
                         setShowDateSelector(true)
-                    }}/>
+                    }}/> */}
                 </div>
             :null} hideOptions/>
 
