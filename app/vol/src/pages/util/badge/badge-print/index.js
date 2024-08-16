@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react"
 import "./index.css"
 import Badge from "../badge-card"
+import moment from "moment"
 
 const BadgePrint = (props)=>{
+
+    const urlParams = new URLSearchParams(window.location.search).get("date").trim()
+    var dates = urlParams=="*"?["*"]:urlParams.split(" ").map((u)=>{
+        return moment(u, "YYYYMMDD").format("YYYY-MM-DD")
+    })
 
     let { data } = props
     let [ badgeList, setBadgeList ] = useState([])
@@ -21,11 +27,11 @@ const BadgePrint = (props)=>{
 
         let { volunteers, services } = data
         volunteers = volunteers.filter(v=>{
-            return !v.idCardPrinted && v.volunteerName && v.volunteerPhone && v.service && (v.date=="2024-08-25" || v.date=="2024-08-26")
+            return !v.idCardPrinted && v.volunteerName && v.volunteerPhone && v.service && dates.indexOf(v.date)!=-1
         })
 
         services = services.filter(s=>{
-            return (s.date=="2024-08-25" || s.date=="2024-08-26")
+            return dates.indexOf(s.date)!=-1
         })
     
         let volunteersMap = {}
@@ -47,7 +53,8 @@ const BadgePrint = (props)=>{
             return {
                 name: v,
                 seva: serviceNameMap[volunteersMap[v].service],
-                spoc: volunteersMap[v].spoc
+                spoc: volunteersMap[v].spoc,
+                dates
             }
         }))
 
