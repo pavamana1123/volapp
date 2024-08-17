@@ -101,6 +101,14 @@ function Vols(props) {
                           }
 
                           if (dates.length) {
+
+                            console.log({
+                              service: v.service,
+                              volunteer: v.volunteerName,
+                              date: v.date,
+                              dates
+                            })
+
                             new API().call(`${reporting && reporting[v.date] && reporting[v.date][v.service] && reporting[v.date][v.service][v.volunteerName] ? "un" : ""}set-reporting`,
                               {
                                 service: v.service,

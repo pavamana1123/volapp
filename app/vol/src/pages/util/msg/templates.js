@@ -130,12 +130,14 @@ ISKCON Mysore`.trim())}`})
 
     "03 - Volunteer Badge Reminder": (props)=>{
 
-        var { volunteers } = props.data
+        var { volunteers, events } = props.data
         
         var umap = {}
         var voldet = {}
+
+        var eventDates = events.filter(e => e.badge).map(e => e.date)
     
-        var volunteers = volunteers.filter(v=>{
+        var volunteers = volunteers.filter(v => eventDates.indexOf(v.date)!=-1).filter(v=>{
             if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
                 umap[v.volunteerName]=v.volunteerPhone
             }
@@ -174,15 +176,16 @@ ISKCON Mysore`.trim())}`})
     
 Hare Krishna 🙏
 
-🪪 *Volunteer Badges will be issued today (Friday, 5th January 2024) from 9.30 AM to 1 PM and 4 PM to 9 PM at Volunteer Care Cell near Homa-Kunda area*. Please collect without fail.
+🪪 Volunteer Badges will be issued this Sunday:
 
-🚗 Vehicle parking is not allowed inside the temple on the festival day. Parking arrangement is made in _Pailvan Basavayya Community Hall_ in front of the temple. Entry into the parking area is allowed only with Volunteer Badge.
+🗓️ Date: 18th August 2024
+⌚ Time: 9.30 AM - 1 PM and 4 PM - 8.30 PM
+📍 Venue: Sridham Hall
 
-🪪 This volunteer-badge must be presented for honoring volunteer prasadam. It can be used as volunteer prasadam coupon. 
-
-You can call this number- 6360028651 (ISKCON Mysore Volunteering) or reply here regarding any queries.
+🚗 During the festival vehicle parking facility and prasadam will be made available only against the volunteer badge. So, please collect your badge without fail.
 
 Regards,
+Volunteer Care Cell
 ISKCON Mysore`.trim())}`})
     },
 

@@ -93,22 +93,24 @@ const BadgeIssueQR = (props)=>{
         if(notURL){
             vname=scanResult
             edate=date
+            edate = '2024-08-25' // temp line
             edates = [edate]
         }else{
             var url = new URL(scanResult)
             vname = url.searchParams.get("name")
             edates = url.searchParams.get("date").split(" ")
+            edates = ['2024-08-25', '2024-08-26'] // temp line
             edate = edates[0]
         }
 
-        if(moment(edates[edates.length-1]).isBefore(moment(), 'day')){
-            warn.current.play()
-            if(navigator && navigator.vibrate){
-                navigator.vibrate(200)
-            }
-            toast.error(`Cannot issue badge of older date ${moment(edate).format("Do MMM YYYY")}!`)
-            return
-        }
+        // if(moment(edates[edates.length-1]).isBefore(moment(), 'day')){
+        //     warn.current.play()
+        //     if(navigator && navigator.vibrate){
+        //         navigator.vibrate(200)
+        //     }
+        //     toast.error(`Cannot issue badge of older date ${moment(edate).format("Do MMM YYYY")}!`)
+        //     return
+        // }
 
         if(!vname){
             toast.warn("No name found in the badge! Enter manually")

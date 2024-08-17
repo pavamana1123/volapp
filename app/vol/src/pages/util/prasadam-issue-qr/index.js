@@ -131,11 +131,13 @@ const PrasadamIssueQR = (props) => {
         if (notURL) {
             vname = scanResult
             edate = date
+            edate = moment().format("YYYY-MM-DD") // temp line
             edates = [edate]
         } else {
             var url = new URL(scanResult)
             vname = url.searchParams.get("name")
             edates = url.searchParams.get("date").split(" ")
+            edates = ['2024-08-25', '2024-08-26'] // temp line
             edate = edates[0]
         }
 
@@ -188,7 +190,7 @@ const PrasadamIssueQR = (props) => {
         setActiveRequests(p => p + 1)
         new API().call('set-prasadam-issue', {
             date: moment().format("YYYY-MM-DD HH:mm:ss"),
-            edate,
+            edate: moment().format('YYYY-MM-DD'),
             vname,
             tod
         }).then((res) => {

@@ -5,7 +5,7 @@ import _ from "../../../_";
 
 function ServiceList(props){
 
-    const safePageHeight = 1100
+    const safePageHeight = 970
     var tableData = []
 
     const headers = [
@@ -39,8 +39,8 @@ function ServiceList(props){
         return `
             <div class="slpage">
                 <div class="sltitle">
-                    <div style="font-size: 1.5vw; font-weight: 900">Service List - Sri Krishna Janmashtami (Round 1)</div>
-                    <div style="margin-top: .3vw; font-size: 1.1vw; font-weight: 900">24th Aug - Pre-Arrangements • 25th Aug - Janmashtami Day-1 • 26th Aug - Janmashtami Day-2</div>
+                    <div style="font-size: 1.5vw; font-weight: 900">Service List - Sri Krishna Janmashtami & Sri Vyasa Puja</div>
+                    <div style="margin-top: .3vw; font-size: 1.1vw; font-weight: 900">24 Aug - Pre-Arrangements • 25 Aug - Janmashtami Day-1 • 26 Aug - Janmashtami Day-2 • 27 Aug - Vyasa Puja • 28 Aug - Winding Up</div>
                 </div>
                 
                 <table class="sltable">
