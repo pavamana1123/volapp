@@ -128,7 +128,7 @@ Volunteer Care Cell
 ISKCON Mysore`.trim())}`})
     }, 
 
-    "03 - Volunteer Badge Reminder": (props)=>{
+    "03 - Volunteer Badge Info": (props)=>{
 
         var { volunteers, events } = props.data
         
@@ -183,6 +183,64 @@ Hare Krishna 🙏
 📍 Venue: Sridham Hall
 
 🚗 During the festival vehicle parking facility and prasadam will be made available only against the volunteer badge. So, please collect your badge without fail.
+
+Regards,
+Volunteer Care Cell
+ISKCON Mysore`.trim())}`})
+    },
+
+    "033 - Volunteer Badge Reminder": (props)=>{
+
+        var { volunteers, events } = props.data
+        
+        var umap = {}
+        var voldet = {}
+
+        var eventDates = events.filter(e => e.badge).map(e => e.date)
+    
+        var volunteers = volunteers.filter(v => eventDates.indexOf(v.date)!=-1).filter(v=>{
+            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
+                umap[v.volunteerName]=v.volunteerPhone
+            }
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && v.idCardPrinted && !v.idReminderSent && !v.idCardCollected
+        })
+        
+        Object.keys(umap).map(name=>{
+            for(var i=0; i<volunteers.length; i++){
+            if(volunteers[i].volunteerName==name){
+                if(!voldet[name]){
+                voldet[name]={
+                    name,
+                    phone: volunteers[i].volunteerPhone,
+                    availability: volunteers[i].availability,
+                    idCardCollected: volunteers[i].idCardCollected,
+                    services:[]
+                }
+                }
+                voldet[name].services.push({
+                    date: volunteers[i].date,
+                    service: volunteers[i].service,
+                    timings: volunteers[i].timings,
+                    coordinator: volunteers[i].coordinator,
+                    spoc: volunteers[i].spoc,
+                    spocPhone: volunteers[i].spocPhone
+                })
+            }
+            }
+        })
+
+        return Object.keys(voldet).sort().map(n=>{
+            var v = voldet[n]
+
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+*Gentle reminder to collect your Volunteer Badge today!*
+    
+Hare Krishna 🙏
+
+🪪 Volunteer Badges will be issued today:
+
+⌚ Time: 9.30 AM - 1 PM and 4 PM - 8.30 PM
+📍 Venue: Sridham Hall
 
 Regards,
 Volunteer Care Cell
