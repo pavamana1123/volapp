@@ -163,7 +163,7 @@ function Vol(props) {
           <b>Note:</b>
           <ol>
             <li className='vol-note-li'>Every service has got a Single Point-of-Contact (SPOC). Contact your SPOC(s) and understand all details of your service like timings, dress code etc.</li>
-            <li className='vol-note-li'>Volunteer Badge will be issued on Sunday, 18th August 2024. Collect without fail.</li>
+            <li className='vol-note-li'>Volunteer Badge will be issued from Saturday, 24th August 2024, 4 PM onwards. Collect without fail.</li>
             <li className='vol-note-li'>Volunteer Badge must be used to avail parking facility and prasadam during Sri Krishna Janmashtami festival (25th & 26th Aug)</li>
           </ol>
         </Paper>
