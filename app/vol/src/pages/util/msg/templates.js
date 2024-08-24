@@ -463,11 +463,9 @@ ISKCON Mysore
 Hare Krishna 🙏
 We hope that you have gone through the service details and have contacted your SPOC(s) regarding the service details.
 
-We now request you to please *recheck your service details and dates of service* by clicking on the link given below:
+We now request you to please *recheck your service details and dates of service* by clicking on the link given below. Details regarding volunteer badge, prasadam and volunteer parking are also updated in the link below:
 
 *${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
-
-‼️🪪 *DO NOT FORGET TO BRING YOUR VOLUNTEER BADGE ON FESTIVAL DAY (23rd)*
 
 You can reply here regarding any queries.
 

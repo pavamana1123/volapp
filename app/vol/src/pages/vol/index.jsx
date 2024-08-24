@@ -164,7 +164,10 @@ function Vol(props) {
           <ol>
             <li className='vol-note-li'>Every service has got a Single Point-of-Contact (SPOC). Contact your SPOC(s) and understand all details of your service like timings, dress code etc.</li>
             <li className='vol-note-li'>Volunteer Badge will be issued from Saturday, 24th August 2024, 4 PM onwards. Collect without fail.</li>
-            <li className='vol-note-li'>Volunteer Badge must be used to avail parking facility and prasadam during Sri Krishna Janmashtami festival (25th & 26th Aug)</li>
+            <li className='vol-note-li'>Volunteer Badge must be used to avail parking facility and prasadam during Sri Krishna Janmashtami festival (25th & 26th Aug). So please collect and bring your badge without fail.</li>
+            <li className='vol-note-li'>Volunteer prasadam (breakfast, lunch and dinner) is arranged in the back-side of the basement of new temple building. You can reach there through the entry to basement near the Goshala.</li>
+            <li className='vol-note-li'>Volunteer parking facility is made near the new temple building, beside the concrete machine.</li>
+            <li className='vol-note-li'>Volunteer Care Cell will be located in front of the book counter near the temple flower garden. Please contact the cell for any queries.</li>
           </ol>
         </Paper>
 
