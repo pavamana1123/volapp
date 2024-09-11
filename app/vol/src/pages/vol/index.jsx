@@ -159,7 +159,7 @@ function Vol(props) {
             (filter && <Spinner style={{ marginTop: "2vw" }} size={2} />)}
         </div>
 
-        <Paper className="vol-note">
+        {null && <Paper className="vol-note">
           <b>Note:</b>
           <ol>
             <li className='vol-note-li'>Every service has got a Single Point-of-Contact (SPOC). Contact your SPOC(s) and understand all details of your service like timings, dress code etc.</li>
@@ -169,7 +169,7 @@ function Vol(props) {
             <li className='vol-note-li'>Volunteer parking facility is made near the new temple building, beside the concrete machine.</li>
             <li className='vol-note-li'>Volunteer Care Cell will be located in front of the book counter near the temple flower garden. Please contact the cell for any queries.</li>
           </ol>
-        </Paper>
+        </Paper>}
 
         {showApp &&
           <Paper className='vol-app-paper'>

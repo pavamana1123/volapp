@@ -98,7 +98,7 @@ function SPOCBLD(props) {
       phone: spocMap[s].phone,
       b: getCount(s, "b"),
       l: getCount(s, "l"),
-      d: dinnerCount?getCount(s, "d"): date=="2024-01-06"?0:getCount(s, "d")
+      d: dinnerCount?getCount(s, "d"): 0
     }
   })
 
