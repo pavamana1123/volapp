@@ -23,29 +23,29 @@ function Vol(props) {
     setPreset(!!urlParams.get('name'))
   }, [])
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (!data.volunteers || showApp) {
-      return
-    }
+  //   if (!data.volunteers || showApp) {
+  //     return
+  //   }
 
-    fetch('/api', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        endpoint: '/verify-user'
-      },
-      body: JSON.stringify({
-        id: data.volunteers.filter(volunteer => volunteer.volunteerName == filter)[0].volunteerPhone,
-      })
-    }).then(res => {
-      if (!res.ok) {
-        setShowApp(true)
-      }
-    }).catch(err => {
-      console.log(err)
-    })
-  }, [data, filter, showApp])
+  //   fetch('/api', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       endpoint: '/verify-user'
+  //     },
+  //     body: JSON.stringify({
+  //       id: data.volunteers.filter(volunteer => volunteer.volunteerName == filter)[0].volunteerPhone,
+  //     })
+  //   }).then(res => {
+  //     if (!res.ok) {
+  //       setShowApp(true)
+  //     }
+  //   }).catch(err => {
+  //     console.log(err)
+  //   })
+  // }, [data, filter, showApp])
 
   useEffect(() => {
     var vn = {}

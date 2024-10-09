@@ -1,7 +1,9 @@
 import moment from 'moment'
 
 var dates = [
-    "2024-09-11"
+    "2024-10-11",
+    "2024-10-12",
+    "2024-10-13",
 ]
 
 var templates = {
@@ -42,7 +44,7 @@ var templates = {
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Sri Radhashtami Festival services*
+*SPOC for Dasara services*
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. Kindly click on the below link and go through the details of the service${s.services.length>1?"s":""} carefully:
 
@@ -101,11 +103,11 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteering Details - Sri Radhashtami Festival*
+*Volunteering Details - Dasara*
 
 Hare Krishna 🙏
 
-Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service for Sri Radhashtami festival. Please check your service details by clicking on the link given below:
+Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service for Dasara. Please check your service details by clicking on the link given below:
 
 
 ${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
@@ -161,7 +163,7 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteer Badge - Sri Radhashtami Festival - Volunteering*
+*Volunteer Badge - Dasara - Volunteering*
     
 Hare Krishna 🙏
 
@@ -272,7 +274,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Sri Radhashtami Festival*
+*SPOC - Service Update Alert ⚠️ - Dasara*
     
 Hare Krishna 🙏
 
@@ -334,7 +336,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Sri Radhashtami Festival - Volunteering*
+*Service Update Alert ⚠️ - Dasara - Volunteering*
     
 Hare Krishna 🙏
 
@@ -447,7 +449,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Reminder - Sri Radhashtami Festival - Volunteering*
+*Service Reminder - Dasara - Volunteering*
     
 Hare Krishna 🙏
 We hope that you have gone through the service details and have contacted your SPOC(s) regarding the service details.
@@ -504,7 +506,7 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
 return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Sri Radhashtami Festival - Volunteering*
+⭐ *Important Info - Dasara - Volunteering*
     
 Hare Krishna 🙏 Hoping that you are ready for the Sri Radhashtami services. Here are some important points you need to know. Please note.
 
