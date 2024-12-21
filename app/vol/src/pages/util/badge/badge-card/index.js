@@ -41,6 +41,11 @@ const Badge = (props) =>{
                     </div>
                 </div> */}
 
+                <div className='bp-lt'/>
+                <div className='bp-lb'/>
+                <div className='bp-rt'/>
+                <div className='bp-rb'/>
+
                 {!back?
                     <div className="bp-details" style={back?{}:style}>
                         <div className="bp-detail">

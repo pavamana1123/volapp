@@ -39,6 +39,7 @@
 
 
 .bp-badge, .bp-plus-holder {
+    position: relative;
     height: 5in;
     width: 3.75in;
 }
@@ -89,11 +90,51 @@
     padding-left: .1in;
 }
 
+.bp-lt {
+    position: absolute;
+    left: 0in;
+    top: 0in;
+    width: .1in;
+    height: .1in;
+    border-left: .01in solid rgba(0, 0, 0, 0.25);
+    border-top: .01in solid rgba(0, 0, 0, 0.25);
+}
+
+.bp-lb {
+    position: absolute;
+    left: 0in;
+    bottom: 0in;
+    width: .1in;
+    height: .1in;
+    border-left: .01in solid rgba(0, 0, 0, 0.25);
+    border-bottom: .01in solid rgba(0, 0, 0, 0.25);
+}
+
+.bp-rt {
+    position: absolute;
+    right: 0in;
+    top: 0in;
+    width: .1in;
+    height: .1in;
+    border-right: .01in solid rgba(0, 0, 0, 0.25);
+    border-top: .01in solid rgba(0, 0, 0, 0.25);
+}
+
+.bp-rb {
+    position: absolute;
+    right: 0in;
+    bottom: 0in;
+    width: .1in;
+    height: .1in;
+    border-right: .01in solid rgba(0, 0, 0, 0.25);
+    border-bottom: .01in solid rgba(0, 0, 0, 0.25);
+}
+
 .bp-qr {
     display: flex;
     align-items: center;
     justify-content: center;
 
     position: relative;
-    top: 1.4in;
+    top: 1.53in;
 }

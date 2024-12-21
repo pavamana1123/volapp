@@ -1,7 +1,9 @@
 import moment from 'moment'
 
 var dates = [
-    "2024-11-05"
+    "2024-12-27",
+    "2024-12-28",
+    "2024-12-29"
 ]
 
 var templates = {
@@ -42,7 +44,7 @@ var templates = {
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Srila Prabhupada Disappearance Day services*
+*SPOC for Ratha Yatra - December 2024 - Volunteering Services*
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. Kindly click on the below link and go through the details of the service${s.services.length>1?"s":""} carefully:
 
@@ -101,13 +103,11 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteering Details - Srila Prabhupada Disappearance Day*
+*Volunteering Details - Ratha Yatra - December 2024*
 
 Hare Krishna 🙏
 
-Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service for Srila Prabhupada Disappearance Day. Please check your service details by clicking on the link given below:
-
-${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}
+Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service for Ratha Yatra - December 2024. Please check your service details by clicking on the this link: https://sevabase.iskconmysore.org
 
 You can reply here regarding any queries.
 
@@ -160,15 +160,16 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteer Badge - Srila Prabhupada Disappearance Day - Volunteering*
+*Volunteer Badge - Ratha Yatra - December 2024*
     
 Hare Krishna 🙏
 
-🪪 Volunteer Badges will be issued today:
+🪪 Volunteer Badges will be issued on Sunday, 22nd December 2024:
 
-🗓️ Date: 1st November 2024
-⌚ Time: 6 PM onwards
-📍 Venue: Near Homa Kunda area
+⌚ Time: 9.30 AM to 1 PM & 4.30 PM to 8.30 PM
+📍 Venue: Sridham Hall
+
+You can reply here regarding any queries.
 
 Regards,
 Volunteer Care Cell
@@ -269,7 +270,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Srila Prabhupada Disappearance Day*
+*SPOC - Service Update Alert ⚠️ - Ratha Yatra - December 2024*
     
 Hare Krishna 🙏
 
@@ -331,7 +332,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Srila Prabhupada Disappearance Day - Volunteering*
+*Service Update Alert ⚠️ - Ratha Yatra - December 2024 - Volunteering*
     
 Hare Krishna 🙏
 
@@ -444,7 +445,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Reminder - Srila Prabhupada Disappearance Day - Volunteering*
+*Service Reminder - Ratha Yatra - December 2024 - Volunteering*
     
 Hare Krishna 🙏
 We hope that you have gone through the service details and have contacted your SPOC(s) regarding the service details.
@@ -501,7 +502,7 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
 return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Srila Prabhupada Disappearance Day - Volunteering*
+⭐ *Important Info - Ratha Yatra - December 2024 - Volunteering*
     
 Hare Krishna 🙏 Hoping that you are ready for the Sri Radhashtami services. Here are some important points you need to know. Please note.
 

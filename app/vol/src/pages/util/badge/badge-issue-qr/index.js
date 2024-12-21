@@ -13,7 +13,7 @@ import Auto from "../../../../components/auto"
 import { Spinner } from "../../../../components/spinner"
 import Selector from "../../../../components/selector"
 
-const BadgeIssueQR = (props)=>{
+const BadgeIssueQR = (props) => {
 
     var { data } = props
     var [date, setDate] = useState()
@@ -22,46 +22,50 @@ const BadgeIssueQR = (props)=>{
     var [searchFilter, setSearchFilter] = useState("")
     var [cameraShowHide, setCameraShowHide] = useState()
     var [showManualEntry, setShowManualEntry] = useState(false)
-    var [activeRequests, setActiveRequests] = useState(0) 
-    var [showDateSelector, setShowDateSelector] = useState(false) 
+    var [activeRequests, setActiveRequests] = useState(0)
+    var [showDateSelector, setShowDateSelector] = useState(false)
     var volunteers = useRef()
-    
+
     var totalBadges = useRef(0)
     const tap = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/tap.mp3`))
     const warn = useRef(new Audio(`https://cdn.iskconmysore.org/content?path=volapp/warn.mp3`))
 
-    useEffect(()=>{
-        if(!data.events){
+    useEffect(() => {
+        if (!data.events) {
             return
         }
-        
-        var ds = data.events.filter(e=>{
+
+        // get list of dates for which badge is applicable
+        var badgeDates = data.events.filter(e => {
             return e.badge
-        }).map(e=>{
+        }).map(e => {
             return e.date
         })
 
-        setDates(ds)
-        var fdates = ds.filter(d=>moment(d).isSameOrAfter(moment(), 'day'))
+        setDates(badgeDates)
+        // get future dates in the list of badgeDates
+        var futureDates = badgeDates.filter(d => moment(d).isSameOrAfter(moment(), 'day'))
+
+        // get currect date on interest
         var edate
-        if(fdates.length){
-            edate = fdates[0]
-        }else{
-            edate = ds[ds.length-1]
+        if (futureDates.length) {
+            edate = futureDates[0]
+        } else {
+            edate = badgeDates[badgeDates.length - 1]
         }
         setDate(edate)
 
-        setActiveRequests(p=>p+1)
-        new API().call('get-badge-issue', {edate}).then((res)=>{
+        setActiveRequests(p => p + 1)
+        new API().call('get-badge-issue', { edate }).then((res) => {
             setIssued(res)
-            setActiveRequests(p=>p-1)
-        }).catch((e)=>{
+            setActiveRequests(p => p - 1)
+        }).catch((e) => {
             console.log(e)
         })
 
-        volunteers.current = data.volunteers.filter(v=>{
-            return fdates.indexOf(v.date)!=-1 && v.service!="" && v.volunteerName!=""
-        }).map(v=>{
+        volunteers.current = data.volunteers.filter(v => {
+            return futureDates.indexOf(v.date) != -1 && v.service != "" && v.volunteerName != ""
+        }).map(v => {
             return v.volunteerName
         }).sonique()
         totalBadges.current = volunteers.current.length
@@ -87,19 +91,19 @@ const BadgeIssueQR = (props)=>{
     //     }
     // }, [date])
 
-    const onScan = useCallback((scanResult, notURL)=>{
+    const onScan = useCallback((scanResult, notURL) => {
 
         var vname, edate, edates
-        if(notURL){
-            vname=scanResult
-            edate=date
-            edate = '2024-08-25' // temp line
+        if (notURL) {
+            vname = scanResult
+            edate = date
+            edate = '2024-12-28' // temp line
             edates = [edate]
-        }else{
+        } else {
             var url = new URL(scanResult)
             vname = url.searchParams.get("name")
             edates = url.searchParams.get("date").split(" ")
-            edates = ['2024-08-25', '2024-08-26'] // temp line
+            edates = ['2024-12-28'] // temp line
             edate = edates[0]
         }
 
@@ -112,106 +116,106 @@ const BadgeIssueQR = (props)=>{
         //     return
         // }
 
-        if(!vname){
+        if (!vname) {
             toast.warn("No name found in the badge! Enter manually")
             setShowManualEntry(true)
             return
         }
 
-        const found = volunteers.current.indexOf(vname)!=-1
-        if(!found){
+        const found = volunteers.current.indexOf(vname) != -1
+        if (!found) {
             warn.current.play()
-            if(navigator && navigator.vibrate){
+            if (navigator && navigator.vibrate) {
                 navigator.vibrate(200)
             }
             toast.error(`This volunteer ${vname} has not been assigned any service!`)
             return
         }
 
-        setActiveRequests(p=>p+1)
+        setActiveRequests(p => p + 1)
         new API().call('set-badge-issue', {
             date: moment().format("YYYY-MM-DD HH:mm:ss"),
             edate,
             vname,
             listedDate: date
-        }).then((res)=>{
-            setTimeout(()=>{
+        }).then((res) => {
+            setTimeout(() => {
                 setIssued(res)
                 tap.current.play()
-                setActiveRequests(p=>p-1)
+                setActiveRequests(p => p - 1)
             }, 1000)
-        }).catch((e)=>{
+        }).catch((e) => {
             console.log(e)
-            setActiveRequests(p=>p-1)
+            setActiveRequests(p => p - 1)
         })
-    },[date])
+    }, [date])
 
-    const handleDelete = useCallback((vname)=>{
+    const handleDelete = useCallback((vname) => {
         const deleteConfirm = window.confirm(`Do you want to delete this entry of ${vname}?`)
 
         if (deleteConfirm) {
-            setActiveRequests(p=>p+1)
-            new API().call('unset-badge-issue', { edate: date, vname }).then((res)=>{
-                setIssued(res) 
+            setActiveRequests(p => p + 1)
+            new API().call('unset-badge-issue', { edate: date, vname }).then((res) => {
+                setIssued(res)
                 tap.current.play()
             }).catch(console.log)
-            .finally(()=>{
-                setActiveRequests(p=>p-1)
-            })
-        }else{
+                .finally(() => {
+                    setActiveRequests(p => p - 1)
+                })
+        } else {
             console.log("Deletion canceled")
         }
     }, [date])
 
-    const readOut = useCallback((d)=>{
+    const readOut = useCallback((d) => {
         return new URL(d).searchParams.get("name") || ""
     }, [])
 
-    const handleCopy = ()=>{
-        clipboardy.write(issued.map(i=>{
+    const handleCopy = () => {
+        clipboardy.write(issued.map(i => {
             return i.vname
-        }).join("\n")).then(()=>{
+        }).join("\n")).then(() => {
             toast.success('Names copied to clipboard');
         })
     }
 
     var timer = useRef()
 
-    const handleSearch = (e)=>{
+    const handleSearch = (e) => {
         clearTimeout(timer.current)
-        timer.current = setTimeout(()=>{
+        timer.current = setTimeout(() => {
             setSearchFilter(e.target.value)
         }, 300)
     }
 
-    const manualFilter = (f)=>{
-        return volunteers.current.filter(v=>{
-            return v.toLowerCase().indexOf(f.toLowerCase())!=-1
+    const manualFilter = (f) => {
+        return volunteers.current.filter(v => {
+            return v.toLowerCase().indexOf(f.toLowerCase()) != -1
         })
     }
 
-    const closeModal = ()=>{
+    const closeModal = () => {
         setShowManualEntry(false)
     }
 
-    const showModal = ()=>{
+    const showModal = () => {
         setShowManualEntry(true)
     }
 
-    const Drop = (props)=>{
+    const Drop = (props) => {
         var { item, value } = props
         return <div className='bi-manual-drop'
-            onClick={()=>{
-            onScan(value, true)
-            setTimeout(closeModal, 100)
-        }}>
+            onClick={() => {
+                onScan(value, true)
+                setTimeout(closeModal, 100)
+            }}>
             {item}
         </div>
     }
 
     return (
         <div className="bi-main">
-            <Header title={date?
+            <Header title={date ?
                 <div className="bi-header">
                     <span>{`Volunteer Badge Issue`}</span>
                     {/* <span>{moment(date).format("DD MMM 'YY")}</span>
@@ -219,16 +223,16 @@ const BadgeIssueQR = (props)=>{
                         setShowDateSelector(true)
                     }}/> */}
                 </div>
-            :null} hideOptions/>
+                : null} hideOptions />
 
-            {showDateSelector?<Selector
-                display={dates.map(d=>moment(d).format('ddd, DD MMM YYYY'))}
+            {showDateSelector ? <Selector
+                display={dates.map(d => moment(d).format('ddd, DD MMM YYYY'))}
                 value={dates}
                 onSelect={setDate}
-                onClose={()=>{
+                onClose={() => {
                     setShowDateSelector(false)
                 }}
-            />:null}
+            /> : null}
 
             <div className="bi-root">
                 <QRCam
@@ -241,47 +245,47 @@ const BadgeIssueQR = (props)=>{
                 />
             </div>
 
-            {issued?
-                <div className={`bi-issued-holder ${!cameraShowHide?"bi-hidden-cam":""}`}>
+            {issued ?
+                <div className={`bi-issued-holder ${!cameraShowHide ? "bi-hidden-cam" : ""}`}>
                     <div className="bi-issue-spin">
-                        <div className="bi-issued-label">{`ISSUED BADGES (${issued.length}${totalBadges.current?`/${totalBadges.current}`:""})`}</div>
-                        {activeRequests?<Spinner/>:null}
+                        <div className="bi-issued-label">{`ISSUED BADGES (${issued.length}${totalBadges.current ? `/${totalBadges.current}` : ""})`}</div>
+                        {activeRequests ? <Spinner /> : null}
                     </div>
 
-                    {showManualEntry?<Modal title="Manual Entry" className="bi-manual-modal" onClose={closeModal}>
+                    {showManualEntry ? <Modal title="Manual Entry" className="bi-manual-modal" onClose={closeModal}>
                         <div className="bi-manual-info">Search and click on a volunteer name to add manually</div>
-                        <Auto 
+                        <Auto
                             className="bi-auto"
                             filter={manualFilter}
                             Drop={Drop}
-                            placeholder="Start typing volunteer name.."/>
-                    </Modal>:null}
+                            placeholder="Start typing volunteer name.." />
+                    </Modal> : null}
 
                     <div className="bi-issue-util">
-                        <input className="bi-issue-search" placeholder="Search..." onChange={handleSearch}/>
-                        {date?<Icon className="bi-util-icon" name="person-add" color="#888" onClick={showModal}/>:null}
-                        <Icon className="bi-util-icon" name="content-copy" color="#888" onClick={handleCopy}/>
+                        <input className="bi-issue-search" placeholder="Search..." onChange={handleSearch} />
+                        {date ? <Icon className="bi-util-icon" name="person-add" color="#888" onClick={showModal} /> : null}
+                        <Icon className="bi-util-icon" name="content-copy" color="#888" onClick={handleCopy} />
                     </div>
 
                     <div className="bi-issued-list">{
-                        issued.length?issued.filter(i=>{
-                            return searchFilter=="" || i.vname.toLowerCase().indexOf(searchFilter.toLowerCase())!=-1
-                        }).map(i=>{
+                        issued.length ? issued.filter(i => {
+                            return searchFilter == "" || i.vname.toLowerCase().indexOf(searchFilter.toLowerCase()) != -1
+                        }).map(i => {
                             return <div className="bi-list-item">
                                 <div>
                                     <div>{i.vname}</div>
                                     <div className="bi-list-time">{moment(i.date).format("DD MMM YYYY hh:mm A")}</div>
                                 </div>
                                 <div>
-                                    <Icon name="trash" color="#aaa" size="6vw" onClick={()=>{
+                                    <Icon name="trash" color="#aaa" size="6vw" onClick={() => {
                                         handleDelete(i.vname)
-                                    }}/>
+                                    }} />
                                 </div>
                             </div>
-                        }):<div className="bi-empty-list">No badges are issued</div>
+                        }) : <div className="bi-empty-list">No badges are issued</div>
                     }</div>
                 </div>
-            :null}
+                : null}
         </div>
     )
 }
