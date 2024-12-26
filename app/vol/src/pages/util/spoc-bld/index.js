@@ -65,7 +65,7 @@ function SPOCBLD(props) {
     spocMap[ms.spoc] = spocMap[ms.spoc] || {}
     spocMap[ms.spoc].phone = ms.phone
     spocMap[ms.spoc].availability = spocMap[ms.spoc].availability || []
-    spocMap[ms.spoc].availability.push((ms.availability=="" || ms.availability=="Default")?"Whole Day":ms.availability)
+    spocMap[ms.spoc].availability.push((ms.availability=="" || ms.availability=="Default")?"All Slots":ms.availability)
   })
 
   var spocs = Object.keys(spocMap).sort()

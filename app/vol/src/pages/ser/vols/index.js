@@ -130,7 +130,7 @@ function Vols(props) {
                           // }
 
                         }}>
-                          <i className={`bi bi-check-circle-fill nameCheck ${!(reporting && reporting[v.date] && reporting[v.date][v.service] && reporting[v.date][v.service][v.volunteerName]) ? "name-greyed" : ""}`}></i>
+                          {false && <i className={`bi bi-check-circle-fill nameCheck ${!(reporting && reporting[v.date] && reporting[v.date][v.service] && reporting[v.date][v.service][v.volunteerName]) ? "name-greyed" : ""}`}></i>}
                         </div> : null}
 
                       <div className='nameact'>
