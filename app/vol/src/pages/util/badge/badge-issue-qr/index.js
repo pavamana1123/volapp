@@ -93,7 +93,7 @@ const BadgeIssueQR = (props) => {
 
     const onScan = useCallback((scanResult, notURL) => {
 
-        var vname, edate, edates
+        var vname, edate, edates 
         if (notURL) {
             vname = scanResult
             edate = date
