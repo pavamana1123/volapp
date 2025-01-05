@@ -217,7 +217,7 @@ const BadgeIssueQR = (props) => {
         <div className="bi-main">
             <Header title={date ?
                 <div className="bi-header">
-                    <span>{`Volunteer Badge Issue`}</span>
+                    <span>{`Volunteer Badge Issue (VE)`}</span>
                     {/* <span>{moment(date).format("DD MMM 'YY")}</span>
                     <Icon name="arrow-drop-down" color="white" onClick={()=>{
                         setShowDateSelector(true)
