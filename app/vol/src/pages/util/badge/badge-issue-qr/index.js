@@ -97,13 +97,13 @@ const BadgeIssueQR = (props) => {
         if (notURL) {
             vname = scanResult
             edate = date
-            edate = '2024-12-28' // temp line
+            edate = '2025-01-10' // temp line
             edates = [edate]
         } else {
             var url = new URL(scanResult)
             vname = url.searchParams.get("name")
             edates = url.searchParams.get("date").split(" ")
-            edates = ['2024-12-28'] // temp line
+            edates = ['2025-01-10'] // temp line
             edate = edates[0]
         }
 
