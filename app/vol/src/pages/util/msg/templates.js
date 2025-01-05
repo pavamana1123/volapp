@@ -1,9 +1,9 @@
 import moment from 'moment'
 
 var dates = [
-    "2024-12-27",
-    "2024-12-28",
-    "2024-12-29"
+    "2025-01-09",
+    "2025-01-10",
+    "2025-01-11"
 ]
 
 var templates = {
@@ -44,7 +44,7 @@ var templates = {
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Ratha Yatra - December 2024 - Volunteering Services*
+*SPOC for Sri Vaikunta Ekadashi - Volunteering Services*
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. Kindly click on the below link and go through the details of the service${s.services.length>1?"s":""} carefully:
 
@@ -72,7 +72,7 @@ ISKCON Mysore
             if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
                 umap[v.volunteerName]=v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.infoMsgSent
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.infoMsgSent && v.idCardPrinted
         })
         
         Object.keys(umap).map(name=>{
@@ -103,11 +103,15 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteering Details - Ratha Yatra - December 2024*
+*Volunteering Details - Sri Vaikuntha Ekadashi - Friday, 10th January 2025*
 
 Hare Krishna 🙏
 
-Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service for Ratha Yatra - December 2024. Please check your service details by clicking on the this link: https://sevabase.iskconmysore.org
+Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service for Sri Vaikunta Ekadashi. Please check your service details by clicking on the this link: https://sevabase.iskconmysore.org
+
+🪪 Volunteer Badges will be issued on Sunday, 5th January 2025:
+ ⌚ Time: 9.30 AM to 1 PM & 4.30 PM to 8.30 PM
+ 📍 Venue: Near Homa Kunda area
 
 You can reply here regarding any queries.
 
@@ -160,7 +164,7 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteer Badge - Ratha Yatra - December 2024*
+*Volunteer Badge - Sri Vaikunta Ekadashi*
     
 Hare Krishna 🙏
 
@@ -270,7 +274,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Ratha Yatra - December 2024*
+*SPOC - Service Update Alert ⚠️ - Sri Vaikunta Ekadashi*
     
 Hare Krishna 🙏
 
@@ -332,7 +336,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Ratha Yatra - December 2024 - Volunteering*
+*Service Update Alert ⚠️ - Sri Vaikunta Ekadashi - Volunteering*
     
 Hare Krishna 🙏
 
@@ -445,7 +449,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Reminder - Ratha Yatra - December 2024 - Volunteering*
+*Service Reminder - Sri Vaikunta Ekadashi - Volunteering*
     
 Hare Krishna 🙏
 We hope that you have gone through the service details and have contacted your SPOC(s) regarding the service details.
@@ -502,7 +506,7 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
 return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Ratha Yatra - December 2024 - Volunteering*
+⭐ *Important Info - Sri Vaikunta Ekadashi - Volunteering*
     
 Hare Krishna 🙏 Hoping that you are ready for the Sri Radhashtami services. Here are some important points you need to know. Please note.
 
