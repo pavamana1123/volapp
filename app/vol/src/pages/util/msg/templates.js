@@ -237,7 +237,7 @@ Hare Krishna 🙏
 
 🪪 Volunteer Badges will be issued today:
 
-⌚ Time: 9.30 AM - 1 PM and 4 PM - 8.30 PM
+⌚ Time: 9.30 AM - 1 PM and 4.30 PM - 8.30 PM
 📍 Venue: Sridham Hall
 
 Regards,

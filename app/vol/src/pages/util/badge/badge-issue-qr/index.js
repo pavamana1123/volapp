@@ -93,17 +93,17 @@ const BadgeIssueQR = (props) => {
 
     const onScan = useCallback((scanResult, notURL) => {
 
-        var vname, edate, edates
+        var vname, edate, edates 
         if (notURL) {
             vname = scanResult
             edate = date
-            edate = '2024-12-28' // temp line
+            edate = '2025-01-10' // temp line
             edates = [edate]
         } else {
             var url = new URL(scanResult)
             vname = url.searchParams.get("name")
             edates = url.searchParams.get("date").split(" ")
-            edates = ['2024-12-28'] // temp line
+            edates = ['2025-01-10'] // temp line
             edate = edates[0]
         }
 
@@ -217,7 +217,7 @@ const BadgeIssueQR = (props) => {
         <div className="bi-main">
             <Header title={date ?
                 <div className="bi-header">
-                    <span>{`Volunteer Badge Issue`}</span>
+                    <span>{`Volunteer Badge Issue (VE)`}</span>
                     {/* <span>{moment(date).format("DD MMM 'YY")}</span>
                     <Icon name="arrow-drop-down" color="white" onClick={()=>{
                         setShowDateSelector(true)
