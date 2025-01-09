@@ -137,7 +137,7 @@ const PrasadamIssueQR = (props) => {
             var url = new URL(scanResult)
             vname = url.searchParams.get("name")
             edates = url.searchParams.get("date").split(" ")
-            edates = ['2024-12-28'] // temp line
+            edates = ['2025-01-10'] // temp line
             edate = edates[0]
         }
 

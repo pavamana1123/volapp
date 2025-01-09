@@ -72,7 +72,7 @@ ISKCON Mysore
             if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
                 umap[v.volunteerName]=v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.infoMsgSent && v.idCardPrinted
+            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.infoMsgSent
         })
         
         Object.keys(umap).map(name=>{
@@ -103,19 +103,26 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteering Details - Sri Vaikuntha Ekadashi - Friday, 10th January 2025*
+Volunteering Details – Sri Vaikuntha Ekadashi – Friday, 10th January 2025
 
 Hare Krishna 🙏
 
-Please accept the blessings of Sri Sri Krishna Balarama 🙏 You have been assigned volunteer service for Sri Vaikunta Ekadashi. Please check your service details by clicking on the this link: https://sevabase.iskconmysore.org
+🌸 Please accept the blessings of Sri Sri Krishna Balarama 🌸
+You have been assigned volunteer service for Sri Vaikuntha Ekadashi. Kindly check your service details by clicking on this link:
+👉 https://sevabase.iskconmysore.org
 
-🪪 Volunteer Badges will be issued on Sunday, 5th January 2025:
- ⌚ Time: 9.30 AM to 1 PM & 4.30 PM to 8.30 PM
- 📍 Venue: Near Homa Kunda area
+🪪 Volunteer Badges Distribution:
+ 📅 Thursday, 9th January
+  ⏰ Time: 4:30 PM to 8:30 PM
+  📍 Venue: Near Homa Kunda area
 
-You can reply here regarding any queries.
+ 📅 Friday, 10th January
+  ⏰ Time: 8:00 AM to 6:00 PM
+  📍 Venue: Volunteer Care Cell (near temple book counter)
 
-Regards,
+💬 Feel free to reply here for any queries or clarifications.
+
+🙏 Regards,
 Volunteer Care Cell
 ISKCON Mysore`.trim())}`})
     }, 
@@ -449,19 +456,52 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Reminder - Sri Vaikunta Ekadashi - Volunteering*
-    
+Service Reminder 🌟 - Sri Vaikunta Ekadashi - Volunteering 🙌
+
 Hare Krishna 🙏
-We hope that you have gone through the service details and have contacted your SPOC(s) regarding the service details.
+We hope you have reviewed your service details and contacted your SPOC(s).
 
-We now request you to please *recheck your service details and dates of service* by clicking on the link given below. Details regarding volunteer badge, prasadam and volunteer parking are also updated in the link below:
+We kindly request you to recheck your service details and dates of service using the link below. Services may be updated due to unavoidable circumstances:
+👉 https://sevabase.iskconmysore.org
 
-*${`https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}`}*
+🔔 Important Points to Note:
+1️⃣ Service Timings:
+Be clear about your service timings. For any doubts, contact your SPOC or message here.
 
-You can reply here regarding any queries.
+2️⃣ Parking Information:
 
-Regards,
-ISKCON Mysore`.trim())}`})
+Parking for volunteers will be provided in the construction area near the new temple building.
+Access is granted only with your volunteer badge.
+3️⃣ Volunteer Care Cell:
+
+Located near the temple book counter (behind the flower garden).
+For any queries, visit the Volunteer Care Cell.
+4️⃣ Volunteer Badge:
+
+Do not forget to wear your badge!
+If you haven’t collected it yet, please visit the Volunteer Care Cell:
+Today: 4:30 PM onwards
+Tomorrow: From 8:30 AM
+5️⃣ Badge Return:
+
+Return your badge to the Volunteer Care Cell after completing your service to receive take-home prasadam.
+Deadline for returning the badge: Sunday, 12th Jan 2025
+6️⃣ Badge Validity:
+
+The volunteer badge is valid only on Friday, 10th Jan 2025.
+7️⃣ Volunteer Prasadam Details:
+
+Location: Sridham Hall (back side).
+Present the QR code on your badge at the entrance.
+Volunteer Prasadam Timings:
+Breakfast Prasadam: 9:00 AM - 11:00 AM
+Lunch Prasadam: 1:00 PM - 3:00 PM
+Dinner Prasadam: 8:30 PM - 9:30 PM
+For any queries, feel free to reply here.
+
+Warm regards,
+Volunteer Care Cell
+ISKCON Mysore 🌸`.trim())}`})
     }, 
 
     "08 - General Info": (props)=>{
