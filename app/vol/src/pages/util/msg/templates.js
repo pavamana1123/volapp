@@ -1,9 +1,5 @@
-import moment from 'moment'
-
 var dates = [
-    "2025-01-09",
-    "2025-01-10",
-    "2025-01-11"
+    "2025-03-14",
 ]
 
 var templates = {
@@ -44,7 +40,7 @@ var templates = {
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Sri Vaikunta Ekadashi - Volunteering Services*
+*SPOC for Sri Gaura Purnima - Volunteering Services*
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. Kindly click on the below link and go through the details of the service${s.services.length>1?"s":""} carefully:
 
@@ -56,7 +52,7 @@ Your responsibilities:
 • Make sure that volunteers report at proper time and in appropriate dress code for their service.
 
 Regards,
-Pankajanghri Dasa
+Volunteer Care Cell
 ISKCON Mysore
 `.trim())}`})
     },    
@@ -103,22 +99,13 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-Volunteering Details – Sri Vaikuntha Ekadashi – Friday, 10th January 2025
+Volunteering Details – Sri Gaura Purnima – Monday, 10th February 2025
 
 Hare Krishna 🙏
 
 🌸 Please accept the blessings of Sri Sri Krishna Balarama 🌸
-You have been assigned volunteer service for Sri Vaikuntha Ekadashi. Kindly check your service details by clicking on this link:
+You have been assigned volunteer service for Sri Gaura Purnima. Kindly check your service details by clicking on this link:
 👉 https://sevabase.iskconmysore.org
-
-🪪 Volunteer Badges Distribution:
- 📅 Thursday, 9th January
-  ⏰ Time: 4:30 PM to 8:30 PM
-  📍 Venue: Near Homa Kunda area
-
- 📅 Friday, 10th January
-  ⏰ Time: 8:00 AM to 6:00 PM
-  📍 Venue: Volunteer Care Cell (near temple book counter)
 
 💬 Feel free to reply here for any queries or clarifications.
 
@@ -171,7 +158,7 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteer Badge - Sri Vaikunta Ekadashi*
+*Volunteer Badge - Sri Gaura Purnima*
     
 Hare Krishna 🙏
 
@@ -281,7 +268,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Sri Vaikunta Ekadashi*
+*SPOC - Service Update Alert ⚠️ - Sri Gaura Purnima*
     
 Hare Krishna 🙏
 
@@ -343,7 +330,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Sri Vaikunta Ekadashi - Volunteering*
+*Service Update Alert ⚠️ - Sri Gaura Purnima - Volunteering*
     
 Hare Krishna 🙏
 
@@ -409,7 +396,7 @@ You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.s
 *https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}*
 
 Regards,
-Pankajanghri Dasa
+Volunteer Care Cell
 ISKCON Mysore
 `.trim())}`})
     },   
@@ -456,7 +443,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-Service Reminder 🌟 - Sri Vaikunta Ekadashi - Volunteering 🙌
+Service Reminder 🌟 - Sri Gaura Purnima - Volunteering 🙌
 
 Hare Krishna 🙏
 We hope you have reviewed your service details and contacted your SPOC(s).
@@ -546,7 +533,7 @@ ISKCON Mysore 🌸`.trim())}`})
             var v = voldet[n]
 
 return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Sri Vaikunta Ekadashi - Volunteering*
+⭐ *Important Info - Sri Gaura Purnima - Volunteering*
     
 Hare Krishna 🙏 Hoping that you are ready for the Sri Radhashtami services. Here are some important points you need to know. Please note.
 
