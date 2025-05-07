@@ -27,7 +27,7 @@ function Serv(props) {
                 <vl className="vol-sep"/>
                 <div className='detailsDiv'>
                     <div className='light'>Your Slot</div>
-                    <div className='detailFeild'>{`⏱️ ${details.availability=="Whole Day" || details.availability=="Default" || details.availability==""?details.timings.toTimingCase():details.availability}`}</div>
+                    <div className='detailFeild'>{`⏱️ ${details.availability=="All Slots" || details.availability=="Default" || details.availability==""?details.timings.toTimingCase():details.availability}`}</div>
                 </div>
             </div>
             <div className='detailsDiv'>

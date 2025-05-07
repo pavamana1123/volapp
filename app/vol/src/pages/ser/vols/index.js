@@ -52,7 +52,7 @@ function Vols(props) {
     }
 
     switch (v.availability) {
-      case "Whole Day":
+      case "All Slots":
         return ""
       case "":
         return "Volunteer may not be available for this service. Please check with the volunteer"
