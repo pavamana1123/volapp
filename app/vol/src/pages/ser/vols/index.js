@@ -91,7 +91,7 @@ function Vols(props) {
 
               var avcomment = getAvComment(v)
               return v.volunteerName ?
-                <div className='eachVol'>
+                <div className='eachVol' key={v.sevaBaseID}>
                   <div className='eachVolDet'>
                     <div className='nameHolder'>
                       {true || today.isSameOrAfter(moment(date)) ?
