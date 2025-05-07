@@ -53,6 +53,7 @@ function App() {
       <Router>
           <Routes>
             <Route path="/vol" element={<Vol data={data} dates={dates}/>}></Route>
+            <Route path="/ebadge" element={<Vol data={data} dates={dates}/>}></Route>
             <Route path="/volist" element={<Vol data={data} dates={dates} showList/>}></Route>
             <Route path="/admin-info" element={<AdminInfo data={data} dates={dates} showList/>}></Route>
             <Route path="/ser" element={<Ser data={data} dates={dates}/>}></Route>
