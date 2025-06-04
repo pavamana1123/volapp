@@ -500,7 +500,7 @@ ${d.map((bb, i)=>{
 
                         {
                           dateServices.map(s=>{
-                          return <div className='svHolder'>
+                          return <div className='svHolder' key={s.serviceName}>
                             <Serv service={s} volunteers={volunteers.filter(v=>{return v.date==d && v.volunteerName != ""})}/>
                             <Vols
                               date={d}

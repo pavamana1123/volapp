@@ -40,7 +40,11 @@ var templates = {
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
+<<<<<<< HEAD
 *SPOC for Sri Narasimha Jayanti - Volunteering Services*
+=======
+*SPOC for Srila Prabhupada Vijayotsava - Volunteering Services*
+>>>>>>> c6d9a279c83a8e67e56c34596b21721333753f70
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. Kindly click on the below link and go through the details of the service${s.services.length>1?"s":""} carefully:
 
@@ -99,12 +103,20 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+<<<<<<< HEAD
 Volunteering Details – Sri Narasimha Jayanti – Sunday, 11th May 2025
+=======
+Volunteering Details – Srila Prabhupada Vijayotsava – Sunday, 25th May 2025
+>>>>>>> c6d9a279c83a8e67e56c34596b21721333753f70
 
 Hare Krishna 🙏
 
 🌸 Please accept the blessings of Sri Sri Krishna Balarama 🌸
+<<<<<<< HEAD
 You have been assigned volunteer service for Sri Narasimha Jayanti. Kindly check your service details by clicking on this link:
+=======
+You have been assigned volunteer service for Srila Prabhupada Vijayotsava. Kindly check your service details by clicking on this link:
+>>>>>>> c6d9a279c83a8e67e56c34596b21721333753f70
 👉 https://sevabase.iskconmysore.org
 
 💬 Feel free to reply here for any queries or clarifications.
@@ -158,7 +170,11 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+<<<<<<< HEAD
 *Volunteer Badge - Sri Narasimha Jayanti*
+=======
+*Volunteer Badge - Srila Prabhupada Vijayotsava*
+>>>>>>> c6d9a279c83a8e67e56c34596b21721333753f70
     
 Hare Krishna 🙏
 
@@ -268,7 +284,11 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
+<<<<<<< HEAD
 *SPOC - Service Update Alert ⚠️ - Sri Narasimha Jayanti*
+=======
+*SPOC - Service Update Alert ⚠️ - Srila Prabhupada Vijayotsava*
+>>>>>>> c6d9a279c83a8e67e56c34596b21721333753f70
     
 Hare Krishna 🙏
 
@@ -330,7 +350,11 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+<<<<<<< HEAD
 *Service Update Alert ⚠️ - Sri Narasimha Jayanti - Volunteering*
+=======
+*Service Update Alert ⚠️ - Srila Prabhupada Vijayotsava - Volunteering*
+>>>>>>> c6d9a279c83a8e67e56c34596b21721333753f70
     
 Hare Krishna 🙏
 
@@ -443,7 +467,11 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+<<<<<<< HEAD
 Service Reminder 🌟 - Sri Narasimha Jayanti - Volunteering 🙌
+=======
+Service Reminder 🌟 - Srila Prabhupada Vijayotsava - Volunteering 🙌
+>>>>>>> c6d9a279c83a8e67e56c34596b21721333753f70
 
 Hare Krishna 🙏
 We hope you have reviewed your service details and contacted your SPOC(s).
@@ -533,7 +561,11 @@ ISKCON Mysore 🌸`.trim())}`})
             var v = voldet[n]
 
 return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+<<<<<<< HEAD
 ⭐ *Important Info - Sri Narasimha Jayanti - Volunteering*
+=======
+⭐ *Important Info - Srila Prabhupada Vijayotsava - Volunteering*
+>>>>>>> c6d9a279c83a8e67e56c34596b21721333753f70
     
 Hare Krishna 🙏 Hoping that you are ready for the Sri Radhashtami services. Here are some important points you need to know. Please note.
 
