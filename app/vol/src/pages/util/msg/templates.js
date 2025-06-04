@@ -1,5 +1,5 @@
 var dates = [
-    "2025-04-06",
+    "2025-05-11",
 ]
 
 var templates = {
@@ -40,7 +40,7 @@ var templates = {
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Sri Rama Navami - Volunteering Services*
+*SPOC for Sri Narasimha Jayanti - Volunteering Services*
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. Kindly click on the below link and go through the details of the service${s.services.length>1?"s":""} carefully:
 
@@ -99,12 +99,12 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-Volunteering Details – Sri Rama Navami – Sunday, 6th April 2025
+Volunteering Details – Sri Narasimha Jayanti – Sunday, 11th May 2025
 
 Hare Krishna 🙏
 
 🌸 Please accept the blessings of Sri Sri Krishna Balarama 🌸
-You have been assigned volunteer service for Sri Rama Navami. Kindly check your service details by clicking on this link:
+You have been assigned volunteer service for Sri Narasimha Jayanti. Kindly check your service details by clicking on this link:
 👉 https://sevabase.iskconmysore.org
 
 💬 Feel free to reply here for any queries or clarifications.
@@ -158,7 +158,7 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteer Badge - Sri Rama Navami*
+*Volunteer Badge - Sri Narasimha Jayanti*
     
 Hare Krishna 🙏
 
@@ -268,7 +268,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Sri Rama Navami*
+*SPOC - Service Update Alert ⚠️ - Sri Narasimha Jayanti*
     
 Hare Krishna 🙏
 
@@ -330,7 +330,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Sri Rama Navami - Volunteering*
+*Service Update Alert ⚠️ - Sri Narasimha Jayanti - Volunteering*
     
 Hare Krishna 🙏
 
@@ -443,7 +443,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-Service Reminder 🌟 - Sri Rama Navami - Volunteering 🙌
+Service Reminder 🌟 - Sri Narasimha Jayanti - Volunteering 🙌
 
 Hare Krishna 🙏
 We hope you have reviewed your service details and contacted your SPOC(s).
@@ -533,7 +533,7 @@ ISKCON Mysore 🌸`.trim())}`})
             var v = voldet[n]
 
 return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Sri Rama Navami - Volunteering*
+⭐ *Important Info - Sri Narasimha Jayanti - Volunteering*
     
 Hare Krishna 🙏 Hoping that you are ready for the Sri Radhashtami services. Here are some important points you need to know. Please note.
 
