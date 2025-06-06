@@ -1,5 +1,5 @@
 var dates = [
-    "2025-05-25",
+    "2025-06-09",
 ]
 
 var templates = {
@@ -40,7 +40,7 @@ var templates = {
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Srila Prabhupada Vijayotsava - Volunteering Services*
+*SPOC for Panihati Chida Dahi Utsav - Volunteering Services*
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. Kindly click on the below link and go through the details of the service${s.services.length>1?"s":""} carefully:
 
@@ -99,12 +99,12 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-Volunteering Details – Srila Prabhupada Vijayotsava – Sunday, 25th May 2025
+Volunteering Details – Panihati Chida Dahi Utsav – Monday, 9th June 2025
 
 Hare Krishna 🙏
 
 🌸 Please accept the blessings of Sri Sri Krishna Balarama 🌸
-You have been assigned volunteer service for Srila Prabhupada Vijayotsava. Kindly check your service details by clicking on this link:
+You have been assigned volunteer service for Panihati Chida Dahi Utsav. Kindly check your service details by clicking on this link:
 👉 https://sevabase.iskconmysore.org
 
 💬 Feel free to reply here for any queries or clarifications.
@@ -158,7 +158,7 @@ ISKCON Mysore`.trim())}`})
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteer Badge - Srila Prabhupada Vijayotsava*
+*Volunteer Badge - Panihati Chida Dahi Utsav*
     
 Hare Krishna 🙏
 
@@ -268,7 +268,7 @@ ISKCON Mysore`.trim())}`})
         var s = spocMap[sp]
 
         return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Srila Prabhupada Vijayotsava*
+*SPOC - Service Update Alert ⚠️ - Panihati Chida Dahi Utsav*
     
 Hare Krishna 🙏
 
@@ -330,7 +330,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Srila Prabhupada Vijayotsava - Volunteering*
+*Service Update Alert ⚠️ - Panihati Chida Dahi Utsav - Volunteering*
     
 Hare Krishna 🙏
 
@@ -443,7 +443,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-Service Reminder 🌟 - Srila Prabhupada Vijayotsava - Volunteering 🙌
+Service Reminder 🌟 - Panihati Chida Dahi Utsav - Volunteering 🙌
 
 Hare Krishna 🙏
 We hope you have reviewed your service details and contacted your SPOC(s).
@@ -533,7 +533,7 @@ ISKCON Mysore 🌸`.trim())}`})
             var v = voldet[n]
 
 return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Srila Prabhupada Vijayotsava - Volunteering*
+⭐ *Important Info - Panihati Chida Dahi Utsav - Volunteering*
     
 Hare Krishna 🙏 Hoping that you are ready for the Sri Radhashtami services. Here are some important points you need to know. Please note.
 
