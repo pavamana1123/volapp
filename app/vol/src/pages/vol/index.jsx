@@ -84,14 +84,14 @@ function Vol(props) {
                   tabs={
                     dates.filter(d => {
                       return !!volunteers.filter(v => {
-                        return v.date == d && v.volunteerName == filter && v.service != ""
+                        return v.date == d && (filterID? v.sevaBaseID == filterID : v.volunteerName == filter) && v.service != ""
                       }).length && !events.filter(e => {
                         return e.date == d
                       })[0].hide
                     }).map((d) => {
 
                       var svs1 = volunteers.filter(v => {
-                        return v.volunteerName == filter && v.date == d
+                        return (filterID? v.sevaBaseID == filterID : v.volunteerName == filter) && v.date == d
                       })
 
                       const mainService = svs1.sort((s1, s2) => {
