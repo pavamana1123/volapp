@@ -11,41 +11,25 @@ import Auto from '../../components/auto';
 function Vol(props) {
 
   var [filter, setFilter] = useState('')
+  var [filterID, setFilterID] = useState('')
   var [preset, setPreset] = useState('')
   var [showApp, setShowApp] = useState(false)
   var [volunteerNames, setVolunteerNames] = useState('')
   var { data, dates } = props
-  var { volunteers, services, events } = data
+  var { volunteers, services, events, master } = data
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    setFilter(urlParams.get('name'))
-    setPreset(!!urlParams.get('name'))
-  }, [])
-
-  // useEffect(() => {
-
-  //   if (!data.volunteers || showApp) {
-  //     return
-  //   }
-
-  //   fetch('/api', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       endpoint: '/verify-user'
-  //     },
-  //     body: JSON.stringify({
-  //       id: data.volunteers.filter(volunteer => volunteer.volunteerName == filter)[0].volunteerPhone,
-  //     })
-  //   }).then(res => {
-  //     if (!res.ok) {
-  //       setShowApp(true)
-  //     }
-  //   }).catch(err => {
-  //     console.log(err)
-  //   })
-  // }, [data, filter, showApp])
+    const urlParams = new URLSearchParams(window.location.search)
+    const id = urlParams.get('id')
+    const name = urlParams.get('name')
+    if (!id) {
+      setFilter(name)
+    } else {
+      setFilterID(id)
+      const _ = name ? setFilter(name) : (master ? setFilter(master.filter(m => m.sevaBaseID == id)[0].name) : null)
+    }
+    setPreset(!!(urlParams.get('name') || urlParams.get('id')))
+  }, [data])
 
   useEffect(() => {
     var vn = {}
@@ -100,14 +84,14 @@ function Vol(props) {
                   tabs={
                     dates.filter(d => {
                       return !!volunteers.filter(v => {
-                        return v.date == d && v.volunteerName == filter && v.service != ""
+                        return v.date == d && (filterID? v.sevaBaseID == filterID : v.volunteerName == filter) && v.service != ""
                       }).length && !events.filter(e => {
                         return e.date == d
                       })[0].hide
                     }).map((d) => {
 
                       var svs1 = volunteers.filter(v => {
-                        return v.volunteerName == filter && v.date == d
+                        return (filterID? v.sevaBaseID == filterID : v.volunteerName == filter) && v.date == d
                       })
 
                       const mainService = svs1.sort((s1, s2) => {
@@ -152,9 +136,9 @@ function Vol(props) {
                           : NoServ
                       }
                     })
-                  } 
-                  
-                  emptyMessage={"No services assigned"}/>
+                  }
+
+                  emptyMessage={"No services assigned"} />
               }
 
             </Paper>
