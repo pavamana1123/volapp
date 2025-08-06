@@ -1,9 +1,6 @@
 var dates = [
-    "2025-08-14",
-    "2025-08-15",
-    "2025-08-16",
-    "2025-08-17",
-    "2025-08-18"
+    "2025-08-08",
+    "2025-08-09"
 ]
 
 var templates = {
@@ -44,7 +41,7 @@ var templates = {
             var s = spocMap[sp]
 
             return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Sri Krishna Jamashtami - Volunteering Services*
+*SPOC for Sri Balarama Purnima - Volunteering Services*
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length > 1 ? s.services.length : "a"} service${s.services.length > 1 ? "s" : ""}. Kindly click on the below link and go through the details of the service${s.services.length > 1 ? "s" : ""} carefully:
 
@@ -104,12 +101,12 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-Volunteering Details – Sri Krishna Jamashtami – 15th & 16th Aug 2025
+Volunteering Details – Sri Balarama Purnima – 9th Aug 2025
 
 Hare Krishna 🙏
 
 🌸 Please accept the blessings of Sri Sri Krishna Balarama 🌸
-You have been assigned volunteer service for Sri Krishna Jamashtami. Kindly check your service details by clicking on this link:
+You have been assigned volunteer service for Sri Balarama Purnima. Kindly check your service details by clicking on this link:
 👉 https://sevabase.iskconmysore.org
 
 💬 Feel free to reply here for any queries or clarifications.
@@ -164,7 +161,7 @@ ISKCON Mysore`.trim())}`
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteer Badge - Sri Krishna Jamashtami*
+*Volunteer Badge - Sri Balarama Purnima*
     
 Hare Krishna 🙏
 
@@ -276,7 +273,7 @@ ISKCON Mysore`.trim())}`
             var s = spocMap[sp]
 
             return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Sri Krishna Jamashtami*
+*SPOC - Service Update Alert ⚠️ - Sri Balarama Purnima*
     
 Hare Krishna 🙏
 
@@ -339,7 +336,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Sri Krishna Jamashtami - Volunteering*
+*Service Update Alert ⚠️ - Sri Balarama Purnima - Volunteering*
     
 Hare Krishna 🙏
 
@@ -454,7 +451,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-Service Reminder 🌟 - Sri Krishna Jamashtami - Volunteering 🙌
+Service Reminder 🌟 - Sri Balarama Purnima - Volunteering 🙌
 
 Hare Krishna 🙏
 We hope you have reviewed your service details and contacted your SPOC(s).
@@ -545,7 +542,7 @@ ISKCON Mysore 🌸`.trim())}`
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Sri Krishna Jamashtami - Volunteering*
+⭐ *Important Info - Sri Balarama Purnima - Volunteering*
     
 Hare Krishna 🙏 Hoping that you are ready for the Sri Radhashtami services. Here are some important points you need to know. Please note.
 
