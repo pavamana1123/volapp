@@ -1,164 +1,170 @@
 var dates = [
-    "2025-06-09",
+    "2025-08-14",
+    "2025-08-15",
+    "2025-08-16",
+    "2025-08-17",
+    "2025-08-18"
 ]
 
 var templates = {
 
-    "01 - SPOC Info": (props)=>{
+    "01 - SPOC Info": (props) => {
 
         var { services } = props.data
 
-        services = services.filter(s=>{
-            return dates.indexOf(s.date)!=-1
-        })  
+        services = services.filter(s => {
+            return dates.indexOf(s.date) != -1
+        })
 
         var spocMap = {}
 
-        services.map(s=>{
+        services.map(s => {
             // if(s.coordinator==s.spoc || s.spoc=="" || s.spocPhone==""){
             //     return
             // }
 
-            spocMap[s.spoc]=spocMap[s.spoc]||{
+            spocMap[s.spoc] = spocMap[s.spoc] || {
                 spoc: s.spoc,
                 spocPhone: s.spocPhone,
-                services : []
+                services: []
             }
-            spocMap[s.spoc].services.indexOf(s.service)==-1 && spocMap[s.spoc].services.push({
-                    service: s.serviceName,
-                    date: s.date,
-                    coordinator: s.coordinator,
-                    coordinatorPhone: s.coordinatorPhone,
-                    timings: s.timings,
-                    supply: s.supply,
-                })
+            spocMap[s.spoc].services.indexOf(s.service) == -1 && spocMap[s.spoc].services.push({
+                service: s.serviceName,
+                date: s.date,
+                coordinator: s.coordinator,
+                coordinatorPhone: s.coordinatorPhone,
+                timings: s.timings,
+                supply: s.supply,
+            })
         })
 
         var spocs = Object.keys(spocMap).sort()
 
-        return spocs.map(sp=>{
-        var s = spocMap[sp]
+        return spocs.map(sp => {
+            var s = spocMap[sp]
 
-        return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Panihati Chida Dahi Utsav - Volunteering Services*
+            return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
+*SPOC for Sri Krishna Jamashtami - Volunteering Services*
 
-Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. Kindly click on the below link and go through the details of the service${s.services.length>1?"s":""} carefully:
+Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length > 1 ? s.services.length : "a"} service${s.services.length > 1 ? "s" : ""}. Kindly click on the below link and go through the details of the service${s.services.length > 1 ? "s" : ""} carefully:
 
 *https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}*
 
 Your responsibilities:
-• Please discuss with the service coordinator${s.services.length>1?"s":""} and understand all major and minor details of the service like dress code, timings etc.
+• Please discuss with the service coordinator${s.services.length > 1 ? "s" : ""} and understand all major and minor details of the service like dress code, timings etc.
 • Please call volunteers under you and communicate all the details of the service to them. Phone numbers of all volunteers are availbale in the link shared above.
 • Make sure that volunteers report at proper time and in appropriate dress code for their service.
 
 Regards,
 Volunteer Care Cell
 ISKCON Mysore
-`.trim())}`})
-    },    
+`.trim())}`
+        })
+    },
 
-    "02 - Service Info": (props)=>{
+    "02 - Service Info": (props) => {
 
         var { volunteers } = props.data
-        
+
         var umap = {}
         var voldet = {}
-    
-        var volunteers = volunteers.filter(v=>{
-            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
-                umap[v.volunteerName]=v.volunteerPhone
+
+        var volunteers = volunteers.filter(v => {
+            if (dates.indexOf(v.date) != -1 && (v.volunteerName != "" && v.volunteerPhone != "")) {
+                umap[v.volunteerName] = v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.infoMsgSent
+            return dates.indexOf(v.date) != -1 && (v.volunteerName != "" && v.volunteerPhone != "") && !v.infoMsgSent
         })
-        
-        Object.keys(umap).map(name=>{
-            for(var i=0; i<volunteers.length; i++){
-            if(volunteers[i].volunteerName==name){
-                if(!voldet[name]){
-                voldet[name]={
-                    name,
-                    phone: volunteers[i].volunteerPhone,
-                    availability: volunteers[i].availability,
-                    idCardCollected: volunteers[i].idCardCollected,
-                    services:[]
+
+        Object.keys(umap).map(name => {
+            for (var i = 0; i < volunteers.length; i++) {
+                if (volunteers[i].volunteerName == name) {
+                    if (!voldet[name]) {
+                        voldet[name] = {
+                            name,
+                            phone: volunteers[i].volunteerPhone,
+                            availability: volunteers[i].availability,
+                            idCardCollected: volunteers[i].idCardCollected,
+                            services: []
+                        }
+                    }
+                    voldet[name].services.push({
+                        date: volunteers[i].date,
+                        service: volunteers[i].service,
+                        timings: volunteers[i].timings,
+                        coordinator: volunteers[i].coordinator,
+                        spoc: volunteers[i].spoc,
+                        spocPhone: volunteers[i].spocPhone
+                    })
                 }
-                }
-                voldet[name].services.push({
-                    date: volunteers[i].date,
-                    service: volunteers[i].service,
-                    timings: volunteers[i].timings,
-                    coordinator: volunteers[i].coordinator,
-                    spoc: volunteers[i].spoc,
-                    spocPhone: volunteers[i].spocPhone
-                })
-            }
             }
         })
 
-        return Object.keys(voldet).sort().map(n=>{
+        return Object.keys(voldet).sort().map(n => {
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-Volunteering Details – Panihati Chida Dahi Utsav – Monday, 9th June 2025
+Volunteering Details – Sri Krishna Jamashtami – 15th & 16th Aug 2025
 
 Hare Krishna 🙏
 
 🌸 Please accept the blessings of Sri Sri Krishna Balarama 🌸
-You have been assigned volunteer service for Panihati Chida Dahi Utsav. Kindly check your service details by clicking on this link:
+You have been assigned volunteer service for Sri Krishna Jamashtami. Kindly check your service details by clicking on this link:
 👉 https://sevabase.iskconmysore.org
 
 💬 Feel free to reply here for any queries or clarifications.
 
 🙏 Regards,
 Volunteer Care Cell
-ISKCON Mysore`.trim())}`})
-    }, 
+ISKCON Mysore`.trim())}`
+        })
+    },
 
-    "03 - Volunteer Badge Info": (props)=>{
+    "03 - Volunteer Badge Info": (props) => {
 
         var { volunteers, events } = props.data
-        
+
         var umap = {}
         var voldet = {}
 
         var eventDates = events.filter(e => e.badge).map(e => e.date)
-    
-        var volunteers = volunteers.filter(v => eventDates.indexOf(v.date)!=-1).filter(v=>{
-            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
-                umap[v.volunteerName]=v.volunteerPhone
+
+        var volunteers = volunteers.filter(v => eventDates.indexOf(v.date) != -1).filter(v => {
+            if (dates.indexOf(v.date) != -1 && (v.volunteerName != "" && v.volunteerPhone != "")) {
+                umap[v.volunteerName] = v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && v.idCardPrinted && !v.idReminderSent && !v.idCardCollected
+            return dates.indexOf(v.date) != -1 && (v.volunteerName != "" && v.volunteerPhone != "") && v.idCardPrinted && !v.idReminderSent && !v.idCardCollected
         })
-        
-        Object.keys(umap).map(name=>{
-            for(var i=0; i<volunteers.length; i++){
-            if(volunteers[i].volunteerName==name){
-                if(!voldet[name]){
-                voldet[name]={
-                    name,
-                    phone: volunteers[i].volunteerPhone,
-                    availability: volunteers[i].availability,
-                    idCardCollected: volunteers[i].idCardCollected,
-                    services:[]
+
+        Object.keys(umap).map(name => {
+            for (var i = 0; i < volunteers.length; i++) {
+                if (volunteers[i].volunteerName == name) {
+                    if (!voldet[name]) {
+                        voldet[name] = {
+                            name,
+                            phone: volunteers[i].volunteerPhone,
+                            availability: volunteers[i].availability,
+                            idCardCollected: volunteers[i].idCardCollected,
+                            services: []
+                        }
+                    }
+                    voldet[name].services.push({
+                        date: volunteers[i].date,
+                        service: volunteers[i].service,
+                        timings: volunteers[i].timings,
+                        coordinator: volunteers[i].coordinator,
+                        spoc: volunteers[i].spoc,
+                        spocPhone: volunteers[i].spocPhone
+                    })
                 }
-                }
-                voldet[name].services.push({
-                    date: volunteers[i].date,
-                    service: volunteers[i].service,
-                    timings: volunteers[i].timings,
-                    coordinator: volunteers[i].coordinator,
-                    spoc: volunteers[i].spoc,
-                    spocPhone: volunteers[i].spocPhone
-                })
-            }
             }
         })
 
-        return Object.keys(voldet).sort().map(n=>{
+        return Object.keys(voldet).sort().map(n => {
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteer Badge - Panihati Chida Dahi Utsav*
+*Volunteer Badge - Sri Krishna Jamashtami*
     
 Hare Krishna 🙏
 
@@ -171,50 +177,51 @@ You can reply here regarding any queries.
 
 Regards,
 Volunteer Care Cell
-ISKCON Mysore`.trim())}`})
+ISKCON Mysore`.trim())}`
+        })
     },
 
-    "033 - Volunteer Badge Reminder": (props)=>{
+    "033 - Volunteer Badge Reminder": (props) => {
 
         var { volunteers, events } = props.data
-        
+
         var umap = {}
         var voldet = {}
 
         var eventDates = events.filter(e => e.badge).map(e => e.date)
-    
-        var volunteers = volunteers.filter(v => eventDates.indexOf(v.date)!=-1).filter(v=>{
-            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
-                umap[v.volunteerName]=v.volunteerPhone
+
+        var volunteers = volunteers.filter(v => eventDates.indexOf(v.date) != -1).filter(v => {
+            if (dates.indexOf(v.date) != -1 && (v.volunteerName != "" && v.volunteerPhone != "")) {
+                umap[v.volunteerName] = v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && v.idCardPrinted && !v.idReminderSent && !v.idCardCollected
+            return dates.indexOf(v.date) != -1 && (v.volunteerName != "" && v.volunteerPhone != "") && v.idCardPrinted && !v.idReminderSent && !v.idCardCollected
         })
-        
-        Object.keys(umap).map(name=>{
-            for(var i=0; i<volunteers.length; i++){
-            if(volunteers[i].volunteerName==name){
-                if(!voldet[name]){
-                voldet[name]={
-                    name,
-                    phone: volunteers[i].volunteerPhone,
-                    availability: volunteers[i].availability,
-                    idCardCollected: volunteers[i].idCardCollected,
-                    services:[]
+
+        Object.keys(umap).map(name => {
+            for (var i = 0; i < volunteers.length; i++) {
+                if (volunteers[i].volunteerName == name) {
+                    if (!voldet[name]) {
+                        voldet[name] = {
+                            name,
+                            phone: volunteers[i].volunteerPhone,
+                            availability: volunteers[i].availability,
+                            idCardCollected: volunteers[i].idCardCollected,
+                            services: []
+                        }
+                    }
+                    voldet[name].services.push({
+                        date: volunteers[i].date,
+                        service: volunteers[i].service,
+                        timings: volunteers[i].timings,
+                        coordinator: volunteers[i].coordinator,
+                        spoc: volunteers[i].spoc,
+                        spocPhone: volunteers[i].spocPhone
+                    })
                 }
-                }
-                voldet[name].services.push({
-                    date: volunteers[i].date,
-                    service: volunteers[i].service,
-                    timings: volunteers[i].timings,
-                    coordinator: volunteers[i].coordinator,
-                    spoc: volunteers[i].spoc,
-                    spocPhone: volunteers[i].spocPhone
-                })
-            }
             }
         })
 
-        return Object.keys(voldet).sort().map(n=>{
+        return Object.keys(voldet).sort().map(n => {
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
@@ -229,46 +236,47 @@ Hare Krishna 🙏
 
 Regards,
 Volunteer Care Cell
-ISKCON Mysore`.trim())}`})
+ISKCON Mysore`.trim())}`
+        })
     },
 
-    "04 - Service Update Alert for SPOCs": (props)=>{
+    "04 - Service Update Alert for SPOCs": (props) => {
 
         var { services } = props.data
 
-        services = services.filter(s=>{
-            return dates.indexOf(s.date)!=-1
-        })  
+        services = services.filter(s => {
+            return dates.indexOf(s.date) != -1
+        })
 
         var spocMap = {}
 
-        services.map(s=>{
-            if(s.coordinator==s.spoc || s.spoc=="" || s.spocPhone==""){
+        services.map(s => {
+            if (s.coordinator == s.spoc || s.spoc == "" || s.spocPhone == "") {
                 return
             }
 
-            spocMap[s.spoc]=spocMap[s.spoc]||{
+            spocMap[s.spoc] = spocMap[s.spoc] || {
                 spoc: s.spoc,
                 spocPhone: s.spocPhone,
-                services : []
+                services: []
             }
-            spocMap[s.spoc].services.indexOf(s.service)==-1 && spocMap[s.spoc].services.push({
-                    service: s.serviceName,
-                    date: s.date,
-                    coordinator: s.coordinator,
-                    coordinatorPhone: s.coordinatorPhone,
-                    timings: s.timings,
-                    supply: s.supply,
-                })
+            spocMap[s.spoc].services.indexOf(s.service) == -1 && spocMap[s.spoc].services.push({
+                service: s.serviceName,
+                date: s.date,
+                coordinator: s.coordinator,
+                coordinatorPhone: s.coordinatorPhone,
+                timings: s.timings,
+                supply: s.supply,
+            })
         })
 
         var spocs = Object.keys(spocMap).sort()
 
-        return spocs.map(sp=>{
-        var s = spocMap[sp]
+        return spocs.map(sp => {
+            var s = spocMap[sp]
 
-        return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Panihati Chida Dahi Utsav*
+            return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
+*SPOC - Service Update Alert ⚠️ - Sri Krishna Jamashtami*
     
 Hare Krishna 🙏
 
@@ -285,52 +293,53 @@ You can reply here regarding any queries.
 Regards,
 Volunteer Care Cell
 ISKCON Mysore
-`.trim())}`})
-    }, 
-    
-    "05 - Service Update Alert for Volunteers": (props)=>{
+`.trim())}`
+        })
+    },
+
+    "05 - Service Update Alert for Volunteers": (props) => {
 
         var { volunteers } = props.data
-        
+
         var umap = {}
         var voldet = {}
-    
-        var volunteers = volunteers.filter(v=>{
-            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
-                umap[v.volunteerName]=v.volunteerPhone
+
+        var volunteers = volunteers.filter(v => {
+            if (dates.indexOf(v.date) != -1 && (v.volunteerName != "" && v.volunteerPhone != "")) {
+                umap[v.volunteerName] = v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && v.infoMsgSent
+            return dates.indexOf(v.date) != -1 && (v.volunteerName != "" && v.volunteerPhone != "") && v.infoMsgSent
         })
-        
-        Object.keys(umap).map(name=>{
-            for(var i=0; i<volunteers.length; i++){
-            if(volunteers[i].volunteerName==name){
-                if(!voldet[name]){
-                voldet[name]={
-                    name,
-                    phone: volunteers[i].volunteerPhone,
-                    availability: volunteers[i].availability,
-                    idCardCollected: volunteers[i].idCardCollected,
-                    services:[]
+
+        Object.keys(umap).map(name => {
+            for (var i = 0; i < volunteers.length; i++) {
+                if (volunteers[i].volunteerName == name) {
+                    if (!voldet[name]) {
+                        voldet[name] = {
+                            name,
+                            phone: volunteers[i].volunteerPhone,
+                            availability: volunteers[i].availability,
+                            idCardCollected: volunteers[i].idCardCollected,
+                            services: []
+                        }
+                    }
+                    voldet[name].services.push({
+                        date: volunteers[i].date,
+                        service: volunteers[i].service,
+                        timings: volunteers[i].timings,
+                        coordinator: volunteers[i].coordinator,
+                        spoc: volunteers[i].spoc,
+                        spocPhone: volunteers[i].spocPhone
+                    })
                 }
-                }
-                voldet[name].services.push({
-                    date: volunteers[i].date,
-                    service: volunteers[i].service,
-                    timings: volunteers[i].timings,
-                    coordinator: volunteers[i].coordinator,
-                    spoc: volunteers[i].spoc,
-                    spocPhone: volunteers[i].spocPhone
-                })
-            }
             }
         })
 
-        return Object.keys(voldet).sort().map(n=>{
+        return Object.keys(voldet).sort().map(n => {
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Panihati Chida Dahi Utsav - Volunteering*
+*Service Update Alert ⚠️ - Sri Krishna Jamashtami - Volunteering*
     
 Hare Krishna 🙏
 
@@ -346,104 +355,106 @@ You can reply here regarding any queries.
 
 Regards,
 Volunteer Care Cell
-ISKCON Mysore`.trim())}`})
-    }, 
+ISKCON Mysore`.trim())}`
+        })
+    },
 
-    "06 - SPOC Reminder": (props)=>{
+    "06 - SPOC Reminder": (props) => {
 
         var { services } = props.data
 
-        services = services.filter(s=>{
-            return dates.indexOf(s.date)!=-1
-        })  
+        services = services.filter(s => {
+            return dates.indexOf(s.date) != -1
+        })
 
         var spocMap = {}
 
-        services.map(s=>{
-            if(s.coordinator==s.spoc || s.spoc=="" || s.spocPhone==""){
+        services.map(s => {
+            if (s.coordinator == s.spoc || s.spoc == "" || s.spocPhone == "") {
                 return
             }
 
-            spocMap[s.spoc]=spocMap[s.spoc]||{
+            spocMap[s.spoc] = spocMap[s.spoc] || {
                 spoc: s.spoc,
                 spocPhone: s.spocPhone,
-                services : []
+                services: []
             }
-            spocMap[s.spoc].services.indexOf(s.service)==-1 && spocMap[s.spoc].services.push({
-                    service: s.serviceName,
-                    date: s.date,
-                    coordinator: s.coordinator,
-                    coordinatorPhone: s.coordinatorPhone,
-                    timings: s.timings,
-                    supply: s.supply,
-                })
+            spocMap[s.spoc].services.indexOf(s.service) == -1 && spocMap[s.spoc].services.push({
+                service: s.serviceName,
+                date: s.date,
+                coordinator: s.coordinator,
+                coordinatorPhone: s.coordinatorPhone,
+                timings: s.timings,
+                supply: s.supply,
+            })
         })
 
         var spocs = Object.keys(spocMap).sort()
 
-        return spocs.map(sp=>{
-        var s = spocMap[sp]
+        return spocs.map(sp => {
+            var s = spocMap[sp]
 
-        return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
+            return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
 *SPOC - Reminder - Sri Radhashtami Volunteering*
 
 Hare Krishna 🙏
 
-Hope you have discussed with the service coordinator${s.services.length>1?"s":""} and understood the details of your service${s.services.length>1?"s":""} and also have called your volunteers. If not please do it by today.
+Hope you have discussed with the service coordinator${s.services.length > 1 ? "s" : ""} and understood the details of your service${s.services.length > 1 ? "s" : ""} and also have called your volunteers. If not please do it by today.
 
-You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length>1?s.services.length:"a"} service${s.services.length>1?"s":""}. *Some service details and volunteers were updated recently*. So kindly recheck the service details by clicking on the below link:
+You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length > 1 ? s.services.length : "a"} service${s.services.length > 1 ? "s" : ""}. *Some service details and volunteers were updated recently*. So kindly recheck the service details by clicking on the below link:
 
 *https://vol.iskconmysore.org/services?SPOC=${encodeURIComponent(s.spoc)}*
 
 Regards,
 Volunteer Care Cell
 ISKCON Mysore
-`.trim())}`})
-    },   
+`.trim())}`
+        })
+    },
 
-    "07 - Service Reminder": (props)=>{
+    "07 - Service Reminder": (props) => {
 
         var { volunteers } = props.data
-        
+
         var umap = {}
         var voldet = {}
-    
-        var volunteers = volunteers.filter(v=>{
-            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
-                umap[v.volunteerName]=v.volunteerPhone
+
+        var volunteers = volunteers.filter(v => {
+            if (dates.indexOf(v.date) != -1 && (v.volunteerName != "" && v.volunteerPhone != "")) {
+                umap[v.volunteerName] = v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") && !v.serviceReminderSent
+            return dates.indexOf(v.date) != -1 && (v.volunteerName != "" && v.volunteerPhone != "") && !v.serviceReminderSent
         })
-        
-        Object.keys(umap).map(name=>{
-            for(var i=0; i<volunteers.length; i++){
-            if(volunteers[i].volunteerName==name){
-                if(!voldet[name]){
-                voldet[name]={
-                    name,
-                    phone: volunteers[i].volunteerPhone,
-                    availability: volunteers[i].availability,
-                    idCardCollected: volunteers[i].idCardCollected,
-                    services:[]
+
+        Object.keys(umap).map(name => {
+            for (var i = 0; i < volunteers.length; i++) {
+                if (volunteers[i].volunteerName == name) {
+                    if (!voldet[name]) {
+                        voldet[name] = {
+                            name,
+                            phone: volunteers[i].volunteerPhone,
+                            availability: volunteers[i].availability,
+                            idCardCollected: volunteers[i].idCardCollected,
+                            services: []
+                        }
+                    }
+                    voldet[name].services.push({
+                        date: volunteers[i].date,
+                        service: volunteers[i].service,
+                        timings: volunteers[i].timings,
+                        coordinator: volunteers[i].coordinator,
+                        spoc: volunteers[i].spoc,
+                        spocPhone: volunteers[i].spocPhone
+                    })
                 }
-                }
-                voldet[name].services.push({
-                    date: volunteers[i].date,
-                    service: volunteers[i].service,
-                    timings: volunteers[i].timings,
-                    coordinator: volunteers[i].coordinator,
-                    spoc: volunteers[i].spoc,
-                    spocPhone: volunteers[i].spocPhone
-                })
-            }
             }
         })
 
-        return Object.keys(voldet).sort().map(n=>{
+        return Object.keys(voldet).sort().map(n => {
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-Service Reminder 🌟 - Panihati Chida Dahi Utsav - Volunteering 🙌
+Service Reminder 🌟 - Sri Krishna Jamashtami - Volunteering 🙌
 
 Hare Krishna 🙏
 We hope you have reviewed your service details and contacted your SPOC(s).
@@ -488,52 +499,53 @@ For any queries, feel free to reply here.
 
 Warm regards,
 Volunteer Care Cell
-ISKCON Mysore 🌸`.trim())}`})
-    }, 
+ISKCON Mysore 🌸`.trim())}`
+        })
+    },
 
-    "08 - General Info": (props)=>{
+    "08 - General Info": (props) => {
 
         var { volunteers } = props.data
-        
+
         var umap = {}
         var voldet = {}
-    
-        var volunteers = volunteers.filter(v=>{
-            if(dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="") ){
-                umap[v.volunteerName]=v.volunteerPhone
+
+        var volunteers = volunteers.filter(v => {
+            if (dates.indexOf(v.date) != -1 && (v.volunteerName != "" && v.volunteerPhone != "")) {
+                umap[v.volunteerName] = v.volunteerPhone
             }
-            return dates.indexOf(v.date)!=-1 && (v.volunteerName!="" && v.volunteerPhone!="")
+            return dates.indexOf(v.date) != -1 && (v.volunteerName != "" && v.volunteerPhone != "")
         })
-        
-        Object.keys(umap).map(name=>{
-            for(var i=0; i<volunteers.length; i++){
-            if(volunteers[i].volunteerName==name){
-                if(!voldet[name]){
-                voldet[name]={
-                    name,
-                    phone: volunteers[i].volunteerPhone,
-                    availability: volunteers[i].availability,
-                    idCardCollected: volunteers[i].idCardCollected,
-                    services:[]
+
+        Object.keys(umap).map(name => {
+            for (var i = 0; i < volunteers.length; i++) {
+                if (volunteers[i].volunteerName == name) {
+                    if (!voldet[name]) {
+                        voldet[name] = {
+                            name,
+                            phone: volunteers[i].volunteerPhone,
+                            availability: volunteers[i].availability,
+                            idCardCollected: volunteers[i].idCardCollected,
+                            services: []
+                        }
+                    }
+                    voldet[name].services.push({
+                        date: volunteers[i].date,
+                        service: volunteers[i].service,
+                        timings: volunteers[i].timings,
+                        coordinator: volunteers[i].coordinator,
+                        spoc: volunteers[i].spoc,
+                        spocPhone: volunteers[i].spocPhone
+                    })
                 }
-                }
-                voldet[name].services.push({
-                    date: volunteers[i].date,
-                    service: volunteers[i].service,
-                    timings: volunteers[i].timings,
-                    coordinator: volunteers[i].coordinator,
-                    spoc: volunteers[i].spoc,
-                    spocPhone: volunteers[i].spocPhone
-                })
-            }
             }
         })
 
-        return Object.keys(voldet).sort().map(n=>{
+        return Object.keys(voldet).sort().map(n => {
             var v = voldet[n]
 
-return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Panihati Chida Dahi Utsav - Volunteering*
+            return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
+⭐ *Important Info - Sri Krishna Jamashtami - Volunteering*
     
 Hare Krishna 🙏 Hoping that you are ready for the Sri Radhashtami services. Here are some important points you need to know. Please note.
 
@@ -573,9 +585,10 @@ You can reply here regarding any queries or call 6360028651.
 
 Regards,
 Volunteer Care Cell
-ISKCON Mysore`.trim())}`})
-    },     
-    
+ISKCON Mysore`.trim())}`
+        })
+    },
+
 }
 
 export default templates
