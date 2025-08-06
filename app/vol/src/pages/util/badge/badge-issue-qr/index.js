@@ -35,7 +35,6 @@ const BadgeIssueQR = (props) => {
             return
         }
 
-        // get list of dates for which badge is applicable
         var badgeDates = data.events.filter(e => {
             return e.badge
         }).map(e => {
@@ -43,10 +42,9 @@ const BadgeIssueQR = (props) => {
         })
 
         setDates(badgeDates)
-        // get future dates in the list of badgeDates
+
         var futureDates = badgeDates.filter(d => moment(d).isSameOrAfter(moment(), 'day'))
 
-        // get currect date on interest
         var edate
         if (futureDates.length) {
             edate = futureDates[0]
@@ -97,13 +95,13 @@ const BadgeIssueQR = (props) => {
         if (notURL) {
             vname = scanResult
             edate = date
-            edate = '2025-01-10' // temp line
+            // edate = '2025-01-10' // temp line
             edates = [edate]
         } else {
             var url = new URL(scanResult)
             vname = url.searchParams.get("name")
             edates = url.searchParams.get("date").split(" ")
-            edates = ['2025-01-10'] // temp line
+            // edates = ['2025-01-10'] // temp line
             edate = edates[0]
         }
 

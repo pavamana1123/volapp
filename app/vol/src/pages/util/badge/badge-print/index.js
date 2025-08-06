@@ -54,6 +54,7 @@ const BadgePrint = (props)=>{
                 name: v,
                 seva: serviceNameMap[volunteersMap[v].service],
                 spoc: volunteersMap[v].spoc,
+                id: volunteersMap[v].sevaBaseID,
                 dates
             }
         }))
