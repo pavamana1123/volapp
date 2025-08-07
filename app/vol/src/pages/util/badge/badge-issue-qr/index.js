@@ -70,49 +70,20 @@ const BadgeIssueQR = (props) => {
 
     }, [data])
 
-    // useEffect(()=>{
-    //     setActiveRequests(p=>p+1)
-    //     new API().call('get-badge-issue', {edate: date}).then((res)=>{
-    //         setIssued(res)
-    //         setActiveRequests(p=>p-1)
-    //     }).catch((e)=>{
-    //         console.log(e)
-    //     })
-
-    //     if(data.volunteers){
-    //         volunteers.current = data.volunteers.filter(v=>{
-    //             return v.date==date && v.service!="" && v.volunteerName!=""
-    //         }).map(v=>{
-    //             return v.volunteerName
-    //         }).sonique()
-    //         totalBadges.current = volunteers.current.length
-    //     }
-    // }, [date])
-
     const onScan = useCallback((scanResult, notURL) => {
 
-        var vname, edate, edates 
+        var vname, edate, edates
         if (notURL) {
             vname = scanResult
             edate = date
-            // edate = '2025-01-10' // temp line
             edates = [edate]
         } else {
             var url = new URL(scanResult)
             vname = url.searchParams.get("name")
             edates = url.searchParams.get("date").split(" ")
-            // edates = ['2025-01-10'] // temp line
             edate = edates[0]
         }
 
-        // if(moment(edates[edates.length-1]).isBefore(moment(), 'day')){
-        //     warn.current.play()
-        //     if(navigator && navigator.vibrate){
-        //         navigator.vibrate(200)
-        //     }
-        //     toast.error(`Cannot issue badge of older date ${moment(edate).format("Do MMM YYYY")}!`)
-        //     return
-        // }
 
         if (!vname) {
             toast.warn("No name found in the badge! Enter manually")
@@ -211,15 +182,17 @@ const BadgeIssueQR = (props) => {
         </div>
     }
 
+    console.log(date)
+
     return (
         <div className="bi-main">
             <Header title={date ?
                 <div className="bi-header">
-                    <span>{`Volunteer Badge Issue (VE)`}</span>
-                    {/* <span>{moment(date).format("DD MMM 'YY")}</span>
-                    <Icon name="arrow-drop-down" color="white" onClick={()=>{
+                    <span style={{ marginRight: '2vw' }}>{`Volunteer Badge Issue`}</span>
+                    <span>{moment(date).format("DD MMM 'YY")}</span>
+                    <Icon name="arrow-drop-down" color="white" onClick={() => {
                         setShowDateSelector(true)
-                    }}/> */}
+                    }} />
                 </div>
                 : null} hideOptions />
 
