@@ -131,14 +131,15 @@ const PrasadamIssueQR = (props) => {
         if (notURL) {
             vname = scanResult
             edate = date
-            edate = moment().format("YYYY-MM-DD") // temp line
+            // edate = moment().format("YYYY-MM-DD") // temp line
             edates = [edate]
         } else {
             var url = new URL(scanResult)
             vname = url.searchParams.get("name")
             edates = url.searchParams.get("date").split(" ")
-            edates = ['2025-01-10'] // temp line
-            edate = edates[0]
+            // edates = ['2025-01-10'] // temp line
+            edate = date
+            edates = [date]
         }
 
         if (edates.reduce((allOld, edate) => {
