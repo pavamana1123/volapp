@@ -164,14 +164,16 @@ ISKCON Mysore`.trim())}`
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Volunteer Badge - Sri Krishna Jamashtami*
+*Volunteer Badge - Sri Krishna Janmashtami 2025*
     
 Hare Krishna 🙏
 
-🪪 Volunteer Badges will be issued on Sunday, 22nd December 2024:
+🪪 Volunteer Badges will be issued today, Sunday, 10th August 2025:
 
 ⌚ Time: 9.30 AM to 1 PM & 4.30 PM to 8.30 PM
-📍 Venue: Sridham Hall
+📍 Venue: Near Sridham Hall
+
+Please note: Due some unavoidable service requirements, sometimes services MAY BE shuffled. Please check in SevaBase App (https://sevabase.iskconmysore.org/) if there is any change in your service.
 
 You can reply here regarding any queries.
 
