@@ -22,7 +22,7 @@ class Cacher {
     start() {
         // Load existing data from data.json
         try {
-            let raw = fs.readFileSync('data.json', 'utf8')
+            let raw = fs.readFileSync('./data.json', 'utf8')
             if (raw.trim() === '') {
                 this.data = {}
             } else {
@@ -31,7 +31,7 @@ class Cacher {
                 console.log('Data loaded forom existing file!')
             }
         } catch (err) {
-            console.log('No valid data.json found, starting with empty data.')
+            console.log('No valid data.json found, starting with empty data.', err)
             this.data = {}
         }
 
