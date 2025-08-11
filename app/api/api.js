@@ -27,7 +27,7 @@ class Cacher {
                 this.data = {}
             } else {
                 this.data = JSON.parse(raw)
-                self.timestamp = new Date()
+                this.timestamp = new Date()
                 console.log('Data loaded forom existing file!')
             }
         } catch (err) {
