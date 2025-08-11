@@ -28,6 +28,7 @@ class Cacher {
             } else {
                 this.data = JSON.parse(raw)
                 self.timestamp = new Date()
+                console.log('Data loaded forom existing file!')
             }
         } catch (err) {
             console.log('No valid data.json found, starting with empty data.')
