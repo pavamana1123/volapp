@@ -27,7 +27,7 @@ class Cacher {
                 this.data = {}
             } else {
                 this.data = JSON.parse(raw)
-                console.log(this.data && this.data["slots"] && this.data["slots"][0])
+                self.timestamp = new Date()
             }
         } catch (err) {
             console.log('No valid data.json found, starting with empty data.')
