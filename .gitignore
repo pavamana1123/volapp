@@ -107,4 +107,4 @@ dist
 
 
 cred.js
-data.json
+app/api/data.json
