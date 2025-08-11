@@ -12,8 +12,6 @@ var Cacher = require("./api.js")
 var cacher = new Cacher(config)
 cacher.start()
 
-console.log(cacher.timestamp)
-
 const express = require('express')
 const app = express()
 app.use(express.json())
