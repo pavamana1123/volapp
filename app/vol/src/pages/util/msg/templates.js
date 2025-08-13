@@ -461,42 +461,34 @@ Service Reminder 🌟 - Sri Krishna Jamashtami - Volunteering 🙌
 Hare Krishna 🙏
 We hope you have reviewed your service details and contacted your SPOC(s).
 
-We kindly request you to recheck your service details and dates of service using the link below. Services may be updated due to unavoidable circumstances:
+We kindly request you to recheck your service details using the link below. Some services are updated due to unavoidable circumstances.
 👉 https://sevabase.iskconmysore.org
 
 🔔 Important Points to Note:
-1️⃣ Service Timings:
-Be clear about your service timings. For any doubts, contact your SPOC or message here.
 
-2️⃣ Parking Information:
-
-Parking for volunteers will be provided in the construction area near the new temple building.
-Access is granted only with your volunteer badge.
-3️⃣ Volunteer Care Cell:
+1) Volunteer Care Cell:
 
 Located near the temple book counter (behind the flower garden).
 For any queries, visit the Volunteer Care Cell.
-4️⃣ Volunteer Badge:
 
-Do not forget to wear your badge!
-If you haven’t collected it yet, please visit the Volunteer Care Cell:
-Today: 4:30 PM onwards
-Tomorrow: From 8:30 AM
-5️⃣ Badge Return:
+2) Volunteer Badge:
 
-Return your badge to the Volunteer Care Cell after completing your service to receive take-home prasadam.
-Deadline for returning the badge: Sunday, 12th Jan 2025
-6️⃣ Badge Validity:
+If you have not yet collected your badge, please collect at Volunteer Care Cell from 4.30 PM - 8.30 PM.
+Do not forget to wear your badge during the services!
 
-The volunteer badge is valid only on Friday, 10th Jan 2025.
-7️⃣ Volunteer Prasadam Details:
+3) Badge Return:
+Return your badge to the Volunteer Care Cell on the last day of your service and receive take-home prasadam.
 
-Location: Sridham Hall (back side).
+4) Volunteer Prasadam Details:
+
+Location: Akshaya Patra Lwan Area (behind Harinam Mantap)
 Present the QR code on your badge at the entrance.
+
 Volunteer Prasadam Timings:
 Breakfast Prasadam: 9:00 AM - 11:00 AM
 Lunch Prasadam: 1:00 PM - 3:00 PM
 Dinner Prasadam: 8:30 PM - 9:30 PM
+
 For any queries, feel free to reply here.
 
 Warm regards,

@@ -62,7 +62,7 @@ const BadgePrint = (props)=>{
 
     }, [data])
 
-    badgeList = badgeList.concat(new Array(20).fill(emptyBadge))
+    badgeList = badgeList.concat(new Array(0).fill(emptyBadge))
 
     let badgeShard = badgeList.shard(10, emptyBadge)
 
