@@ -474,14 +474,15 @@ For any queries, visit the Volunteer Care Cell.
 2) Volunteer Badge:
 
 If you have not yet collected your badge, please collect at Volunteer Care Cell from 4.30 PM - 8.30 PM.
-Do not forget to wear your badge during the services!
+Do not forget to wear your badge during the services on 15th & 16th of August.
 
 3) Badge Return:
+
 Return your badge to the Volunteer Care Cell on the last day of your service and receive take-home prasadam.
 
 4) Volunteer Prasadam Details:
 
-Location: Akshaya Patra Lwan Area (behind Harinam Mantap)
+Location: Akshaya Patra Lawn Area (behind Harinam Mantap)
 Present the QR code on your badge at the entrance.
 
 Volunteer Prasadam Timings:
