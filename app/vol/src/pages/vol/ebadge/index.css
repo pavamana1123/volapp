@@ -11,6 +11,14 @@
     background: linear-gradient(rgba(43, 147, 226, 00.5), rgba(127, 255, 212, 00.5));
 }
 
+.ebadge-qr {
+    box-sizing: border-box;
+    margin: 3vw;
+    padding: 4vw;
+    background: white;
+    border-radius: 5vw;
+}
+
 .ebadge-color1 {
     height: 30vw;
     width: 300%;
