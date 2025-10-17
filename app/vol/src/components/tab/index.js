@@ -12,7 +12,7 @@ function Tab(props) {
       <div className='tabHeader'>
         <div className='tabHeaderItems '>
           {
-            tabs.map((tab, i)=>{
+            tabs.filter(tab => !tab.disable).map((tab, i)=>{
               return (
                 <div className={`tabHeaderItem ${activeTab==i?"selectedtab":""} ${i==tabs.length-1?"last-thi":""}`} key={i} onClick={()=>{
                   setActiveTab.bind(self)(i)

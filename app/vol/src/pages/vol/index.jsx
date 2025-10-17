@@ -7,11 +7,13 @@ import Serv from './serv';
 import { Spinner } from '../../components/spinner';
 import moment from 'moment'
 import Auto from '../../components/auto';
+import EBadge from './ebadge';
 
 function Vol(props) {
 
   var [filter, setFilter] = useState('')
   var [filterID, setFilterID] = useState('')
+  var [vol, setVol] = useState('')
   var [preset, setPreset] = useState('')
   var [showApp, setShowApp] = useState(false)
   var [volunteerNames, setVolunteerNames] = useState('')
@@ -24,12 +26,17 @@ function Vol(props) {
     const name = urlParams.get('name')
     if (!id) {
       setFilter(name)
+      setFilterID(data && data.master && data.master.filter(v => v.name == name)[0].sevaBaseID)
     } else {
       setFilterID(id)
       const _ = name ? setFilter(name) : (master ? setFilter(master.filter(m => m.sevaBaseID == id)[0].name) : null)
     }
     setPreset(!!(urlParams.get('name') || urlParams.get('id')))
   }, [data])
+
+  useEffect(() => {
+    data && data.master && filterID && setVol(data.master.filter(v => v.sevaBaseID == filterID)[0])
+  }, [filterID, data])
 
   useEffect(() => {
     var vn = {}
@@ -76,74 +83,89 @@ function Vol(props) {
             <Auto className="autoinvol" filter={filterFunc} Drop={Drop} />
           }
 
-          {filter && dates.length ?
-            <Paper className="serpaper">
-              {!preset && <div className='volnameintab'>{filter}</div>}
+          <hr />
+
+          <Tab tabs={
+            [
               {
-                <Tab
-                  tabs={
-                    dates.filter(d => {
-                      return !!volunteers.filter(v => {
-                        return v.date == d && (filterID? v.sevaBaseID == filterID : v.volunteerName == filter) && v.service != ""
-                      }).length && !events.filter(e => {
-                        return e.date == d
-                      })[0].hide
-                    }).map((d) => {
-
-                      var svs1 = volunteers.filter(v => {
-                        return (filterID? v.sevaBaseID == filterID : v.volunteerName == filter) && v.date == d
-                      })
-
-                      const mainService = svs1.sort((s1, s2) => {
-                        return s2.serviceDuration - s1.serviceDuration
-                      })[0]
-
-                      var svs = svs1.map((s, i, ss) => {
-                        return <Serv details={s} services={services} i={i} sl={ss.length} mainService={mainService} name={filter} preset={preset} />
-                      })
-
-                      return {
-                        title: dates.length == 1 ? moment(d, "YYYY-MM-DD").format("dddd, Do MMMM YYYY") : (dates.length < 5 ? moment(d, "YYYY-MM-DD").format("Do MMM") : moment(d, "YYYY-MM-DD").format("MMM D")),
-                        component: svs.length ?
-                          <div className='vol-events-holder'>
-                            <div className='event-name'>{`${data.events.filter(e => {
+                title: "Services",
+                component: filter && dates.length ?
+                  <Paper className="serpaper">
+                    {!preset && <div className='volnameintab'>{filter}</div>}
+                    {
+                      <Tab
+                        tabs={
+                          dates.filter(d => {
+                            return !!volunteers.filter(v => {
+                              return v.date == d && (filterID ? v.sevaBaseID == filterID : v.volunteerName == filter) && v.service != ""
+                            }).length && !events.filter(e => {
                               return e.date == d
-                            })[0].event} (${svs.length} service${svs.length > 1 ? "s" : ""})`.trim()}</div>
-                            <div className='voldetholderv'>
-                              <div style={{ width: '100%' }}>{svs}</div>
-                              {data.events.filter(e => {
-                                return e.date == d
-                              })[0].coupon && false && <div className='pracoup'>
-                                  <div className='dark'>Collect Prasadam Coupon from</div>
-                                  {<div style={{
-                                    display: "flex",
-                                    alignItems: "center"
-                                  }}>
-                                    <div className='spocdetholder'>
-                                      <div className='detailFeild' style={{ marginRight: "2vw" }}>
-                                        <div>{`${mainService.spoc}`}</div>
-                                        <div className='spocdetphone'>{`${mainService.spocPhone}`}</div>
-                                      </div>
-                                      <div className='spocdeticons'>
-                                        {!isNaN(mainService.spocPhone) ? <a href={`tel:+91${mainService.spocPhone}`}><i className="bi bi-telephone-fill spocdeticon"></i></a> : null}
-                                        {!isNaN(mainService.spocPhone) ? <a href={`https://wa.me/91${mainService.spocPhone}`} target="_blank"><i className="bi bi-whatsapp spocdeticon"></i></a> : null}
-                                      </div>
-                                    </div>
-                                  </div>}
-                                </div>}
-                            </div>
-                          </div>
-                          : NoServ
-                      }
-                    })
-                  }
+                            })[0].hide
+                          }).map((d) => {
 
-                  emptyMessage={"No services assigned"} />
-              }
+                            var svs1 = volunteers.filter(v => {
+                              return (filterID ? v.sevaBaseID == filterID : v.volunteerName == filter) && v.date == d
+                            })
 
-            </Paper>
-            :
-            (filter && <Spinner style={{ marginTop: "2vw" }} size={2} />)}
+                            const mainService = svs1.sort((s1, s2) => {
+                              return s2.serviceDuration - s1.serviceDuration
+                            })[0]
+
+                            var svs = svs1.map((s, i, ss) => {
+                              return <Serv details={s} services={services} i={i} sl={ss.length} mainService={mainService} name={filter} preset={preset} />
+                            })
+
+                            return {
+                              title: dates.length == 1 ? moment(d, "YYYY-MM-DD").format("dddd, Do MMMM YYYY") : (dates.length < 5 ? moment(d, "YYYY-MM-DD").format("Do MMM") : moment(d, "YYYY-MM-DD").format("MMM D")),
+                              component: svs.length ?
+                                <div className='vol-events-holder'>
+                                  <div className='event-name'>{`${data.events.filter(e => {
+                                    return e.date == d
+                                  })[0].event} (${svs.length} service${svs.length > 1 ? "s" : ""})`.trim()}</div>
+                                  <div className='voldetholderv'>
+                                    <div style={{ width: '100%' }}>{svs}</div>
+                                    {data.events.filter(e => {
+                                      return e.date == d
+                                    })[0].coupon && false && <div className='pracoup'>
+                                        <div className='dark'>Collect Prasadam Coupon from</div>
+                                        {<div style={{
+                                          display: "flex",
+                                          alignItems: "center"
+                                        }}>
+                                          <div className='spocdetholder'>
+                                            <div className='detailFeild' style={{ marginRight: "2vw" }}>
+                                              <div>{`${mainService.spoc}`}</div>
+                                              <div className='spocdetphone'>{`${mainService.spocPhone}`}</div>
+                                            </div>
+                                            <div className='spocdeticons'>
+                                              {!isNaN(mainService.spocPhone) ? <a href={`tel:+91${mainService.spocPhone}`}><i className="bi bi-telephone-fill spocdeticon"></i></a> : null}
+                                              {!isNaN(mainService.spocPhone) ? <a href={`https://wa.me/91${mainService.spocPhone}`} target="_blank"><i className="bi bi-whatsapp spocdeticon"></i></a> : null}
+                                            </div>
+                                          </div>
+                                        </div>}
+                                      </div>}
+                                  </div>
+                                </div>
+                                : NoServ
+                            }
+                          })
+                        }
+
+                        emptyMessage={"No services assigned"} />
+                    }
+
+                  </Paper>
+                  :
+                  (filter && <Spinner style={{ marginTop: "2vw" }} size={2} />)
+              },
+              {
+                title: "E-Badge",
+                component: <EBadge vol={vol} dates={dates}/>,
+                disable: false
+              },
+            ]
+          } />
+
         </div>
 
         {null && <Paper className="vol-note">
