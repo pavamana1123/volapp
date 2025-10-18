@@ -14,6 +14,8 @@ function Vol(props) {
   var [filter, setFilter] = useState('')
   var [filterID, setFilterID] = useState('')
   var [vol, setVol] = useState('')
+  var [hasEBadge, setHasEBadge] = useState('')
+  var [hasService, setHasService] = useState('')
   var [preset, setPreset] = useState('')
   var [showApp, setShowApp] = useState(false)
   var [volunteerNames, setVolunteerNames] = useState('')
@@ -36,7 +38,9 @@ function Vol(props) {
 
   useEffect(() => {
     data && data.master && filterID && setVol(data.master.filter(v => v.sevaBaseID == filterID)[0])
-  }, [filterID, data])
+    data && data.events && setHasEBadge(data.events.map(e => e.ebadge).reduce(((a, b) => a || b), false))
+    data && data.volunteers && setHasService(!!data.volunteers.filter(v => v.volunteerName == filter).length)
+  }, [filterID, data, filter])
 
   useEffect(() => {
     var vn = {}
@@ -160,8 +164,8 @@ function Vol(props) {
               },
               {
                 title: "E-Badge",
-                component: <EBadge vol={vol} dates={dates}/>,
-                disable: false
+                component: <EBadge vol={vol} dates={dates} />,
+                disable: !hasEBadge || !hasService
               },
             ]
           } />
