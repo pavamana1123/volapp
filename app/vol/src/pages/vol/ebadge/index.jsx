@@ -25,9 +25,9 @@ const EBadge = props => {
                     <DP user={{ id }} size={[40, 8]} enlarge></DP>
                     <div className={'ebadge-qr'}><QRCode
                         value={name ? `https://vol.iskconmysore.org/vol?name=${encodeURIComponent(name)}&date=${(dates || []).join("+")}${id ? `&id=${id}` : ''}` : `https://vol.iskconmysore.org/vol`}
-                        size={230}
+                        size={0.5623 * window.innerWidth}
                     /></div>
-                    <div style={{fontSize:"4vw", marginBottom: "2vw"}}>{time}</div>
+                    <div style={{ fontSize: "4vw", marginBottom: "2vw" }}>{time}</div>
 
                     <div className='ebadge-color1'></div>
                 </div>
