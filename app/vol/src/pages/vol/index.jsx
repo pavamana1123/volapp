@@ -165,7 +165,8 @@ function Vol(props) {
               {
                 title: "E-Badge",
                 component: <EBadge vol={vol} dates={dates} />,
-                disable: !hasEBadge || !hasService || dates.reduce(((a, b) => { return a && b < (moment().format("YYYY-MM-DD")) }), true)
+                disable: !hasEBadge || !hasService || dates.reduce(((a, b) => { return a && b < (moment().format("YYYY-MM-DD")) }), true),
+                highlight: true
               },
             ]
           } />
