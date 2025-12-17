@@ -1,7 +1,7 @@
 var dates = [
-    "2025-10-21",
-    "2025-10-22",
-    "2025-10-23"
+    "2025-10-24",
+    "2025-10-25",
+    "2025-10-26"
 ]
 
 var templates = {
@@ -42,7 +42,7 @@ var templates = {
             var s = spocMap[sp]
 
             return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Sri Govardhana Puja - Volunteering Services*
+*SPOC for Srila Prabhupada Disappearance Day - Volunteering Services*
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length > 1 ? s.services.length : "a"} service${s.services.length > 1 ? "s" : ""}. Kindly click on the below link and go through the details of the service${s.services.length > 1 ? "s" : ""} carefully:
 
@@ -102,31 +102,19 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-Volunteering Details – Sri Govardhana Puja – 22nd Aug 2025
+Volunteering Details – Srila Prabhupada Disappearance Day – 25th Aug 2025
 
 Dear Volunteer, ${v.name}!
 
 Hare Krishna! 🙏
 🌸 Please accept the blessings of Sri Sri Krishna Balarama 🌸
 
-You have been assigned volunteer service for Sri Govardhana Puja. Kindly check your service details here:
+You have been assigned volunteer service for Srila Prabhupada Disappearance Day. Kindly check your service details here:
 👉 https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}
 
 You can also view your services in the SevaBase App📱: https://sevabase.iskconmysore.org
 
-🌟 Introducing E-Badge
-The E-Badge is a digital version of the volunteer badge. It contains a QR code, the same as on the physical badge, to be scanned at the prasadam entry.
-
-✅ How to use it:
- - Show your E-Badge at the volunteer prasadam entry
- - Get it scanned
- - Then proceed for dinner prasadam
-
-📍 Volunteers’ prasadam venue:
-New Temple Basement backside (entry from Sridham Hall backside)
-
-⚠️ Important:
-If you are unable to access your E-Badge (e.g., phone issues, network problems), you can collect prasadam coupon from your SPOC on the festival day.
+Please note: Dinner Prasadam for volunteers will be common with public. So there is no need of badges or coupons for this festival.
 
 If you have any queries, feel free to reply here.
 
@@ -294,7 +282,7 @@ ISKCON Mysore`.trim())}`
             var s = spocMap[sp]
 
             return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Sri Govardhana Puja*
+*SPOC - Service Update Alert ⚠️ - Srila Prabhupada Disappearance Day*
     
 Hare Krishna 🙏
 
@@ -357,7 +345,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Sri Govardhana Puja - Volunteering*
+*Service Update Alert ⚠️ - Srila Prabhupada Disappearance Day - Volunteering*
     
 Hare Krishna 🙏
 
@@ -413,7 +401,7 @@ ISKCON Mysore`.trim())}`
             var s = spocMap[sp]
 
             return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Reminder - Sri Govardhana Puja Volunteering*
+*SPOC - Reminder - Srila Prabhupada Disappearance Day Volunteering*
 
 Hare Krishna 🙏
 
@@ -472,7 +460,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-Service Reminder 🌟 - Sri Govardhana Puja - Volunteering 🙌
+Service Reminder 🌟 - Srila Prabhupada Disappearance Day - Volunteering 🙌
 
 Hare Krishna 🙏
 We hope you have reviewed your service details and contacted your SPOC(s).
@@ -556,9 +544,9 @@ ISKCON Mysore 🌸`.trim())}`
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Sri Govardhana Puja - Volunteering*
+⭐ *Important Info - Srila Prabhupada Disappearance Day - Volunteering*
     
-Hare Krishna 🙏 Hoping that you are ready for the Sri Govardhana Puja services. Here are some important points you need to know. Please note.
+Hare Krishna 🙏 Hoping that you are ready for the Srila Prabhupada Disappearance Day services. Here are some important points you need to know. Please note.
 
 1️⃣ 🙏 *Prasadam Timings and Venue:*
 
