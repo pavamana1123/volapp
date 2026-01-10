@@ -108,3 +108,4 @@ dist
 
 cred.js
 app/api/data.json
+token.json
