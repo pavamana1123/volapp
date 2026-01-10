@@ -40,7 +40,7 @@ const DP = ({ url, user, size, className, onClick, badge, enlarge }) => {
           setBackground({
             background: user && user.name ? user.name.color() : "#555"
           })
-          setText(user ? user.name.initial() : "")
+          setText(user && user.name ? user.name.initial() : "")
         })
     } else {
       setBackground({
