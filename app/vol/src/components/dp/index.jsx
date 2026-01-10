@@ -38,7 +38,7 @@ const DP = ({ url, user, size, className, onClick, badge, enlarge }) => {
         })
         .catch(() => {
           setBackground({
-            background: user ? user.name.color() : "#555"
+            background: user && user.name ? user.name.color() : "#555"
           })
           setText(user ? user.name.initial() : "")
         })
