@@ -1,7 +1,7 @@
 var dates = [
-    "2025-10-24",
-    "2025-10-25",
-    "2025-10-26"
+    "2026-01-23",
+    "2026-01-24",
+    "2026-01-25"
 ]
 
 var templates = {
@@ -42,7 +42,7 @@ var templates = {
             var s = spocMap[sp]
 
             return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC for Srila Prabhupada Disappearance Day - Volunteering Services*
+*SPOC for Ratha Yatra - Volunteering Services*
 
 Hare Krishna 🙏. You are assigned as Single-Point-of-Contact (SPOC) for ${s.services.length > 1 ? s.services.length : "a"} service${s.services.length > 1 ? "s" : ""}. Kindly click on the below link and go through the details of the service${s.services.length > 1 ? "s" : ""} carefully:
 
@@ -102,19 +102,17 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-Volunteering Details – Srila Prabhupada Disappearance Day – 25th Aug 2025
+Volunteering Details – Ratha Yatra – 24th January 2026
 
 Dear Volunteer, ${v.name}!
 
 Hare Krishna! 🙏
 🌸 Please accept the blessings of Sri Sri Krishna Balarama 🌸
 
-You have been assigned volunteer service for Srila Prabhupada Disappearance Day. Kindly check your service details here:
+You have been assigned volunteer service for Ratha Yatra. Kindly check your service details here:
 👉 https://vol.iskconmysore.org/vol?name=${encodeURIComponent(v.name)}
 
 You can also view your services in the SevaBase App📱: https://sevabase.iskconmysore.org
-
-Please note: Dinner Prasadam for volunteers will be common with public. So there is no need of badges or coupons for this festival.
 
 If you have any queries, feel free to reply here.
 
@@ -282,7 +280,7 @@ ISKCON Mysore`.trim())}`
             var s = spocMap[sp]
 
             return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Service Update Alert ⚠️ - Srila Prabhupada Disappearance Day*
+*SPOC - Service Update Alert ⚠️ - Ratha Yatra*
     
 Hare Krishna 🙏
 
@@ -345,7 +343,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-*Service Update Alert ⚠️ - Srila Prabhupada Disappearance Day - Volunteering*
+*Service Update Alert ⚠️ - Ratha Yatra - Volunteering*
     
 Hare Krishna 🙏
 
@@ -401,7 +399,7 @@ ISKCON Mysore`.trim())}`
             var s = spocMap[sp]
 
             return `https://web.whatsapp.com/send?phone=91${s.spocPhone}&name=${encodeURIComponent(s.spoc)}&text=${encodeURIComponent(`
-*SPOC - Reminder - Srila Prabhupada Disappearance Day Volunteering*
+*SPOC - Reminder - Ratha Yatra Volunteering*
 
 Hare Krishna 🙏
 
@@ -460,7 +458,7 @@ ISKCON Mysore
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-Service Reminder 🌟 - Srila Prabhupada Disappearance Day - Volunteering 🙌
+Service Reminder 🌟 - Ratha Yatra - Volunteering 🙌
 
 Hare Krishna 🙏
 We hope you have reviewed your service details and contacted your SPOC(s).
@@ -544,9 +542,9 @@ ISKCON Mysore 🌸`.trim())}`
             var v = voldet[n]
 
             return `https://web.whatsapp.com/send?phone=91${v.phone}&name=${encodeURIComponent(v.name)}&text=${encodeURIComponent(`
-⭐ *Important Info - Srila Prabhupada Disappearance Day - Volunteering*
+⭐ *Important Info - Ratha Yatra - Volunteering*
     
-Hare Krishna 🙏 Hoping that you are ready for the Srila Prabhupada Disappearance Day services. Here are some important points you need to know. Please note.
+Hare Krishna 🙏 Hoping that you are ready for the Ratha Yatra services. Here are some important points you need to know. Please note.
 
 1️⃣ 🙏 *Prasadam Timings and Venue:*
 
