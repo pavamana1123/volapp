@@ -39,7 +39,7 @@ function ServiceList(props) {
         return `
             <div class="slpage">
                 <div class="sltitle">
-                    <div style="font-size: 1.5vw; font-weight: 900">Tentative Service List - Ratha Yatra 2026</div>
+                    <div style="font-size: 1.5vw; font-weight: 900">Service List - Ratha Yatra 2026</div>
                     <div style="margin-top: .3vw; font-size: 1.1vw; font-weight: 900">23 Jan - Pre-Arrangements • 24 Jan - Ratha Yatra • 25 Jan - Churnabhisheka & Winding Up</div>
                 </div>
                 
