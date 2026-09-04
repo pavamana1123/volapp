@@ -39,8 +39,8 @@ function ServiceList(props) {
         return `
             <div class="slpage">
                 <div class="sltitle">
-                    <div style="font-size: 1.5vw; font-weight: 900">Tentative Service List - Sri Krishna Janmashtami 2026</div>
-                    <div style="margin-top: .3vw; font-size: 1.1vw; font-weight: 900">02 Sep - Pre-Arrangements • 03 Sep - SKJ Day 1 • 04 Sep - SKJ Day 2 • 05 Sep - Sri Vyasa Puja • 06 Sep - Winding Up</div>
+                    <div style="font-size: 1.5vw; font-weight: 900">Service List - Sri Krishna Janmashtami 2026</div>
+                    <div style="margin-top: .3vw; font-size: 1.1vw; font-weight: 900">02 Sep - Pre-Arrangements • 03 Sep - SKJ Day 1 • 04 Sep - SKJ Day 2 • 05 Sep - Sri Vyasa Puja</div>
                 </div>
                 
                 <table class="sltable">

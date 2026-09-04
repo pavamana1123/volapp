@@ -51,7 +51,8 @@ const BadgeIssueQR = (props) => {
         } else {
             edate = badgeDates[badgeDates.length - 1]
         }
-        setDate(edate)
+        // setDate(edate)
+        setDate("2026-09-03")
 
         setActiveRequests(p => p + 1)
         new API().call('get-badge-issue', { edate }).then((res) => {
@@ -181,8 +182,6 @@ const BadgeIssueQR = (props) => {
             {item}
         </div>
     }
-
-    console.log(date)
 
     return (
         <div className="bi-main">
